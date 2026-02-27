@@ -1,0 +1,65 @@
+name: Bloomberg AIM API
+description: Bloomberg's AIM (API and Integration Manager) provides access to Bloomberg's market data, analytics, and enterprise services through REST APIs
+image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+url: https://www.bloomberg.com/professional/product/aim/
+created: '2024-01-15'
+modified: '2024-01-15'
+tags:
+- financial data
+- market data
+- analytics
+- enterprise data
+- reference data
+apis:
+- name: Bloomberg Data License API
+  description: Access to Bloomberg's comprehensive financial, pricing, and reference data
+  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+  baseURL: https://api.bloomberg.com/eap
+  humanURL: https://www.bloomberg.com/professional/support/api-library/
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://www.bloomberg.com/professional/support/api-library/#authentication
+  tags:
+  - market data
+  - pricing
+  - reference data
+- name: Bloomberg BEAP (Enterprise Access Point)
+  description: Enterprise-grade API for accessing Bloomberg Terminal data programmatically
+  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+  baseURL: https://api.bloomberg.com/eap/catalogs
+  humanURL: https://www.bloomberg.com/professional/product/enterprise-access-point/
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Swagger/OpenAPI
+    url: https://api.bloomberg.com/eap/swagger
+  - type: Authentication
+    url: https://www.bloomberg.com/professional/support/api-library/#authentication
+  tags:
+  - enterprise
+  - real-time data
+  - historical data
+- name: Bloomberg B-PIPE API
+  description: Real-time and delayed market data streaming API
+  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+  humanURL: https://www.bloomberg.com/professional/product/market-data-feed/
+  properties:
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: SDK
+    url: https://www.bloomberg.com/professional/support/api-library/#sdk-downloads
+  tags:
+  - streaming
+  - real-time
+  - market feed
+maintainers:
+- name: Bloomberg L.P.
+  email: apisupport@bloomberg.net
+  url: https://www.bloomberg.com
+include:
+- name: Bloomberg Terminal
+  url: https://www.bloomberg.com/professional/solution/bloomberg-terminal/
+- name: Bloomberg Data License
+  url: https://www.bloomberg.com/professional/product/data-license/
