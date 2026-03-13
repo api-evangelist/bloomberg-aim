@@ -1,0 +1,183 @@
+{
+  "$id": "https://bloomberg.com/schemas/position.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Position",
+  "description": "A position representing holdings of a specific security within a Bloomberg AIM portfolio, including quantity, valuation, and analytics.",
+  "type": "object",
+  "required": [
+    "ticker",
+    "quantity",
+    "portfolioId"
+  ],
+  "properties": {
+    "positionId": {
+      "type": "string",
+      "description": "Unique position identifier"
+    },
+    "portfolioId": {
+      "type": "string",
+      "description": "Identifier of the portfolio holding this position"
+    },
+    "ticker": {
+      "type": "string",
+      "description": "Bloomberg ticker of the security held",
+      "examples": [
+        "IBM US Equity",
+        "AAPL US Equity"
+      ]
+    },
+    "securityName": {
+      "type": "string",
+      "description": "Full name of the security"
+    },
+    "figi": {
+      "type": "string",
+      "description": "FIGI identifier of the security",
+      "pattern": "^BBG[A-Z0-9]{9}$"
+    },
+    "isin": {
+      "type": "string",
+      "description": "ISIN of the security",
+      "pattern": "^[A-Z]{2}[A-Z0-9]{9}[0-9]$"
+    },
+    "assetClass": {
+      "type": "string",
+      "description": "Asset class of the held security",
+      "enum": [
+        "Equity",
+        "Fixed Income",
+        "Commodity",
+        "Currency",
+        "Index",
+        "Mortgage",
+        "Municipal",
+        "Preferred",
+        "Money Market",
+        "Government",
+        "Corporate",
+        "Option",
+        "Future",
+        "Fund",
+        "ETF",
+        "Cash"
+      ]
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Number of shares, contracts, or units held (negative for short positions)"
+    },
+    "side": {
+      "type": "string",
+      "description": "Long or short position",
+      "enum": [
+        "Long",
+        "Short"
+      ]
+    },
+    "costBasis": {
+      "type": "number",
+      "description": "Total cost basis of the position in local currency"
+    },
+    "averageCost": {
+      "type": "number",
+      "description": "Average cost per unit"
+    },
+    "marketPrice": {
+      "type": "number",
+      "description": "Current market price per unit"
+    },
+    "marketValue": {
+      "type": "number",
+      "description": "Current market value of the position (quantity x market price)"
+    },
+    "marketValueBase": {
+      "type": "number",
+      "description": "Market value converted to portfolio base currency"
+    },
+    "localCurrency": {
+      "type": "string",
+      "description": "Local trading currency of the security (ISO 4217)",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "fxRate": {
+      "type": "number",
+      "description": "Exchange rate from local currency to portfolio base currency"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Position weight as percentage of total portfolio market value",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "unrealizedPnL": {
+      "type": "number",
+      "description": "Unrealized profit or loss on the position"
+    },
+    "realizedPnL": {
+      "type": "number",
+      "description": "Realized profit or loss from closed portions"
+    },
+    "unrealizedPnLPercent": {
+      "type": "number",
+      "description": "Unrealized P&L as a percentage of cost basis"
+    },
+    "dailyPnL": {
+      "type": "number",
+      "description": "Profit or loss for the current trading day"
+    },
+    "accruedInterest": {
+      "type": "number",
+      "description": "Accrued interest for fixed income positions"
+    },
+    "yield": {
+      "type": "number",
+      "description": "Current yield for fixed income positions"
+    },
+    "duration": {
+      "type": "number",
+      "description": "Modified duration for fixed income positions"
+    },
+    "convexity": {
+      "type": "number",
+      "description": "Convexity for fixed income positions"
+    },
+    "creditRating": {
+      "type": "string",
+      "description": "Credit rating for fixed income positions",
+      "examples": [
+        "AAA",
+        "AA+",
+        "BBB-"
+      ]
+    },
+    "beta": {
+      "type": "number",
+      "description": "Beta of the security relative to the benchmark"
+    },
+    "sector": {
+      "type": "string",
+      "description": "Industry sector of the security"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of the security (ISO 3166-1 alpha-2)",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "tradeDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the position was initiated or last traded"
+    },
+    "settleDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Settlement date for the most recent trade"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last position update"
+    }
+  },
+  "additionalProperties": false
+}

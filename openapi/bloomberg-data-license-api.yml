@@ -1,0 +1,1057 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI)
+  description: >-
+    Provides programmatic access to Bloomberg's comprehensive financial,
+    pricing, reference, regulatory, and alternative data covering over 50
+    million securities and 56,000 fields via the Hypermedia API (HAPI).
+    The BEAP/HAPI follows a hypermedia-driven REST architecture where
+    clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+
+servers:
+  - url: https://api.bloomberg.com/eap
+    description: Bloomberg Enterprise Access Point (Production)
+
+security:
+  - bearerAuth: []
+  - oauth2: []
+
+tags:
+  - name: Catalogs
+    description: Browse available data catalogs and their contents
+  - name: Universes
+    description: Manage security universes for data requests
+  - name: Field Lists
+    description: Manage field lists for data requests
+  - name: Triggers
+    description: Configure scheduling triggers for data delivery
+  - name: Requests
+    description: Create and manage data requests
+  - name: Distributions
+    description: Access completed data distributions and downloads
+  - name: Replies
+    description: Access request reply data
+
+paths:
+  /catalogs:
+    get:
+      operationId: listCatalogs
+      summary: List available catalogs
+      description: >-
+        Returns a collection of catalogs available to the authenticated user.
+        Each catalog represents a logical grouping of data services.
+      tags:
+        - Catalogs
+      responses:
+        '200':
+          description: A list of available catalogs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}:
+    get:
+      operationId: getCatalog
+      summary: Get catalog details
+      description: Returns details and links for a specific catalog.
+      tags:
+        - Catalogs
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: Catalog details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/datasets:
+    get:
+      operationId: listDatasets
+      summary: List datasets in a catalog
+      description: Returns the datasets available within a specific catalog.
+      tags:
+        - Catalogs
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of datasets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/fields:
+    get:
+      operationId: listCatalogFields
+      summary: List available fields in a catalog
+      description: >-
+        Returns the fields available for data requests within a catalog.
+        Fields can be filtered by asset class or data category.
+      tags:
+        - Field Lists
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - name: category
+          in: query
+          description: Filter fields by data category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of available fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/universes:
+    get:
+      operationId: listUniverses
+      summary: List universes
+      description: Returns the security universes defined in the catalog.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of universes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UniverseCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createUniverse
+      summary: Create a universe
+      description: >-
+        Creates a new security universe containing a set of identifiers
+        (tickers, FIGIs, ISINs, CUSIPs, SEDOLs, etc.) for data requests.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UniverseCreate'
+      responses:
+        '201':
+          description: Universe created
+          headers:
+            Location:
+              description: URI of the created universe
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Universe'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/universes/{universeId}:
+    get:
+      operationId: getUniverse
+      summary: Get universe details
+      description: Returns details of a specific security universe.
+      tags:
+        - Universes
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/universeId'
+      responses:
+        '200':
+          description: Universe details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Universe'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/fieldLists:
+    get:
+      operationId: listFieldLists
+      summary: List field lists
+      description: Returns all field lists defined in the catalog.
+      tags:
+        - Field Lists
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of field lists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldListCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createFieldList
+      summary: Create a field list
+      description: >-
+        Creates a new field list specifying which data fields to include
+        in a data request.
+      tags:
+        - Field Lists
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldListCreate'
+      responses:
+        '201':
+          description: Field list created
+          headers:
+            Location:
+              description: URI of the created field list
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/fieldLists/{fieldListId}:
+    get:
+      operationId: getFieldList
+      summary: Get field list details
+      description: Returns details of a specific field list.
+      tags:
+        - Field Lists
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/fieldListId'
+      responses:
+        '200':
+          description: Field list details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/triggers:
+    get:
+      operationId: listTriggers
+      summary: List triggers
+      description: Returns the scheduling triggers available in the catalog.
+      tags:
+        - Triggers
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTrigger
+      summary: Create a trigger
+      description: >-
+        Creates a scheduling trigger to control when data requests are
+        executed and delivered.
+      tags:
+        - Triggers
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerCreate'
+      responses:
+        '201':
+          description: Trigger created
+          headers:
+            Location:
+              description: URI of the created trigger
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/triggers/{triggerId}:
+    get:
+      operationId: getTrigger
+      summary: Get trigger details
+      description: Returns details of a specific trigger.
+      tags:
+        - Triggers
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/triggerId'
+      responses:
+        '200':
+          description: Trigger details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/requests:
+    get:
+      operationId: listRequests
+      summary: List data requests
+      description: Returns all data requests in the catalog.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of data requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createRequest
+      summary: Create a data request
+      description: >-
+        Creates a new data request combining a universe, field list, and
+        trigger to produce a scheduled data output.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCreate'
+      responses:
+        '201':
+          description: Request created
+          headers:
+            Location:
+              description: URI of the created request
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataRequest'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/requests/{requestId}:
+    get:
+      operationId: getRequest
+      summary: Get data request details
+      description: Returns details of a specific data request.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/requestId'
+      responses:
+        '200':
+          description: Data request details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteRequest
+      summary: Delete a data request
+      description: Deletes a specific data request.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/requestId'
+      responses:
+        '204':
+          description: Request deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/distributions:
+    get:
+      operationId: listDistributions
+      summary: List distributions
+      description: >-
+        Returns available data distributions (completed outputs) for the catalog.
+      tags:
+        - Distributions
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of distributions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/distributions/{distributionId}:
+    get:
+      operationId: getDistribution
+      summary: Get distribution details
+      description: >-
+        Returns details and download links for a specific distribution.
+      tags:
+        - Distributions
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/distributionId'
+      responses:
+        '200':
+          description: Distribution details with download links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Distribution'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /catalogs/{catalogId}/distributions/{distributionId}/replies:
+    get:
+      operationId: listReplies
+      summary: List replies for a distribution
+      description: >-
+        Returns the individual reply files available for download within
+        a distribution.
+      tags:
+        - Replies
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/distributionId'
+      responses:
+        '200':
+          description: A list of replies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /catalogs/{catalogId}/distributions/{distributionId}/replies/{replyId}:
+    get:
+      operationId: getReply
+      summary: Download a reply
+      description: >-
+        Downloads the data content of a specific reply within a distribution.
+        The response format depends on the request configuration (JSON, CSV, etc.).
+      tags:
+        - Replies
+      parameters:
+        - $ref: '#/components/parameters/catalogId'
+        - $ref: '#/components/parameters/distributionId'
+        - $ref: '#/components/parameters/replyId'
+      responses:
+        '200':
+          description: Reply data content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyData'
+            text/csv:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data
+
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+    universeId:
+      name: universeId
+      in: path
+      required: true
+      description: Unique identifier for the universe
+      schema:
+        type: string
+    fieldListId:
+      name: fieldListId
+      in: path
+      required: true
+      description: Unique identifier for the field list
+      schema:
+        type: string
+    triggerId:
+      name: triggerId
+      in: path
+      required: true
+      description: Unique identifier for the trigger
+      schema:
+        type: string
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier for the data request
+      schema:
+        type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      description: Unique identifier for the reply
+      schema:
+        type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    CatalogCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Catalog'
+
+    Catalog:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Unique catalog identifier
+        title:
+          type: string
+          description: Human-readable catalog title
+        description:
+          type: string
+          description: Description of the catalog contents
+        links:
+          type: object
+          properties:
+            universes:
+              type: string
+              format: uri
+            fieldLists:
+              type: string
+              format: uri
+            triggers:
+              type: string
+              format: uri
+            requests:
+              type: string
+              format: uri
+            distributions:
+              type: string
+              format: uri
+
+    DatasetCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+
+    Dataset:
+      type: object
+      properties:
+        identifier:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        fieldCount:
+          type: integer
+        category:
+          type: string
+
+    UniverseCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Universe'
+
+    Universe:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Universe
+        identifier:
+          type: string
+          description: Unique universe identifier
+        title:
+          type: string
+          description: Human-readable universe title
+        description:
+          type: string
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityIdentifier'
+
+    UniverseCreate:
+      type: object
+      required:
+        - '@type'
+        - identifier
+        - title
+        - contains
+      properties:
+        '@type':
+          type: string
+          const: Universe
+        identifier:
+          type: string
+          description: Unique universe identifier
+        title:
+          type: string
+          description: Human-readable universe title
+        description:
+          type: string
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityIdentifier'
+
+    SecurityIdentifier:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Identifier
+        identifierType:
+          type: string
+          description: Type of identifier
+          enum:
+            - TICKER
+            - BB_GLOBAL
+            - ISIN
+            - CUSIP
+            - SEDOL
+            - BB_UNIQUE
+            - FIGI
+        identifierValue:
+          type: string
+          description: The identifier value
+
+    FieldCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+
+    Field:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Bloomberg field mnemonic (e.g., PX_LAST)
+        title:
+          type: string
+        description:
+          type: string
+        dataType:
+          type: string
+          description: Data type of the field value
+        category:
+          type: string
+
+    FieldListCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldList'
+
+    FieldList:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: FieldList
+        identifier:
+          type: string
+        title:
+          type: string
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+
+    FieldListCreate:
+      type: object
+      required:
+        - '@type'
+        - identifier
+        - title
+        - contains
+      properties:
+        '@type':
+          type: string
+          const: FieldList
+        identifier:
+          type: string
+        title:
+          type: string
+        contains:
+          type: array
+          items:
+            type: object
+            properties:
+              cleanName:
+                type: string
+                description: Bloomberg field mnemonic
+
+    TriggerCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+
+    Trigger:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+        identifier:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        frequency:
+          type: string
+          enum:
+            - daily
+            - weekly
+            - monthly
+            - once
+        snapshotTime:
+          type: string
+          description: Time of day for the snapshot (HH:MM)
+        timezone:
+          type: string
+          description: Timezone for the trigger schedule
+
+    TriggerCreate:
+      type: object
+      required:
+        - '@type'
+        - identifier
+        - frequency
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+        identifier:
+          type: string
+        title:
+          type: string
+        frequency:
+          type: string
+          enum:
+            - daily
+            - weekly
+            - monthly
+            - once
+        snapshotTime:
+          type: string
+        timezone:
+          type: string
+
+    RequestCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRequest'
+
+    RequestCreate:
+      type: object
+      required:
+        - '@type'
+        - identifier
+        - universe
+        - fieldList
+        - trigger
+      properties:
+        '@type':
+          type: string
+          const: DataRequest
+        identifier:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        universe:
+          type: string
+          format: uri
+          description: URI reference to the universe resource
+        fieldList:
+          type: string
+          format: uri
+          description: URI reference to the field list resource
+        trigger:
+          type: string
+          format: uri
+          description: URI reference to the trigger resource
+        formatting:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - DataOutputJson
+                - DataOutputCsv
+            dateFormat:
+              type: string
+            columnHeader:
+              type: boolean
+
+    DataRequest:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: DataRequest
+        identifier:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        universe:
+          type: string
+          format: uri
+        fieldList:
+          type: string
+          format: uri
+        trigger:
+          type: string
+          format: uri
+        formatting:
+          type: object
+          properties:
+            type:
+              type: string
+            dateFormat:
+              type: string
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+            - error
+
+    DistributionCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Distribution'
+
+    Distribution:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Distribution
+        identifier:
+          type: string
+        snapshotTime:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - pending
+            - completed
+            - error
+        links:
+          type: object
+          properties:
+            replies:
+              type: string
+              format: uri
+
+    ReplyCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reply'
+
+    Reply:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Reply
+        identifier:
+          type: string
+        distributionId:
+          type: string
+        contentType:
+          type: string
+        size:
+          type: integer
+          description: Size in bytes
+
+    ReplyData:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            type: string
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string

@@ -1,0 +1,1185 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg EMSX API
+  description: >-
+    The Execution Management System API allows developers to manage and
+    automate trading for equities, futures, and options using an event-driven
+    model with both subscription and request-response paradigms. EMSX
+    provides order and route management, broker integration, and fill
+    tracking via the BLPAPI protocol. This spec models the request-response
+    operations as REST-like endpoints.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://emsx-api-doc.readthedocs.io/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+
+servers:
+  - url: https://localhost:3000
+    description: Bloomberg EMSX service via BLPAPI HTTP bridge
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Orders
+    description: Create, modify, and manage orders
+  - name: Routes
+    description: Create, modify, and manage routes to brokers
+  - name: Fills
+    description: Track order and route fills
+  - name: Broker Strategies
+    description: Query available broker strategies and parameters
+  - name: Teams
+    description: Manage EMSX teams and assignments
+  - name: Subscriptions
+    description: Subscribe to real-time order and route updates
+
+paths:
+  /request/blp/emapisvc/CreateOrder:
+    post:
+      operationId: createOrder
+      summary: Create a new order
+      description: >-
+        Creates a new order in the EMSX blotter. Orders can be created for
+        equities, futures, and options with various order types and
+        time-in-force parameters.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/CreateOrderAndRouteEx:
+    post:
+      operationId: createOrderAndRoute
+      summary: Create an order and route simultaneously
+      description: >-
+        Creates a new order and immediately routes it to a specified broker
+        in a single operation.
+      tags:
+        - Orders
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderAndRouteRequest'
+      responses:
+        '200':
+          description: Order created and routed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderAndRouteResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/ModifyOrderEx:
+    post:
+      operationId: modifyOrder
+      summary: Modify an existing order
+      description: >-
+        Modifies parameters of an existing order such as quantity, limit
+        price, or time-in-force.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyOrderRequest'
+      responses:
+        '200':
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/DeleteOrder:
+    post:
+      operationId: deleteOrder
+      summary: Delete an order
+      description: >-
+        Deletes (cancels) an order from the EMSX blotter. Only orders that
+        have not been fully filled can be deleted.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrderRequest'
+      responses:
+        '200':
+          description: Order deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GroupRouteEx:
+    post:
+      operationId: groupRoute
+      summary: Route multiple orders as a group
+      description: >-
+        Routes a group of orders to a single broker in a single operation,
+        useful for basket or program trading.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupRouteRequest'
+      responses:
+        '200':
+          description: Orders routed as a group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupRouteResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/RouteEx:
+    post:
+      operationId: routeOrder
+      summary: Route an order to a broker
+      description: >-
+        Routes an existing order to a specific broker with optional
+        strategy parameters.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteOrderRequest'
+      responses:
+        '200':
+          description: Order routed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteOrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/ModifyRouteEx:
+    post:
+      operationId: modifyRoute
+      summary: Modify a route
+      description: >-
+        Modifies parameters of an existing route, such as quantity or
+        strategy parameters.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyRouteRequest'
+      responses:
+        '200':
+          description: Route modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/DeleteRoute:
+    post:
+      operationId: deleteRoute
+      summary: Delete (cancel) a route
+      description: >-
+        Cancels an active route. Only routes that have not been fully
+        filled can be cancelled.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRouteRequest'
+      responses:
+        '200':
+          description: Route cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetOrders:
+    post:
+      operationId: getOrders
+      summary: Get orders
+      description: >-
+        Retrieves the current list of orders in the EMSX blotter, optionally
+        filtered by status or other parameters.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOrdersRequest'
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetRoutes:
+    post:
+      operationId: getRoutes
+      summary: Get routes
+      description: >-
+        Retrieves the current list of routes associated with orders in
+        the EMSX blotter.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoutesRequest'
+      responses:
+        '200':
+          description: List of routes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoutesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetFills:
+    post:
+      operationId: getFills
+      summary: Get fills
+      description: >-
+        Retrieves fill information for orders and routes. Fills represent
+        partial or complete executions of routes.
+      tags:
+        - Fills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFillsRequest'
+      responses:
+        '200':
+          description: List of fills
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFillsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetBrokerStrategiesWithAssetClass:
+    post:
+      operationId: getBrokerStrategies
+      summary: Get broker strategies
+      description: >-
+        Retrieves available trading strategies for a specific broker
+        and asset class combination.
+      tags:
+        - Broker Strategies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBrokerStrategiesRequest'
+      responses:
+        '200':
+          description: Available broker strategies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrokerStrategiesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetBrokerStrategyInfoWithAssetClass:
+    post:
+      operationId: getBrokerStrategyInfo
+      summary: Get broker strategy details
+      description: >-
+        Retrieves detailed information about a specific broker strategy
+        including its parameters and constraints.
+      tags:
+        - Broker Strategies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBrokerStrategyInfoRequest'
+      responses:
+        '200':
+          description: Strategy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrokerStrategyInfoResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/GetTeams:
+    post:
+      operationId: getTeams
+      summary: Get EMSX teams
+      description: >-
+        Retrieves the list of EMSX teams available to the user.
+      tags:
+        - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/AssignTrader:
+    post:
+      operationId: assignTrader
+      summary: Assign a trader to an order
+      description: >-
+        Assigns or reassigns a trader to handle a specific order.
+      tags:
+        - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignTraderRequest'
+      responses:
+        '200':
+          description: Trader assigned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /request/blp/emapisvc/ManualFill:
+    post:
+      operationId: manualFill
+      summary: Record a manual fill
+      description: >-
+        Records a manual fill against a route for cases where fills
+        are reported outside the electronic execution flow.
+      tags:
+        - Fills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualFillRequest'
+      responses:
+        '200':
+          description: Manual fill recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential for EMSX access
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+        - EMSX_TICKER
+        - EMSX_AMOUNT
+        - EMSX_ORDER_TYPE
+        - EMSX_SIDE
+        - EMSX_TIF
+      properties:
+        EMSX_TICKER:
+          type: string
+          description: Bloomberg security identifier
+          examples:
+            - 'IBM US Equity'
+        EMSX_AMOUNT:
+          type: integer
+          description: Order quantity (number of shares/contracts)
+        EMSX_ORDER_TYPE:
+          type: string
+          description: Order type
+          enum:
+            - MKT
+            - LMT
+            - STP
+            - STP LMT
+        EMSX_SIDE:
+          type: string
+          description: Buy or sell
+          enum:
+            - BUY
+            - SELL
+            - SHRT
+        EMSX_TIF:
+          type: string
+          description: Time in force
+          enum:
+            - DAY
+            - GTC
+            - OPG
+            - IOC
+            - FOK
+            - GTD
+            - MOC
+            - LOC
+        EMSX_LIMIT_PRICE:
+          type: number
+          description: Limit price (required for LMT and STP LMT orders)
+        EMSX_STOP_PRICE:
+          type: number
+          description: Stop price (required for STP and STP LMT orders)
+        EMSX_ACCOUNT:
+          type: string
+          description: Trading account identifier
+        EMSX_NOTES:
+          type: string
+          description: Free-text notes attached to the order
+        EMSX_HAND_INSTRUCTION:
+          type: string
+          description: Handling instruction
+          enum:
+            - ANY
+            - DIR
+            - FCM
+        EMSX_BASKET_NAME:
+          type: string
+          description: Name of the basket this order belongs to
+        EMSX_CFD_FLAG:
+          type: string
+          description: Contract for difference flag
+          enum:
+            - 'Y'
+            - 'N'
+        EMSX_CUSTOM_NOTE1:
+          type: string
+        EMSX_CUSTOM_NOTE2:
+          type: string
+        EMSX_CUSTOM_NOTE3:
+          type: string
+        EMSX_CUSTOM_NOTE4:
+          type: string
+        EMSX_CUSTOM_NOTE5:
+          type: string
+        EMSX_GTD_DATE:
+          type: string
+          description: Good-till-date in YYYYMMDD format
+        EMSX_INVESTOR_ID:
+          type: string
+          description: Investor identifier for allocation
+        EMSX_LOCATE_BROKER:
+          type: string
+          description: Locate broker for short sells
+        EMSX_LOCATE_ID:
+          type: string
+          description: Locate ID for short sells
+        EMSX_PORTFOLIO:
+          type: string
+          description: Portfolio name for the order
+
+    CreateOrderResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number assigned by EMSX
+        MESSAGE:
+          type: string
+          description: Status message
+
+    CreateOrderAndRouteRequest:
+      allOf:
+        - $ref: '#/components/schemas/CreateOrderRequest'
+        - type: object
+          required:
+            - EMSX_BROKER
+          properties:
+            EMSX_BROKER:
+              type: string
+              description: Broker code for routing
+            EMSX_STRATEGY:
+              type: string
+              description: Broker execution strategy name
+            EMSX_STRATEGY_PARAMS:
+              type: object
+              description: Strategy-specific parameters
+              additionalProperties: true
+            EMSX_EXEC_INSTRUCTIONS:
+              type: string
+              description: Execution instructions for the broker
+
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+        MESSAGE:
+          type: string
+
+    ModifyOrderRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to modify
+        EMSX_AMOUNT:
+          type: integer
+          description: New order quantity
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+            - MKT
+            - LMT
+            - STP
+            - STP LMT
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_STOP_PRICE:
+          type: number
+        EMSX_TIF:
+          type: string
+          enum:
+            - DAY
+            - GTC
+            - OPG
+            - IOC
+            - FOK
+            - GTD
+            - MOC
+            - LOC
+        EMSX_NOTES:
+          type: string
+
+    DeleteOrderRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to delete
+
+    RouteOrderRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_AMOUNT
+        - EMSX_BROKER
+        - EMSX_ORDER_TYPE
+        - EMSX_TIF
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to route
+        EMSX_AMOUNT:
+          type: integer
+          description: Quantity to route
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+            - MKT
+            - LMT
+            - STP
+            - STP LMT
+        EMSX_TIF:
+          type: string
+          enum:
+            - DAY
+            - GTC
+            - OPG
+            - IOC
+            - FOK
+            - GTD
+            - MOC
+            - LOC
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_STOP_PRICE:
+          type: number
+        EMSX_STRATEGY:
+          type: string
+          description: Broker strategy name
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+        EMSX_EXEC_INSTRUCTIONS:
+          type: string
+        EMSX_ACCOUNT:
+          type: string
+
+    RouteOrderResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+        MESSAGE:
+          type: string
+
+    ModifyRouteRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_ROUTE_ID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to modify
+        EMSX_AMOUNT:
+          type: integer
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+            - MKT
+            - LMT
+            - STP
+            - STP LMT
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_STOP_PRICE:
+          type: number
+        EMSX_TIF:
+          type: string
+          enum:
+            - DAY
+            - GTC
+            - OPG
+            - IOC
+            - FOK
+            - GTD
+            - MOC
+            - LOC
+        EMSX_STRATEGY:
+          type: string
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+
+    DeleteRouteRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_ROUTE_ID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to cancel
+
+    GroupRouteRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_BROKER
+        - EMSX_ORDER_TYPE
+        - EMSX_TIF
+      properties:
+        EMSX_SEQUENCE:
+          type: array
+          items:
+            type: integer
+          description: List of order sequence numbers to route as a group
+        EMSX_AMOUNT_PERCENT:
+          type: number
+          description: Percentage of each order to route (0-100)
+          minimum: 0
+          maximum: 100
+        EMSX_BROKER:
+          type: string
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+            - MKT
+            - LMT
+            - STP
+            - STP LMT
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_TIF:
+          type: string
+          enum:
+            - DAY
+            - GTC
+            - OPG
+            - IOC
+            - FOK
+            - GTD
+            - MOC
+            - LOC
+        EMSX_STRATEGY:
+          type: string
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+
+    GroupRouteResponse:
+      type: object
+      properties:
+        numRouted:
+          type: integer
+          description: Number of orders successfully routed
+        MESSAGE:
+          type: string
+        routeIds:
+          type: array
+          items:
+            type: object
+            properties:
+              EMSX_SEQUENCE:
+                type: integer
+              EMSX_ROUTE_ID:
+                type: integer
+
+    GetOrdersRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          description: Scope of orders to retrieve
+          enum:
+            - PRIVATE
+            - TEAM
+
+    GetOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+
+    Order:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+        EMSX_TICKER:
+          type: string
+          description: Security identifier
+        EMSX_SIDE:
+          type: string
+          enum:
+            - BUY
+            - SELL
+            - SHRT
+        EMSX_AMOUNT:
+          type: integer
+          description: Total order quantity
+        EMSX_FILLED:
+          type: integer
+          description: Quantity filled so far
+        EMSX_WORKING:
+          type: integer
+          description: Quantity currently working (routed but not filled)
+        EMSX_ORDER_TYPE:
+          type: string
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_STOP_PRICE:
+          type: number
+        EMSX_TIF:
+          type: string
+        EMSX_STATUS:
+          type: string
+          description: Current order status
+          enum:
+            - ASSIGN
+            - CANCEL
+            - CONNECTED
+            - CXL_PND
+            - DONE
+            - EXPIRED
+            - FILL
+            - MOD_PND
+            - NEW
+            - PART_FILL
+            - RJCT
+            - SENT
+            - WORKING
+        EMSX_AVG_PRICE:
+          type: number
+          description: Average fill price
+        EMSX_ACCOUNT:
+          type: string
+        EMSX_TRADER:
+          type: string
+        EMSX_NOTES:
+          type: string
+        EMSX_BASKET_NAME:
+          type: string
+        EMSX_DATE:
+          type: string
+          description: Order creation date (YYYYMMDD)
+        EMSX_TIME_STAMP:
+          type: string
+          description: Last update timestamp
+        EMSX_PORTFOLIO:
+          type: string
+
+    GetRoutesRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+            - PRIVATE
+            - TEAM
+
+    GetRoutesResponse:
+      type: object
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+
+    Route:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Parent order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+        EMSX_AMOUNT:
+          type: integer
+          description: Routed quantity
+        EMSX_FILLED:
+          type: integer
+          description: Filled quantity on this route
+        EMSX_STATUS:
+          type: string
+          enum:
+            - CANCEL
+            - CXL_PND
+            - DONE
+            - FILL
+            - MOD_PND
+            - NEW
+            - PART_FILL
+            - RJCT
+            - SENT
+            - WORKING
+        EMSX_ORDER_TYPE:
+          type: string
+        EMSX_LIMIT_PRICE:
+          type: number
+        EMSX_AVG_PRICE:
+          type: number
+          description: Average fill price for this route
+        EMSX_STRATEGY:
+          type: string
+        EMSX_EXEC_INSTRUCTIONS:
+          type: string
+        EMSX_LAST_FILL_DATE:
+          type: string
+        EMSX_LAST_FILL_TIME:
+          type: string
+        EMSX_ROUTE_CREATE_DATE:
+          type: string
+        EMSX_ROUTE_CREATE_TIME:
+          type: string
+
+    GetFillsRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+            - PRIVATE
+            - TEAM
+        fromDateTime:
+          type: string
+          format: date-time
+          description: Start of time range for fills
+
+    GetFillsResponse:
+      type: object
+      properties:
+        fills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fill'
+
+    Fill:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Parent order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route that was filled
+        EMSX_FILL_ID:
+          type: integer
+          description: Unique fill identifier
+        EMSX_TICKER:
+          type: string
+        EMSX_SIDE:
+          type: string
+          enum:
+            - BUY
+            - SELL
+            - SHRT
+        EMSX_FILL_AMOUNT:
+          type: integer
+          description: Quantity filled
+        EMSX_FILL_PRICE:
+          type: number
+          description: Fill price
+        EMSX_FILL_DATE:
+          type: string
+          description: Fill date (YYYYMMDD)
+        EMSX_FILL_TIME:
+          type: string
+          description: Fill time (HHMMSS)
+        EMSX_BROKER:
+          type: string
+        EMSX_EXCHANGE:
+          type: string
+          description: Exchange where the fill occurred
+
+    GetBrokerStrategiesRequest:
+      type: object
+      required:
+        - EMSX_BROKER
+        - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+        EMSX_ASSET_CLASS:
+          type: string
+          description: Asset class
+          enum:
+            - EQTY
+            - OPT
+            - FUT
+
+    GetBrokerStrategiesResponse:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            type: string
+          description: List of available strategy names
+
+    GetBrokerStrategyInfoRequest:
+      type: object
+      required:
+        - EMSX_BROKER
+        - EMSX_STRATEGY
+        - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+        EMSX_STRATEGY:
+          type: string
+        EMSX_ASSET_CLASS:
+          type: string
+          enum:
+            - EQTY
+            - OPT
+            - FUT
+
+    GetBrokerStrategyInfoResponse:
+      type: object
+      properties:
+        strategyInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  required:
+                    type: boolean
+                  allowedValues:
+                    type: array
+                    items:
+                      type: string
+
+    GetTeamsResponse:
+      type: object
+      properties:
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              members:
+                type: array
+                items:
+                  type: string
+
+    AssignTraderRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_TRADER_UUID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+        EMSX_TRADER_UUID:
+          type: string
+          description: UUID of the trader to assign
+
+    ManualFillRequest:
+      type: object
+      required:
+        - EMSX_SEQUENCE
+        - EMSX_ROUTE_ID
+        - EMSX_FILL_AMOUNT
+        - EMSX_FILL_PRICE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID
+        EMSX_FILL_AMOUNT:
+          type: integer
+          description: Fill quantity
+        EMSX_FILL_PRICE:
+          type: number
+          description: Fill price
+        EMSX_FILL_DATE:
+          type: string
+          description: Fill date (YYYYMMDD)
+        EMSX_FILL_TIME:
+          type: string
+          description: Fill time (HHMMSS)
+
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+        MESSAGE:
+          type: string
+          description: Status message
+
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+        MESSAGE:
+          type: string
+        REASON:
+          type: string

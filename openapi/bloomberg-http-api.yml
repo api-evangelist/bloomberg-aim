@@ -1,0 +1,924 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg HTTP API
+  description: >-
+    Makes the Bloomberg Open API available via HTTP and WebSockets, allowing
+    clients to access reference and historical request-response data as well
+    as subscribe to live streaming market data. This API wraps the BLPAPI
+    protocol into RESTful HTTP endpoints and WebSocket connections.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://github.com/bloomberg/blpapi-http
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  - url: https://localhost:3000
+    description: Local Bloomberg HTTP API server (default)
+
+security:
+  - basicAuth: []
+
+tags:
+  - name: Reference Data
+    description: Request reference (static) data for securities
+  - name: Historical Data
+    description: Request historical end-of-day or intraday data
+  - name: Intraday Data
+    description: Request intraday tick or bar data
+  - name: Field Search
+    description: Search and discover available data fields
+  - name: Instruments
+    description: Search for securities and instruments
+  - name: Subscriptions
+    description: Manage real-time streaming data subscriptions via WebSocket
+
+paths:
+  /request:
+    post:
+      operationId: sendRequest
+      summary: Send a BLPAPI request
+      description: >-
+        Sends a generic BLPAPI request. The service and operation are specified
+        in the request body. This is the primary endpoint for all request-response
+        operations.
+      tags:
+        - Reference Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlpapiRequest'
+      responses:
+        '200':
+          description: Successful response with requested data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlpapiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/ReferenceDataRequest:
+    post:
+      operationId: referenceDataRequest
+      summary: Request reference data
+      description: >-
+        Retrieves current reference data for a set of securities and fields.
+        Returns the latest available values for requested fields.
+      tags:
+        - Reference Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceDataRequest'
+      responses:
+        '200':
+          description: Reference data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/HistoricalDataRequest:
+    post:
+      operationId: historicalDataRequest
+      summary: Request historical data
+      description: >-
+        Retrieves historical end-of-day data for a set of securities and fields
+        over a specified date range.
+      tags:
+        - Historical Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HistoricalDataRequest'
+      responses:
+        '200':
+          description: Historical data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/IntradayTickRequest:
+    post:
+      operationId: intradayTickRequest
+      summary: Request intraday tick data
+      description: >-
+        Retrieves intraday tick-level data for a single security over
+        a specified time range.
+      tags:
+        - Intraday Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntradayTickRequest'
+      responses:
+        '200':
+          description: Intraday tick data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntradayTickResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/IntradayBarRequest:
+    post:
+      operationId: intradayBarRequest
+      summary: Request intraday bar data
+      description: >-
+        Retrieves intraday OHLCV bar data for a single security over
+        a specified time range and interval.
+      tags:
+        - Intraday Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntradayBarRequest'
+      responses:
+        '200':
+          description: Intraday bar data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntradayBarResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/FieldInfoRequest:
+    post:
+      operationId: fieldInfoRequest
+      summary: Get field information
+      description: >-
+        Returns metadata about specified Bloomberg fields, including
+        descriptions, data types, and categories.
+      tags:
+        - Field Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldInfoRequest'
+      responses:
+        '200':
+          description: Field information response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldInfoResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/refdata/FieldSearchRequest:
+    post:
+      operationId: fieldSearchRequest
+      summary: Search for fields
+      description: >-
+        Searches for Bloomberg fields by keyword or category.
+      tags:
+        - Field Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldSearchRequest'
+      responses:
+        '200':
+          description: Field search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/instruments/InstrumentListRequest:
+    post:
+      operationId: instrumentListRequest
+      summary: Search for instruments
+      description: >-
+        Searches for securities and instruments by query string,
+        supporting partial matches.
+      tags:
+        - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstrumentListRequest'
+      responses:
+        '200':
+          description: Instrument list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/instruments/CurveListRequest:
+    post:
+      operationId: curveListRequest
+      summary: Search for curves
+      description: >-
+        Searches for yield curves and other curve instruments by query.
+      tags:
+        - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurveListRequest'
+      responses:
+        '200':
+          description: Curve list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurveListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /request/blp/instruments/GovernmentLookupRequest:
+    post:
+      operationId: governmentLookupRequest
+      summary: Look up government securities
+      description: >-
+        Searches for government bond securities by country, currency,
+        and maturity parameters.
+      tags:
+        - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GovernmentLookupRequest'
+      responses:
+        '200':
+          description: Government security lookup response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GovernmentLookupResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication for the local API server
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    BlpapiRequest:
+      type: object
+      required:
+        - serviceUri
+        - operationName
+        - requestObject
+      properties:
+        serviceUri:
+          type: string
+          description: BLPAPI service URI (e.g., //blp/refdata)
+          examples:
+            - '//blp/refdata'
+            - '//blp/instruments'
+            - '//blp/mktdata'
+        operationName:
+          type: string
+          description: Name of the BLPAPI operation
+          examples:
+            - ReferenceDataRequest
+            - HistoricalDataRequest
+        requestObject:
+          type: object
+          description: The operation-specific request payload
+          additionalProperties: true
+
+    BlpapiResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    ReferenceDataRequest:
+      type: object
+      required:
+        - securities
+        - fields
+      properties:
+        securities:
+          type: array
+          items:
+            type: string
+          description: List of security identifiers
+          examples:
+            - ['IBM US Equity', 'AAPL US Equity']
+        fields:
+          type: array
+          items:
+            type: string
+          description: List of Bloomberg field mnemonics
+          examples:
+            - ['PX_LAST', 'NAME', 'MARKET_CAP']
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Override'
+        returnFormattedValue:
+          type: boolean
+          default: false
+        useUTCTime:
+          type: boolean
+          default: false
+
+    ReferenceDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    fieldData:
+                      type: object
+                      additionalProperties: true
+                    fieldExceptions:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldException'
+
+    HistoricalDataRequest:
+      type: object
+      required:
+        - securities
+        - fields
+        - startDate
+        - endDate
+      properties:
+        securities:
+          type: array
+          items:
+            type: string
+          description: List of security identifiers
+        fields:
+          type: array
+          items:
+            type: string
+          description: List of Bloomberg field mnemonics
+        startDate:
+          type: string
+          description: Start date in YYYYMMDD format
+          examples:
+            - '20250101'
+        endDate:
+          type: string
+          description: End date in YYYYMMDD format
+          examples:
+            - '20250131'
+        periodicitySelection:
+          type: string
+          enum:
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+            - QUARTERLY
+            - SEMI_ANNUALLY
+            - YEARLY
+          default: DAILY
+        periodicityAdjustment:
+          type: string
+          enum:
+            - ACTUAL
+            - CALENDAR
+            - FISCAL
+          default: ACTUAL
+        currency:
+          type: string
+          description: Three-letter currency code for cross-currency conversion
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Override'
+        nonTradingDayFillOption:
+          type: string
+          enum:
+            - NON_TRADING_WEEKDAYS
+            - ALL_CALENDAR_DAYS
+            - ACTIVE_DAYS_ONLY
+          default: ACTIVE_DAYS_ONLY
+        nonTradingDayFillMethod:
+          type: string
+          enum:
+            - PREVIOUS_VALUE
+            - NIL_VALUE
+          default: NIL_VALUE
+        adjustmentNormal:
+          type: boolean
+          default: false
+        adjustmentAbnormal:
+          type: boolean
+          default: false
+        adjustmentSplit:
+          type: boolean
+          default: true
+
+    HistoricalDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: object
+                properties:
+                  security:
+                    type: string
+                  fieldData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                      additionalProperties: true
+
+    IntradayTickRequest:
+      type: object
+      required:
+        - security
+        - startDateTime
+        - endDateTime
+      properties:
+        security:
+          type: string
+          description: Single security identifier
+        eventTypes:
+          type: array
+          items:
+            type: string
+            enum:
+              - TRADE
+              - BID
+              - ASK
+              - BID_BEST
+              - ASK_BEST
+              - MID_PRICE
+              - AT_TRADE
+              - BEST_BID
+              - BEST_ASK
+          default:
+            - TRADE
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time range
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time range
+        includeConditionCodes:
+          type: boolean
+          default: false
+        includeExchangeCodes:
+          type: boolean
+          default: false
+        includeBrokerCodes:
+          type: boolean
+          default: false
+        includeRPSCodes:
+          type: boolean
+          default: false
+
+    IntradayTickResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              tickData:
+                type: object
+                properties:
+                  tickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        type:
+                          type: string
+                        value:
+                          type: number
+                        size:
+                          type: integer
+
+    IntradayBarRequest:
+      type: object
+      required:
+        - security
+        - eventType
+        - startDateTime
+        - endDateTime
+        - interval
+      properties:
+        security:
+          type: string
+          description: Single security identifier
+        eventType:
+          type: string
+          enum:
+            - TRADE
+            - BID
+            - ASK
+            - BEST_BID
+            - BEST_ASK
+          default: TRADE
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        interval:
+          type: integer
+          description: Bar interval in minutes
+          minimum: 1
+          maximum: 1440
+        gapFillInitialBar:
+          type: boolean
+          default: false
+
+    IntradayBarResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barData:
+                type: object
+                properties:
+                  barTickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        open:
+                          type: number
+                        high:
+                          type: number
+                        low:
+                          type: number
+                        close:
+                          type: number
+                        volume:
+                          type: integer
+                        numEvents:
+                          type: integer
+
+    FieldInfoRequest:
+      type: object
+      required:
+        - fieldId
+      properties:
+        fieldId:
+          type: array
+          items:
+            type: string
+          description: List of field mnemonics or IDs to look up
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+
+    FieldInfoResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    fieldInfo:
+                      type: object
+                      properties:
+                        mnemonic:
+                          type: string
+                        description:
+                          type: string
+                        datatype:
+                          type: string
+                        categoryName:
+                          type: array
+                          items:
+                            type: string
+                        documentation:
+                          type: string
+
+    FieldSearchRequest:
+      type: object
+      required:
+        - searchSpec
+      properties:
+        searchSpec:
+          type: string
+          description: Search keyword or pattern
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+
+    FieldSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    fieldInfo:
+                      type: object
+                      properties:
+                        mnemonic:
+                          type: string
+                        description:
+                          type: string
+                        datatype:
+                          type: string
+                        categoryName:
+                          type: array
+                          items:
+                            type: string
+
+    InstrumentListRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search string for instrument lookup
+        maxResults:
+          type: integer
+          description: Maximum number of results to return
+          default: 10
+        yellowKeyFilter:
+          type: string
+          description: Filter by Bloomberg yellow key
+          enum:
+            - YK_FILTER_NONE
+            - YK_FILTER_CMDT
+            - YK_FILTER_EQUITY
+            - YK_FILTER_MUNI
+            - YK_FILTER_PRFD
+            - YK_FILTER_CLNT
+            - YK_FILTER_MMKT
+            - YK_FILTER_GOVT
+            - YK_FILTER_CORP
+            - YK_FILTER_INDX
+            - YK_FILTER_CURR
+            - YK_FILTER_MTGE
+        languageOverride:
+          type: string
+          description: Two-letter language code
+
+    InstrumentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+
+    CurveListRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search string for curve lookup
+        maxResults:
+          type: integer
+          default: 10
+        countryCode:
+          type: string
+          description: Two-letter country code filter
+        currencyCode:
+          type: string
+          description: Three-letter currency code filter
+        type:
+          type: string
+          enum:
+            - BOND
+            - CDS
+            - ISDA
+          description: Curve type filter
+        subtype:
+          type: string
+          enum:
+            - SOVEREIGN
+            - CORPORATE
+
+    CurveListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    curve:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+                    currency:
+                      type: string
+                    type:
+                      type: string
+                    subtype:
+                      type: string
+
+    GovernmentLookupRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Country or ticker search string
+        partialMatch:
+          type: boolean
+          default: false
+        maxResults:
+          type: integer
+          default: 10
+
+    GovernmentLookupResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+        value:
+          type: string
+          description: Override value
+
+    FieldException:
+      type: object
+      properties:
+        fieldId:
+          type: string
+        errorInfo:
+          type: object
+          properties:
+            source:
+              type: string
+            code:
+              type: integer
+            category:
+              type: string
+            message:
+              type: string
+            subcategory:
+              type: string
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer

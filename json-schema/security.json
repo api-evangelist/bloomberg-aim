@@ -1,0 +1,182 @@
+{
+  "$id": "https://bloomberg.com/schemas/security.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Security",
+  "description": "A financial security or instrument tracked within Bloomberg AIM, representing an equity, fixed income, derivative, or other tradeable asset.",
+  "type": "object",
+  "required": [
+    "ticker",
+    "name",
+    "assetClass"
+  ],
+  "properties": {
+    "ticker": {
+      "type": "string",
+      "description": "Bloomberg ticker symbol (e.g., 'IBM US Equity')",
+      "examples": [
+        "IBM US Equity",
+        "AAPL US Equity",
+        "T 3.5 02/15/2039 Corp"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the security"
+    },
+    "figi": {
+      "type": "string",
+      "description": "Financial Instrument Global Identifier (FIGI)",
+      "pattern": "^BBG[A-Z0-9]{9}$"
+    },
+    "compositeFigi": {
+      "type": "string",
+      "description": "Composite FIGI for the security",
+      "pattern": "^BBG[A-Z0-9]{9}$"
+    },
+    "isin": {
+      "type": "string",
+      "description": "International Securities Identification Number",
+      "pattern": "^[A-Z]{2}[A-Z0-9]{9}[0-9]$"
+    },
+    "cusip": {
+      "type": "string",
+      "description": "Committee on Uniform Securities Identification Procedures number",
+      "pattern": "^[A-Z0-9]{9}$"
+    },
+    "sedol": {
+      "type": "string",
+      "description": "Stock Exchange Daily Official List number",
+      "pattern": "^[A-Z0-9]{7}$"
+    },
+    "bloombergUniqueId": {
+      "type": "string",
+      "description": "Bloomberg unique security identifier"
+    },
+    "assetClass": {
+      "type": "string",
+      "description": "Asset class classification",
+      "enum": [
+        "Equity",
+        "Fixed Income",
+        "Commodity",
+        "Currency",
+        "Index",
+        "Mortgage",
+        "Municipal",
+        "Preferred",
+        "Money Market",
+        "Government",
+        "Corporate",
+        "Option",
+        "Future",
+        "Fund",
+        "ETF"
+      ]
+    },
+    "securityType": {
+      "type": "string",
+      "description": "Specific security type within the asset class",
+      "examples": [
+        "Common Stock",
+        "Corporate Bond",
+        "Call Option",
+        "Put Option",
+        "Future Contract"
+      ]
+    },
+    "exchange": {
+      "type": "string",
+      "description": "Primary exchange where the security is listed",
+      "examples": [
+        "NYSE",
+        "NASDAQ",
+        "LSE",
+        "TSE"
+      ]
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of domicile (ISO 3166-1 alpha-2)",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Trading currency (ISO 4217)",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "sector": {
+      "type": "string",
+      "description": "Industry sector classification"
+    },
+    "industryGroup": {
+      "type": "string",
+      "description": "Industry group within the sector"
+    },
+    "marketCap": {
+      "type": "number",
+      "description": "Market capitalization in the trading currency"
+    },
+    "lastPrice": {
+      "type": "number",
+      "description": "Last traded price"
+    },
+    "bidPrice": {
+      "type": "number",
+      "description": "Current bid price"
+    },
+    "askPrice": {
+      "type": "number",
+      "description": "Current ask price"
+    },
+    "volume": {
+      "type": "integer",
+      "description": "Trading volume for the current session"
+    },
+    "lotSize": {
+      "type": "integer",
+      "description": "Minimum trading lot size",
+      "default": 1
+    },
+    "couponRate": {
+      "type": "number",
+      "description": "Coupon rate for fixed income securities (as a percentage)"
+    },
+    "maturityDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Maturity date for fixed income and derivative securities"
+    },
+    "issueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Issue date of the security"
+    },
+    "strikePrice": {
+      "type": "number",
+      "description": "Strike price for options"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Expiration date for options and futures"
+    },
+    "optionType": {
+      "type": "string",
+      "description": "Option type",
+      "enum": [
+        "Call",
+        "Put"
+      ]
+    },
+    "underlyingTicker": {
+      "type": "string",
+      "description": "Ticker of the underlying security for derivatives"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the security is actively trading",
+      "default": true
+    }
+  },
+  "additionalProperties": false
+}

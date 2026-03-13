@@ -1,0 +1,232 @@
+{
+  "$id": "https://bloomberg.com/schemas/trade.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trade",
+  "description": "A trade execution record within Bloomberg AIM/EMSX, representing a route sent to a broker and its associated fills. Maps to the EMSX route concept with embedded fill data.",
+  "type": "object",
+  "required": [
+    "sequenceNumber",
+    "routeId",
+    "ticker",
+    "side",
+    "amount",
+    "broker"
+  ],
+  "properties": {
+    "sequenceNumber": {
+      "type": "integer",
+      "description": "Parent order sequence number in EMSX"
+    },
+    "routeId": {
+      "type": "integer",
+      "description": "Unique route identifier within the parent order"
+    },
+    "ticker": {
+      "type": "string",
+      "description": "Bloomberg ticker of the traded security",
+      "examples": [
+        "IBM US Equity",
+        "AAPL US Equity"
+      ]
+    },
+    "side": {
+      "type": "string",
+      "description": "Trade direction",
+      "enum": [
+        "BUY",
+        "SELL",
+        "SHRT"
+      ]
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Quantity routed to the broker",
+      "minimum": 1
+    },
+    "filledAmount": {
+      "type": "integer",
+      "description": "Quantity filled on this route",
+      "minimum": 0,
+      "default": 0
+    },
+    "averagePrice": {
+      "type": "number",
+      "description": "Volume-weighted average fill price for this route"
+    },
+    "broker": {
+      "type": "string",
+      "description": "Broker code the route was sent to"
+    },
+    "orderType": {
+      "type": "string",
+      "description": "Order type for this route",
+      "enum": [
+        "MKT",
+        "LMT",
+        "STP",
+        "STP LMT"
+      ]
+    },
+    "limitPrice": {
+      "type": "number",
+      "description": "Limit price sent with the route"
+    },
+    "stopPrice": {
+      "type": "number",
+      "description": "Stop price sent with the route"
+    },
+    "timeInForce": {
+      "type": "string",
+      "description": "Time in force for this route",
+      "enum": [
+        "DAY",
+        "GTC",
+        "OPG",
+        "IOC",
+        "FOK",
+        "GTD",
+        "MOC",
+        "LOC"
+      ]
+    },
+    "strategy": {
+      "type": "string",
+      "description": "Broker execution strategy name"
+    },
+    "strategyParameters": {
+      "type": "object",
+      "description": "Strategy-specific parameters sent to the broker",
+      "additionalProperties": true
+    },
+    "executionInstructions": {
+      "type": "string",
+      "description": "Free-text execution instructions for the broker"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current route status",
+      "enum": [
+        "CANCEL",
+        "CXL_PND",
+        "DONE",
+        "FILL",
+        "MOD_PND",
+        "NEW",
+        "PART_FILL",
+        "RJCT",
+        "SENT",
+        "WORKING"
+      ]
+    },
+    "account": {
+      "type": "string",
+      "description": "Trading account used for this route"
+    },
+    "exchange": {
+      "type": "string",
+      "description": "Exchange where execution occurred"
+    },
+    "commission": {
+      "type": "number",
+      "description": "Commission charged for this route execution"
+    },
+    "commissionType": {
+      "type": "string",
+      "description": "How commission is calculated",
+      "enum": [
+        "PerShare",
+        "Percentage",
+        "Fixed"
+      ]
+    },
+    "netAmount": {
+      "type": "number",
+      "description": "Net monetary amount of the trade (quantity x avgPrice +/- commission)"
+    },
+    "settlementDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Expected or actual settlement date"
+    },
+    "fills": {
+      "type": "array",
+      "description": "Individual fill records for this route",
+      "items": {
+        "$ref": "#/$defs/Fill"
+      }
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the route was created"
+    },
+    "createdTime": {
+      "type": "string",
+      "description": "Time the route was created (HH:MM:SS)"
+    },
+    "lastFillDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the most recent fill"
+    },
+    "lastFillTime": {
+      "type": "string",
+      "description": "Time of the most recent fill (HH:MM:SS)"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last route update"
+    }
+  },
+  "$defs": {
+    "Fill": {
+      "type": "object",
+      "description": "An individual fill (partial or complete execution) within a route",
+      "required": [
+        "fillId",
+        "fillAmount",
+        "fillPrice"
+      ],
+      "properties": {
+        "fillId": {
+          "type": "integer",
+          "description": "Unique fill identifier"
+        },
+        "fillAmount": {
+          "type": "integer",
+          "description": "Quantity executed in this fill",
+          "minimum": 1
+        },
+        "fillPrice": {
+          "type": "number",
+          "description": "Execution price for this fill"
+        },
+        "fillDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the fill"
+        },
+        "fillTime": {
+          "type": "string",
+          "description": "Time of the fill (HH:MM:SS)"
+        },
+        "exchange": {
+          "type": "string",
+          "description": "Exchange where the fill occurred"
+        },
+        "broker": {
+          "type": "string",
+          "description": "Broker that executed the fill"
+        },
+        "isManual": {
+          "type": "boolean",
+          "description": "Whether this fill was manually entered",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

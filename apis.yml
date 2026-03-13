@@ -1,65 +1,177 @@
+specificationVersion: '0.18'
 name: Bloomberg AIM API
-description: Bloomberg's AIM (API and Integration Manager) provides access to Bloomberg's market data, analytics, and enterprise services through REST APIs
+description: >-
+  Bloomberg's Asset and Investment Manager (AIM) is a comprehensive buy-side
+  solution offering global, multi-asset capabilities for portfolio management,
+  trading, compliance, and operations. Bloomberg provides a suite of developer
+  APIs including BLPAPI, Server API, and the Hypermedia API for programmatic
+  access to market data, analytics, and enterprise services.
 image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
-url: https://www.bloomberg.com/professional/product/aim/
+url: https://www.bloomberg.com/professional/products/trading/order-management-system/aim/
 created: '2024-01-15'
-modified: '2024-01-15'
+modified: '2026-03-03'
 tags:
-- financial data
-- market data
-- analytics
-- enterprise data
-- reference data
+  - Financial Data
+  - Market Data
+  - Order Management
+  - Portfolio Management
+  - Trading
+common:
+  - type: Developer Portal
+    url: https://developer.bloomberg.com/
+  - type: Documentation
+    url: https://bloomberg.github.io/blpapi-docs/
+  - type: Getting Started
+    url: https://data.bloomberglp.com/professional/sites/10/2017/03/BLPAPI-Core-Developer-Guide.pdf
+  - type: Console
+    url: https://console.bloomberg.com/
+  - type: Terms of Service
+    url: https://www.bloomberg.com/notices/tos/
+  - type: Privacy Policy
+    url: https://www.bloomberg.com/notices/
+  - type: Blog
+    url: https://www.bloomberg.com/company/stories/category/tech-at-bloomberg/
+  - type: GitHub Organization
+    url: https://github.com/bloomberg
+  - type: Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/blpapi
+  - type: JSON-LD Context
+    url: json-ld/context.jsonld
+  - type: JSON Schema
+    url: json-schema/
 apis:
-- name: Bloomberg Data License API
-  description: Access to Bloomberg's comprehensive financial, pricing, and reference data
-  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
-  baseURL: https://api.bloomberg.com/eap
-  humanURL: https://www.bloomberg.com/professional/support/api-library/
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/api-library/
-  - type: Authentication
-    url: https://www.bloomberg.com/professional/support/api-library/#authentication
-  tags:
-  - market data
-  - pricing
-  - reference data
-- name: Bloomberg BEAP (Enterprise Access Point)
-  description: Enterprise-grade API for accessing Bloomberg Terminal data programmatically
-  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
-  baseURL: https://api.bloomberg.com/eap/catalogs
-  humanURL: https://www.bloomberg.com/professional/product/enterprise-access-point/
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/api-library/
-  - type: Swagger/OpenAPI
-    url: https://api.bloomberg.com/eap/swagger
-  - type: Authentication
-    url: https://www.bloomberg.com/professional/support/api-library/#authentication
-  tags:
-  - enterprise
-  - real-time data
-  - historical data
-- name: Bloomberg B-PIPE API
-  description: Real-time and delayed market data streaming API
-  image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
-  humanURL: https://www.bloomberg.com/professional/product/market-data-feed/
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/api-library/
-  - type: SDK
-    url: https://www.bloomberg.com/professional/support/api-library/#sdk-downloads
-  tags:
-  - streaming
-  - real-time
-  - market feed
+  - name: Bloomberg Data License API
+    description: >-
+      Provides programmatic access to Bloomberg's comprehensive financial,
+      pricing, reference, regulatory, and alternative data covering over 50
+      million securities and 56,000 fields via the Hypermedia API (HAPI).
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    baseURL: https://api.bloomberg.com/eap
+    humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+    properties:
+      - type: Documentation
+        url: https://www.bloomberg.com/professional/support/api-library/
+      - type: Authentication
+        url: https://console.bloomberg.com/about/82
+      - type: OpenAPI
+        url: openapi/bloomberg-data-license-api.yml
+    tags:
+      - Market Data
+      - Pricing Data
+      - Reference Data
+      - Financial Data
+  - name: Bloomberg BEAP (Enterprise Access Point)
+    description: >-
+      Enterprise-grade REST API for accessing Bloomberg Data License content
+      through the Hypermedia API, supporting request-response and subscription
+      based services for reference, pricing, regulatory, and alternative data.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    baseURL: https://api.bloomberg.com/eap/catalogs
+    humanURL: https://www.bloomberg.com/professional/solutions/asset-management/developer/
+    properties:
+      - type: Documentation
+        url: https://www.bloomberg.com/professional/support/api-library/
+      - type: Authentication
+        url: https://console.bloomberg.com/about/82
+      - type: OpenAPI
+        url: openapi/bloomberg-data-license-api.yml
+    tags:
+      - Enterprise Data
+      - Real-Time Data
+      - Historical Data
+      - Reference Data
+  - name: Bloomberg B-PIPE API
+    description: >-
+      Real-time and delayed market data streaming API that consolidates data
+      from more than 330 exchanges and 5,000 pricing contributors globally,
+      covering 35 million instruments across all asset classes.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    humanURL: https://www.bloomberg.com/professional/products/data/enterprise-catalog/real-time-data-feed/
+    properties:
+      - type: Documentation
+        url: https://www.bloomberg.com/professional/support/api-library/
+      - type: Client Libraries
+        url: https://bloomberg.github.io/blpapi-docs/
+    tags:
+      - Streaming Data
+      - Real-Time Data
+      - Market Feed
+      - Exchange Data
+  - name: Bloomberg Server API (SAPI)
+    description: >-
+      Server API delivers real-time market data, historical data, premium
+      reference data, and calculation tools from the Bloomberg Terminal into
+      front-office applications. Available in C, C++, .NET, Python, and Java.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
+    properties:
+      - type: Documentation
+        url: https://bloomberg.github.io/blpapi-docs/
+      - type: Reference
+        url: https://assets.bbhub.io/professional/sites/10/Server-API-SAPI-Fact-Sheet.pdf
+    tags:
+      - Server Api
+      - Market Data
+      - Real-Time Data
+      - Financial Analytics
+  - name: Bloomberg EMSX API
+    description: >-
+      The Execution Management System API allows developers to manage and
+      automate trading for equities, futures, and options using an event-driven
+      model with both subscription and request-response paradigms.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    humanURL: https://www.bloomberg.com/professional/products/trading/execution-management-system/
+    properties:
+      - type: Documentation
+        url: https://emsx-api-doc.readthedocs.io/
+      - type: Reference
+        url: https://www.bloomberg.com/professional/support/api-library/
+      - type: OpenAPI
+        url: openapi/bloomberg-emsx-api.yml
+    tags:
+      - Execution Management
+      - Trading
+      - Order Management
+      - Equities
+  - name: Bloomberg Terminal Connect API
+    description: >-
+      Terminal Connect enables developers to link proprietary applications
+      and spreadsheets with the Bloomberg Terminal, synchronizing actions
+      across applications for seamless front-office workflows.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    humanURL: https://www.bloomberg.com/professional/solutions/asset-management/developer/
+    properties:
+      - type: Documentation
+        url: https://bloomberg.github.io/blpapi-docs/
+      - type: Reference
+        url: https://www.bloomberg.com/professional/support/api-library/
+    tags:
+      - Terminal Integration
+      - Workflow Automation
+      - Front Office
+      - Desktop Api
+  - name: Bloomberg HTTP API
+    description: >-
+      Makes the Bloomberg Open API available via HTTP and WebSockets, allowing
+      clients to access reference and historical request-response data as well
+      as subscribe to live streaming market data.
+    image: https://www.bloomberg.com/company/press/wp-content/uploads/sites/3/2020/02/bloomberg-logo-1.png
+    humanURL: https://github.com/bloomberg/blpapi-http
+    properties:
+      - type: Documentation
+        url: https://github.com/bloomberg/blpapi-http/blob/develop/doc/http-api-guide.md
+      - type: OpenAPI
+        url: openapi/bloomberg-http-api.yml
+    tags:
+      - Http Api
+      - Websockets
+      - Market Data
+      - Streaming Data
 maintainers:
-- name: Bloomberg L.P.
-  email: apisupport@bloomberg.net
-  url: https://www.bloomberg.com
+  - name: Kin Lane
+    email: kin@apievangelist.com
 include:
-- name: Bloomberg Terminal
-  url: https://www.bloomberg.com/professional/solution/bloomberg-terminal/
-- name: Bloomberg Data License
-  url: https://www.bloomberg.com/professional/product/data-license/
+  - name: Bloomberg Terminal
+    url: https://www.bloomberg.com/professional/solution/bloomberg-terminal/
+  - name: Bloomberg Data License
+    url: https://www.bloomberg.com/professional/products/data/data-management/data-license/

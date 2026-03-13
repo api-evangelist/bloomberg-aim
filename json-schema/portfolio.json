@@ -1,0 +1,205 @@
+{
+  "$id": "https://bloomberg.com/schemas/portfolio.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Portfolio",
+  "description": "An investment portfolio managed within Bloomberg AIM, containing positions across multiple securities with associated analytics and compliance attributes.",
+  "type": "object",
+  "required": [
+    "portfolioId",
+    "name"
+  ],
+  "properties": {
+    "portfolioId": {
+      "type": "string",
+      "description": "Unique portfolio identifier within the AIM system"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable portfolio name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the portfolio strategy or purpose"
+    },
+    "portfolioType": {
+      "type": "string",
+      "description": "Classification of the portfolio",
+      "enum": [
+        "Trading",
+        "Model",
+        "Benchmark",
+        "Composite",
+        "Sleeve",
+        "Master",
+        "Sub-Account"
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "description": "Base reporting currency (ISO 4217)",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "benchmarkTicker": {
+      "type": "string",
+      "description": "Bloomberg ticker of the benchmark index"
+    },
+    "manager": {
+      "type": "string",
+      "description": "Portfolio manager responsible for investment decisions"
+    },
+    "managerId": {
+      "type": "string",
+      "description": "Unique identifier for the portfolio manager"
+    },
+    "custodian": {
+      "type": "string",
+      "description": "Custodian institution for the portfolio's assets"
+    },
+    "custodianAccountId": {
+      "type": "string",
+      "description": "Account identifier at the custodian"
+    },
+    "inceptionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the portfolio was created"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current portfolio status",
+      "enum": [
+        "Active",
+        "Closed",
+        "Pending",
+        "Frozen"
+      ],
+      "default": "Active"
+    },
+    "totalMarketValue": {
+      "type": "number",
+      "description": "Total market value of all positions in base currency"
+    },
+    "totalCostBasis": {
+      "type": "number",
+      "description": "Total cost basis of all positions in base currency"
+    },
+    "cashBalance": {
+      "type": "number",
+      "description": "Available cash balance in the portfolio"
+    },
+    "unrealizedPnL": {
+      "type": "number",
+      "description": "Unrealized profit and loss across all open positions"
+    },
+    "realizedPnL": {
+      "type": "number",
+      "description": "Realized profit and loss from closed positions"
+    },
+    "totalReturn": {
+      "type": "number",
+      "description": "Total return as a percentage since inception"
+    },
+    "ytdReturn": {
+      "type": "number",
+      "description": "Year-to-date return as a percentage"
+    },
+    "mtdReturn": {
+      "type": "number",
+      "description": "Month-to-date return as a percentage"
+    },
+    "positions": {
+      "type": "array",
+      "description": "Current positions held in the portfolio",
+      "items": {
+        "$ref": "https://bloomberg.com/schemas/position.json"
+      }
+    },
+    "assetAllocation": {
+      "type": "object",
+      "description": "Asset allocation breakdown as percentage weights",
+      "properties": {
+        "equity": {
+          "type": "number",
+          "description": "Percentage allocated to equities"
+        },
+        "fixedIncome": {
+          "type": "number",
+          "description": "Percentage allocated to fixed income"
+        },
+        "cash": {
+          "type": "number",
+          "description": "Percentage held in cash"
+        },
+        "alternatives": {
+          "type": "number",
+          "description": "Percentage allocated to alternative investments"
+        },
+        "commodities": {
+          "type": "number",
+          "description": "Percentage allocated to commodities"
+        },
+        "other": {
+          "type": "number",
+          "description": "Percentage in other asset classes"
+        }
+      }
+    },
+    "riskMetrics": {
+      "type": "object",
+      "description": "Portfolio-level risk metrics",
+      "properties": {
+        "beta": {
+          "type": "number",
+          "description": "Portfolio beta relative to benchmark"
+        },
+        "sharpeRatio": {
+          "type": "number",
+          "description": "Sharpe ratio measuring risk-adjusted return"
+        },
+        "volatility": {
+          "type": "number",
+          "description": "Annualized portfolio volatility (standard deviation)"
+        },
+        "trackingError": {
+          "type": "number",
+          "description": "Tracking error versus benchmark"
+        },
+        "valueAtRisk": {
+          "type": "number",
+          "description": "Value at Risk (95% confidence) in base currency"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Modified duration for fixed income portfolios"
+        },
+        "convexity": {
+          "type": "number",
+          "description": "Convexity for fixed income portfolios"
+        }
+      }
+    },
+    "complianceStatus": {
+      "type": "string",
+      "description": "Portfolio compliance status",
+      "enum": [
+        "Compliant",
+        "Warning",
+        "Violation",
+        "Pending Review"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Custom tags for portfolio classification",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last portfolio update"
+    }
+  },
+  "additionalProperties": false
+}

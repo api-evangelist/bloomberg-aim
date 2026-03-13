@@ -1,0 +1,502 @@
+{
+  "@context": {
+    "@version": 1.1,
+
+    "bloomberg": "https://bloomberg.com/schemas/",
+    "schema": "https://schema.org/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+    "figi": "https://www.openfigi.com/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Security": {
+      "@id": "bloomberg:Security",
+      "@context": {
+        "ticker": {
+          "@id": "bloomberg:ticker",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "figi": {
+          "@id": "figi:identifier",
+          "@type": "xsd:string"
+        },
+        "compositeFigi": {
+          "@id": "bloomberg:compositeFigi",
+          "@type": "xsd:string"
+        },
+        "isin": {
+          "@id": "fibo:Securities/SecuritiesIdentification/InternationalSecuritiesIdentificationNumber",
+          "@type": "xsd:string"
+        },
+        "cusip": {
+          "@id": "fibo:Securities/SecuritiesIdentification/CUSIPIdentifier",
+          "@type": "xsd:string"
+        },
+        "sedol": {
+          "@id": "fibo:Securities/SecuritiesIdentification/SEDOLIdentifier",
+          "@type": "xsd:string"
+        },
+        "bloombergUniqueId": {
+          "@id": "bloomberg:uniqueId",
+          "@type": "xsd:string"
+        },
+        "assetClass": {
+          "@id": "bloomberg:assetClass",
+          "@type": "xsd:string"
+        },
+        "securityType": {
+          "@id": "bloomberg:securityType",
+          "@type": "xsd:string"
+        },
+        "exchange": {
+          "@id": "schema:Exchange",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "schema:countryOfOrigin",
+          "@type": "xsd:string"
+        },
+        "currency": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "sector": {
+          "@id": "bloomberg:sector",
+          "@type": "xsd:string"
+        },
+        "industryGroup": {
+          "@id": "bloomberg:industryGroup",
+          "@type": "xsd:string"
+        },
+        "marketCap": {
+          "@id": "bloomberg:marketCap",
+          "@type": "xsd:decimal"
+        },
+        "lastPrice": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "bidPrice": {
+          "@id": "bloomberg:bidPrice",
+          "@type": "xsd:decimal"
+        },
+        "askPrice": {
+          "@id": "bloomberg:askPrice",
+          "@type": "xsd:decimal"
+        },
+        "volume": {
+          "@id": "bloomberg:volume",
+          "@type": "xsd:integer"
+        },
+        "maturityDate": {
+          "@id": "bloomberg:maturityDate",
+          "@type": "xsd:date"
+        },
+        "couponRate": {
+          "@id": "bloomberg:couponRate",
+          "@type": "xsd:decimal"
+        },
+        "strikePrice": {
+          "@id": "bloomberg:strikePrice",
+          "@type": "xsd:decimal"
+        },
+        "expirationDate": {
+          "@id": "bloomberg:expirationDate",
+          "@type": "xsd:date"
+        },
+        "optionType": {
+          "@id": "bloomberg:optionType",
+          "@type": "xsd:string"
+        },
+        "underlyingTicker": {
+          "@id": "bloomberg:underlyingTicker",
+          "@type": "xsd:string"
+        },
+        "active": {
+          "@id": "bloomberg:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Order": {
+      "@id": "bloomberg:Order",
+      "@context": {
+        "sequenceNumber": {
+          "@id": "bloomberg:sequenceNumber",
+          "@type": "xsd:integer"
+        },
+        "ticker": {
+          "@id": "bloomberg:ticker",
+          "@type": "xsd:string"
+        },
+        "side": {
+          "@id": "bloomberg:side",
+          "@type": "xsd:string"
+        },
+        "amount": {
+          "@id": "bloomberg:amount",
+          "@type": "xsd:integer"
+        },
+        "orderType": {
+          "@id": "bloomberg:orderType",
+          "@type": "xsd:string"
+        },
+        "limitPrice": {
+          "@id": "bloomberg:limitPrice",
+          "@type": "xsd:decimal"
+        },
+        "stopPrice": {
+          "@id": "bloomberg:stopPrice",
+          "@type": "xsd:decimal"
+        },
+        "timeInForce": {
+          "@id": "bloomberg:timeInForce",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "bloomberg:status",
+          "@type": "xsd:string"
+        },
+        "filledAmount": {
+          "@id": "bloomberg:filledAmount",
+          "@type": "xsd:integer"
+        },
+        "workingAmount": {
+          "@id": "bloomberg:workingAmount",
+          "@type": "xsd:integer"
+        },
+        "averagePrice": {
+          "@id": "bloomberg:averagePrice",
+          "@type": "xsd:decimal"
+        },
+        "account": {
+          "@id": "bloomberg:account",
+          "@type": "xsd:string"
+        },
+        "portfolio": {
+          "@id": "bloomberg:portfolio",
+          "@type": "xsd:string"
+        },
+        "trader": {
+          "@id": "bloomberg:trader",
+          "@type": "xsd:string"
+        },
+        "basketName": {
+          "@id": "bloomberg:basketName",
+          "@type": "xsd:string"
+        },
+        "notes": {
+          "@id": "bloomberg:notes",
+          "@type": "xsd:string"
+        },
+        "createdDate": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:date"
+        },
+        "lastUpdated": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        },
+        "routes": {
+          "@id": "bloomberg:routes",
+          "@type": "@id",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Portfolio": {
+      "@id": "bloomberg:Portfolio",
+      "@context": {
+        "portfolioId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "portfolioType": {
+          "@id": "bloomberg:portfolioType",
+          "@type": "xsd:string"
+        },
+        "currency": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "benchmarkTicker": {
+          "@id": "bloomberg:benchmarkTicker",
+          "@type": "xsd:string"
+        },
+        "manager": {
+          "@id": "bloomberg:manager",
+          "@type": "xsd:string"
+        },
+        "custodian": {
+          "@id": "bloomberg:custodian",
+          "@type": "xsd:string"
+        },
+        "inceptionDate": {
+          "@id": "bloomberg:inceptionDate",
+          "@type": "xsd:date"
+        },
+        "status": {
+          "@id": "bloomberg:status",
+          "@type": "xsd:string"
+        },
+        "totalMarketValue": {
+          "@id": "bloomberg:totalMarketValue",
+          "@type": "xsd:decimal"
+        },
+        "cashBalance": {
+          "@id": "bloomberg:cashBalance",
+          "@type": "xsd:decimal"
+        },
+        "unrealizedPnL": {
+          "@id": "bloomberg:unrealizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "realizedPnL": {
+          "@id": "bloomberg:realizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "totalReturn": {
+          "@id": "bloomberg:totalReturn",
+          "@type": "xsd:decimal"
+        },
+        "positions": {
+          "@id": "bloomberg:positions",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "complianceStatus": {
+          "@id": "bloomberg:complianceStatus",
+          "@type": "xsd:string"
+        },
+        "lastUpdated": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Position": {
+      "@id": "bloomberg:Position",
+      "@context": {
+        "positionId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "portfolioId": {
+          "@id": "bloomberg:portfolioId",
+          "@type": "xsd:string"
+        },
+        "ticker": {
+          "@id": "bloomberg:ticker",
+          "@type": "xsd:string"
+        },
+        "securityName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "figi": {
+          "@id": "figi:identifier",
+          "@type": "xsd:string"
+        },
+        "isin": {
+          "@id": "fibo:Securities/SecuritiesIdentification/InternationalSecuritiesIdentificationNumber",
+          "@type": "xsd:string"
+        },
+        "assetClass": {
+          "@id": "bloomberg:assetClass",
+          "@type": "xsd:string"
+        },
+        "quantity": {
+          "@id": "bloomberg:quantity",
+          "@type": "xsd:decimal"
+        },
+        "side": {
+          "@id": "bloomberg:side",
+          "@type": "xsd:string"
+        },
+        "costBasis": {
+          "@id": "bloomberg:costBasis",
+          "@type": "xsd:decimal"
+        },
+        "averageCost": {
+          "@id": "bloomberg:averageCost",
+          "@type": "xsd:decimal"
+        },
+        "marketPrice": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "marketValue": {
+          "@id": "bloomberg:marketValue",
+          "@type": "xsd:decimal"
+        },
+        "localCurrency": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "weight": {
+          "@id": "bloomberg:weight",
+          "@type": "xsd:decimal"
+        },
+        "unrealizedPnL": {
+          "@id": "bloomberg:unrealizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "realizedPnL": {
+          "@id": "bloomberg:realizedPnL",
+          "@type": "xsd:decimal"
+        },
+        "sector": {
+          "@id": "bloomberg:sector",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "schema:countryOfOrigin",
+          "@type": "xsd:string"
+        },
+        "tradeDate": {
+          "@id": "bloomberg:tradeDate",
+          "@type": "xsd:date"
+        },
+        "settleDate": {
+          "@id": "bloomberg:settleDate",
+          "@type": "xsd:date"
+        },
+        "lastUpdated": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Trade": {
+      "@id": "bloomberg:Trade",
+      "@context": {
+        "sequenceNumber": {
+          "@id": "bloomberg:sequenceNumber",
+          "@type": "xsd:integer"
+        },
+        "routeId": {
+          "@id": "bloomberg:routeId",
+          "@type": "xsd:integer"
+        },
+        "ticker": {
+          "@id": "bloomberg:ticker",
+          "@type": "xsd:string"
+        },
+        "side": {
+          "@id": "bloomberg:side",
+          "@type": "xsd:string"
+        },
+        "amount": {
+          "@id": "bloomberg:amount",
+          "@type": "xsd:integer"
+        },
+        "filledAmount": {
+          "@id": "bloomberg:filledAmount",
+          "@type": "xsd:integer"
+        },
+        "averagePrice": {
+          "@id": "bloomberg:averagePrice",
+          "@type": "xsd:decimal"
+        },
+        "broker": {
+          "@id": "bloomberg:broker",
+          "@type": "xsd:string"
+        },
+        "orderType": {
+          "@id": "bloomberg:orderType",
+          "@type": "xsd:string"
+        },
+        "limitPrice": {
+          "@id": "bloomberg:limitPrice",
+          "@type": "xsd:decimal"
+        },
+        "strategy": {
+          "@id": "bloomberg:strategy",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "bloomberg:status",
+          "@type": "xsd:string"
+        },
+        "exchange": {
+          "@id": "schema:Exchange",
+          "@type": "xsd:string"
+        },
+        "commission": {
+          "@id": "bloomberg:commission",
+          "@type": "xsd:decimal"
+        },
+        "netAmount": {
+          "@id": "bloomberg:netAmount",
+          "@type": "xsd:decimal"
+        },
+        "settlementDate": {
+          "@id": "bloomberg:settlementDate",
+          "@type": "xsd:date"
+        },
+        "fills": {
+          "@id": "bloomberg:fills",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "lastUpdated": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Fill": {
+      "@id": "bloomberg:Fill",
+      "@context": {
+        "fillId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:integer"
+        },
+        "fillAmount": {
+          "@id": "bloomberg:fillAmount",
+          "@type": "xsd:integer"
+        },
+        "fillPrice": {
+          "@id": "bloomberg:fillPrice",
+          "@type": "xsd:decimal"
+        },
+        "fillDate": {
+          "@id": "bloomberg:fillDate",
+          "@type": "xsd:date"
+        },
+        "fillTime": {
+          "@id": "bloomberg:fillTime",
+          "@type": "xsd:string"
+        },
+        "exchange": {
+          "@id": "schema:Exchange",
+          "@type": "xsd:string"
+        },
+        "broker": {
+          "@id": "bloomberg:broker",
+          "@type": "xsd:string"
+        },
+        "isManual": {
+          "@id": "bloomberg:isManual",
+          "@type": "xsd:boolean"
+        }
+      }
+    }
+  }
+}
