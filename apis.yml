@@ -28,10 +28,10 @@ apis:
       million securities and 56,000 fields via the Hypermedia API (HAPI).
     humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
     tags:
+      - Financial Data
       - Market Data
       - Pricing Data
       - Reference Data
-      - Financial Data
     properties:
       - type: Documentation
         url: https://www.bloomberg.com/professional/support/api-library/
@@ -45,10 +45,10 @@ apis:
       front-office applications.
     humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
     tags:
-      - Server API
+      - Financial Analytics
       - Market Data
       - Real-Time Data
-      - Financial Analytics
+      - Server API
     properties:
       - type: Documentation
         url: https://bloomberg.github.io/blpapi-docs/
@@ -59,10 +59,10 @@ apis:
       automate trading for equities, futures, and options.
     humanURL: https://www.bloomberg.com/professional/products/trading/execution-management-system/
     tags:
-      - Execution Management
-      - Trading
-      - Order Management
       - Equities
+      - Execution Management
+      - Order Management
+      - Trading
     properties:
       - type: Documentation
         url: https://emsx-api-doc.readthedocs.io/
