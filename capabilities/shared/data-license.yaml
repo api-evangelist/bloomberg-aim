@@ -1,0 +1,218 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Bloomberg Data License API (HAPI)"
+  description: "Hypermedia API for accessing Bloomberg financial, pricing, reference, and regulatory data covering 50M+ securities."
+  tags:
+    - Bloomberg
+    - Financial Data
+    - Market Data
+    - Reference Data
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BLOOMBERG_HAPI_TOKEN: BLOOMBERG_HAPI_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: data-license
+      baseUri: https://api.bloomberg.com/eap
+      description: "Bloomberg Data License HAPI for financial data"
+      authentication:
+        type: bearer
+        token: "{{BLOOMBERG_HAPI_TOKEN}}"
+      resources:
+        - name: catalogs
+          path: /catalogs
+          description: "Data catalog browsing"
+          operations:
+            - name: list-catalogs
+              method: GET
+              description: "List available data catalogs"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-catalog
+              method: GET
+              description: "Get catalog details"
+              inputParameters:
+                - name: catalogId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Catalog identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: universes
+          path: /universes
+          description: "Security universe management"
+          operations:
+            - name: list-universes
+              method: GET
+              description: "List security universes"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-universe
+              method: POST
+              description: "Create a security universe"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  identifier: "{{tools.identifier}}"
+                  title: "{{tools.title}}"
+            - name: get-universe
+              method: GET
+              description: "Get universe details"
+              inputParameters:
+                - name: universeId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Universe identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-universe
+              method: DELETE
+              description: "Delete a universe"
+              inputParameters:
+                - name: universeId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Universe identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: field-lists
+          path: /fieldLists
+          description: "Field list management"
+          operations:
+            - name: list-field-lists
+              method: GET
+              description: "List field lists"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-field-list
+              method: POST
+              description: "Create a field list"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-field-list
+              method: GET
+              description: "Get field list details"
+              inputParameters:
+                - name: fieldListId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Field list identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: requests
+          path: /requests
+          description: "Data request management"
+          operations:
+            - name: list-requests
+              method: GET
+              description: "List data requests"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-request
+              method: POST
+              description: "Create a data request"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: distributions
+          path: /distributions
+          description: "Data distribution access"
+          operations:
+            - name: list-distributions
+              method: GET
+              description: "List data distributions"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-distribution
+              method: GET
+              description: "Get distribution details and download URL"
+              inputParameters:
+                - name: distributionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Distribution identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: data-license-api
+      resources:
+        - path: /v1/catalogs
+          name: catalogs
+          description: "Data catalogs"
+          operations:
+            - method: GET
+              name: list-catalogs
+              description: "List data catalogs"
+              call: "data-license.list-catalogs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: data-license-mcp
+      transport: http
+      tools:
+        - name: list-catalogs
+          description: "List Bloomberg data catalogs"
+          hints:
+            readOnly: true
+          call: "data-license.list-catalogs"
+          outputParameters:
+            - type: object
+              mapping: "$."

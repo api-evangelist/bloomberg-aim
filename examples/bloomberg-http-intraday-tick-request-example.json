@@ -1,0 +1,10 @@
+{
+  "security": "example_value",
+  "eventTypes": [],
+  "startDateTime": "example_value",
+  "endDateTime": "example_value",
+  "includeConditionCodes": true,
+  "includeExchangeCodes": true,
+  "includeBrokerCodes": true,
+  "includeRPSCodes": true
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeleteOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Order sequence number to delete"
+    }
+  }
+}

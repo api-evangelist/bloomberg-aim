@@ -1,0 +1,8 @@
+{
+  "query": "example_value",
+  "maxResults": 10,
+  "countryCode": "example_value",
+  "currencyCode": "example_value",
+  "type": "example_value",
+  "subtype": "example_value"
+}

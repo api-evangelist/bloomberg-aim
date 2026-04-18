@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IntradayBarRequest",
+  "type": "object",
+  "properties": {
+    "security": {
+      "type": "string",
+      "description": "Single security identifier"
+    },
+    "eventType": {
+      "type": "string"
+    },
+    "startDateTime": {
+      "type": "string"
+    },
+    "endDateTime": {
+      "type": "string"
+    },
+    "interval": {
+      "type": "integer",
+      "description": "Bar interval in minutes"
+    },
+    "gapFillInitialBar": {
+      "type": "boolean"
+    }
+  }
+}

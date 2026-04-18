@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GetFillsRequest",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string"
+    },
+    "fromDateTime": {
+      "type": "string"
+    }
+  }
+}

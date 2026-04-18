@@ -17,39 +17,39 @@ info:
   termsOfService: https://www.bloomberg.com/notices/tos/
 
 servers:
-  - url: https://api.bloomberg.com/eap
-    description: Bloomberg Enterprise Access Point (Production)
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
 
 security:
-  - bearerAuth: []
-  - oauth2: []
+- bearerAuth: []
+- oauth2: []
 
 tags:
-  - name: Catalogs
-    description: Browse available data catalogs and their contents
-  - name: Universes
-    description: Manage security universes for data requests
-  - name: Field Lists
-    description: Manage field lists for data requests
-  - name: Triggers
-    description: Configure scheduling triggers for data delivery
-  - name: Requests
-    description: Create and manage data requests
-  - name: Distributions
-    description: Access completed data distributions and downloads
-  - name: Replies
-    description: Access request reply data
+- name: Catalogs
+  description: Browse available data catalogs and their contents
+- name: Universes
+  description: Manage security universes for data requests
+- name: Field Lists
+  description: Manage field lists for data requests
+- name: Triggers
+  description: Configure scheduling triggers for data delivery
+- name: Requests
+  description: Create and manage data requests
+- name: Distributions
+  description: Access completed data distributions and downloads
+- name: Replies
+  description: Access request reply data
 
 paths:
   /catalogs:
     get:
       operationId: listCatalogs
-      summary: List available catalogs
+      summary: List Available Catalogs
       description: >-
         Returns a collection of catalogs available to the authenticated user.
         Each catalog represents a logical grouping of data services.
       tags:
-        - Catalogs
+      - Catalogs
       responses:
         '200':
           description: A list of available catalogs
@@ -57,18 +57,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogCollection'
+              examples:
+                Listcatalogs200Example:
+                  summary: Default listCatalogs 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}:
     get:
       operationId: getCatalog
-      summary: Get catalog details
+      summary: Get Catalog Details
       description: Returns details and links for a specific catalog.
       tags:
-        - Catalogs
+      - Catalogs
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: Catalog details
@@ -76,20 +89,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Catalog'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    links:
+                      universes: https://www.example.com
+                      fieldLists: https://www.example.com
+                      triggers: https://www.example.com
+                      requests: https://www.example.com
+                      distributions: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/datasets:
     get:
       operationId: listDatasets
-      summary: List datasets in a catalog
+      summary: List Datasets in a Catalog
       description: Returns the datasets available within a specific catalog.
       tags:
-        - Catalogs
+      - Catalogs
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of datasets
@@ -97,27 +127,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetCollection'
+              examples:
+                Listdatasets200Example:
+                  summary: Default listDatasets 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      fieldCount: 10
+                      category: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/fields:
     get:
       operationId: listCatalogFields
-      summary: List available fields in a catalog
+      summary: List Available Fields in a Catalog
       description: >-
         Returns the fields available for data requests within a catalog.
         Fields can be filtered by asset class or data category.
       tags:
-        - Field Lists
+      - Field Lists
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - name: category
-          in: query
-          description: Filter fields by data category
-          schema:
-            type: string
+      - $ref: '#/components/parameters/catalogId'
+      - name: category
+        in: query
+        description: Filter fields by data category
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: A list of available fields
@@ -125,18 +170,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldCollection'
+              examples:
+                Listcatalogfields200Example:
+                  summary: Default listCatalogFields 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/universes:
     get:
       operationId: listUniverses
-      summary: List universes
+      summary: List Universes
       description: Returns the security universes defined in the catalog.
       tags:
-        - Universes
+      - Universes
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of universes
@@ -144,24 +203,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UniverseCollection'
+              examples:
+                Listuniverses200Example:
+                  summary: Default listUniverses 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      contains: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createUniverse
-      summary: Create a universe
+      summary: Create a Universe
       description: >-
         Creates a new security universe containing a set of identifiers
         (tickers, FIGIs, ISINs, CUSIPs, SEDOLs, etc.) for data requests.
       tags:
-        - Universes
+      - Universes
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UniverseCreate'
+            examples:
+              CreateuniverseRequestExample:
+                summary: Default createUniverse request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  description: A sample description.
+                  contains:
+                  - '@type': example_value
+                    identifierType: TICKER
+                    identifierValue: example_value
       responses:
         '201':
           description: Universe created
@@ -175,21 +261,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Universe'
+              examples:
+                Createuniverse201Example:
+                  summary: Default createUniverse 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    contains:
+                    - '@type': example_value
+                      identifierType: TICKER
+                      identifierValue: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/universes/{universeId}:
     get:
       operationId: getUniverse
-      summary: Get universe details
+      summary: Get Universe Details
       description: Returns details of a specific security universe.
       tags:
-        - Universes
+      - Universes
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/universeId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/universeId'
       responses:
         '200':
           description: Universe details
@@ -197,20 +299,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Universe'
+              examples:
+                Getuniverse200Example:
+                  summary: Default getUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    contains:
+                    - '@type': example_value
+                      identifierType: TICKER
+                      identifierValue: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/fieldLists:
     get:
       operationId: listFieldLists
-      summary: List field lists
+      summary: List Field Lists
       description: Returns all field lists defined in the catalog.
       tags:
-        - Field Lists
+      - Field Lists
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of field lists
@@ -218,24 +336,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldListCollection'
+              examples:
+                Listfieldlists200Example:
+                  summary: Default listFieldLists 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      contains: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createFieldList
-      summary: Create a field list
+      summary: Create a Field List
       description: >-
         Creates a new field list specifying which data fields to include
         in a data request.
       tags:
-        - Field Lists
+      - Field Lists
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/FieldListCreate'
+            examples:
+              CreatefieldlistRequestExample:
+                summary: Default createFieldList request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  contains:
+                  - cleanName: example_value
       responses:
         '201':
           description: Field list created
@@ -249,21 +390,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldList'
+              examples:
+                Createfieldlist201Example:
+                  summary: Default createFieldList 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/fieldLists/{fieldListId}:
     get:
       operationId: getFieldList
-      summary: Get field list details
+      summary: Get Field List Details
       description: Returns details of a specific field list.
       tags:
-        - Field Lists
+      - Field Lists
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/fieldListId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/fieldListId'
       responses:
         '200':
           description: Field list details
@@ -271,20 +429,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldList'
+              examples:
+                Getfieldlist200Example:
+                  summary: Default getFieldList 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/triggers:
     get:
       operationId: listTriggers
-      summary: List triggers
+      summary: List Triggers
       description: Returns the scheduling triggers available in the catalog.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of triggers
@@ -292,24 +467,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TriggerCollection'
+              examples:
+                Listtriggers200Example:
+                  summary: Default listTriggers 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      frequency: daily
+                      snapshotTime: example_value
+                      timezone: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createTrigger
-      summary: Create a trigger
+      summary: Create a Trigger
       description: >-
         Creates a scheduling trigger to control when data requests are
         executed and delivered.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TriggerCreate'
+            examples:
+              CreatetriggerRequestExample:
+                summary: Default createTrigger request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  frequency: daily
+                  snapshotTime: example_value
+                  timezone: example_value
       responses:
         '201':
           description: Trigger created
@@ -323,21 +525,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trigger'
+              examples:
+                Createtrigger201Example:
+                  summary: Default createTrigger 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    frequency: daily
+                    snapshotTime: example_value
+                    timezone: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/triggers/{triggerId}:
     get:
       operationId: getTrigger
-      summary: Get trigger details
+      summary: Get Trigger Details
       description: Returns details of a specific trigger.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/triggerId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/triggerId'
       responses:
         '200':
           description: Trigger details
@@ -345,20 +562,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trigger'
+              examples:
+                Gettrigger200Example:
+                  summary: Default getTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    frequency: daily
+                    snapshotTime: example_value
+                    timezone: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/requests:
     get:
       operationId: listRequests
-      summary: List data requests
+      summary: List Data Requests
       description: Returns all data requests in the catalog.
       tags:
-        - Requests
+      - Requests
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of data requests
@@ -366,24 +598,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RequestCollection'
+              examples:
+                Listrequests200Example:
+                  summary: Default listRequests 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      universe: https://www.example.com
+                      fieldList: https://www.example.com
+                      trigger: https://www.example.com
+                      formatting: {}
+                      status: active
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createRequest
-      summary: Create a data request
+      summary: Create a Data Request
       description: >-
         Creates a new data request combining a universe, field list, and
         trigger to produce a scheduled data output.
       tags:
-        - Requests
+      - Requests
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RequestCreate'
+            examples:
+              CreaterequestRequestExample:
+                summary: Default createRequest request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  description: A sample description.
+                  universe: https://www.example.com
+                  fieldList: https://www.example.com
+                  trigger: https://www.example.com
+                  formatting:
+                    type: DataOutputJson
+                    dateFormat: example_value
+                    columnHeader: true
       responses:
         '201':
           description: Request created
@@ -397,21 +663,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataRequest'
+              examples:
+                Createrequest201Example:
+                  summary: Default createRequest 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    universe: https://www.example.com
+                    fieldList: https://www.example.com
+                    trigger: https://www.example.com
+                    formatting:
+                      type: example_value
+                      dateFormat: example_value
+                    status: active
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/requests/{requestId}:
     get:
       operationId: getRequest
-      summary: Get data request details
+      summary: Get Data Request Details
       description: Returns details of a specific data request.
       tags:
-        - Requests
+      - Requests
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/requestId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/requestId'
       responses:
         '200':
           description: Data request details
@@ -419,19 +704,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataRequest'
+              examples:
+                Getrequest200Example:
+                  summary: Default getRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    universe: https://www.example.com
+                    fieldList: https://www.example.com
+                    trigger: https://www.example.com
+                    formatting:
+                      type: example_value
+                      dateFormat: example_value
+                    status: active
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteRequest
-      summary: Delete a data request
+      summary: Delete a Data Request
       description: Deletes a specific data request.
       tags:
-        - Requests
+      - Requests
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/requestId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/requestId'
       responses:
         '204':
           description: Request deleted
@@ -440,16 +744,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/distributions:
     get:
       operationId: listDistributions
-      summary: List distributions
+      summary: List Distributions
       description: >-
         Returns available data distributions (completed outputs) for the catalog.
       tags:
-        - Distributions
+      - Distributions
       parameters:
-        - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/catalogId'
       responses:
         '200':
           description: A list of distributions
@@ -457,20 +764,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DistributionCollection'
+              examples:
+                Listdistributions200Example:
+                  summary: Default listDistributions 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      snapshotTime: '2026-01-15T10:30:00Z'
+                      status: pending
+                      links: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/distributions/{distributionId}:
     get:
       operationId: getDistribution
-      summary: Get distribution details
+      summary: Get Distribution Details
       description: >-
         Returns details and download links for a specific distribution.
       tags:
-        - Distributions
+      - Distributions
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/distributionId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
       responses:
         '200':
           description: Distribution details with download links
@@ -478,23 +799,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Distribution'
+              examples:
+                Getdistribution200Example:
+                  summary: Default getDistribution 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    snapshotTime: '2026-01-15T10:30:00Z'
+                    status: pending
+                    links:
+                      replies: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/distributions/{distributionId}/replies:
     get:
       operationId: listReplies
-      summary: List replies for a distribution
+      summary: List Replies for a Distribution
       description: >-
         Returns the individual reply files available for download within
         a distribution.
       tags:
-        - Replies
+      - Replies
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/distributionId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
       responses:
         '200':
           description: A list of replies
@@ -502,22 +837,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReplyCollection'
+              examples:
+                Listreplies200Example:
+                  summary: Default listReplies 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      distributionId: '500123'
+                      contentType: example_value
+                      size: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /catalogs/{catalogId}/distributions/{distributionId}/replies/{replyId}:
     get:
       operationId: getReply
-      summary: Download a reply
+      summary: Download a Reply
       description: >-
         Downloads the data content of a specific reply within a distribution.
         The response format depends on the request configuration (JSON, CSV, etc.).
       tags:
-        - Replies
+      - Replies
       parameters:
-        - $ref: '#/components/parameters/catalogId'
-        - $ref: '#/components/parameters/distributionId'
-        - $ref: '#/components/parameters/replyId'
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
+      - $ref: '#/components/parameters/replyId'
       responses:
         '200':
           description: Reply data content
@@ -525,14 +874,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReplyData'
+              examples:
+                Getreply200Example:
+                  summary: Default getReply 200 response
+                  x-microcks-default: true
+                  value:
+                    fields:
+                    - example_value
+                    data:
+                    - {}
             text/csv:
               schema:
                 type: string
+              examples:
+                Getreply200Example:
+                  summary: Default getReply 200 response
+                  x-microcks-default: true
+                  value: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -632,18 +998,22 @@ components:
           items:
             $ref: '#/components/schemas/Catalog'
 
+          example: []
     Catalog:
       type: object
       properties:
         identifier:
           type: string
           description: Unique catalog identifier
+          example: example_value
         title:
           type: string
           description: Human-readable catalog title
+          example: Example Title
         description:
           type: string
           description: Description of the catalog contents
+          example: A sample description.
         links:
           type: object
           properties:
@@ -663,6 +1033,7 @@ components:
               type: string
               format: uri
 
+          example: example_value
     DatasetCollection:
       type: object
       properties:
@@ -671,20 +1042,26 @@ components:
           items:
             $ref: '#/components/schemas/Dataset'
 
+          example: []
     Dataset:
       type: object
       properties:
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         fieldCount:
           type: integer
+          example: 10
         category:
           type: string
 
+          example: example_value
     UniverseCollection:
       type: object
       properties:
@@ -693,70 +1070,84 @@ components:
           items:
             $ref: '#/components/schemas/Universe'
 
+          example: []
     Universe:
       type: object
       properties:
         '@type':
           type: string
           const: Universe
+          example: example_value
         identifier:
           type: string
           description: Unique universe identifier
+          example: example_value
         title:
           type: string
           description: Human-readable universe title
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         contains:
           type: array
           items:
             $ref: '#/components/schemas/SecurityIdentifier'
 
+          example: []
     UniverseCreate:
       type: object
       required:
-        - '@type'
-        - identifier
-        - title
-        - contains
+      - '@type'
+      - identifier
+      - title
+      - contains
       properties:
         '@type':
           type: string
           const: Universe
+          example: example_value
         identifier:
           type: string
           description: Unique universe identifier
+          example: example_value
         title:
           type: string
           description: Human-readable universe title
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         contains:
           type: array
           items:
             $ref: '#/components/schemas/SecurityIdentifier'
 
+          example: []
     SecurityIdentifier:
       type: object
       properties:
         '@type':
           type: string
           const: Identifier
+          example: example_value
         identifierType:
           type: string
           description: Type of identifier
           enum:
-            - TICKER
-            - BB_GLOBAL
-            - ISIN
-            - CUSIP
-            - SEDOL
-            - BB_UNIQUE
-            - FIGI
+          - TICKER
+          - BB_GLOBAL
+          - ISIN
+          - CUSIP
+          - SEDOL
+          - BB_UNIQUE
+          - FIGI
+          example: TICKER
         identifierValue:
           type: string
           description: The identifier value
 
+          example: example_value
     FieldCollection:
       type: object
       properties:
@@ -765,22 +1156,28 @@ components:
           items:
             $ref: '#/components/schemas/Field'
 
+          example: []
     Field:
       type: object
       properties:
         identifier:
           type: string
           description: Bloomberg field mnemonic (e.g., PX_LAST)
+          example: example_value
         title:
           type: string
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         dataType:
           type: string
           description: Data type of the field value
+          example: example_value
         category:
           type: string
 
+          example: example_value
     FieldListCollection:
       type: object
       properties:
@@ -789,36 +1186,44 @@ components:
           items:
             $ref: '#/components/schemas/FieldList'
 
+          example: []
     FieldList:
       type: object
       properties:
         '@type':
           type: string
           const: FieldList
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         contains:
           type: array
           items:
             $ref: '#/components/schemas/Field'
 
+          example: []
     FieldListCreate:
       type: object
       required:
-        - '@type'
-        - identifier
-        - title
-        - contains
+      - '@type'
+      - identifier
+      - title
+      - contains
       properties:
         '@type':
           type: string
           const: FieldList
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         contains:
           type: array
           items:
@@ -828,6 +1233,7 @@ components:
                 type: string
                 description: Bloomberg field mnemonic
 
+          example: []
     TriggerCollection:
       type: object
       properties:
@@ -836,58 +1242,72 @@ components:
           items:
             $ref: '#/components/schemas/Trigger'
 
+          example: []
     Trigger:
       type: object
       properties:
         '@type':
           type: string
           const: Trigger
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         frequency:
           type: string
           enum:
-            - daily
-            - weekly
-            - monthly
-            - once
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
         snapshotTime:
           type: string
           description: Time of day for the snapshot (HH:MM)
+          example: example_value
         timezone:
           type: string
           description: Timezone for the trigger schedule
 
+          example: example_value
     TriggerCreate:
       type: object
       required:
-        - '@type'
-        - identifier
-        - frequency
+      - '@type'
+      - identifier
+      - frequency
       properties:
         '@type':
           type: string
           const: Trigger
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         frequency:
           type: string
           enum:
-            - daily
-            - weekly
-            - monthly
-            - once
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
         snapshotTime:
           type: string
+          example: example_value
         timezone:
           type: string
 
+          example: example_value
     RequestCollection:
       type: object
       properties:
@@ -896,70 +1316,86 @@ components:
           items:
             $ref: '#/components/schemas/DataRequest'
 
+          example: []
     RequestCreate:
       type: object
       required:
-        - '@type'
-        - identifier
-        - universe
-        - fieldList
-        - trigger
+      - '@type'
+      - identifier
+      - universe
+      - fieldList
+      - trigger
       properties:
         '@type':
           type: string
           const: DataRequest
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         universe:
           type: string
           format: uri
           description: URI reference to the universe resource
+          example: https://www.example.com
         fieldList:
           type: string
           format: uri
           description: URI reference to the field list resource
+          example: https://www.example.com
         trigger:
           type: string
           format: uri
           description: URI reference to the trigger resource
+          example: https://www.example.com
         formatting:
           type: object
           properties:
             type:
               type: string
               enum:
-                - DataOutputJson
-                - DataOutputCsv
+              - DataOutputJson
+              - DataOutputCsv
             dateFormat:
               type: string
             columnHeader:
               type: boolean
 
+          example: example_value
     DataRequest:
       type: object
       properties:
         '@type':
           type: string
           const: DataRequest
+          example: example_value
         identifier:
           type: string
+          example: example_value
         title:
           type: string
+          example: Example Title
         description:
           type: string
+          example: A sample description.
         universe:
           type: string
           format: uri
+          example: https://www.example.com
         fieldList:
           type: string
           format: uri
+          example: https://www.example.com
         trigger:
           type: string
           format: uri
+          example: https://www.example.com
         formatting:
           type: object
           properties:
@@ -967,13 +1403,15 @@ components:
               type: string
             dateFormat:
               type: string
+          example: example_value
         status:
           type: string
           enum:
-            - active
-            - inactive
-            - error
+          - active
+          - inactive
+          - error
 
+          example: active
     DistributionCollection:
       type: object
       properties:
@@ -982,23 +1420,28 @@ components:
           items:
             $ref: '#/components/schemas/Distribution'
 
+          example: []
     Distribution:
       type: object
       properties:
         '@type':
           type: string
           const: Distribution
+          example: example_value
         identifier:
           type: string
+          example: example_value
         snapshotTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         status:
           type: string
           enum:
-            - pending
-            - completed
-            - error
+          - pending
+          - completed
+          - error
+          example: pending
         links:
           type: object
           properties:
@@ -1006,6 +1449,7 @@ components:
               type: string
               format: uri
 
+          example: example_value
     ReplyCollection:
       type: object
       properties:
@@ -1014,22 +1458,28 @@ components:
           items:
             $ref: '#/components/schemas/Reply'
 
+          example: []
     Reply:
       type: object
       properties:
         '@type':
           type: string
           const: Reply
+          example: example_value
         identifier:
           type: string
+          example: example_value
         distributionId:
           type: string
+          example: '500123'
         contentType:
           type: string
+          example: example_value
         size:
           type: integer
           description: Size in bytes
 
+          example: 10
     ReplyData:
       type: object
       properties:
@@ -1037,12 +1487,14 @@ components:
           type: array
           items:
             type: string
+          example: []
         data:
           type: array
           items:
             type: object
             additionalProperties: true
 
+          example: []
     Error:
       type: object
       properties:
@@ -1055,3 +1507,4 @@ components:
               type: string
             details:
               type: string
+          example: example_value

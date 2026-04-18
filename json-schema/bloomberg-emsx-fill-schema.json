@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fill",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Parent order sequence number"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer",
+      "description": "Route that was filled"
+    },
+    "EMSX_FILL_ID": {
+      "type": "integer",
+      "description": "Unique fill identifier"
+    },
+    "EMSX_TICKER": {
+      "type": "string"
+    },
+    "EMSX_SIDE": {
+      "type": "string"
+    },
+    "EMSX_FILL_AMOUNT": {
+      "type": "integer",
+      "description": "Quantity filled"
+    },
+    "EMSX_FILL_PRICE": {
+      "type": "number",
+      "description": "Fill price"
+    },
+    "EMSX_FILL_DATE": {
+      "type": "string",
+      "description": "Fill date (YYYYMMDD)"
+    },
+    "EMSX_FILL_TIME": {
+      "type": "string",
+      "description": "Fill time (HHMMSS)"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_EXCHANGE": {
+      "type": "string",
+      "description": "Exchange where the fill occurred"
+    }
+  }
+}

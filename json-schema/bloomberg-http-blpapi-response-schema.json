@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlpapiResponse",
+  "type": "object",
+  "properties": {
+    "statusCode": {
+      "type": "integer",
+      "description": "HTTP status code"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array"
+    }
+  }
+}

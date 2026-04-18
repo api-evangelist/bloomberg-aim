@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Catalog",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "description": "Unique catalog identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable catalog title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the catalog contents"
+    },
+    "links": {
+      "type": "object"
+    }
+  }
+}

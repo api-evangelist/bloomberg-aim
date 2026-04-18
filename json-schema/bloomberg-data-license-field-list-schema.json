@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FieldList",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "contains": {
+      "type": "array"
+    }
+  }
+}

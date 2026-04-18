@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Field",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "dataType": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

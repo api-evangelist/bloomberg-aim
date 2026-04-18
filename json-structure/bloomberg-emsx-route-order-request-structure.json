@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RouteOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY_PARAMS": {
+      "type": "object"
+    },
+    "EMSX_EXEC_INSTRUCTIONS": {
+      "type": "string"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string"
+    }
+  }
+}

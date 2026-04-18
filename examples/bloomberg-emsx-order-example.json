@@ -1,0 +1,21 @@
+{
+  "EMSX_SEQUENCE": 10,
+  "EMSX_TICKER": "example_value",
+  "EMSX_SIDE": "example_value",
+  "EMSX_AMOUNT": 10,
+  "EMSX_FILLED": 10,
+  "EMSX_WORKING": 10,
+  "EMSX_ORDER_TYPE": "example_value",
+  "EMSX_LIMIT_PRICE": 42.5,
+  "EMSX_STOP_PRICE": 42.5,
+  "EMSX_TIF": "example_value",
+  "EMSX_STATUS": "example_value",
+  "EMSX_AVG_PRICE": 42.5,
+  "EMSX_ACCOUNT": "example_value",
+  "EMSX_TRADER": "example_value",
+  "EMSX_NOTES": "example_value",
+  "EMSX_BASKET_NAME": "example_value",
+  "EMSX_DATE": "example_value",
+  "EMSX_TIME_STAMP": "example_value",
+  "EMSX_PORTFOLIO": "example_value"
+}

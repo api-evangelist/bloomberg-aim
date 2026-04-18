@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FieldSearchRequest",
+  "type": "object",
+  "properties": {
+    "searchSpec": {
+      "type": "string",
+      "description": "Search keyword or pattern"
+    },
+    "returnFieldDocumentation": {
+      "type": "boolean"
+    }
+  }
+}

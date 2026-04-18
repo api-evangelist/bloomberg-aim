@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "OperationResponse",
+  "type": "object",
+  "properties": {
+    "STATUS": {
+      "type": "integer"
+    },
+    "MESSAGE": {
+      "type": "string"
+    }
+  }
+}

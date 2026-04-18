@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ModifyRouteRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY_PARAMS": {
+      "type": "object"
+    }
+  }
+}

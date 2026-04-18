@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModifyOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Order sequence number to modify"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer",
+      "description": "New order quantity"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_NOTES": {
+      "type": "string"
+    }
+  }
+}

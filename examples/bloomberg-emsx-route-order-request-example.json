@@ -1,0 +1,13 @@
+{
+  "EMSX_SEQUENCE": 10,
+  "EMSX_AMOUNT": 10,
+  "EMSX_BROKER": "example_value",
+  "EMSX_ORDER_TYPE": "example_value",
+  "EMSX_TIF": "example_value",
+  "EMSX_LIMIT_PRICE": 42.5,
+  "EMSX_STOP_PRICE": 42.5,
+  "EMSX_STRATEGY": "example_value",
+  "EMSX_STRATEGY_PARAMS": "example_value",
+  "EMSX_EXEC_INSTRUCTIONS": "example_value",
+  "EMSX_ACCOUNT": "example_value"
+}

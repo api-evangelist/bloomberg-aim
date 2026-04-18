@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "DeleteRouteRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer"
+    }
+  }
+}

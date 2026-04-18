@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GovernmentLookupRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Country or ticker search string"
+    },
+    "partialMatch": {
+      "type": "boolean"
+    },
+    "maxResults": {
+      "type": "integer"
+    }
+  }
+}

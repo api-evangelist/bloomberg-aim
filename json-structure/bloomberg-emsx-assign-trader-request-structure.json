@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AssignTraderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_TRADER_UUID": {
+      "type": "string"
+    }
+  }
+}

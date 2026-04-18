@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroupRouteResponse",
+  "type": "object",
+  "properties": {
+    "numRouted": {
+      "type": "integer",
+      "description": "Number of orders successfully routed"
+    },
+    "MESSAGE": {
+      "type": "string"
+    },
+    "routeIds": {
+      "type": "array"
+    }
+  }
+}

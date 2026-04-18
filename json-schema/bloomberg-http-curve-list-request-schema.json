@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CurveListRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Search string for curve lookup"
+    },
+    "maxResults": {
+      "type": "integer"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Two-letter country code filter"
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "Three-letter currency code filter"
+    },
+    "type": {
+      "type": "string",
+      "description": "Curve type filter"
+    },
+    "subtype": {
+      "type": "string"
+    }
+  }
+}

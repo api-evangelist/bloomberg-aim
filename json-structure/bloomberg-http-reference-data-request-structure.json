@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ReferenceDataRequest",
+  "type": "object",
+  "properties": {
+    "securities": {
+      "type": "array"
+    },
+    "fields": {
+      "type": "array"
+    },
+    "overrides": {
+      "type": "array"
+    },
+    "returnFormattedValue": {
+      "type": "boolean"
+    },
+    "useUTCTime": {
+      "type": "boolean"
+    }
+  }
+}

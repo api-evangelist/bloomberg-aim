@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OperationResponse",
+  "type": "object",
+  "properties": {
+    "STATUS": {
+      "type": "integer",
+      "description": "Operation status code (0 = success)"
+    },
+    "MESSAGE": {
+      "type": "string",
+      "description": "Status message"
+    }
+  }
+}

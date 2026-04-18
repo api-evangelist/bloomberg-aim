@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "HistoricalDataRequest",
+  "type": "object",
+  "properties": {
+    "securities": {
+      "type": "array"
+    },
+    "fields": {
+      "type": "array"
+    },
+    "startDate": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string"
+    },
+    "periodicitySelection": {
+      "type": "string"
+    },
+    "periodicityAdjustment": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "overrides": {
+      "type": "array"
+    },
+    "nonTradingDayFillOption": {
+      "type": "string"
+    },
+    "nonTradingDayFillMethod": {
+      "type": "string"
+    },
+    "adjustmentNormal": {
+      "type": "boolean"
+    },
+    "adjustmentAbnormal": {
+      "type": "boolean"
+    },
+    "adjustmentSplit": {
+      "type": "boolean"
+    }
+  }
+}

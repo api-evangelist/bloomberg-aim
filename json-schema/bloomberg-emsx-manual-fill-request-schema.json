@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManualFillRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Order sequence number"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer",
+      "description": "Route ID"
+    },
+    "EMSX_FILL_AMOUNT": {
+      "type": "integer",
+      "description": "Fill quantity"
+    },
+    "EMSX_FILL_PRICE": {
+      "type": "number",
+      "description": "Fill price"
+    },
+    "EMSX_FILL_DATE": {
+      "type": "string",
+      "description": "Fill date (YYYYMMDD)"
+    },
+    "EMSX_FILL_TIME": {
+      "type": "string",
+      "description": "Fill time (HHMMSS)"
+    }
+  }
+}

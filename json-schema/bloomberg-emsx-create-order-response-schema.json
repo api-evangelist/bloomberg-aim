@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateOrderResponse",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Unique order sequence number assigned by EMSX"
+    },
+    "MESSAGE": {
+      "type": "string",
+      "description": "Status message"
+    }
+  }
+}

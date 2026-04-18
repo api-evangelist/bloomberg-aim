@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_TICKER": {
+      "type": "string",
+      "description": "Bloomberg security identifier"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer",
+      "description": "Order quantity (number of shares/contracts)"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string",
+      "description": "Order type"
+    },
+    "EMSX_SIDE": {
+      "type": "string",
+      "description": "Buy or sell"
+    },
+    "EMSX_TIF": {
+      "type": "string",
+      "description": "Time in force"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number",
+      "description": "Limit price (required for LMT and STP LMT orders)"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number",
+      "description": "Stop price (required for STP and STP LMT orders)"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string",
+      "description": "Trading account identifier"
+    },
+    "EMSX_NOTES": {
+      "type": "string",
+      "description": "Free-text notes attached to the order"
+    },
+    "EMSX_HAND_INSTRUCTION": {
+      "type": "string",
+      "description": "Handling instruction"
+    },
+    "EMSX_BASKET_NAME": {
+      "type": "string",
+      "description": "Name of the basket this order belongs to"
+    },
+    "EMSX_CFD_FLAG": {
+      "type": "string",
+      "description": "Contract for difference flag"
+    },
+    "EMSX_CUSTOM_NOTE1": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE2": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE3": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE4": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE5": {
+      "type": "string"
+    },
+    "EMSX_GTD_DATE": {
+      "type": "string",
+      "description": "Good-till-date in YYYYMMDD format"
+    },
+    "EMSX_INVESTOR_ID": {
+      "type": "string",
+      "description": "Investor identifier for allocation"
+    },
+    "EMSX_LOCATE_BROKER": {
+      "type": "string",
+      "description": "Locate broker for short sells"
+    },
+    "EMSX_LOCATE_ID": {
+      "type": "string",
+      "description": "Locate ID for short sells"
+    },
+    "EMSX_PORTFOLIO": {
+      "type": "string",
+      "description": "Portfolio name for the order"
+    }
+  }
+}

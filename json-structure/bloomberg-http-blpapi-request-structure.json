@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BlpapiRequest",
+  "type": "object",
+  "properties": {
+    "serviceUri": {
+      "type": "string"
+    },
+    "operationName": {
+      "type": "string"
+    },
+    "requestObject": {
+      "type": "object"
+    }
+  }
+}

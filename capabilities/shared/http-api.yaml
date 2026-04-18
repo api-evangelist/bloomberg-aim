@@ -1,0 +1,173 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Bloomberg HTTP API"
+  description: "HTTP/WebSocket wrapper for BLPAPI providing reference data, historical data, intraday data, field search, and streaming market data."
+  tags:
+    - Bloomberg
+    - Market Data
+    - Reference Data
+    - Historical Data
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BLOOMBERG_HTTP_USERNAME: BLOOMBERG_HTTP_USERNAME
+      BLOOMBERG_HTTP_PASSWORD: BLOOMBERG_HTTP_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: http-api
+      baseUri: https://localhost:3000
+      description: "Bloomberg HTTP API for reference and historical data"
+      authentication:
+        type: basic
+        username: "{{BLOOMBERG_HTTP_USERNAME}}"
+        password: "{{BLOOMBERG_HTTP_PASSWORD}}"
+      resources:
+        - name: request
+          path: /request
+          description: "Generic BLPAPI request endpoint"
+          operations:
+            - name: send-request
+              method: POST
+              description: "Send a BLPAPI request"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  service: "{{tools.service}}"
+                  operation: "{{tools.operation}}"
+                  parameters: "{{tools.parameters}}"
+        - name: reference-data
+          path: /request
+          description: "Reference data requests"
+          operations:
+            - name: get-reference-data
+              method: POST
+              description: "Get reference data for securities"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  service: "//blp/refdata"
+                  operation: "ReferenceDataRequest"
+                  parameters:
+                    securities: "{{tools.securities}}"
+                    fields: "{{tools.fields}}"
+        - name: historical-data
+          path: /request
+          description: "Historical data requests"
+          operations:
+            - name: get-historical-data
+              method: POST
+              description: "Get historical end-of-day data"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  service: "//blp/refdata"
+                  operation: "HistoricalDataRequest"
+                  parameters:
+                    securities: "{{tools.securities}}"
+                    fields: "{{tools.fields}}"
+                    startDate: "{{tools.startDate}}"
+                    endDate: "{{tools.endDate}}"
+        - name: intraday-data
+          path: /request
+          description: "Intraday data requests"
+          operations:
+            - name: get-intraday-bars
+              method: POST
+              description: "Get intraday bar data"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-intraday-ticks
+              method: POST
+              description: "Get intraday tick data"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: field-search
+          path: /request
+          description: "Field discovery"
+          operations:
+            - name: search-fields
+              method: POST
+              description: "Search available data fields"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-field-info
+              method: POST
+              description: "Get field metadata"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: instruments
+          path: /request
+          description: "Instrument search"
+          operations:
+            - name: search-instruments
+              method: POST
+              description: "Search for securities and instruments"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: http-api-rest
+      resources:
+        - path: /v1/reference-data
+          name: reference-data
+          description: "Reference data"
+          operations:
+            - method: POST
+              name: get-reference-data
+              description: "Get reference data for securities"
+              call: "http-api.get-reference-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: http-api-mcp
+      transport: http
+      tools:
+        - name: get-reference-data
+          description: "Get reference data for Bloomberg securities"
+          hints:
+            readOnly: true
+          call: "http-api.get-reference-data"
+          outputParameters:
+            - type: object
+              mapping: "$."

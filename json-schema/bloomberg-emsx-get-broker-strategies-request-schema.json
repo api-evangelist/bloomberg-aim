@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetBrokerStrategiesRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_BROKER": {
+      "type": "string",
+      "description": "Broker code"
+    },
+    "EMSX_ASSET_CLASS": {
+      "type": "string",
+      "description": "Asset class"
+    }
+  }
+}

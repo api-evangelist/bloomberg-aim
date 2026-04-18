@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Route",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_FILLED": {
+      "type": "integer"
+    },
+    "EMSX_STATUS": {
+      "type": "string"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_AVG_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_EXEC_INSTRUCTIONS": {
+      "type": "string"
+    },
+    "EMSX_LAST_FILL_DATE": {
+      "type": "string"
+    },
+    "EMSX_LAST_FILL_TIME": {
+      "type": "string"
+    },
+    "EMSX_ROUTE_CREATE_DATE": {
+      "type": "string"
+    },
+    "EMSX_ROUTE_CREATE_TIME": {
+      "type": "string"
+    }
+  }
+}

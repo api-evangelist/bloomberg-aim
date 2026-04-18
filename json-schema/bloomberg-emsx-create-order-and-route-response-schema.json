@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateOrderAndRouteResponse",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Unique order sequence number"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer",
+      "description": "Unique route identifier"
+    },
+    "MESSAGE": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "security": "example_value",
+  "eventType": "example_value",
+  "startDateTime": "example_value",
+  "endDateTime": "example_value",
+  "interval": 10,
+  "gapFillInitialBar": true
+}

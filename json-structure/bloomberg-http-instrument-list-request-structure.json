@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "InstrumentListRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string"
+    },
+    "maxResults": {
+      "type": "integer"
+    },
+    "yellowKeyFilter": {
+      "type": "string"
+    },
+    "languageOverride": {
+      "type": "string"
+    }
+  }
+}

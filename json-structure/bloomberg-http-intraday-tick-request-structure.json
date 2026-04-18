@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "IntradayTickRequest",
+  "type": "object",
+  "properties": {
+    "security": {
+      "type": "string"
+    },
+    "eventTypes": {
+      "type": "array"
+    },
+    "startDateTime": {
+      "type": "string"
+    },
+    "endDateTime": {
+      "type": "string"
+    },
+    "includeConditionCodes": {
+      "type": "boolean"
+    },
+    "includeExchangeCodes": {
+      "type": "boolean"
+    },
+    "includeBrokerCodes": {
+      "type": "boolean"
+    },
+    "includeRPSCodes": {
+      "type": "boolean"
+    }
+  }
+}

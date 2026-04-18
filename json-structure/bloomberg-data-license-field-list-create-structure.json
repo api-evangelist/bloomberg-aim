@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "FieldListCreate",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "contains": {
+      "type": "array"
+    }
+  }
+}

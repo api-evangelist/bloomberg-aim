@@ -1,0 +1,10 @@
+{
+  "EMSX_SEQUENCE": [],
+  "EMSX_AMOUNT_PERCENT": 42.5,
+  "EMSX_BROKER": "example_value",
+  "EMSX_ORDER_TYPE": "example_value",
+  "EMSX_LIMIT_PRICE": 42.5,
+  "EMSX_TIF": "example_value",
+  "EMSX_STRATEGY": "example_value",
+  "EMSX_STRATEGY_PARAMS": "example_value"
+}

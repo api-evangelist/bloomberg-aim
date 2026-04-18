@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReferenceDataRequest",
+  "type": "object",
+  "properties": {
+    "securities": {
+      "type": "array",
+      "description": "List of security identifiers"
+    },
+    "fields": {
+      "type": "array",
+      "description": "List of Bloomberg field mnemonics"
+    },
+    "overrides": {
+      "type": "array"
+    },
+    "returnFormattedValue": {
+      "type": "boolean"
+    },
+    "useUTCTime": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Route",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Parent order sequence number"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer",
+      "description": "Unique route identifier"
+    },
+    "EMSX_BROKER": {
+      "type": "string",
+      "description": "Broker code"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer",
+      "description": "Routed quantity"
+    },
+    "EMSX_FILLED": {
+      "type": "integer",
+      "description": "Filled quantity on this route"
+    },
+    "EMSX_STATUS": {
+      "type": "string"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_AVG_PRICE": {
+      "type": "number",
+      "description": "Average fill price for this route"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_EXEC_INSTRUCTIONS": {
+      "type": "string"
+    },
+    "EMSX_LAST_FILL_DATE": {
+      "type": "string"
+    },
+    "EMSX_LAST_FILL_TIME": {
+      "type": "string"
+    },
+    "EMSX_ROUTE_CREATE_DATE": {
+      "type": "string"
+    },
+    "EMSX_ROUTE_CREATE_TIME": {
+      "type": "string"
+    }
+  }
+}

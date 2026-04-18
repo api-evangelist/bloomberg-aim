@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Reply",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "distributionId": {
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    }
+  }
+}

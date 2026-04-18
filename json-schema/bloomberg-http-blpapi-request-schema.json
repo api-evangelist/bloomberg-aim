@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BlpapiRequest",
+  "type": "object",
+  "properties": {
+    "serviceUri": {
+      "type": "string",
+      "description": "BLPAPI service URI (e.g., //blp/refdata)"
+    },
+    "operationName": {
+      "type": "string",
+      "description": "Name of the BLPAPI operation"
+    },
+    "requestObject": {
+      "type": "object",
+      "description": "The operation-specific request payload"
+    }
+  }
+}

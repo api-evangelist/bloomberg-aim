@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GroupRouteRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "array"
+    },
+    "EMSX_AMOUNT_PERCENT": {
+      "type": "number"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY_PARAMS": {
+      "type": "object"
+    }
+  }
+}

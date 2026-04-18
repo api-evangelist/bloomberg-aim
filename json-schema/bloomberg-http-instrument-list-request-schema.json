@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InstrumentListRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Search string for instrument lookup"
+    },
+    "maxResults": {
+      "type": "integer",
+      "description": "Maximum number of results to return"
+    },
+    "yellowKeyFilter": {
+      "type": "string",
+      "description": "Filter by Bloomberg yellow key"
+    },
+    "languageOverride": {
+      "type": "string",
+      "description": "Two-letter language code"
+    }
+  }
+}

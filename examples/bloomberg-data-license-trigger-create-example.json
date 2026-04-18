@@ -1,0 +1,8 @@
+{
+  "@type": "example_value",
+  "identifier": "example_value",
+  "title": "Example Title",
+  "frequency": "example_value",
+  "snapshotTime": "example_value",
+  "timezone": "example_value"
+}

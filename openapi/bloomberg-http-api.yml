@@ -15,43 +15,51 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
 
 servers:
-  - url: https://localhost:3000
-    description: Local Bloomberg HTTP API server (default)
+- url: https://localhost:3000
+  description: Local Bloomberg HTTP API server (default)
 
 security:
-  - basicAuth: []
+- basicAuth: []
 
 tags:
-  - name: Reference Data
-    description: Request reference (static) data for securities
-  - name: Historical Data
-    description: Request historical end-of-day or intraday data
-  - name: Intraday Data
-    description: Request intraday tick or bar data
-  - name: Field Search
-    description: Search and discover available data fields
-  - name: Instruments
-    description: Search for securities and instruments
-  - name: Subscriptions
-    description: Manage real-time streaming data subscriptions via WebSocket
+- name: Reference Data
+  description: Request reference (static) data for securities
+- name: Historical Data
+  description: Request historical end-of-day or intraday data
+- name: Intraday Data
+  description: Request intraday tick or bar data
+- name: Field Search
+  description: Search and discover available data fields
+- name: Instruments
+  description: Search for securities and instruments
+- name: Subscriptions
+  description: Manage real-time streaming data subscriptions via WebSocket
 
 paths:
   /request:
     post:
       operationId: sendRequest
-      summary: Send a BLPAPI request
+      summary: Send a Blpapi Request
       description: >-
         Sends a generic BLPAPI request. The service and operation are specified
         in the request body. This is the primary endpoint for all request-response
         operations.
       tags:
-        - Reference Data
+      - Reference Data
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/BlpapiRequest'
+            examples:
+              SendrequestRequestExample:
+                summary: Default sendRequest request
+                x-microcks-default: true
+                value:
+                  serviceUri: example_value
+                  operationName: example_value
+                  requestObject: example_value
       responses:
         '200':
           description: Successful response with requested data
@@ -59,26 +67,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlpapiResponse'
+              examples:
+                Sendrequest200Example:
+                  summary: Default sendRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    statusCode: 10
+                    message: example_value
+                    data:
+                    - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/ReferenceDataRequest:
     post:
       operationId: referenceDataRequest
-      summary: Request reference data
+      summary: Request Reference Data
       description: >-
         Retrieves current reference data for a set of securities and fields.
         Returns the latest available values for requested fields.
       tags:
-        - Reference Data
+      - Reference Data
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReferenceDataRequest'
+            examples:
+              ReferencedatarequestRequestExample:
+                summary: Default referenceDataRequest request
+                x-microcks-default: true
+                value:
+                  securities:
+                  - example_value
+                  fields:
+                  - example_value
+                  overrides:
+                  - fieldId: '500123'
+                    value: example_value
+                  returnFormattedValue: true
+                  useUTCTime: true
       responses:
         '200':
           description: Reference data response
@@ -86,26 +120,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReferenceDataResponse'
+              examples:
+                Referencedatarequest200Example:
+                  summary: Default referenceDataRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - securityData:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/HistoricalDataRequest:
     post:
       operationId: historicalDataRequest
-      summary: Request historical data
+      summary: Request Historical Data
       description: >-
         Retrieves historical end-of-day data for a set of securities and fields
         over a specified date range.
       tags:
-        - Historical Data
+      - Historical Data
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/HistoricalDataRequest'
+            examples:
+              HistoricaldatarequestRequestExample:
+                summary: Default historicalDataRequest request
+                x-microcks-default: true
+                value:
+                  securities:
+                  - example_value
+                  fields:
+                  - example_value
+                  startDate: example_value
+                  endDate: example_value
+                  periodicitySelection: DAILY
+                  periodicityAdjustment: ACTUAL
+                  currency: example_value
+                  overrides:
+                  - fieldId: '500123'
+                    value: example_value
+                  nonTradingDayFillOption: NON_TRADING_WEEKDAYS
+                  nonTradingDayFillMethod: PREVIOUS_VALUE
+                  adjustmentNormal: true
+                  adjustmentAbnormal: true
+                  adjustmentSplit: true
       responses:
         '200':
           description: Historical data response
@@ -113,26 +180,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HistoricalDataResponse'
+              examples:
+                Historicaldatarequest200Example:
+                  summary: Default historicalDataRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - securityData:
+                        security: example_value
+                        fieldData: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/IntradayTickRequest:
     post:
       operationId: intradayTickRequest
-      summary: Request intraday tick data
+      summary: Request Intraday Tick Data
       description: >-
         Retrieves intraday tick-level data for a single security over
         a specified time range.
       tags:
-        - Intraday Data
+      - Intraday Data
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/IntradayTickRequest'
+            examples:
+              IntradaytickrequestRequestExample:
+                summary: Default intradayTickRequest request
+                x-microcks-default: true
+                value:
+                  security: example_value
+                  eventTypes:
+                  - TRADE
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  endDateTime: '2026-01-15T10:30:00Z'
+                  includeConditionCodes: true
+                  includeExchangeCodes: true
+                  includeBrokerCodes: true
+                  includeRPSCodes: true
       responses:
         '200':
           description: Intraday tick data response
@@ -140,26 +233,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IntradayTickResponse'
+              examples:
+                Intradaytickrequest200Example:
+                  summary: Default intradayTickRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - tickData:
+                        tickData: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/IntradayBarRequest:
     post:
       operationId: intradayBarRequest
-      summary: Request intraday bar data
+      summary: Request Intraday Bar Data
       description: >-
         Retrieves intraday OHLCV bar data for a single security over
         a specified time range and interval.
       tags:
-        - Intraday Data
+      - Intraday Data
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/IntradayBarRequest'
+            examples:
+              IntradaybarrequestRequestExample:
+                summary: Default intradayBarRequest request
+                x-microcks-default: true
+                value:
+                  security: example_value
+                  eventType: TRADE
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  endDateTime: '2026-01-15T10:30:00Z'
+                  interval: 10
+                  gapFillInitialBar: true
       responses:
         '200':
           description: Intraday bar data response
@@ -167,26 +282,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IntradayBarResponse'
+              examples:
+                Intradaybarrequest200Example:
+                  summary: Default intradayBarRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - barData:
+                        barTickData: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/FieldInfoRequest:
     post:
       operationId: fieldInfoRequest
-      summary: Get field information
+      summary: Get Field Information
       description: >-
         Returns metadata about specified Bloomberg fields, including
         descriptions, data types, and categories.
       tags:
-        - Field Search
+      - Field Search
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/FieldInfoRequest'
+            examples:
+              FieldinforequestRequestExample:
+                summary: Default fieldInfoRequest request
+                x-microcks-default: true
+                value:
+                  fieldId:
+                  - example_value
+                  returnFieldDocumentation: true
       responses:
         '200':
           description: Field information response
@@ -194,25 +328,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldInfoResponse'
+              examples:
+                Fieldinforequest200Example:
+                  summary: Default fieldInfoRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - fieldData:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/refdata/FieldSearchRequest:
     post:
       operationId: fieldSearchRequest
-      summary: Search for fields
+      summary: Search for Fields
       description: >-
         Searches for Bloomberg fields by keyword or category.
       tags:
-        - Field Search
+      - Field Search
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/FieldSearchRequest'
+            examples:
+              FieldsearchrequestRequestExample:
+                summary: Default fieldSearchRequest request
+                x-microcks-default: true
+                value:
+                  searchSpec: example_value
+                  returnFieldDocumentation: true
       responses:
         '200':
           description: Field search results
@@ -220,26 +372,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FieldSearchResponse'
+              examples:
+                Fieldsearchrequest200Example:
+                  summary: Default fieldSearchRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - fieldData:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/instruments/InstrumentListRequest:
     post:
       operationId: instrumentListRequest
-      summary: Search for instruments
+      summary: Search for Instruments
       description: >-
         Searches for securities and instruments by query string,
         supporting partial matches.
       tags:
-        - Instruments
+      - Instruments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/InstrumentListRequest'
+            examples:
+              InstrumentlistrequestRequestExample:
+                summary: Default instrumentListRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  maxResults: 10
+                  yellowKeyFilter: YK_FILTER_NONE
+                  languageOverride: example_value
       responses:
         '200':
           description: Instrument list response
@@ -247,25 +419,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstrumentListResponse'
+              examples:
+                Instrumentlistrequest200Example:
+                  summary: Default instrumentListRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/instruments/CurveListRequest:
     post:
       operationId: curveListRequest
-      summary: Search for curves
+      summary: Search for Curves
       description: >-
         Searches for yield curves and other curve instruments by query.
       tags:
-        - Instruments
+      - Instruments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CurveListRequest'
+            examples:
+              CurvelistrequestRequestExample:
+                summary: Default curveListRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  maxResults: 10
+                  countryCode: example_value
+                  currencyCode: example_value
+                  type: BOND
+                  subtype: SOVEREIGN
       responses:
         '200':
           description: Curve list response
@@ -273,26 +467,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CurveListResponse'
+              examples:
+                Curvelistrequest200Example:
+                  summary: Default curveListRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/instruments/GovernmentLookupRequest:
     post:
       operationId: governmentLookupRequest
-      summary: Look up government securities
+      summary: Look up Government Securities
       description: >-
         Searches for government bond securities by country, currency,
         and maturity parameters.
       tags:
-        - Instruments
+      - Instruments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GovernmentLookupRequest'
+            examples:
+              GovernmentlookuprequestRequestExample:
+                summary: Default governmentLookupRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  partialMatch: true
+                  maxResults: 10
       responses:
         '200':
           description: Government security lookup response
@@ -300,11 +513,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GovernmentLookupResponse'
+              examples:
+                Governmentlookuprequest200Example:
+                  summary: Default governmentLookupRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalError'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -330,47 +554,51 @@ components:
     BlpapiRequest:
       type: object
       required:
-        - serviceUri
-        - operationName
-        - requestObject
+      - serviceUri
+      - operationName
+      - requestObject
       properties:
         serviceUri:
           type: string
           description: BLPAPI service URI (e.g., //blp/refdata)
           examples:
-            - '//blp/refdata'
-            - '//blp/instruments'
-            - '//blp/mktdata'
+          - '//blp/refdata'
+          - '//blp/instruments'
+          - '//blp/mktdata'
         operationName:
           type: string
           description: Name of the BLPAPI operation
           examples:
-            - ReferenceDataRequest
-            - HistoricalDataRequest
+          - ReferenceDataRequest
+          - HistoricalDataRequest
         requestObject:
           type: object
           description: The operation-specific request payload
           additionalProperties: true
 
+          example: example_value
     BlpapiResponse:
       type: object
       properties:
         statusCode:
           type: integer
           description: HTTP status code
+          example: 10
         message:
           type: string
+          example: example_value
         data:
           type: array
           items:
             type: object
             additionalProperties: true
 
+          example: []
     ReferenceDataRequest:
       type: object
       required:
-        - securities
-        - fields
+      - securities
+      - fields
       properties:
         securities:
           type: array
@@ -378,25 +606,28 @@ components:
             type: string
           description: List of security identifiers
           examples:
-            - ['IBM US Equity', 'AAPL US Equity']
+          - ['IBM US Equity', 'AAPL US Equity']
         fields:
           type: array
           items:
             type: string
           description: List of Bloomberg field mnemonics
           examples:
-            - ['PX_LAST', 'NAME', 'MARKET_CAP']
+          - ['PX_LAST', 'NAME', 'MARKET_CAP']
         overrides:
           type: array
           items:
             $ref: '#/components/schemas/Override'
+          example: []
         returnFormattedValue:
           type: boolean
           default: false
+          example: true
         useUTCTime:
           type: boolean
           default: false
 
+          example: true
     ReferenceDataResponse:
       type: object
       properties:
@@ -420,81 +651,93 @@ components:
                       items:
                         $ref: '#/components/schemas/FieldException'
 
+          example: []
     HistoricalDataRequest:
       type: object
       required:
-        - securities
-        - fields
-        - startDate
-        - endDate
+      - securities
+      - fields
+      - startDate
+      - endDate
       properties:
         securities:
           type: array
           items:
             type: string
           description: List of security identifiers
+          example: []
         fields:
           type: array
           items:
             type: string
           description: List of Bloomberg field mnemonics
+          example: []
         startDate:
           type: string
           description: Start date in YYYYMMDD format
           examples:
-            - '20250101'
+          - '20250101'
         endDate:
           type: string
           description: End date in YYYYMMDD format
           examples:
-            - '20250131'
+          - '20250131'
         periodicitySelection:
           type: string
           enum:
-            - DAILY
-            - WEEKLY
-            - MONTHLY
-            - QUARTERLY
-            - SEMI_ANNUALLY
-            - YEARLY
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUALLY
+          - YEARLY
           default: DAILY
+          example: DAILY
         periodicityAdjustment:
           type: string
           enum:
-            - ACTUAL
-            - CALENDAR
-            - FISCAL
+          - ACTUAL
+          - CALENDAR
+          - FISCAL
           default: ACTUAL
+          example: ACTUAL
         currency:
           type: string
           description: Three-letter currency code for cross-currency conversion
+          example: example_value
         overrides:
           type: array
           items:
             $ref: '#/components/schemas/Override'
+          example: []
         nonTradingDayFillOption:
           type: string
           enum:
-            - NON_TRADING_WEEKDAYS
-            - ALL_CALENDAR_DAYS
-            - ACTIVE_DAYS_ONLY
+          - NON_TRADING_WEEKDAYS
+          - ALL_CALENDAR_DAYS
+          - ACTIVE_DAYS_ONLY
           default: ACTIVE_DAYS_ONLY
+          example: NON_TRADING_WEEKDAYS
         nonTradingDayFillMethod:
           type: string
           enum:
-            - PREVIOUS_VALUE
-            - NIL_VALUE
+          - PREVIOUS_VALUE
+          - NIL_VALUE
           default: NIL_VALUE
+          example: PREVIOUS_VALUE
         adjustmentNormal:
           type: boolean
           default: false
+          example: true
         adjustmentAbnormal:
           type: boolean
           default: false
+          example: true
         adjustmentSplit:
           type: boolean
           default: true
 
+          example: true
     HistoricalDataResponse:
       type: object
       properties:
@@ -518,53 +761,62 @@ components:
                           format: date
                       additionalProperties: true
 
+          example: []
     IntradayTickRequest:
       type: object
       required:
-        - security
-        - startDateTime
-        - endDateTime
+      - security
+      - startDateTime
+      - endDateTime
       properties:
         security:
           type: string
           description: Single security identifier
+          example: example_value
         eventTypes:
           type: array
           items:
             type: string
             enum:
-              - TRADE
-              - BID
-              - ASK
-              - BID_BEST
-              - ASK_BEST
-              - MID_PRICE
-              - AT_TRADE
-              - BEST_BID
-              - BEST_ASK
-          default:
             - TRADE
+            - BID
+            - ASK
+            - BID_BEST
+            - ASK_BEST
+            - MID_PRICE
+            - AT_TRADE
+            - BEST_BID
+            - BEST_ASK
+          default:
+          - TRADE
+          example: []
         startDateTime:
           type: string
           format: date-time
           description: Start of the time range
+          example: '2026-01-15T10:30:00Z'
         endDateTime:
           type: string
           format: date-time
           description: End of the time range
+          example: '2026-01-15T10:30:00Z'
         includeConditionCodes:
           type: boolean
           default: false
+          example: true
         includeExchangeCodes:
           type: boolean
           default: false
+          example: true
         includeBrokerCodes:
           type: boolean
           default: false
+          example: true
         includeRPSCodes:
           type: boolean
           default: false
 
+          example: true
     IntradayTickResponse:
       type: object
       properties:
@@ -591,42 +843,49 @@ components:
                         size:
                           type: integer
 
+          example: []
     IntradayBarRequest:
       type: object
       required:
-        - security
-        - eventType
-        - startDateTime
-        - endDateTime
-        - interval
+      - security
+      - eventType
+      - startDateTime
+      - endDateTime
+      - interval
       properties:
         security:
           type: string
           description: Single security identifier
+          example: example_value
         eventType:
           type: string
           enum:
-            - TRADE
-            - BID
-            - ASK
-            - BEST_BID
-            - BEST_ASK
+          - TRADE
+          - BID
+          - ASK
+          - BEST_BID
+          - BEST_ASK
           default: TRADE
+          example: TRADE
         startDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         endDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         interval:
           type: integer
           description: Bar interval in minutes
           minimum: 1
           maximum: 1440
+          example: 10
         gapFillInitialBar:
           type: boolean
           default: false
 
+          example: true
     IntradayBarResponse:
       type: object
       properties:
@@ -659,20 +918,23 @@ components:
                         numEvents:
                           type: integer
 
+          example: []
     FieldInfoRequest:
       type: object
       required:
-        - fieldId
+      - fieldId
       properties:
         fieldId:
           type: array
           items:
             type: string
           description: List of field mnemonics or IDs to look up
+          example: '500123'
         returnFieldDocumentation:
           type: boolean
           default: false
 
+          example: true
     FieldInfoResponse:
       type: object
       properties:
@@ -704,18 +966,21 @@ components:
                         documentation:
                           type: string
 
+          example: []
     FieldSearchRequest:
       type: object
       required:
-        - searchSpec
+      - searchSpec
       properties:
         searchSpec:
           type: string
           description: Search keyword or pattern
+          example: example_value
         returnFieldDocumentation:
           type: boolean
           default: false
 
+          example: true
     FieldSearchResponse:
       type: object
       properties:
@@ -745,38 +1010,43 @@ components:
                           items:
                             type: string
 
+          example: []
     InstrumentListRequest:
       type: object
       required:
-        - query
+      - query
       properties:
         query:
           type: string
           description: Search string for instrument lookup
+          example: example_value
         maxResults:
           type: integer
           description: Maximum number of results to return
           default: 10
+          example: 10
         yellowKeyFilter:
           type: string
           description: Filter by Bloomberg yellow key
           enum:
-            - YK_FILTER_NONE
-            - YK_FILTER_CMDT
-            - YK_FILTER_EQUITY
-            - YK_FILTER_MUNI
-            - YK_FILTER_PRFD
-            - YK_FILTER_CLNT
-            - YK_FILTER_MMKT
-            - YK_FILTER_GOVT
-            - YK_FILTER_CORP
-            - YK_FILTER_INDX
-            - YK_FILTER_CURR
-            - YK_FILTER_MTGE
+          - YK_FILTER_NONE
+          - YK_FILTER_CMDT
+          - YK_FILTER_EQUITY
+          - YK_FILTER_MUNI
+          - YK_FILTER_PRFD
+          - YK_FILTER_CLNT
+          - YK_FILTER_MMKT
+          - YK_FILTER_GOVT
+          - YK_FILTER_CORP
+          - YK_FILTER_INDX
+          - YK_FILTER_CURR
+          - YK_FILTER_MTGE
+          example: YK_FILTER_NONE
         languageOverride:
           type: string
           description: Two-letter language code
 
+          example: example_value
     InstrumentListResponse:
       type: object
       properties:
@@ -795,36 +1065,43 @@ components:
                     description:
                       type: string
 
+          example: []
     CurveListRequest:
       type: object
       required:
-        - query
+      - query
       properties:
         query:
           type: string
           description: Search string for curve lookup
+          example: example_value
         maxResults:
           type: integer
           default: 10
+          example: 10
         countryCode:
           type: string
           description: Two-letter country code filter
+          example: example_value
         currencyCode:
           type: string
           description: Three-letter currency code filter
+          example: example_value
         type:
           type: string
           enum:
-            - BOND
-            - CDS
-            - ISDA
+          - BOND
+          - CDS
+          - ISDA
           description: Curve type filter
+          example: BOND
         subtype:
           type: string
           enum:
-            - SOVEREIGN
-            - CORPORATE
+          - SOVEREIGN
+          - CORPORATE
 
+          example: SOVEREIGN
     CurveListResponse:
       type: object
       properties:
@@ -851,21 +1128,25 @@ components:
                     subtype:
                       type: string
 
+          example: []
     GovernmentLookupRequest:
       type: object
       required:
-        - query
+      - query
       properties:
         query:
           type: string
           description: Country or ticker search string
+          example: example_value
         partialMatch:
           type: boolean
           default: false
+          example: true
         maxResults:
           type: integer
           default: 10
 
+          example: 10
     GovernmentLookupResponse:
       type: object
       properties:
@@ -886,21 +1167,25 @@ components:
                     country:
                       type: string
 
+          example: []
     Override:
       type: object
       properties:
         fieldId:
           type: string
           description: Bloomberg field mnemonic to override
+          example: '500123'
         value:
           type: string
           description: Override value
 
+          example: example_value
     FieldException:
       type: object
       properties:
         fieldId:
           type: string
+          example: '500123'
         errorInfo:
           type: object
           properties:
@@ -915,10 +1200,13 @@ components:
             subcategory:
               type: string
 
+          example: example_value
     Error:
       type: object
       properties:
         message:
           type: string
+          example: example_value
         status:
           type: integer
+          example: 10

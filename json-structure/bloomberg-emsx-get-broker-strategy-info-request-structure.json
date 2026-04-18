@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GetBrokerStrategyInfoRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_ASSET_CLASS": {
+      "type": "string"
+    }
+  }
+}

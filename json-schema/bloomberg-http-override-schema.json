@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Override",
+  "type": "object",
+  "properties": {
+    "fieldId": {
+      "type": "string",
+      "description": "Bloomberg field mnemonic to override"
+    },
+    "value": {
+      "type": "string",
+      "description": "Override value"
+    }
+  }
+}

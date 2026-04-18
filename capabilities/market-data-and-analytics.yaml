@@ -1,0 +1,204 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Bloomberg Market Data and Analytics"
+  description: "Workflow for accessing Bloomberg market data combining the Data License HAPI for bulk data with the HTTP API for real-time reference and historical data, used by quantitative analysts and portfolio managers."
+  tags:
+    - Bloomberg
+    - Market Data
+    - Financial Analytics
+    - Reference Data
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BLOOMBERG_HAPI_TOKEN: BLOOMBERG_HAPI_TOKEN
+      BLOOMBERG_HTTP_USERNAME: BLOOMBERG_HTTP_USERNAME
+      BLOOMBERG_HTTP_PASSWORD: BLOOMBERG_HTTP_PASSWORD
+
+capability:
+  consumes:
+    - import: data-license
+      location: ./shared/data-license.yaml
+    - import: http-api
+      location: ./shared/http-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: market-data-api
+      description: "Unified REST API for Bloomberg market data and analytics."
+      resources:
+        - path: /v1/catalogs
+          name: catalogs
+          description: "Data catalog browsing"
+          operations:
+            - method: GET
+              name: list-catalogs
+              description: "List available data catalogs"
+              call: "data-license.list-catalogs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/universes
+          name: universes
+          description: "Security universe management"
+          operations:
+            - method: GET
+              name: list-universes
+              description: "List security universes"
+              call: "data-license.list-universes"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/field-lists
+          name: field-lists
+          description: "Field list management"
+          operations:
+            - method: GET
+              name: list-field-lists
+              description: "List field lists"
+              call: "data-license.list-field-lists"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reference-data
+          name: reference-data
+          description: "Reference data access"
+          operations:
+            - method: POST
+              name: get-reference-data
+              description: "Get reference data for securities"
+              call: "http-api.get-reference-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/historical-data
+          name: historical-data
+          description: "Historical data access"
+          operations:
+            - method: POST
+              name: get-historical-data
+              description: "Get historical end-of-day data"
+              call: "http-api.get-historical-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/distributions
+          name: distributions
+          description: "Data distributions"
+          operations:
+            - method: GET
+              name: list-distributions
+              description: "List completed data distributions"
+              call: "data-license.list-distributions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: market-data-mcp
+      transport: http
+      description: "MCP server for AI-assisted Bloomberg market data access."
+      tools:
+        - name: list-catalogs
+          description: "List available Bloomberg data catalogs"
+          hints:
+            readOnly: true
+          call: "data-license.list-catalogs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-catalog
+          description: "Get data catalog details"
+          hints:
+            readOnly: true
+          call: "data-license.get-catalog"
+          with:
+            catalogId: "tools.catalogId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-universes
+          description: "List security universes"
+          hints:
+            readOnly: true
+          call: "data-license.list-universes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-universe
+          description: "Create a security universe for data requests"
+          hints:
+            readOnly: false
+          call: "data-license.create-universe"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-field-lists
+          description: "List field lists for data requests"
+          hints:
+            readOnly: true
+          call: "data-license.list-field-lists"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-data-request
+          description: "Create a Bloomberg data request"
+          hints:
+            readOnly: false
+          call: "data-license.create-request"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-distributions
+          description: "List completed data distributions"
+          hints:
+            readOnly: true
+          call: "data-license.list-distributions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-reference-data
+          description: "Get reference data for securities via HTTP API"
+          hints:
+            readOnly: true
+          call: "http-api.get-reference-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-historical-data
+          description: "Get historical data for securities"
+          hints:
+            readOnly: true
+          call: "http-api.get-historical-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-intraday-bars
+          description: "Get intraday bar data"
+          hints:
+            readOnly: true
+          call: "http-api.get-intraday-bars"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-fields
+          description: "Search available Bloomberg data fields"
+          hints:
+            readOnly: true
+          call: "http-api.search-fields"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-instruments
+          description: "Search for securities and instruments"
+          hints:
+            readOnly: true
+          call: "http-api.search-instruments"
+          outputParameters:
+            - type: object
+              mapping: "$."

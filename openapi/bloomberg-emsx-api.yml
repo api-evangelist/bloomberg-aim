@@ -18,43 +18,70 @@ info:
   termsOfService: https://www.bloomberg.com/notices/tos/
 
 servers:
-  - url: https://localhost:3000
-    description: Bloomberg EMSX service via BLPAPI HTTP bridge
+- url: https://localhost:3000
+  description: Bloomberg EMSX service via BLPAPI HTTP bridge
 
 security:
-  - bearerAuth: []
+- bearerAuth: []
 
 tags:
-  - name: Orders
-    description: Create, modify, and manage orders
-  - name: Routes
-    description: Create, modify, and manage routes to brokers
-  - name: Fills
-    description: Track order and route fills
-  - name: Broker Strategies
-    description: Query available broker strategies and parameters
-  - name: Teams
-    description: Manage EMSX teams and assignments
-  - name: Subscriptions
-    description: Subscribe to real-time order and route updates
+- name: Orders
+  description: Create, modify, and manage orders
+- name: Routes
+  description: Create, modify, and manage routes to brokers
+- name: Fills
+  description: Track order and route fills
+- name: Broker Strategies
+  description: Query available broker strategies and parameters
+- name: Teams
+  description: Manage EMSX teams and assignments
+- name: Subscriptions
+  description: Subscribe to real-time order and route updates
 
 paths:
   /request/blp/emapisvc/CreateOrder:
     post:
       operationId: createOrder
-      summary: Create a new order
+      summary: Create a New Order
       description: >-
         Creates a new order in the EMSX blotter. Orders can be created for
         equities, futures, and options with various order types and
         time-in-force parameters.
       tags:
-        - Orders
+      - Orders
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateOrderRequest'
+            examples:
+              CreateorderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_TICKER: example_value
+                  EMSX_AMOUNT: 10
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_SIDE: BUY
+                  EMSX_TIF: DAY
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_ACCOUNT: example_value
+                  EMSX_NOTES: example_value
+                  EMSX_HAND_INSTRUCTION: ANY
+                  EMSX_BASKET_NAME: example_value
+                  EMSX_CFD_FLAG: 'Y'
+                  EMSX_CUSTOM_NOTE1: example_value
+                  EMSX_CUSTOM_NOTE2: example_value
+                  EMSX_CUSTOM_NOTE3: example_value
+                  EMSX_CUSTOM_NOTE4: example_value
+                  EMSX_CUSTOM_NOTE5: example_value
+                  EMSX_GTD_DATE: example_value
+                  EMSX_INVESTOR_ID: '500123'
+                  EMSX_LOCATE_BROKER: example_value
+                  EMSX_LOCATE_ID: '500123'
+                  EMSX_PORTFOLIO: example_value
       responses:
         '200':
           description: Order created successfully
@@ -62,25 +89,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateOrderResponse'
+              examples:
+                Createorder200Example:
+                  summary: Default createOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    EMSX_SEQUENCE: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/CreateOrderAndRouteEx:
     post:
       operationId: createOrderAndRoute
-      summary: Create an order and route simultaneously
+      summary: Create an Order and Route Simultaneously
       description: >-
         Creates a new order and immediately routes it to a specified broker
         in a single operation.
       tags:
-        - Orders
-        - Routes
+      - Orders
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateOrderAndRouteRequest'
+            examples:
+              CreateorderandrouteRequestExample:
+                summary: Default createOrderAndRoute request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: Order created and routed
@@ -88,24 +130,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateOrderAndRouteResponse'
+              examples:
+                Createorderandroute200Example:
+                  summary: Default createOrderAndRoute 200 response
+                  x-microcks-default: true
+                  value:
+                    EMSX_SEQUENCE: 10
+                    EMSX_ROUTE_ID: '500123'
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/ModifyOrderEx:
     post:
       operationId: modifyOrder
-      summary: Modify an existing order
+      summary: Modify an Existing Order
       description: >-
         Modifies parameters of an existing order such as quantity, limit
         price, or time-in-force.
       tags:
-        - Orders
+      - Orders
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ModifyOrderRequest'
+            examples:
+              ModifyorderRequestExample:
+                summary: Default modifyOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_AMOUNT: 10
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_TIF: DAY
+                  EMSX_NOTES: example_value
       responses:
         '200':
           description: Order modified successfully
@@ -113,24 +178,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Modifyorder200Example:
+                  summary: Default modifyOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/DeleteOrder:
     post:
       operationId: deleteOrder
-      summary: Delete an order
+      summary: Delete an Order
       description: >-
         Deletes (cancels) an order from the EMSX blotter. Only orders that
         have not been fully filled can be deleted.
       tags:
-        - Orders
+      - Orders
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DeleteOrderRequest'
+            examples:
+              DeleteorderRequestExample:
+                summary: Default deleteOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
       responses:
         '200':
           description: Order deleted
@@ -138,24 +219,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Deleteorder200Example:
+                  summary: Default deleteOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GroupRouteEx:
     post:
       operationId: groupRoute
-      summary: Route multiple orders as a group
+      summary: Route Multiple Orders as a Group
       description: >-
         Routes a group of orders to a single broker in a single operation,
         useful for basket or program trading.
       tags:
-        - Routes
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GroupRouteRequest'
+            examples:
+              GrouprouteRequestExample:
+                summary: Default groupRoute request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE:
+                  - 10
+                  EMSX_AMOUNT_PERCENT: 42.5
+                  EMSX_BROKER: example_value
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_TIF: DAY
+                  EMSX_STRATEGY: example_value
+                  EMSX_STRATEGY_PARAMS: example_value
       responses:
         '200':
           description: Orders routed as a group
@@ -163,24 +268,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GroupRouteResponse'
+              examples:
+                Grouproute200Example:
+                  summary: Default groupRoute 200 response
+                  x-microcks-default: true
+                  value:
+                    numRouted: 10
+                    MESSAGE: example_value
+                    routeIds:
+                    - EMSX_SEQUENCE: 10
+                      EMSX_ROUTE_ID: '500123'
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/RouteEx:
     post:
       operationId: routeOrder
-      summary: Route an order to a broker
+      summary: Route an Order to a Broker
       description: >-
         Routes an existing order to a specific broker with optional
         strategy parameters.
       tags:
-        - Routes
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RouteOrderRequest'
+            examples:
+              RouteorderRequestExample:
+                summary: Default routeOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_AMOUNT: 10
+                  EMSX_BROKER: example_value
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_TIF: DAY
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_STRATEGY: example_value
+                  EMSX_STRATEGY_PARAMS: example_value
+                  EMSX_EXEC_INSTRUCTIONS: example_value
+                  EMSX_ACCOUNT: example_value
       responses:
         '200':
           description: Order routed successfully
@@ -188,24 +322,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RouteOrderResponse'
+              examples:
+                Routeorder200Example:
+                  summary: Default routeOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    EMSX_SEQUENCE: 10
+                    EMSX_ROUTE_ID: '500123'
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/ModifyRouteEx:
     post:
       operationId: modifyRoute
-      summary: Modify a route
+      summary: Modify a Route
       description: >-
         Modifies parameters of an existing route, such as quantity or
         strategy parameters.
       tags:
-        - Routes
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ModifyRouteRequest'
+            examples:
+              ModifyrouteRequestExample:
+                summary: Default modifyRoute request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_ROUTE_ID: '500123'
+                  EMSX_AMOUNT: 10
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_TIF: DAY
+                  EMSX_STRATEGY: example_value
+                  EMSX_STRATEGY_PARAMS: example_value
       responses:
         '200':
           description: Route modified
@@ -213,24 +372,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Modifyroute200Example:
+                  summary: Default modifyRoute 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/DeleteRoute:
     post:
       operationId: deleteRoute
-      summary: Delete (cancel) a route
+      summary: Delete (cancel) a Route
       description: >-
         Cancels an active route. Only routes that have not been fully
         filled can be cancelled.
       tags:
-        - Routes
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DeleteRouteRequest'
+            examples:
+              DeleterouteRequestExample:
+                summary: Default deleteRoute request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_ROUTE_ID: '500123'
       responses:
         '200':
           description: Route cancelled
@@ -238,24 +414,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Deleteroute200Example:
+                  summary: Default deleteRoute 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetOrders:
     post:
       operationId: getOrders
-      summary: Get orders
+      summary: Get Orders
       description: >-
         Retrieves the current list of orders in the EMSX blotter, optionally
         filtered by status or other parameters.
       tags:
-        - Orders
+      - Orders
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GetOrdersRequest'
+            examples:
+              GetordersRequestExample:
+                summary: Default getOrders request
+                x-microcks-default: true
+                value:
+                  scope: PRIVATE
       responses:
         '200':
           description: List of orders
@@ -263,24 +455,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetOrdersResponse'
+              examples:
+                Getorders200Example:
+                  summary: Default getOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    orders:
+                    - EMSX_SEQUENCE: 10
+                      EMSX_TICKER: example_value
+                      EMSX_SIDE: BUY
+                      EMSX_AMOUNT: 10
+                      EMSX_FILLED: 10
+                      EMSX_WORKING: 10
+                      EMSX_ORDER_TYPE: example_value
+                      EMSX_LIMIT_PRICE: 42.5
+                      EMSX_STOP_PRICE: 42.5
+                      EMSX_TIF: example_value
+                      EMSX_STATUS: ASSIGN
+                      EMSX_AVG_PRICE: 42.5
+                      EMSX_ACCOUNT: example_value
+                      EMSX_TRADER: example_value
+                      EMSX_NOTES: example_value
+                      EMSX_BASKET_NAME: example_value
+                      EMSX_DATE: example_value
+                      EMSX_TIME_STAMP: example_value
+                      EMSX_PORTFOLIO: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetRoutes:
     post:
       operationId: getRoutes
-      summary: Get routes
+      summary: Get Routes
       description: >-
         Retrieves the current list of routes associated with orders in
         the EMSX blotter.
       tags:
-        - Routes
+      - Routes
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GetRoutesRequest'
+            examples:
+              GetroutesRequestExample:
+                summary: Default getRoutes request
+                x-microcks-default: true
+                value:
+                  scope: PRIVATE
       responses:
         '200':
           description: List of routes
@@ -288,24 +514,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetRoutesResponse'
+              examples:
+                Getroutes200Example:
+                  summary: Default getRoutes 200 response
+                  x-microcks-default: true
+                  value:
+                    routes:
+                    - EMSX_SEQUENCE: 10
+                      EMSX_ROUTE_ID: '500123'
+                      EMSX_BROKER: example_value
+                      EMSX_AMOUNT: 10
+                      EMSX_FILLED: 10
+                      EMSX_STATUS: CANCEL
+                      EMSX_ORDER_TYPE: example_value
+                      EMSX_LIMIT_PRICE: 42.5
+                      EMSX_AVG_PRICE: 42.5
+                      EMSX_STRATEGY: example_value
+                      EMSX_EXEC_INSTRUCTIONS: example_value
+                      EMSX_LAST_FILL_DATE: example_value
+                      EMSX_LAST_FILL_TIME: example_value
+                      EMSX_ROUTE_CREATE_DATE: example_value
+                      EMSX_ROUTE_CREATE_TIME: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetFills:
     post:
       operationId: getFills
-      summary: Get fills
+      summary: Get Fills
       description: >-
         Retrieves fill information for orders and routes. Fills represent
         partial or complete executions of routes.
       tags:
-        - Fills
+      - Fills
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GetFillsRequest'
+            examples:
+              GetfillsRequestExample:
+                summary: Default getFills request
+                x-microcks-default: true
+                value:
+                  scope: PRIVATE
+                  fromDateTime: '2026-01-15T10:30:00Z'
       responses:
         '200':
           description: List of fills
@@ -313,24 +570,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetFillsResponse'
+              examples:
+                Getfills200Example:
+                  summary: Default getFills 200 response
+                  x-microcks-default: true
+                  value:
+                    fills:
+                    - EMSX_SEQUENCE: 10
+                      EMSX_ROUTE_ID: '500123'
+                      EMSX_FILL_ID: '500123'
+                      EMSX_TICKER: example_value
+                      EMSX_SIDE: BUY
+                      EMSX_FILL_AMOUNT: 10
+                      EMSX_FILL_PRICE: 42.5
+                      EMSX_FILL_DATE: example_value
+                      EMSX_FILL_TIME: example_value
+                      EMSX_BROKER: example_value
+                      EMSX_EXCHANGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetBrokerStrategiesWithAssetClass:
     post:
       operationId: getBrokerStrategies
-      summary: Get broker strategies
+      summary: Get Broker Strategies
       description: >-
         Retrieves available trading strategies for a specific broker
         and asset class combination.
       tags:
-        - Broker Strategies
+      - Broker Strategies
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GetBrokerStrategiesRequest'
+            examples:
+              GetbrokerstrategiesRequestExample:
+                summary: Default getBrokerStrategies request
+                x-microcks-default: true
+                value:
+                  EMSX_BROKER: example_value
+                  EMSX_ASSET_CLASS: EQTY
       responses:
         '200':
           description: Available broker strategies
@@ -338,24 +622,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetBrokerStrategiesResponse'
+              examples:
+                Getbrokerstrategies200Example:
+                  summary: Default getBrokerStrategies 200 response
+                  x-microcks-default: true
+                  value:
+                    strategies:
+                    - example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetBrokerStrategyInfoWithAssetClass:
     post:
       operationId: getBrokerStrategyInfo
-      summary: Get broker strategy details
+      summary: Get Broker Strategy Details
       description: >-
         Retrieves detailed information about a specific broker strategy
         including its parameters and constraints.
       tags:
-        - Broker Strategies
+      - Broker Strategies
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/GetBrokerStrategyInfoRequest'
+            examples:
+              GetbrokerstrategyinfoRequestExample:
+                summary: Default getBrokerStrategyInfo request
+                x-microcks-default: true
+                value:
+                  EMSX_BROKER: example_value
+                  EMSX_STRATEGY: example_value
+                  EMSX_ASSET_CLASS: EQTY
       responses:
         '200':
           description: Strategy details
@@ -363,23 +665,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetBrokerStrategyInfoResponse'
+              examples:
+                Getbrokerstrategyinfo200Example:
+                  summary: Default getBrokerStrategyInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    strategyInfo:
+                      name: Example Title
+                      description: A sample description.
+                      parameters:
+                      - name: Example Title
+                        description: A sample description.
+                        type: example_value
+                        required: true
+                        allowedValues: {}
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/GetTeams:
     post:
       operationId: getTeams
-      summary: Get EMSX teams
+      summary: Get Emsx Teams
       description: >-
         Retrieves the list of EMSX teams available to the user.
       tags:
-        - Teams
+      - Teams
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+            examples:
+              GetteamsRequestExample:
+                summary: Default getTeams request
+                x-microcks-default: true
+                value: {}
       responses:
         '200':
           description: List of teams
@@ -387,23 +711,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetTeamsResponse'
+              examples:
+                Getteams200Example:
+                  summary: Default getTeams 200 response
+                  x-microcks-default: true
+                  value:
+                    teams:
+                    - name: Example Title
+                      members:
+                      - {}
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/AssignTrader:
     post:
       operationId: assignTrader
-      summary: Assign a trader to an order
+      summary: Assign a Trader to an Order
       description: >-
         Assigns or reassigns a trader to handle a specific order.
       tags:
-        - Teams
+      - Teams
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssignTraderRequest'
+            examples:
+              AssigntraderRequestExample:
+                summary: Default assignTrader request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_TRADER_UUID: '500123'
       responses:
         '200':
           description: Trader assigned
@@ -411,24 +754,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Assigntrader200Example:
+                  summary: Default assignTrader 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /request/blp/emapisvc/ManualFill:
     post:
       operationId: manualFill
-      summary: Record a manual fill
+      summary: Record a Manual Fill
       description: >-
         Records a manual fill against a route for cases where fills
         are reported outside the electronic execution flow.
       tags:
-        - Fills
+      - Fills
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ManualFillRequest'
+            examples:
+              ManualfillRequestExample:
+                summary: Default manualFill request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_ROUTE_ID: '500123'
+                  EMSX_FILL_AMOUNT: 10
+                  EMSX_FILL_PRICE: 42.5
+                  EMSX_FILL_DATE: example_value
+                  EMSX_FILL_TIME: example_value
       responses:
         '200':
           description: Manual fill recorded
@@ -436,9 +800,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Manualfill200Example:
+                  summary: Default manualFill 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -459,131 +833,154 @@ components:
     CreateOrderRequest:
       type: object
       required:
-        - EMSX_TICKER
-        - EMSX_AMOUNT
-        - EMSX_ORDER_TYPE
-        - EMSX_SIDE
-        - EMSX_TIF
+      - EMSX_TICKER
+      - EMSX_AMOUNT
+      - EMSX_ORDER_TYPE
+      - EMSX_SIDE
+      - EMSX_TIF
       properties:
         EMSX_TICKER:
           type: string
           description: Bloomberg security identifier
           examples:
-            - 'IBM US Equity'
+          - 'IBM US Equity'
         EMSX_AMOUNT:
           type: integer
           description: Order quantity (number of shares/contracts)
+          example: 10
         EMSX_ORDER_TYPE:
           type: string
           description: Order type
           enum:
-            - MKT
-            - LMT
-            - STP
-            - STP LMT
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
         EMSX_SIDE:
           type: string
           description: Buy or sell
           enum:
-            - BUY
-            - SELL
-            - SHRT
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
         EMSX_TIF:
           type: string
           description: Time in force
           enum:
-            - DAY
-            - GTC
-            - OPG
-            - IOC
-            - FOK
-            - GTD
-            - MOC
-            - LOC
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
         EMSX_LIMIT_PRICE:
           type: number
           description: Limit price (required for LMT and STP LMT orders)
+          example: 42.5
         EMSX_STOP_PRICE:
           type: number
           description: Stop price (required for STP and STP LMT orders)
+          example: 42.5
         EMSX_ACCOUNT:
           type: string
           description: Trading account identifier
+          example: example_value
         EMSX_NOTES:
           type: string
           description: Free-text notes attached to the order
+          example: example_value
         EMSX_HAND_INSTRUCTION:
           type: string
           description: Handling instruction
           enum:
-            - ANY
-            - DIR
-            - FCM
+          - ANY
+          - DIR
+          - FCM
+          example: ANY
         EMSX_BASKET_NAME:
           type: string
           description: Name of the basket this order belongs to
+          example: example_value
         EMSX_CFD_FLAG:
           type: string
           description: Contract for difference flag
           enum:
-            - 'Y'
-            - 'N'
+          - 'Y'
+          - 'N'
+          example: 'Y'
         EMSX_CUSTOM_NOTE1:
           type: string
+          example: example_value
         EMSX_CUSTOM_NOTE2:
           type: string
+          example: example_value
         EMSX_CUSTOM_NOTE3:
           type: string
+          example: example_value
         EMSX_CUSTOM_NOTE4:
           type: string
+          example: example_value
         EMSX_CUSTOM_NOTE5:
           type: string
+          example: example_value
         EMSX_GTD_DATE:
           type: string
           description: Good-till-date in YYYYMMDD format
+          example: example_value
         EMSX_INVESTOR_ID:
           type: string
           description: Investor identifier for allocation
+          example: '500123'
         EMSX_LOCATE_BROKER:
           type: string
           description: Locate broker for short sells
+          example: example_value
         EMSX_LOCATE_ID:
           type: string
           description: Locate ID for short sells
+          example: '500123'
         EMSX_PORTFOLIO:
           type: string
           description: Portfolio name for the order
 
+          example: example_value
     CreateOrderResponse:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Unique order sequence number assigned by EMSX
+          example: 10
         MESSAGE:
           type: string
           description: Status message
 
+          example: example_value
     CreateOrderAndRouteRequest:
       allOf:
-        - $ref: '#/components/schemas/CreateOrderRequest'
-        - type: object
-          required:
-            - EMSX_BROKER
-          properties:
-            EMSX_BROKER:
-              type: string
-              description: Broker code for routing
-            EMSX_STRATEGY:
-              type: string
-              description: Broker execution strategy name
-            EMSX_STRATEGY_PARAMS:
-              type: object
-              description: Strategy-specific parameters
-              additionalProperties: true
-            EMSX_EXEC_INSTRUCTIONS:
-              type: string
-              description: Execution instructions for the broker
+      - $ref: '#/components/schemas/CreateOrderRequest'
+      - type: object
+        required:
+        - EMSX_BROKER
+        properties:
+          EMSX_BROKER:
+            type: string
+            description: Broker code for routing
+          EMSX_STRATEGY:
+            type: string
+            description: Broker execution strategy name
+          EMSX_STRATEGY_PARAMS:
+            type: object
+            description: Strategy-specific parameters
+            additionalProperties: true
+          EMSX_EXEC_INSTRUCTIONS:
+            type: string
+            description: Execution instructions for the broker
 
     CreateOrderAndRouteResponse:
       type: object
@@ -591,228 +988,274 @@ components:
         EMSX_SEQUENCE:
           type: integer
           description: Unique order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Unique route identifier
+          example: '500123'
         MESSAGE:
           type: string
 
+          example: example_value
     ModifyOrderRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
+      - EMSX_SEQUENCE
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number to modify
+          example: 10
         EMSX_AMOUNT:
           type: integer
           description: New order quantity
+          example: 10
         EMSX_ORDER_TYPE:
           type: string
           enum:
-            - MKT
-            - LMT
-            - STP
-            - STP LMT
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_STOP_PRICE:
           type: number
+          example: 42.5
         EMSX_TIF:
           type: string
           enum:
-            - DAY
-            - GTC
-            - OPG
-            - IOC
-            - FOK
-            - GTD
-            - MOC
-            - LOC
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
         EMSX_NOTES:
           type: string
 
+          example: example_value
     DeleteOrderRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
+      - EMSX_SEQUENCE
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number to delete
 
+          example: 10
     RouteOrderRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_AMOUNT
-        - EMSX_BROKER
-        - EMSX_ORDER_TYPE
-        - EMSX_TIF
+      - EMSX_SEQUENCE
+      - EMSX_AMOUNT
+      - EMSX_BROKER
+      - EMSX_ORDER_TYPE
+      - EMSX_TIF
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number to route
+          example: 10
         EMSX_AMOUNT:
           type: integer
           description: Quantity to route
+          example: 10
         EMSX_BROKER:
           type: string
           description: Broker code
+          example: example_value
         EMSX_ORDER_TYPE:
           type: string
           enum:
-            - MKT
-            - LMT
-            - STP
-            - STP LMT
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
         EMSX_TIF:
           type: string
           enum:
-            - DAY
-            - GTC
-            - OPG
-            - IOC
-            - FOK
-            - GTD
-            - MOC
-            - LOC
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_STOP_PRICE:
           type: number
+          example: 42.5
         EMSX_STRATEGY:
           type: string
           description: Broker strategy name
+          example: example_value
         EMSX_STRATEGY_PARAMS:
           type: object
           additionalProperties: true
+          example: example_value
         EMSX_EXEC_INSTRUCTIONS:
           type: string
+          example: example_value
         EMSX_ACCOUNT:
           type: string
 
+          example: example_value
     RouteOrderResponse:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Unique route identifier
+          example: '500123'
         MESSAGE:
           type: string
 
+          example: example_value
     ModifyRouteRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_ROUTE_ID
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Route ID to modify
+          example: '500123'
         EMSX_AMOUNT:
           type: integer
+          example: 10
         EMSX_ORDER_TYPE:
           type: string
           enum:
-            - MKT
-            - LMT
-            - STP
-            - STP LMT
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_STOP_PRICE:
           type: number
+          example: 42.5
         EMSX_TIF:
           type: string
           enum:
-            - DAY
-            - GTC
-            - OPG
-            - IOC
-            - FOK
-            - GTD
-            - MOC
-            - LOC
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
         EMSX_STRATEGY:
           type: string
+          example: example_value
         EMSX_STRATEGY_PARAMS:
           type: object
           additionalProperties: true
 
+          example: example_value
     DeleteRouteRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_ROUTE_ID
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Route ID to cancel
 
+          example: '500123'
     GroupRouteRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_BROKER
-        - EMSX_ORDER_TYPE
-        - EMSX_TIF
+      - EMSX_SEQUENCE
+      - EMSX_BROKER
+      - EMSX_ORDER_TYPE
+      - EMSX_TIF
       properties:
         EMSX_SEQUENCE:
           type: array
           items:
             type: integer
           description: List of order sequence numbers to route as a group
+          example: []
         EMSX_AMOUNT_PERCENT:
           type: number
           description: Percentage of each order to route (0-100)
           minimum: 0
           maximum: 100
+          example: 42.5
         EMSX_BROKER:
           type: string
+          example: example_value
         EMSX_ORDER_TYPE:
           type: string
           enum:
-            - MKT
-            - LMT
-            - STP
-            - STP LMT
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_TIF:
           type: string
           enum:
-            - DAY
-            - GTC
-            - OPG
-            - IOC
-            - FOK
-            - GTD
-            - MOC
-            - LOC
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
         EMSX_STRATEGY:
           type: string
+          example: example_value
         EMSX_STRATEGY_PARAMS:
           type: object
           additionalProperties: true
 
+          example: example_value
     GroupRouteResponse:
       type: object
       properties:
         numRouted:
           type: integer
           description: Number of orders successfully routed
+          example: 10
         MESSAGE:
           type: string
+          example: example_value
         routeIds:
           type: array
           items:
@@ -823,6 +1266,7 @@ components:
               EMSX_ROUTE_ID:
                 type: integer
 
+          example: []
     GetOrdersRequest:
       type: object
       properties:
@@ -830,9 +1274,10 @@ components:
           type: string
           description: Scope of orders to retrieve
           enum:
-            - PRIVATE
-            - TEAM
+          - PRIVATE
+          - TEAM
 
+          example: PRIVATE
     GetOrdersResponse:
       type: object
       properties:
@@ -841,84 +1286,105 @@ components:
           items:
             $ref: '#/components/schemas/Order'
 
+          example: []
     Order:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Unique order sequence number
+          example: 10
         EMSX_TICKER:
           type: string
           description: Security identifier
+          example: example_value
         EMSX_SIDE:
           type: string
           enum:
-            - BUY
-            - SELL
-            - SHRT
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
         EMSX_AMOUNT:
           type: integer
           description: Total order quantity
+          example: 10
         EMSX_FILLED:
           type: integer
           description: Quantity filled so far
+          example: 10
         EMSX_WORKING:
           type: integer
           description: Quantity currently working (routed but not filled)
+          example: 10
         EMSX_ORDER_TYPE:
           type: string
+          example: example_value
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_STOP_PRICE:
           type: number
+          example: 42.5
         EMSX_TIF:
           type: string
+          example: example_value
         EMSX_STATUS:
           type: string
           description: Current order status
           enum:
-            - ASSIGN
-            - CANCEL
-            - CONNECTED
-            - CXL_PND
-            - DONE
-            - EXPIRED
-            - FILL
-            - MOD_PND
-            - NEW
-            - PART_FILL
-            - RJCT
-            - SENT
-            - WORKING
+          - ASSIGN
+          - CANCEL
+          - CONNECTED
+          - CXL_PND
+          - DONE
+          - EXPIRED
+          - FILL
+          - MOD_PND
+          - NEW
+          - PART_FILL
+          - RJCT
+          - SENT
+          - WORKING
+          example: ASSIGN
         EMSX_AVG_PRICE:
           type: number
           description: Average fill price
+          example: 42.5
         EMSX_ACCOUNT:
           type: string
+          example: example_value
         EMSX_TRADER:
           type: string
+          example: example_value
         EMSX_NOTES:
           type: string
+          example: example_value
         EMSX_BASKET_NAME:
           type: string
+          example: example_value
         EMSX_DATE:
           type: string
           description: Order creation date (YYYYMMDD)
+          example: example_value
         EMSX_TIME_STAMP:
           type: string
           description: Last update timestamp
+          example: example_value
         EMSX_PORTFOLIO:
           type: string
 
+          example: example_value
     GetRoutesRequest:
       type: object
       properties:
         scope:
           type: string
           enum:
-            - PRIVATE
-            - TEAM
+          - PRIVATE
+          - TEAM
 
+          example: PRIVATE
     GetRoutesResponse:
       type: object
       properties:
@@ -927,70 +1393,88 @@ components:
           items:
             $ref: '#/components/schemas/Route'
 
+          example: []
     Route:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Parent order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Unique route identifier
+          example: '500123'
         EMSX_BROKER:
           type: string
           description: Broker code
+          example: example_value
         EMSX_AMOUNT:
           type: integer
           description: Routed quantity
+          example: 10
         EMSX_FILLED:
           type: integer
           description: Filled quantity on this route
+          example: 10
         EMSX_STATUS:
           type: string
           enum:
-            - CANCEL
-            - CXL_PND
-            - DONE
-            - FILL
-            - MOD_PND
-            - NEW
-            - PART_FILL
-            - RJCT
-            - SENT
-            - WORKING
+          - CANCEL
+          - CXL_PND
+          - DONE
+          - FILL
+          - MOD_PND
+          - NEW
+          - PART_FILL
+          - RJCT
+          - SENT
+          - WORKING
+          example: CANCEL
         EMSX_ORDER_TYPE:
           type: string
+          example: example_value
         EMSX_LIMIT_PRICE:
           type: number
+          example: 42.5
         EMSX_AVG_PRICE:
           type: number
           description: Average fill price for this route
+          example: 42.5
         EMSX_STRATEGY:
           type: string
+          example: example_value
         EMSX_EXEC_INSTRUCTIONS:
           type: string
+          example: example_value
         EMSX_LAST_FILL_DATE:
           type: string
+          example: example_value
         EMSX_LAST_FILL_TIME:
           type: string
+          example: example_value
         EMSX_ROUTE_CREATE_DATE:
           type: string
+          example: example_value
         EMSX_ROUTE_CREATE_TIME:
           type: string
 
+          example: example_value
     GetFillsRequest:
       type: object
       properties:
         scope:
           type: string
           enum:
-            - PRIVATE
-            - TEAM
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
         fromDateTime:
           type: string
           format: date-time
           description: Start of time range for fills
 
+          example: '2026-01-15T10:30:00Z'
     GetFillsResponse:
       type: object
       properties:
@@ -999,61 +1483,75 @@ components:
           items:
             $ref: '#/components/schemas/Fill'
 
+          example: []
     Fill:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Parent order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Route that was filled
+          example: '500123'
         EMSX_FILL_ID:
           type: integer
           description: Unique fill identifier
+          example: '500123'
         EMSX_TICKER:
           type: string
+          example: example_value
         EMSX_SIDE:
           type: string
           enum:
-            - BUY
-            - SELL
-            - SHRT
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
         EMSX_FILL_AMOUNT:
           type: integer
           description: Quantity filled
+          example: 10
         EMSX_FILL_PRICE:
           type: number
           description: Fill price
+          example: 42.5
         EMSX_FILL_DATE:
           type: string
           description: Fill date (YYYYMMDD)
+          example: example_value
         EMSX_FILL_TIME:
           type: string
           description: Fill time (HHMMSS)
+          example: example_value
         EMSX_BROKER:
           type: string
+          example: example_value
         EMSX_EXCHANGE:
           type: string
           description: Exchange where the fill occurred
 
+          example: example_value
     GetBrokerStrategiesRequest:
       type: object
       required:
-        - EMSX_BROKER
-        - EMSX_ASSET_CLASS
+      - EMSX_BROKER
+      - EMSX_ASSET_CLASS
       properties:
         EMSX_BROKER:
           type: string
           description: Broker code
+          example: example_value
         EMSX_ASSET_CLASS:
           type: string
           description: Asset class
           enum:
-            - EQTY
-            - OPT
-            - FUT
+          - EQTY
+          - OPT
+          - FUT
 
+          example: EQTY
     GetBrokerStrategiesResponse:
       type: object
       properties:
@@ -1063,24 +1561,28 @@ components:
             type: string
           description: List of available strategy names
 
+          example: []
     GetBrokerStrategyInfoRequest:
       type: object
       required:
-        - EMSX_BROKER
-        - EMSX_STRATEGY
-        - EMSX_ASSET_CLASS
+      - EMSX_BROKER
+      - EMSX_STRATEGY
+      - EMSX_ASSET_CLASS
       properties:
         EMSX_BROKER:
           type: string
+          example: example_value
         EMSX_STRATEGY:
           type: string
+          example: example_value
         EMSX_ASSET_CLASS:
           type: string
           enum:
-            - EQTY
-            - OPT
-            - FUT
+          - EQTY
+          - OPT
+          - FUT
 
+          example: EQTY
     GetBrokerStrategyInfoResponse:
       type: object
       properties:
@@ -1109,6 +1611,7 @@ components:
                     items:
                       type: string
 
+          example: example_value
     GetTeamsResponse:
       type: object
       properties:
@@ -1124,62 +1627,76 @@ components:
                 items:
                   type: string
 
+          example: []
     AssignTraderRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_TRADER_UUID
+      - EMSX_SEQUENCE
+      - EMSX_TRADER_UUID
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number
+          example: 10
         EMSX_TRADER_UUID:
           type: string
           description: UUID of the trader to assign
 
+          example: '500123'
     ManualFillRequest:
       type: object
       required:
-        - EMSX_SEQUENCE
-        - EMSX_ROUTE_ID
-        - EMSX_FILL_AMOUNT
-        - EMSX_FILL_PRICE
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
+      - EMSX_FILL_AMOUNT
+      - EMSX_FILL_PRICE
       properties:
         EMSX_SEQUENCE:
           type: integer
           description: Order sequence number
+          example: 10
         EMSX_ROUTE_ID:
           type: integer
           description: Route ID
+          example: '500123'
         EMSX_FILL_AMOUNT:
           type: integer
           description: Fill quantity
+          example: 10
         EMSX_FILL_PRICE:
           type: number
           description: Fill price
+          example: 42.5
         EMSX_FILL_DATE:
           type: string
           description: Fill date (YYYYMMDD)
+          example: example_value
         EMSX_FILL_TIME:
           type: string
           description: Fill time (HHMMSS)
 
+          example: example_value
     OperationResponse:
       type: object
       properties:
         STATUS:
           type: integer
           description: Operation status code (0 = success)
+          example: 10
         MESSAGE:
           type: string
           description: Status message
 
+          example: example_value
     Error:
       type: object
       properties:
         STATUS:
           type: integer
+          example: 10
         MESSAGE:
           type: string
+          example: example_value
         REASON:
           type: string
+          example: example_value

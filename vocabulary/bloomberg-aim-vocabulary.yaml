@@ -1,0 +1,24 @@
+name: bloomberg-aim API Vocabulary
+provider: bloomberg-aim
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 47
+schemas: 78
+tags:
+- Broker Strategies
+- Catalogs
+- Distributions
+- Field Lists
+- Field Search
+- Fills
+- Historical Data
+- Instruments
+- Intraday Data
+- Orders
+- Reference Data
+- Replies
+- Requests
+- Routes
+- Teams
+- Triggers
+- Universes

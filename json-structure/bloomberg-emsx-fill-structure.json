@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Fill",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_ROUTE_ID": {
+      "type": "integer"
+    },
+    "EMSX_FILL_ID": {
+      "type": "integer"
+    },
+    "EMSX_TICKER": {
+      "type": "string"
+    },
+    "EMSX_SIDE": {
+      "type": "string"
+    },
+    "EMSX_FILL_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_FILL_PRICE": {
+      "type": "number"
+    },
+    "EMSX_FILL_DATE": {
+      "type": "string"
+    },
+    "EMSX_FILL_TIME": {
+      "type": "string"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_EXCHANGE": {
+      "type": "string"
+    }
+  }
+}

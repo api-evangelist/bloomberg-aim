@@ -1,0 +1,187 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Bloomberg Trading and Execution"
+  description: "Workflow for automated trading combining EMSX order/route management with HTTP API market data for traders and algorithmic trading teams."
+  tags:
+    - Bloomberg
+    - Trading
+    - Execution Management
+    - Order Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BLOOMBERG_EMSX_TOKEN: BLOOMBERG_EMSX_TOKEN
+      BLOOMBERG_HTTP_USERNAME: BLOOMBERG_HTTP_USERNAME
+      BLOOMBERG_HTTP_PASSWORD: BLOOMBERG_HTTP_PASSWORD
+
+capability:
+  consumes:
+    - import: emsx
+      location: ./shared/emsx.yaml
+    - import: http-api
+      location: ./shared/http-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: trading-api
+      description: "Unified REST API for Bloomberg trading and execution."
+      resources:
+        - path: /v1/orders
+          name: orders
+          description: "Order management"
+          operations:
+            - method: POST
+              name: create-order
+              description: "Create a trading order"
+              call: "emsx.create-order"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: get-orders
+              description: "Get orders from blotter"
+              call: "emsx.get-orders"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/routes
+          name: routes
+          description: "Route management"
+          operations:
+            - method: POST
+              name: route-order
+              description: "Route an order to a broker"
+              call: "emsx.route-order"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: get-routes
+              description: "Get routes from blotter"
+              call: "emsx.get-routes"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/fills
+          name: fills
+          description: "Fill tracking"
+          operations:
+            - method: POST
+              name: get-fills
+              description: "Get order fills"
+              call: "emsx.get-fills"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/market-data
+          name: market-data
+          description: "Market data for trading decisions"
+          operations:
+            - method: POST
+              name: get-reference-data
+              description: "Get security reference data"
+              call: "http-api.get-reference-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: trading-mcp
+      transport: http
+      description: "MCP server for AI-assisted Bloomberg trading and execution."
+      tools:
+        - name: create-order
+          description: "Create a new trading order"
+          hints:
+            readOnly: false
+          call: "emsx.create-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: modify-order
+          description: "Modify an existing order"
+          hints:
+            readOnly: false
+          call: "emsx.modify-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-order
+          description: "Cancel/delete an order"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "emsx.delete-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-orders
+          description: "Get orders from the EMSX blotter"
+          hints:
+            readOnly: true
+          call: "emsx.get-orders"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: route-order
+          description: "Route an order to a broker"
+          hints:
+            readOnly: false
+          call: "emsx.route-order"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-routes
+          description: "Get routes from the EMSX blotter"
+          hints:
+            readOnly: true
+          call: "emsx.get-routes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-fills
+          description: "Get order and route fills"
+          hints:
+            readOnly: true
+          call: "emsx.get-fills"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-broker-strategies
+          description: "Get available broker strategies"
+          hints:
+            readOnly: true
+          call: "emsx.get-broker-strategies"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-teams
+          description: "Get EMSX teams"
+          hints:
+            readOnly: true
+          call: "emsx.get-teams"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-reference-data
+          description: "Get security reference data for trading"
+          hints:
+            readOnly: true
+          call: "http-api.get-reference-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-intraday-ticks
+          description: "Get intraday tick data for a security"
+          hints:
+            readOnly: true
+          call: "http-api.get-intraday-ticks"
+          outputParameters:
+            - type: object
+              mapping: "$."

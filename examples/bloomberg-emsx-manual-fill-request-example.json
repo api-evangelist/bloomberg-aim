@@ -1,0 +1,8 @@
+{
+  "EMSX_SEQUENCE": 10,
+  "EMSX_ROUTE_ID": "500123",
+  "EMSX_FILL_AMOUNT": 10,
+  "EMSX_FILL_PRICE": 42.5,
+  "EMSX_FILL_DATE": "example_value",
+  "EMSX_FILL_TIME": "example_value"
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Trigger",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "frequency": {
+      "type": "string"
+    },
+    "snapshotTime": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    }
+  }
+}

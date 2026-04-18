@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RouteOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Order sequence number to route"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer",
+      "description": "Quantity to route"
+    },
+    "EMSX_BROKER": {
+      "type": "string",
+      "description": "Broker code"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string",
+      "description": "Broker strategy name"
+    },
+    "EMSX_STRATEGY_PARAMS": {
+      "type": "object"
+    },
+    "EMSX_EXEC_INSTRUCTIONS": {
+      "type": "string"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string"
+    }
+  }
+}

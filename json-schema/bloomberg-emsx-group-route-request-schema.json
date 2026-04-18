@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroupRouteRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "array",
+      "description": "List of order sequence numbers to route as a group"
+    },
+    "EMSX_AMOUNT_PERCENT": {
+      "type": "number",
+      "description": "Percentage of each order to route (0-100)"
+    },
+    "EMSX_BROKER": {
+      "type": "string"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY": {
+      "type": "string"
+    },
+    "EMSX_STRATEGY_PARAMS": {
+      "type": "object"
+    }
+  }
+}

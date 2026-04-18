@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer",
+      "description": "Unique order sequence number"
+    },
+    "EMSX_TICKER": {
+      "type": "string",
+      "description": "Security identifier"
+    },
+    "EMSX_SIDE": {
+      "type": "string"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer",
+      "description": "Total order quantity"
+    },
+    "EMSX_FILLED": {
+      "type": "integer",
+      "description": "Quantity filled so far"
+    },
+    "EMSX_WORKING": {
+      "type": "integer",
+      "description": "Quantity currently working (routed but not filled)"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_STATUS": {
+      "type": "string",
+      "description": "Current order status"
+    },
+    "EMSX_AVG_PRICE": {
+      "type": "number",
+      "description": "Average fill price"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string"
+    },
+    "EMSX_TRADER": {
+      "type": "string"
+    },
+    "EMSX_NOTES": {
+      "type": "string"
+    },
+    "EMSX_BASKET_NAME": {
+      "type": "string"
+    },
+    "EMSX_DATE": {
+      "type": "string",
+      "description": "Order creation date (YYYYMMDD)"
+    },
+    "EMSX_TIME_STAMP": {
+      "type": "string",
+      "description": "Last update timestamp"
+    },
+    "EMSX_PORTFOLIO": {
+      "type": "string"
+    }
+  }
+}

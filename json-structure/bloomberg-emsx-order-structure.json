@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "EMSX_SEQUENCE": {
+      "type": "integer"
+    },
+    "EMSX_TICKER": {
+      "type": "string"
+    },
+    "EMSX_SIDE": {
+      "type": "string"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_FILLED": {
+      "type": "integer"
+    },
+    "EMSX_WORKING": {
+      "type": "integer"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_STATUS": {
+      "type": "string"
+    },
+    "EMSX_AVG_PRICE": {
+      "type": "number"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string"
+    },
+    "EMSX_TRADER": {
+      "type": "string"
+    },
+    "EMSX_NOTES": {
+      "type": "string"
+    },
+    "EMSX_BASKET_NAME": {
+      "type": "string"
+    },
+    "EMSX_DATE": {
+      "type": "string"
+    },
+    "EMSX_TIME_STAMP": {
+      "type": "string"
+    },
+    "EMSX_PORTFOLIO": {
+      "type": "string"
+    }
+  }
+}

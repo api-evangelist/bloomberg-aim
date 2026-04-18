@@ -1,0 +1,15 @@
+{
+  "securities": [],
+  "fields": [],
+  "startDate": "example_value",
+  "endDate": "example_value",
+  "periodicitySelection": "example_value",
+  "periodicityAdjustment": "example_value",
+  "currency": "example_value",
+  "overrides": [],
+  "nonTradingDayFillOption": "example_value",
+  "nonTradingDayFillMethod": "example_value",
+  "adjustmentNormal": true,
+  "adjustmentAbnormal": true,
+  "adjustmentSplit": true
+}

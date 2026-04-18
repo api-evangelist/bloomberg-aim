@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Field",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string",
+      "description": "Bloomberg field mnemonic (e.g., PX_LAST)"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Data type of the field value"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

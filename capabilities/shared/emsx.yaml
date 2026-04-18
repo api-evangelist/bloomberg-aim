@@ -1,0 +1,175 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Bloomberg EMSX API"
+  description: "Execution Management System API for managing and automating trading for equities, futures, and options."
+  tags:
+    - Bloomberg
+    - Trading
+    - Order Management
+    - Execution Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BLOOMBERG_EMSX_TOKEN: BLOOMBERG_EMSX_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: emsx
+      baseUri: https://localhost:3000
+      description: "Bloomberg EMSX API via BLPAPI HTTP bridge"
+      authentication:
+        type: bearer
+        token: "{{BLOOMBERG_EMSX_TOKEN}}"
+      resources:
+        - name: orders
+          path: /request/blp/emapisvc
+          description: "Order management"
+          operations:
+            - name: create-order
+              method: POST
+              description: "Create a new order"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  EMSX_TICKER: "{{tools.ticker}}"
+                  EMSX_AMOUNT: "{{tools.amount}}"
+                  EMSX_ORDER_TYPE: "{{tools.orderType}}"
+                  EMSX_SIDE: "{{tools.side}}"
+                  EMSX_TIF: "{{tools.tif}}"
+            - name: modify-order
+              method: POST
+              description: "Modify an existing order"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-order
+              method: POST
+              description: "Delete/cancel an order"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-orders
+              method: POST
+              description: "Get orders from the blotter"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: routes
+          path: /request/blp/emapisvc
+          description: "Route management"
+          operations:
+            - name: route-order
+              method: POST
+              description: "Route an order to a broker"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: modify-route
+              method: POST
+              description: "Modify a route"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-routes
+              method: POST
+              description: "Get routes from the blotter"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: fills
+          path: /request/blp/emapisvc
+          description: "Fill tracking"
+          operations:
+            - name: get-fills
+              method: POST
+              description: "Get order fills"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: broker-strategies
+          path: /request/blp/emapisvc
+          description: "Broker strategy queries"
+          operations:
+            - name: get-broker-strategies
+              method: POST
+              description: "Get available broker strategies"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-broker-strategy-info
+              method: POST
+              description: "Get broker strategy details"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: teams
+          path: /request/blp/emapisvc
+          description: "Team management"
+          operations:
+            - name: get-teams
+              method: POST
+              description: "Get EMSX teams"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: emsx-api
+      resources:
+        - path: /v1/orders
+          name: orders
+          description: "Order management"
+          operations:
+            - method: POST
+              name: create-order
+              description: "Create a trading order"
+              call: "emsx.create-order"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: emsx-mcp
+      transport: http
+      tools:
+        - name: get-orders
+          description: "Get orders from the EMSX blotter"
+          hints:
+            readOnly: true
+          call: "emsx.get-orders"
+          outputParameters:
+            - type: object
+              mapping: "$."

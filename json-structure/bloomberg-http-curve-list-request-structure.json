@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CurveListRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string"
+    },
+    "maxResults": {
+      "type": "integer"
+    },
+    "countryCode": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "subtype": {
+      "type": "string"
+    }
+  }
+}

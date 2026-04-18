@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CreateOrderRequest",
+  "type": "object",
+  "properties": {
+    "EMSX_TICKER": {
+      "type": "string"
+    },
+    "EMSX_AMOUNT": {
+      "type": "integer"
+    },
+    "EMSX_ORDER_TYPE": {
+      "type": "string"
+    },
+    "EMSX_SIDE": {
+      "type": "string"
+    },
+    "EMSX_TIF": {
+      "type": "string"
+    },
+    "EMSX_LIMIT_PRICE": {
+      "type": "number"
+    },
+    "EMSX_STOP_PRICE": {
+      "type": "number"
+    },
+    "EMSX_ACCOUNT": {
+      "type": "string"
+    },
+    "EMSX_NOTES": {
+      "type": "string"
+    },
+    "EMSX_HAND_INSTRUCTION": {
+      "type": "string"
+    },
+    "EMSX_BASKET_NAME": {
+      "type": "string"
+    },
+    "EMSX_CFD_FLAG": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE1": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE2": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE3": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE4": {
+      "type": "string"
+    },
+    "EMSX_CUSTOM_NOTE5": {
+      "type": "string"
+    },
+    "EMSX_GTD_DATE": {
+      "type": "string"
+    },
+    "EMSX_INVESTOR_ID": {
+      "type": "string"
+    },
+    "EMSX_LOCATE_BROKER": {
+      "type": "string"
+    },
+    "EMSX_LOCATE_ID": {
+      "type": "string"
+    },
+    "EMSX_PORTFOLIO": {
+      "type": "string"
+    }
+  }
+}

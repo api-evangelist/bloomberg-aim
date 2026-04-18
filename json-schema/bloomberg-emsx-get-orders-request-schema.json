@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetOrdersRequest",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "Scope of orders to retrieve"
+    }
+  }
+}

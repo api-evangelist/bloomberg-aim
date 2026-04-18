@@ -1,0 +1,7 @@
+{
+  "@type": "example_value",
+  "identifier": "example_value",
+  "title": "Example Title",
+  "description": "A sample description.",
+  "contains": []
+}
