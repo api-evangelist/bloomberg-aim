@@ -89,6 +89,15 @@ Historical Data, HTTP API, Market Data, Reference Data, Streaming
 | [market-data-and-analytics.yaml](capabilities/market-data-and-analytics.yaml) | Market Data and Analytics | Data License + HTTP API |
 | [trading-and-execution.yaml](capabilities/trading-and-execution.yaml) | Trading and Execution | EMSX + HTTP API |
 
+### Inline Workflow Capabilities (capabilities/inline/)
+
+Self-contained variants of the workflow capabilities with all upstream API definitions inlined — no `import:` references to `shared/` files.
+
+| File | Workflow | APIs Combined |
+|------|----------|---------------|
+| [market-data-and-analytics.yaml](capabilities/inline/market-data-and-analytics.yaml) | Market Data and Analytics (Inline) | Data License + HTTP API |
+| [trading-and-execution.yaml](capabilities/inline/trading-and-execution.yaml) | Trading and Execution (Inline) | EMSX + HTTP API |
+
 ## Artifacts
 
 ### OpenAPI Specifications (openapi/)
