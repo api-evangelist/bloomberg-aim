@@ -1,161 +1,87 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Bloomberg AIM
+providerId: bloomberg-aim
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Order Management
+  - Portfolio Management
+  - Trading
+description: 'FOCUS-aligned FinOps placeholder for Bloomberg AIM: enterprise buy-side OMS / IBOR
+  platform billed under a contract-negotiated annual subscription typically combined with named-user
+  seats and Bloomberg market-data feeds.'
+sources:
+  - https://www.bloomberg.com/professional/products/bloomberg-terminal/
+notes: AIM commercial terms are bundled into the Bloomberg Enterprise contract; reconcile against
+  the active subscription for actual fee structure.
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Bloomberg AIM
-providerId: bloomberg-aim
-publisherName: Bloomberg AIM
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Financial Data
-  - Market Data
-  - Order Management
-  - Portfolio Management
-  - Trading
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Bloomberg AIM API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Bloomberg L.P.
+serviceCategory: Buy-side OMS / IBOR
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Enterprise Subscription (Negotiated)
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Bloomberg AIM
-  ServiceCategory: Developer Tools / API
-  ProviderName: Bloomberg AIM
-  PublisherName: Bloomberg AIM
-  InvoiceIssuerName: Bloomberg AIM
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Buy-side OMS / IBOR
+  ProviderName: Bloomberg
+  PublisherName: Bloomberg L.P.
+  InvoiceIssuerName: Bloomberg L.P.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: aim_subscription
+    unit: year
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - module
+      - tenant
+  - name: aim_named_users
+    unit: seat
+    aggregation: max
+    dimensions:
+      - tenant
+      - role
+  - name: aim_orders
+    unit: order
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - asset_class
+      - venue
+  - name: market_data_passthrough
+    unit: record
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Bloomberg Data License API
-    baseURL: https://api.bloomberg.com/eap
-    tags:
-      - Financial Data
-      - Market Data
-      - Pricing Data
-      - Reference Data
-    serviceName: Bloomberg Data License API
-    serviceCategory: API
-  - name: Bloomberg Server API (SAPI)
-    baseURL: ''
-    tags:
-      - Financial Analytics
-      - Market Data
-      - Real-Time Data
-      - Server API
-    serviceName: Bloomberg Server API (SAPI)
-    serviceCategory: API
-  - name: Bloomberg EMSX API
-    baseURL: https://localhost:3000
-    tags:
-      - Equities
-      - Execution Management
-      - Order Management
-      - Trading
-    serviceName: Bloomberg EMSX API
-    serviceCategory: API
-  - name: Bloomberg HTTP API
-    baseURL: https://localhost:3000
-    tags:
-      - Historical Data
-      - HTTP API
-      - Market Data
-      - Reference Data
-      - Streaming
-    serviceName: Bloomberg HTTP API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - feed
+      - exchange
+principles:
+  - name: Visibility
+    description: Use AIM administration and Bloomberg client-services usage reports to track
+      module activation, named-user counts, and order throughput.
+  - name: Allocation
+    description: Map AIM tenants and modules to the consuming desk / strategy for chargeback;
+      reconcile against the bundled Bloomberg Enterprise invoice.
+  - name: Optimization
+    description: Reclaim unused AIM seats during annual renewal; align AIM module mix with
+      portfolio strategy; consolidate market-data passthrough into shared B-PIPE rather than
+      per-AIM-tenant feeds where possible.
+  - name: Accountability
+    description: Designate an AIM contract owner per legal entity; review utilization quarterly
+      with Bloomberg Enterprise client services.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
