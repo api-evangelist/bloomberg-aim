@@ -1,0 +1,248 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg EMSX API — Orders
+  description: 'Bloomberg EMSX API — Orders. 5 operations. Lead operation: Create a New Order. Self-contained Naftiko capability
+    covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-emsx-orders
+    baseUri: https://localhost:3000
+    description: Bloomberg EMSX API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: request-blp-emapisvc-CreateOrder
+      path: /request/blp/emapisvc/CreateOrder
+      operations:
+      - name: createorder
+        method: POST
+        description: Create a New Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-CreateOrderAndRouteEx
+      path: /request/blp/emapisvc/CreateOrderAndRouteEx
+      operations:
+      - name: createorderandroute
+        method: POST
+        description: Create an Order and Route Simultaneously
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-DeleteOrder
+      path: /request/blp/emapisvc/DeleteOrder
+      operations:
+      - name: deleteorder
+        method: POST
+        description: Delete an Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-GetOrders
+      path: /request/blp/emapisvc/GetOrders
+      operations:
+      - name: getorders
+        method: POST
+        description: Get Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-ModifyOrderEx
+      path: /request/blp/emapisvc/ModifyOrderEx
+      operations:
+      - name: modifyorder
+        method: POST
+        description: Modify an Existing Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-emsx-orders-rest
+    port: 8080
+    description: REST adapter for Bloomberg EMSX API — Orders. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/request/blp/emapisvc/createorder
+      name: request-blp-emapisvc-createorder
+      description: REST surface for request-blp-emapisvc-CreateOrder.
+      operations:
+      - method: POST
+        name: createorder
+        description: Create a New Order
+        call: bloomberg-emsx-orders.createorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/createorderandrouteex
+      name: request-blp-emapisvc-createorderandrouteex
+      description: REST surface for request-blp-emapisvc-CreateOrderAndRouteEx.
+      operations:
+      - method: POST
+        name: createorderandroute
+        description: Create an Order and Route Simultaneously
+        call: bloomberg-emsx-orders.createorderandroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/deleteorder
+      name: request-blp-emapisvc-deleteorder
+      description: REST surface for request-blp-emapisvc-DeleteOrder.
+      operations:
+      - method: POST
+        name: deleteorder
+        description: Delete an Order
+        call: bloomberg-emsx-orders.deleteorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/getorders
+      name: request-blp-emapisvc-getorders
+      description: REST surface for request-blp-emapisvc-GetOrders.
+      operations:
+      - method: POST
+        name: getorders
+        description: Get Orders
+        call: bloomberg-emsx-orders.getorders
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/modifyorderex
+      name: request-blp-emapisvc-modifyorderex
+      description: REST surface for request-blp-emapisvc-ModifyOrderEx.
+      operations:
+      - method: POST
+        name: modifyorder
+        description: Modify an Existing Order
+        call: bloomberg-emsx-orders.modifyorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-emsx-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg EMSX API — Orders. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-new-order
+      description: Create a New Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-orders.createorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-order-and-route-simultaneously
+      description: Create an Order and Route Simultaneously
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-orders.createorderandroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-order
+      description: Delete an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-orders.deleteorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-orders
+      description: Get Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-orders.getorders
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modify-existing-order
+      description: Modify an Existing Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-orders.modifyorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

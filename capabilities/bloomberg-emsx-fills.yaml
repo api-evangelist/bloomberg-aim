@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg EMSX API — Fills
+  description: 'Bloomberg EMSX API — Fills. 2 operations. Lead operation: Get Fills. Self-contained Naftiko capability covering
+    one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Fills
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-emsx-fills
+    baseUri: https://localhost:3000
+    description: Bloomberg EMSX API — Fills business capability. Self-contained, no shared references.
+    resources:
+    - name: request-blp-emapisvc-GetFills
+      path: /request/blp/emapisvc/GetFills
+      operations:
+      - name: getfills
+        method: POST
+        description: Get Fills
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-ManualFill
+      path: /request/blp/emapisvc/ManualFill
+      operations:
+      - name: manualfill
+        method: POST
+        description: Record a Manual Fill
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-emsx-fills-rest
+    port: 8080
+    description: REST adapter for Bloomberg EMSX API — Fills. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/request/blp/emapisvc/getfills
+      name: request-blp-emapisvc-getfills
+      description: REST surface for request-blp-emapisvc-GetFills.
+      operations:
+      - method: POST
+        name: getfills
+        description: Get Fills
+        call: bloomberg-emsx-fills.getfills
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/manualfill
+      name: request-blp-emapisvc-manualfill
+      description: REST surface for request-blp-emapisvc-ManualFill.
+      operations:
+      - method: POST
+        name: manualfill
+        description: Record a Manual Fill
+        call: bloomberg-emsx-fills.manualfill
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-emsx-fills-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg EMSX API — Fills. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-fills
+      description: Get Fills
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-fills.getfills
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: record-manual-fill
+      description: Record a Manual Fill
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-fills.manualfill
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

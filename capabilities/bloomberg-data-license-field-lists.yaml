@@ -1,0 +1,178 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg Data License API (HAPI) — Field Lists
+  description: 'Bloomberg Data License API (HAPI) — Field Lists. 4 operations. Lead operation: List Field Lists. Self-contained
+    Naftiko capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Field Lists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-data-license-field-lists
+    baseUri: https://api.bloomberg.com/eap
+    description: Bloomberg Data License API (HAPI) — Field Lists business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalogId-fieldLists
+      path: /catalogs/{catalogId}/fieldLists
+      operations:
+      - name: listfieldlists
+        method: GET
+        description: List Field Lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfieldlist
+        method: POST
+        description: Create a Field List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: catalogs-catalogId-fieldLists-fieldListId
+      path: /catalogs/{catalogId}/fieldLists/{fieldListId}
+      operations:
+      - name: getfieldlist
+        method: GET
+        description: Get Field List Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: catalogs-catalogId-fields
+      path: /catalogs/{catalogId}/fields
+      operations:
+      - name: listcatalogfields
+        method: GET
+        description: List Available Fields in a Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: category
+          in: query
+          type: string
+          description: Filter fields by data category
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-data-license-field-lists-rest
+    port: 8080
+    description: REST adapter for Bloomberg Data License API (HAPI) — Field Lists. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalogid}/fieldlists
+      name: catalogs-catalogid-fieldlists
+      description: REST surface for catalogs-catalogId-fieldLists.
+      operations:
+      - method: GET
+        name: listfieldlists
+        description: List Field Lists
+        call: bloomberg-data-license-field-lists.listfieldlists
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfieldlist
+        description: Create a Field List
+        call: bloomberg-data-license-field-lists.createfieldlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalogid}/fieldlists/{fieldlistid}
+      name: catalogs-catalogid-fieldlists-fieldlistid
+      description: REST surface for catalogs-catalogId-fieldLists-fieldListId.
+      operations:
+      - method: GET
+        name: getfieldlist
+        description: Get Field List Details
+        call: bloomberg-data-license-field-lists.getfieldlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalogid}/fields
+      name: catalogs-catalogid-fields
+      description: REST surface for catalogs-catalogId-fields.
+      operations:
+      - method: GET
+        name: listcatalogfields
+        description: List Available Fields in a Catalog
+        call: bloomberg-data-license-field-lists.listcatalogfields
+        with:
+          category: rest.category
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-data-license-field-lists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg Data License API (HAPI) — Field Lists. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-field-lists
+      description: List Field Lists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-field-lists.listfieldlists
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-field-list
+      description: Create a Field List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-data-license-field-lists.createfieldlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-field-list-details
+      description: Get Field List Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-field-lists.getfieldlist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-available-fields-catalog
+      description: List Available Fields in a Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-field-lists.listcatalogfields
+      with:
+        category: tools.category
+      outputParameters:
+      - type: object
+        mapping: $.

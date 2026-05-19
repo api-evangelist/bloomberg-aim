@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg HTTP API — Reference Data
+  description: 'Bloomberg HTTP API — Reference Data. 2 operations. Lead operation: Send a Blpapi Request. Self-contained Naftiko
+    capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Reference Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-http-reference-data
+    baseUri: https://localhost:3000
+    description: Bloomberg HTTP API — Reference Data business capability. Self-contained, no shared references.
+    resources:
+    - name: request
+      path: /request
+      operations:
+      - name: sendrequest
+        method: POST
+        description: Send a Blpapi Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-refdata-ReferenceDataRequest
+      path: /request/blp/refdata/ReferenceDataRequest
+      operations:
+      - name: referencedatarequest
+        method: POST
+        description: Request Reference Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.BLOOMBERG_AIM_USER}}'
+      password: '{{env.BLOOMBERG_AIM_PASS}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-http-reference-data-rest
+    port: 8080
+    description: REST adapter for Bloomberg HTTP API — Reference Data. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/request
+      name: request
+      description: REST surface for request.
+      operations:
+      - method: POST
+        name: sendrequest
+        description: Send a Blpapi Request
+        call: bloomberg-http-reference-data.sendrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/refdata/referencedatarequest
+      name: request-blp-refdata-referencedatarequest
+      description: REST surface for request-blp-refdata-ReferenceDataRequest.
+      operations:
+      - method: POST
+        name: referencedatarequest
+        description: Request Reference Data
+        call: bloomberg-http-reference-data.referencedatarequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-http-reference-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg HTTP API — Reference Data. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: send-blpapi-request
+      description: Send a Blpapi Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-http-reference-data.sendrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-reference-data
+      description: Request Reference Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-http-reference-data.referencedatarequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

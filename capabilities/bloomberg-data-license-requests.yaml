@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg Data License API (HAPI) — Requests
+  description: 'Bloomberg Data License API (HAPI) — Requests. 4 operations. Lead operation: List Data Requests. Self-contained
+    Naftiko capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Requests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-data-license-requests
+    baseUri: https://api.bloomberg.com/eap
+    description: Bloomberg Data License API (HAPI) — Requests business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalogId-requests
+      path: /catalogs/{catalogId}/requests
+      operations:
+      - name: listrequests
+        method: GET
+        description: List Data Requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createrequest
+        method: POST
+        description: Create a Data Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: catalogs-catalogId-requests-requestId
+      path: /catalogs/{catalogId}/requests/{requestId}
+      operations:
+      - name: getrequest
+        method: GET
+        description: Get Data Request Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleterequest
+        method: DELETE
+        description: Delete a Data Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-data-license-requests-rest
+    port: 8080
+    description: REST adapter for Bloomberg Data License API (HAPI) — Requests. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalogid}/requests
+      name: catalogs-catalogid-requests
+      description: REST surface for catalogs-catalogId-requests.
+      operations:
+      - method: GET
+        name: listrequests
+        description: List Data Requests
+        call: bloomberg-data-license-requests.listrequests
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrequest
+        description: Create a Data Request
+        call: bloomberg-data-license-requests.createrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalogid}/requests/{requestid}
+      name: catalogs-catalogid-requests-requestid
+      description: REST surface for catalogs-catalogId-requests-requestId.
+      operations:
+      - method: GET
+        name: getrequest
+        description: Get Data Request Details
+        call: bloomberg-data-license-requests.getrequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterequest
+        description: Delete a Data Request
+        call: bloomberg-data-license-requests.deleterequest
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-data-license-requests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg Data License API (HAPI) — Requests. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-data-requests
+      description: List Data Requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-requests.listrequests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-data-request
+      description: Create a Data Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-data-license-requests.createrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-data-request-details
+      description: Get Data Request Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-requests.getrequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-data-request
+      description: Delete a Data Request
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: bloomberg-data-license-requests.deleterequest
+      outputParameters:
+      - type: object
+        mapping: $.

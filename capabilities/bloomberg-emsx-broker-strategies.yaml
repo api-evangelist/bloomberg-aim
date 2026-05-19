@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg EMSX API — Broker Strategies
+  description: 'Bloomberg EMSX API — Broker Strategies. 2 operations. Lead operation: Get Broker Strategies. Self-contained
+    Naftiko capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Broker Strategies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-emsx-broker-strategies
+    baseUri: https://localhost:3000
+    description: Bloomberg EMSX API — Broker Strategies business capability. Self-contained, no shared references.
+    resources:
+    - name: request-blp-emapisvc-GetBrokerStrategiesWithAssetClass
+      path: /request/blp/emapisvc/GetBrokerStrategiesWithAssetClass
+      operations:
+      - name: getbrokerstrategies
+        method: POST
+        description: Get Broker Strategies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-GetBrokerStrategyInfoWithAssetClass
+      path: /request/blp/emapisvc/GetBrokerStrategyInfoWithAssetClass
+      operations:
+      - name: getbrokerstrategyinfo
+        method: POST
+        description: Get Broker Strategy Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-emsx-broker-strategies-rest
+    port: 8080
+    description: REST adapter for Bloomberg EMSX API — Broker Strategies. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/request/blp/emapisvc/getbrokerstrategieswithassetclass
+      name: request-blp-emapisvc-getbrokerstrategieswithassetclass
+      description: REST surface for request-blp-emapisvc-GetBrokerStrategiesWithAssetClass.
+      operations:
+      - method: POST
+        name: getbrokerstrategies
+        description: Get Broker Strategies
+        call: bloomberg-emsx-broker-strategies.getbrokerstrategies
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/getbrokerstrategyinfowithassetclass
+      name: request-blp-emapisvc-getbrokerstrategyinfowithassetclass
+      description: REST surface for request-blp-emapisvc-GetBrokerStrategyInfoWithAssetClass.
+      operations:
+      - method: POST
+        name: getbrokerstrategyinfo
+        description: Get Broker Strategy Details
+        call: bloomberg-emsx-broker-strategies.getbrokerstrategyinfo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-emsx-broker-strategies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg EMSX API — Broker Strategies. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-broker-strategies
+      description: Get Broker Strategies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-broker-strategies.getbrokerstrategies
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-broker-strategy-details
+      description: Get Broker Strategy Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-broker-strategies.getbrokerstrategyinfo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

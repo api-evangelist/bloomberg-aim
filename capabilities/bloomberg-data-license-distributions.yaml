@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg Data License API (HAPI) — Distributions
+  description: 'Bloomberg Data License API (HAPI) — Distributions. 2 operations. Lead operation: List Distributions. Self-contained
+    Naftiko capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Distributions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-data-license-distributions
+    baseUri: https://api.bloomberg.com/eap
+    description: Bloomberg Data License API (HAPI) — Distributions business capability. Self-contained, no shared references.
+    resources:
+    - name: catalogs-catalogId-distributions
+      path: /catalogs/{catalogId}/distributions
+      operations:
+      - name: listdistributions
+        method: GET
+        description: List Distributions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: catalogs-catalogId-distributions-distributionId
+      path: /catalogs/{catalogId}/distributions/{distributionId}
+      operations:
+      - name: getdistribution
+        method: GET
+        description: Get Distribution Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-data-license-distributions-rest
+    port: 8080
+    description: REST adapter for Bloomberg Data License API (HAPI) — Distributions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalogs/{catalogid}/distributions
+      name: catalogs-catalogid-distributions
+      description: REST surface for catalogs-catalogId-distributions.
+      operations:
+      - method: GET
+        name: listdistributions
+        description: List Distributions
+        call: bloomberg-data-license-distributions.listdistributions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalogs/{catalogid}/distributions/{distributionid}
+      name: catalogs-catalogid-distributions-distributionid
+      description: REST surface for catalogs-catalogId-distributions-distributionId.
+      operations:
+      - method: GET
+        name: getdistribution
+        description: Get Distribution Details
+        call: bloomberg-data-license-distributions.getdistribution
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-data-license-distributions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg Data License API (HAPI) — Distributions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-distributions
+      description: List Distributions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-distributions.listdistributions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-distribution-details
+      description: Get Distribution Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bloomberg-data-license-distributions.getdistribution
+      outputParameters:
+      - type: object
+        mapping: $.

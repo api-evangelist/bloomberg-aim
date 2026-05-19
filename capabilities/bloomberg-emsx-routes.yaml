@@ -1,0 +1,290 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bloomberg EMSX API — Routes
+  description: 'Bloomberg EMSX API — Routes. 6 operations. Lead operation: Create an Order and Route Simultaneously. Self-contained
+    Naftiko capability covering one Bloomberg Aim business surface.'
+  tags:
+  - Bloomberg Aim
+  - Routes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BLOOMBERG_AIM_API_KEY: BLOOMBERG_AIM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bloomberg-emsx-routes
+    baseUri: https://localhost:3000
+    description: Bloomberg EMSX API — Routes business capability. Self-contained, no shared references.
+    resources:
+    - name: request-blp-emapisvc-CreateOrderAndRouteEx
+      path: /request/blp/emapisvc/CreateOrderAndRouteEx
+      operations:
+      - name: createorderandroute
+        method: POST
+        description: Create an Order and Route Simultaneously
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-DeleteRoute
+      path: /request/blp/emapisvc/DeleteRoute
+      operations:
+      - name: deleteroute
+        method: POST
+        description: Delete (cancel) a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-GetRoutes
+      path: /request/blp/emapisvc/GetRoutes
+      operations:
+      - name: getroutes
+        method: POST
+        description: Get Routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-GroupRouteEx
+      path: /request/blp/emapisvc/GroupRouteEx
+      operations:
+      - name: grouproute
+        method: POST
+        description: Route Multiple Orders as a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-ModifyRouteEx
+      path: /request/blp/emapisvc/ModifyRouteEx
+      operations:
+      - name: modifyroute
+        method: POST
+        description: Modify a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: request-blp-emapisvc-RouteEx
+      path: /request/blp/emapisvc/RouteEx
+      operations:
+      - name: routeorder
+        method: POST
+        description: Route an Order to a Broker
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.BLOOMBERG_AIM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bloomberg-emsx-routes-rest
+    port: 8080
+    description: REST adapter for Bloomberg EMSX API — Routes. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/request/blp/emapisvc/createorderandrouteex
+      name: request-blp-emapisvc-createorderandrouteex
+      description: REST surface for request-blp-emapisvc-CreateOrderAndRouteEx.
+      operations:
+      - method: POST
+        name: createorderandroute
+        description: Create an Order and Route Simultaneously
+        call: bloomberg-emsx-routes.createorderandroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/deleteroute
+      name: request-blp-emapisvc-deleteroute
+      description: REST surface for request-blp-emapisvc-DeleteRoute.
+      operations:
+      - method: POST
+        name: deleteroute
+        description: Delete (cancel) a Route
+        call: bloomberg-emsx-routes.deleteroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/getroutes
+      name: request-blp-emapisvc-getroutes
+      description: REST surface for request-blp-emapisvc-GetRoutes.
+      operations:
+      - method: POST
+        name: getroutes
+        description: Get Routes
+        call: bloomberg-emsx-routes.getroutes
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/grouprouteex
+      name: request-blp-emapisvc-grouprouteex
+      description: REST surface for request-blp-emapisvc-GroupRouteEx.
+      operations:
+      - method: POST
+        name: grouproute
+        description: Route Multiple Orders as a Group
+        call: bloomberg-emsx-routes.grouproute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/modifyrouteex
+      name: request-blp-emapisvc-modifyrouteex
+      description: REST surface for request-blp-emapisvc-ModifyRouteEx.
+      operations:
+      - method: POST
+        name: modifyroute
+        description: Modify a Route
+        call: bloomberg-emsx-routes.modifyroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/request/blp/emapisvc/routeex
+      name: request-blp-emapisvc-routeex
+      description: REST surface for request-blp-emapisvc-RouteEx.
+      operations:
+      - method: POST
+        name: routeorder
+        description: Route an Order to a Broker
+        call: bloomberg-emsx-routes.routeorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bloomberg-emsx-routes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bloomberg EMSX API — Routes. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-order-and-route-simultaneously
+      description: Create an Order and Route Simultaneously
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.createorderandroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-cancel-route
+      description: Delete (cancel) a Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.deleteroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-routes
+      description: Get Routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.getroutes
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: route-multiple-orders-group
+      description: Route Multiple Orders as a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.grouproute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modify-route
+      description: Modify a Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.modifyroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: route-order-broker
+      description: Route an Order to a Broker
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bloomberg-emsx-routes.routeorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
