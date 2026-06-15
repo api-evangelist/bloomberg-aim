@@ -1,0 +1,2217 @@
+{
+  "item": [
+    {
+      "id": "37fb4570-b17c-4476-9844-735dbd85c06a",
+      "name": "Reference Data",
+      "description": {
+        "content": "Request reference (static) data for securities",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6dd31be0-cd7e-4227-9d16-0f9e1370eee2",
+          "name": "Send a Blpapi Request",
+          "request": {
+            "name": "Send a Blpapi Request",
+            "description": {
+              "content": "Sends a generic BLPAPI request. The service and operation are specified in the request body. This is the primary endpoint for all request-response operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceUri\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"requestObject\": {\n    \"key_0\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48625209-4dc2-47f3-8878-a0e90095eaa2",
+              "name": "Successful response with requested data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"example_value\",\n  \"operationName\": \"example_value\",\n  \"requestObject\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 10,\n  \"message\": \"example_value\",\n  \"data\": [\n    {}\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da0b641c-296c-4527-942d-0cc71de79a38",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"example_value\",\n  \"operationName\": \"example_value\",\n  \"requestObject\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b253b723-98eb-4267-b553-a1e39a3abf29",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"example_value\",\n  \"operationName\": \"example_value\",\n  \"requestObject\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f6af178-ccfb-46e0-b3e2-724b182953f9",
+          "name": "Request Reference Data",
+          "request": {
+            "name": "Request Reference Data",
+            "description": {
+              "content": "Retrieves current reference data for a set of securities and fields. Returns the latest available values for requested fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "ReferenceDataRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"returnFormattedValue\": false,\n  \"useUTCTime\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa024916-0483-4365-9b19-2e6ff84d82a5",
+              "name": "Reference data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "ReferenceDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"returnFormattedValue\": true,\n  \"useUTCTime\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"securityData\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a18da59e-01f8-42af-985c-6c08bbf85144",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "ReferenceDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"returnFormattedValue\": true,\n  \"useUTCTime\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59a0f59-ac3f-4391-8de7-788fa8366e65",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "ReferenceDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"returnFormattedValue\": true,\n  \"useUTCTime\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "513463c2-b3a1-43a1-80bc-698f27d05769",
+      "name": "Historical Data",
+      "description": {
+        "content": "Request historical end-of-day or intraday data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5975b1c7-041b-481b-871a-53a2018b06f6",
+          "name": "Request Historical Data",
+          "request": {
+            "name": "Request Historical Data",
+            "description": {
+              "content": "Retrieves historical end-of-day data for a set of securities and fields over a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "HistoricalDataRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb46f598-fdbc-4142-8961-bdf1ca906504",
+              "name": "Historical data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"securityData\": {\n        \"security\": \"example_value\",\n        \"fieldData\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0a974a9-4d56-4eee-86ca-a5bb9c01da9d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "235c9a82-e16f-49db-9c31-9c0850afd3d0",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e8a6b130-8090-4f47-a2a9-eac89fcefc5d",
+      "name": "Intraday Data",
+      "description": {
+        "content": "Request intraday tick or bar data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e59c2185-f286-477e-acea-8d3b29653704",
+          "name": "Request Intraday Tick Data",
+          "request": {
+            "name": "Request Intraday Tick Data",
+            "description": {
+              "content": "Retrieves intraday tick-level data for a single security over a specified time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "IntradayTickRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"security\": \"<string>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"includeConditionCodes\": false,\n  \"includeExchangeCodes\": false,\n  \"includeBrokerCodes\": false,\n  \"includeRPSCodes\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "801f0d35-335d-45c4-8e3f-45cc712c7e07",
+              "name": "Intraday tick data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayTickRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"includeConditionCodes\": true,\n  \"includeExchangeCodes\": true,\n  \"includeBrokerCodes\": true,\n  \"includeRPSCodes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"tickData\": {\n        \"tickData\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b63f5b0d-dd6a-4d41-9aa4-ce245dfeffa5",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayTickRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"includeConditionCodes\": true,\n  \"includeExchangeCodes\": true,\n  \"includeBrokerCodes\": true,\n  \"includeRPSCodes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88465942-e3df-4ad2-8ece-a34ff2f84d10",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayTickRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"includeConditionCodes\": true,\n  \"includeExchangeCodes\": true,\n  \"includeBrokerCodes\": true,\n  \"includeRPSCodes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10b3b5b7-6d30-406e-be54-ec6d23060f4b",
+          "name": "Request Intraday Bar Data",
+          "request": {
+            "name": "Request Intraday Bar Data",
+            "description": {
+              "content": "Retrieves intraday OHLCV bar data for a single security over a specified time range and interval.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "IntradayBarRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"security\": \"<string>\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"interval\": \"<integer>\",\n  \"gapFillInitialBar\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68bd9080-46f7-4291-8b8d-bcf09e5c0c88",
+              "name": "Intraday bar data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayBarRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"interval\": 10,\n  \"gapFillInitialBar\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"barData\": {\n        \"barTickData\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44eea0a3-2c18-4fc8-a7b9-849d467ead9c",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayBarRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"interval\": 10,\n  \"gapFillInitialBar\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d21eb29d-7da5-4c88-86d2-5cb41be12e80",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "IntradayBarRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"security\": \"example_value\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"2026-01-15T10:30:00Z\",\n  \"endDateTime\": \"2026-01-15T10:30:00Z\",\n  \"interval\": 10,\n  \"gapFillInitialBar\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bcea8fbf-ab66-48dc-b5b8-5374bfe5c8d7",
+      "name": "Field Search",
+      "description": {
+        "content": "Search and discover available data fields",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17e348a3-d076-4cc8-9e5d-bd71bd65180e",
+          "name": "Get Field Information",
+          "request": {
+            "name": "Get Field Information",
+            "description": {
+              "content": "Returns metadata about specified Bloomberg fields, including descriptions, data types, and categories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "FieldInfoRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fieldId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"returnFieldDocumentation\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea3b63e1-6f78-4f05-84ec-bc911fd46fb1",
+              "name": "Field information response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldInfoRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fieldId\": [\n    \"example_value\"\n  ],\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"fieldData\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ad3e586-9d84-4e8d-ba06-64b1d7462ee2",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldInfoRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fieldId\": [\n    \"example_value\"\n  ],\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd9085b3-16f8-4727-aaed-4eac147bb122",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldInfoRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fieldId\": [\n    \"example_value\"\n  ],\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2af7d2dd-201c-4b84-a8d7-086336d8b087",
+          "name": "Search for Fields",
+          "request": {
+            "name": "Search for Fields",
+            "description": {
+              "content": "Searches for Bloomberg fields by keyword or category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "FieldSearchRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"searchSpec\": \"<string>\",\n  \"returnFieldDocumentation\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e06cbcb-0668-437f-9370-33ec99660464",
+              "name": "Field search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldSearchRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchSpec\": \"example_value\",\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"fieldData\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d7e4df2-2213-455d-b681-522a0d944be5",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldSearchRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchSpec\": \"example_value\",\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45cc6e71-c251-401d-ae93-725668e22b39",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "FieldSearchRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"searchSpec\": \"example_value\",\n  \"returnFieldDocumentation\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7b700cf7-a741-4007-b30a-d497daa86798",
+      "name": "Instruments",
+      "description": {
+        "content": "Search for securities and instruments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69c27376-a005-4677-8655-88f1b35e120d",
+          "name": "Search for Instruments",
+          "request": {
+            "name": "Search for Instruments",
+            "description": {
+              "content": "Searches for securities and instruments by query string, supporting partial matches.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "instruments",
+                "InstrumentListRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"<string>\",\n  \"languageOverride\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48a20862-d922-4827-9463-e2ed19cc4a49",
+              "name": "Instrument list response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "InstrumentListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_NONE\",\n  \"languageOverride\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80877e40-d57d-43dc-94b4-e7848c4cec5d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "InstrumentListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_NONE\",\n  \"languageOverride\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "491baa9e-7a85-426f-94d7-e54599ae75ab",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "InstrumentListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_NONE\",\n  \"languageOverride\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10795de3-0867-4d92-907e-b6397c7871e0",
+          "name": "Search for Curves",
+          "request": {
+            "name": "Search for Curves",
+            "description": {
+              "content": "Searches for yield curves and other curve instruments by query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "instruments",
+                "CurveListRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"countryCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subtype\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfeb7f6c-1df3-4ef1-8df2-ff928531a49d",
+              "name": "Curve list response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "CurveListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"countryCode\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cd12df1-f927-49ab-b613-278c8c9b2ffc",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "CurveListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"countryCode\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07cb8227-5645-4bd3-b8b4-b7e87af9fc83",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "CurveListRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"maxResults\": 10,\n  \"countryCode\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35724c54-3298-43e2-8cb9-b123af7fa15e",
+          "name": "Look up Government Securities",
+          "request": {
+            "name": "Look up Government Securities",
+            "description": {
+              "content": "Searches for government bond securities by country, currency, and maturity parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "instruments",
+                "GovernmentLookupRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"partialMatch\": false,\n  \"maxResults\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3696c11d-412e-4e22-b525-e112461bea50",
+              "name": "Government security lookup response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "GovernmentLookupRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"partialMatch\": true,\n  \"maxResults\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "199185e8-bc89-4c2f-b020-d360909cbb37",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "GovernmentLookupRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"partialMatch\": true,\n  \"maxResults\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8a8b593-6fc6-4a98-bea8-d166afdc9293",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "instruments",
+                    "GovernmentLookupRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"example_value\",\n  \"partialMatch\": true,\n  \"maxResults\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f150ccf4-1c09-40df-8eea-04644f86e8a3",
+      "name": "Subscriptions",
+      "description": {
+        "content": "Manage real-time streaming data subscriptions via WebSocket",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:3000",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6aa3889f-f330-453a-afc8-bcaedf3b4378",
+    "name": "Bloomberg HTTP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Makes the Bloomberg Open API available via HTTP and WebSockets, allowing clients to access reference and historical request-response data as well as subscribe to live streaming market data. This API wraps the BLPAPI protocol into RESTful HTTP endpoints and WebSocket connections.\n\nContact Support:\n Name: Bloomberg Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

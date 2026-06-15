@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg HTTP API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reference Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Blpapi Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a generic BLPAPI request. The service and operation are specified in the request body. This is the primary endpoint for all request-response operations."
+        },
+        {
+          "info": {
+            "name": "Request Reference Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/ReferenceDataRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves current reference data for a set of securities and fields. Returns the latest available values for requested fields."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Historical Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Historical Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/HistoricalDataRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves historical end-of-day data for a set of securities and fields over a specified date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Intraday Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Intraday Tick Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/IntradayTickRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves intraday tick-level data for a single security over a specified time range."
+        },
+        {
+          "info": {
+            "name": "Request Intraday Bar Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/IntradayBarRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves intraday OHLCV bar data for a single security over a specified time range and interval."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Field Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Field Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/FieldInfoRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns metadata about specified Bloomberg fields, including descriptions, data types, and categories."
+        },
+        {
+          "info": {
+            "name": "Search for Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/refdata/FieldSearchRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for Bloomberg fields by keyword or category."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instruments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for Instruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/instruments/InstrumentListRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for securities and instruments by query string, supporting partial matches."
+        },
+        {
+          "info": {
+            "name": "Search for Curves",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/instruments/CurveListRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for yield curves and other curve instruments by query."
+        },
+        {
+          "info": {
+            "name": "Look up Government Securities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/instruments/GovernmentLookupRequest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for government bond securities by country, currency, and maturity parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

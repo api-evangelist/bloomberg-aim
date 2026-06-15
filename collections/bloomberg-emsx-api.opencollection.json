@@ -1,0 +1,296 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg EMSX API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a New Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/CreateOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order in the EMSX blotter. Orders can be created for equities, futures, and options with various order types and time-in-force parameters."
+        },
+        {
+          "info": {
+            "name": "Create an Order and Route Simultaneously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/CreateOrderAndRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order and immediately routes it to a specified broker in a single operation."
+        },
+        {
+          "info": {
+            "name": "Modify an Existing Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/ModifyOrderEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies parameters of an existing order such as quantity, limit price, or time-in-force."
+        },
+        {
+          "info": {
+            "name": "Delete an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/DeleteOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes (cancels) an order from the EMSX blotter. Only orders that have not been fully filled can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetOrders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current list of orders in the EMSX blotter, optionally filtered by status or other parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Route Multiple Orders as a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GroupRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Routes a group of orders to a single broker in a single operation, useful for basket or program trading."
+        },
+        {
+          "info": {
+            "name": "Route an Order to a Broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/RouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Routes an existing order to a specific broker with optional strategy parameters."
+        },
+        {
+          "info": {
+            "name": "Modify a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/ModifyRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies parameters of an existing route, such as quantity or strategy parameters."
+        },
+        {
+          "info": {
+            "name": "Delete (cancel) a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/DeleteRoute",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active route. Only routes that have not been fully filled can be cancelled."
+        },
+        {
+          "info": {
+            "name": "Get Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetRoutes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current list of routes associated with orders in the EMSX blotter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Fills",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetFills",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves fill information for orders and routes. Fills represent partial or complete executions of routes."
+        },
+        {
+          "info": {
+            "name": "Record a Manual Fill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/ManualFill",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records a manual fill against a route for cases where fills are reported outside the electronic execution flow."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Broker Strategies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Broker Strategies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetBrokerStrategiesWithAssetClass",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves available trading strategies for a specific broker and asset class combination."
+        },
+        {
+          "info": {
+            "name": "Get Broker Strategy Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetBrokerStrategyInfoWithAssetClass",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves detailed information about a specific broker strategy including its parameters and constraints."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Emsx Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/GetTeams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the list of EMSX teams available to the user."
+        },
+        {
+          "info": {
+            "name": "Assign a Trader to an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:3000/request/blp/emapisvc/AssignTrader",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns or reassigns a trader to handle a specific order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

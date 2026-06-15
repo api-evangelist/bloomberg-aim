@@ -1,0 +1,539 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI)",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs"
+          },
+          "docs": "Returns a collection of catalogs available to the authenticated user. Each catalog represents a logical grouping of data services."
+        },
+        {
+          "info": {
+            "name": "Get Catalog Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns details and links for a specific catalog."
+        },
+        {
+          "info": {
+            "name": "List Datasets in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/datasets",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the datasets available within a specific catalog."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Field Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Fields in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fields",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "category",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter fields by data category"
+              }
+            ]
+          },
+          "docs": "Returns the fields available for data requests within a catalog. Fields can be filtered by asset class or data category."
+        },
+        {
+          "info": {
+            "name": "List Field Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns all field lists defined in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Field List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new field list specifying which data fields to include in a data request."
+        },
+        {
+          "info": {
+            "name": "Get Field List Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists/:fieldListId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "fieldListId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the field list"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific field list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Universes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Universes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the security universes defined in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new security universe containing a set of identifiers (tickers, FIGIs, ISINs, CUSIPs, SEDOLs, etc.) for data requests."
+        },
+        {
+          "info": {
+            "name": "Get Universe Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes/:universeId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "universeId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the universe"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific security universe."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the scheduling triggers available in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a scheduling trigger to control when data requests are executed and delivered."
+        },
+        {
+          "info": {
+            "name": "Get Trigger Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers/:triggerId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "triggerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the trigger"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific trigger."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/requests",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns all data requests in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Data Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/requests",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data request combining a universe, field list, and trigger to produce a scheduled data output."
+        },
+        {
+          "info": {
+            "name": "Get Data Request Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/requests/:requestId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the data request"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific data request."
+        },
+        {
+          "info": {
+            "name": "Delete a Data Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/requests/:requestId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the data request"
+              }
+            ]
+          },
+          "docs": "Deletes a specific data request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Distributions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Distributions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns available data distributions (completed outputs) for the catalog."
+        },
+        {
+          "info": {
+            "name": "Get Distribution Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions/:distributionId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the distribution"
+              }
+            ]
+          },
+          "docs": "Returns details and download links for a specific distribution."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Replies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Replies for a Distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions/:distributionId/replies",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the distribution"
+              }
+            ]
+          },
+          "docs": "Returns the individual reply files available for download within a distribution."
+        },
+        {
+          "info": {
+            "name": "Download a Reply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the distribution"
+              },
+              {
+                "name": "replyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the reply"
+              }
+            ]
+          },
+          "docs": "Downloads the data content of a specific reply within a distribution. The response format depends on the request configuration (JSON, CSV, etc.)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
