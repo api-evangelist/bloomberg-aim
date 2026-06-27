@@ -105,11 +105,11 @@ common:
     url: https://www.bloomberg.com/company/stories/category/tech-at-bloomberg/
   - type: GitHubOrganization
     url: https://github.com/bloomberg
-  - type: SDK
+  - type: SDKs
     url: https://github.com/bloomberg/blpapi-node
-  - type: SDK
+  - type: SDKs
     url: https://github.com/bloomberg/blpapi-python
-  - type: SDK
+  - type: SDKs
     url: https://github.com/bloomberg/blpapi-java
   - type: Features
     url: https://www.bloomberg.com/professional/products/data/

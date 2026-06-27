@@ -2,14 +2,17 @@
   "repo": "bloomberg-aim",
   "feeds": [
     {
-      "source": "https://www.bloomberg.com/company/stories/category/tech-at-bloomberg/",
-      "error": "HTTPError"
+      "source": "https://www.techatbloomberg.com/feed/",
+      "feed_url": "https://www.techatbloomberg.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://www.bloomberg.com/notices/",
       "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T12:03:07Z",
   "post_count": 10
 }
