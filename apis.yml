@@ -89,6 +89,12 @@ apis:
       - type: GitHubRepository
         url: https://github.com/bloomberg/blpapi-http
 common:
+  - type: VulnerabilityDisclosure
+    url: security/bloomberg-aim-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/bloomberg-aim-domain-security.yml
+  - type: Authentication
+    url: authentication/bloomberg-aim-authentication.yml
   - type: OAuthScopes
     url: scopes/bloomberg-aim-scopes.yml
   - type: Portal

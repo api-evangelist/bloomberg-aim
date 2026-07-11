@@ -1,0 +1,33 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/bloomberg-data-license-api.yml, openapi/bloomberg-emsx-api.yml, openapi/bloomberg-http-api.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+  sources:
+  - openapi/bloomberg-data-license-api.yml
+  - openapi/bloomberg-emsx-api.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+    scopes: 3
+  description: OAuth 2.0 client credentials flow
+  sources:
+  - openapi/bloomberg-data-license-api.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication for the local API server
+  sources:
+  - openapi/bloomberg-http-api.yml
