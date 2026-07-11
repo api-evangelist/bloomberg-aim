@@ -89,6 +89,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/bloomberg/blpapi-http
 common:
+  - type: OAuthScopes
+    url: scopes/bloomberg-aim-scopes.yml
   - type: Portal
     url: https://developer.bloomberg.com/
   - type: Documentation

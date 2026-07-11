@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/bloomberg-data-license-api.yml
+schemes:
+- name: oauth2
+  source: openapi/bloomberg-data-license-api.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+  description: OAuth 2.0 client credentials flow
+scopes:
+- scope: eap
+  description: Access to Enterprise Access Point data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bloomberg-data-license-api.yml
+- scope: eap.catalogs.read
+  description: Read catalog data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bloomberg-data-license-api.yml
+- scope: eap.catalogs.write
+  description: Write catalog data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/bloomberg-data-license-api.yml
