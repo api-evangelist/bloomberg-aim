@@ -1,0 +1,220 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Broker Strategies
+  description: Query available broker strategies and parameters
+paths:
+  /request/blp/emapisvc/GetBrokerStrategiesWithAssetClass:
+    post:
+      operationId: getBrokerStrategies
+      summary: Get Broker Strategies
+      description: Retrieves available trading strategies for a specific broker and asset class combination.
+      tags:
+      - Broker Strategies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBrokerStrategiesRequest'
+            examples:
+              GetbrokerstrategiesRequestExample:
+                summary: Default getBrokerStrategies request
+                x-microcks-default: true
+                value:
+                  EMSX_BROKER: example_value
+                  EMSX_ASSET_CLASS: EQTY
+      responses:
+        '200':
+          description: Available broker strategies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrokerStrategiesResponse'
+              examples:
+                Getbrokerstrategies200Example:
+                  summary: Default getBrokerStrategies 200 response
+                  x-microcks-default: true
+                  value:
+                    strategies:
+                    - example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/GetBrokerStrategyInfoWithAssetClass:
+    post:
+      operationId: getBrokerStrategyInfo
+      summary: Get Broker Strategy Details
+      description: Retrieves detailed information about a specific broker strategy including its parameters and constraints.
+      tags:
+      - Broker Strategies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBrokerStrategyInfoRequest'
+            examples:
+              GetbrokerstrategyinfoRequestExample:
+                summary: Default getBrokerStrategyInfo request
+                x-microcks-default: true
+                value:
+                  EMSX_BROKER: example_value
+                  EMSX_STRATEGY: example_value
+                  EMSX_ASSET_CLASS: EQTY
+      responses:
+        '200':
+          description: Strategy details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrokerStrategyInfoResponse'
+              examples:
+                Getbrokerstrategyinfo200Example:
+                  summary: Default getBrokerStrategyInfo 200 response
+                  x-microcks-default: true
+                  value:
+                    strategyInfo:
+                      name: Example Title
+                      description: A sample description.
+                      parameters:
+                      - name: Example Title
+                        description: A sample description.
+                        type: example_value
+                        required: true
+                        allowedValues: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GetBrokerStrategiesRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          description: Asset class
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
+    GetBrokerStrategiesResponse:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            type: string
+          description: List of available strategy names
+          example: []
+    GetBrokerStrategyInfoResponse:
+      type: object
+      properties:
+        strategyInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  required:
+                    type: boolean
+                  allowedValues:
+                    type: array
+                    items:
+                      type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    GetBrokerStrategyInfoRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_STRATEGY
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          example: example_value
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

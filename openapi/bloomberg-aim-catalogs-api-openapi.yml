@@ -1,0 +1,242 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Catalogs API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Catalogs
+  description: Browse available data catalogs and their contents
+paths:
+  /catalogs:
+    get:
+      operationId: listCatalogs
+      summary: List Available Catalogs
+      description: Returns a collection of catalogs available to the authenticated user. Each catalog represents a logical grouping of data services.
+      tags:
+      - Catalogs
+      responses:
+        '200':
+          description: A list of available catalogs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogCollection'
+              examples:
+                Listcatalogs200Example:
+                  summary: Default listCatalogs 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      links: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}:
+    get:
+      operationId: getCatalog
+      summary: Get Catalog Details
+      description: Returns details and links for a specific catalog.
+      tags:
+      - Catalogs
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: Catalog details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+              examples:
+                Getcatalog200Example:
+                  summary: Default getCatalog 200 response
+                  x-microcks-default: true
+                  value:
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    links:
+                      universes: https://www.example.com
+                      fieldLists: https://www.example.com
+                      triggers: https://www.example.com
+                      requests: https://www.example.com
+                      distributions: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/datasets:
+    get:
+      operationId: listDatasets
+      summary: List Datasets in a Catalog
+      description: Returns the datasets available within a specific catalog.
+      tags:
+      - Catalogs
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of datasets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetCollection'
+              examples:
+                Listdatasets200Example:
+                  summary: Default listDatasets 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      fieldCount: 10
+                      category: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Catalog:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Unique catalog identifier
+          example: example_value
+        title:
+          type: string
+          description: Human-readable catalog title
+          example: Example Title
+        description:
+          type: string
+          description: Description of the catalog contents
+          example: A sample description.
+        links:
+          type: object
+          properties:
+            universes:
+              type: string
+              format: uri
+            fieldLists:
+              type: string
+              format: uri
+            triggers:
+              type: string
+              format: uri
+            requests:
+              type: string
+              format: uri
+            distributions:
+              type: string
+              format: uri
+          example: example_value
+    CatalogCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Catalog'
+          example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    DatasetCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+          example: []
+    Dataset:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        fieldCount:
+          type: integer
+          example: 10
+        category:
+          type: string
+          example: example_value
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

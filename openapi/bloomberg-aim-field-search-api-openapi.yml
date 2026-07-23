@@ -1,0 +1,235 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Field Search API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Field Search
+  description: Search and discover available data fields
+paths:
+  /request/blp/refdata/FieldInfoRequest:
+    post:
+      operationId: fieldInfoRequest
+      summary: Get Field Information
+      description: Returns metadata about specified Bloomberg fields, including descriptions, data types, and categories.
+      tags:
+      - Field Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldInfoRequest'
+            examples:
+              FieldinforequestRequestExample:
+                summary: Default fieldInfoRequest request
+                x-microcks-default: true
+                value:
+                  fieldId:
+                  - example_value
+                  returnFieldDocumentation: true
+      responses:
+        '200':
+          description: Field information response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldInfoResponse'
+              examples:
+                Fieldinforequest200Example:
+                  summary: Default fieldInfoRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - fieldData:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/refdata/FieldSearchRequest:
+    post:
+      operationId: fieldSearchRequest
+      summary: Search for Fields
+      description: Searches for Bloomberg fields by keyword or category.
+      tags:
+      - Field Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldSearchRequest'
+            examples:
+              FieldsearchrequestRequestExample:
+                summary: Default fieldSearchRequest request
+                x-microcks-default: true
+                value:
+                  searchSpec: example_value
+                  returnFieldDocumentation: true
+      responses:
+        '200':
+          description: Field search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldSearchResponse'
+              examples:
+                Fieldsearchrequest200Example:
+                  summary: Default fieldSearchRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - fieldData:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FieldInfoResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    fieldInfo:
+                      type: object
+                      properties:
+                        mnemonic:
+                          type: string
+                        description:
+                          type: string
+                        datatype:
+                          type: string
+                        categoryName:
+                          type: array
+                          items:
+                            type: string
+                        documentation:
+                          type: string
+          example: []
+    FieldSearchRequest:
+      type: object
+      required:
+      - searchSpec
+      properties:
+        searchSpec:
+          type: string
+          description: Search keyword or pattern
+          example: example_value
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+          example: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    FieldSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    fieldInfo:
+                      type: object
+                      properties:
+                        mnemonic:
+                          type: string
+                        description:
+                          type: string
+                        datatype:
+                          type: string
+                        categoryName:
+                          type: array
+                          items:
+                            type: string
+          example: []
+    FieldInfoRequest:
+      type: object
+      required:
+      - fieldId
+      properties:
+        fieldId:
+          type: array
+          items:
+            type: string
+          description: List of field mnemonics or IDs to look up
+          example: '500123'
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+          example: true
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

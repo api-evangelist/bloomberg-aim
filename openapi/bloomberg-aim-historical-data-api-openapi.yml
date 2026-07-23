@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Historical Data API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Historical Data
+  description: Request historical end-of-day or intraday data
+paths:
+  /request/blp/refdata/HistoricalDataRequest:
+    post:
+      operationId: historicalDataRequest
+      summary: Request Historical Data
+      description: Retrieves historical end-of-day data for a set of securities and fields over a specified date range.
+      tags:
+      - Historical Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HistoricalDataRequest'
+            examples:
+              HistoricaldatarequestRequestExample:
+                summary: Default historicalDataRequest request
+                x-microcks-default: true
+                value:
+                  securities:
+                  - example_value
+                  fields:
+                  - example_value
+                  startDate: example_value
+                  endDate: example_value
+                  periodicitySelection: DAILY
+                  periodicityAdjustment: ACTUAL
+                  currency: example_value
+                  overrides:
+                  - fieldId: '500123'
+                    value: example_value
+                  nonTradingDayFillOption: NON_TRADING_WEEKDAYS
+                  nonTradingDayFillMethod: PREVIOUS_VALUE
+                  adjustmentNormal: true
+                  adjustmentAbnormal: true
+                  adjustmentSplit: true
+      responses:
+        '200':
+          description: Historical data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalDataResponse'
+              examples:
+                Historicaldatarequest200Example:
+                  summary: Default historicalDataRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - securityData:
+                        security: example_value
+                        fieldData: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    HistoricalDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: object
+                properties:
+                  security:
+                    type: string
+                  fieldData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                      additionalProperties: true
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
+    HistoricalDataRequest:
+      type: object
+      required:
+      - securities
+      - fields
+      - startDate
+      - endDate
+      properties:
+        securities:
+          type: array
+          items:
+            type: string
+          description: List of security identifiers
+          example: []
+        fields:
+          type: array
+          items:
+            type: string
+          description: List of Bloomberg field mnemonics
+          example: []
+        startDate:
+          type: string
+          description: Start date in YYYYMMDD format
+          examples:
+          - '20250101'
+        endDate:
+          type: string
+          description: End date in YYYYMMDD format
+          examples:
+          - '20250131'
+        periodicitySelection:
+          type: string
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUALLY
+          - YEARLY
+          default: DAILY
+          example: DAILY
+        periodicityAdjustment:
+          type: string
+          enum:
+          - ACTUAL
+          - CALENDAR
+          - FISCAL
+          default: ACTUAL
+          example: ACTUAL
+        currency:
+          type: string
+          description: Three-letter currency code for cross-currency conversion
+          example: example_value
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Override'
+          example: []
+        nonTradingDayFillOption:
+          type: string
+          enum:
+          - NON_TRADING_WEEKDAYS
+          - ALL_CALENDAR_DAYS
+          - ACTIVE_DAYS_ONLY
+          default: ACTIVE_DAYS_ONLY
+          example: NON_TRADING_WEEKDAYS
+        nonTradingDayFillMethod:
+          type: string
+          enum:
+          - PREVIOUS_VALUE
+          - NIL_VALUE
+          default: NIL_VALUE
+          example: PREVIOUS_VALUE
+        adjustmentNormal:
+          type: boolean
+          default: false
+          example: true
+        adjustmentAbnormal:
+          type: boolean
+          default: false
+          example: true
+        adjustmentSplit:
+          type: boolean
+          default: true
+          example: true
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Distributions API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Distributions
+  description: Access completed data distributions and downloads
+paths:
+  /catalogs/{catalogId}/distributions:
+    get:
+      operationId: listDistributions
+      summary: List Distributions
+      description: Returns available data distributions (completed outputs) for the catalog.
+      tags:
+      - Distributions
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of distributions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionCollection'
+              examples:
+                Listdistributions200Example:
+                  summary: Default listDistributions 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      snapshotTime: '2026-01-15T10:30:00Z'
+                      status: pending
+                      links: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/distributions/{distributionId}:
+    get:
+      operationId: getDistribution
+      summary: Get Distribution Details
+      description: Returns details and download links for a specific distribution.
+      tags:
+      - Distributions
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
+      responses:
+        '200':
+          description: Distribution details with download links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Distribution'
+              examples:
+                Getdistribution200Example:
+                  summary: Default getDistribution 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    snapshotTime: '2026-01-15T10:30:00Z'
+                    status: pending
+                    links:
+                      replies: https://www.example.com
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+  schemas:
+    DistributionCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Distribution'
+          example: []
+    Distribution:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Distribution
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        snapshotTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        status:
+          type: string
+          enum:
+          - pending
+          - completed
+          - error
+          example: pending
+        links:
+          type: object
+          properties:
+            replies:
+              type: string
+              format: uri
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

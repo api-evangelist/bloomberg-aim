@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Teams API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Teams
+  description: Manage EMSX teams and assignments
+paths:
+  /request/blp/emapisvc/GetTeams:
+    post:
+      operationId: getTeams
+      summary: Get Emsx Teams
+      description: Retrieves the list of EMSX teams available to the user.
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              GetteamsRequestExample:
+                summary: Default getTeams request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamsResponse'
+              examples:
+                Getteams200Example:
+                  summary: Default getTeams 200 response
+                  x-microcks-default: true
+                  value:
+                    teams:
+                    - name: Example Title
+                      members:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/AssignTrader:
+    post:
+      operationId: assignTrader
+      summary: Assign a Trader to an Order
+      description: Assigns or reassigns a trader to handle a specific order.
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignTraderRequest'
+            examples:
+              AssigntraderRequestExample:
+                summary: Default assignTrader request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_TRADER_UUID: '500123'
+      responses:
+        '200':
+          description: Trader assigned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Assigntrader200Example:
+                  summary: Default assignTrader 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    AssignTraderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_TRADER_UUID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_TRADER_UUID:
+          type: string
+          description: UUID of the trader to assign
+          example: '500123'
+    GetTeamsResponse:
+      type: object
+      properties:
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              members:
+                type: array
+                items:
+                  type: string
+          example: []
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

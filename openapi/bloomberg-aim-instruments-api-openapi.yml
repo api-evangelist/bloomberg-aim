@@ -1,0 +1,346 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Instruments API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Instruments
+  description: Search for securities and instruments
+paths:
+  /request/blp/instruments/InstrumentListRequest:
+    post:
+      operationId: instrumentListRequest
+      summary: Search for Instruments
+      description: Searches for securities and instruments by query string, supporting partial matches.
+      tags:
+      - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstrumentListRequest'
+            examples:
+              InstrumentlistrequestRequestExample:
+                summary: Default instrumentListRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  maxResults: 10
+                  yellowKeyFilter: YK_FILTER_NONE
+                  languageOverride: example_value
+      responses:
+        '200':
+          description: Instrument list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentListResponse'
+              examples:
+                Instrumentlistrequest200Example:
+                  summary: Default instrumentListRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/instruments/CurveListRequest:
+    post:
+      operationId: curveListRequest
+      summary: Search for Curves
+      description: Searches for yield curves and other curve instruments by query.
+      tags:
+      - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurveListRequest'
+            examples:
+              CurvelistrequestRequestExample:
+                summary: Default curveListRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  maxResults: 10
+                  countryCode: example_value
+                  currencyCode: example_value
+                  type: BOND
+                  subtype: SOVEREIGN
+      responses:
+        '200':
+          description: Curve list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurveListResponse'
+              examples:
+                Curvelistrequest200Example:
+                  summary: Default curveListRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/instruments/GovernmentLookupRequest:
+    post:
+      operationId: governmentLookupRequest
+      summary: Look up Government Securities
+      description: Searches for government bond securities by country, currency, and maturity parameters.
+      tags:
+      - Instruments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GovernmentLookupRequest'
+            examples:
+              GovernmentlookuprequestRequestExample:
+                summary: Default governmentLookupRequest request
+                x-microcks-default: true
+                value:
+                  query: example_value
+                  partialMatch: true
+                  maxResults: 10
+      responses:
+        '200':
+          description: Government security lookup response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GovernmentLookupResponse'
+              examples:
+                Governmentlookuprequest200Example:
+                  summary: Default governmentLookupRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - results:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    InstrumentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+          example: []
+    InstrumentListRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Search string for instrument lookup
+          example: example_value
+        maxResults:
+          type: integer
+          description: Maximum number of results to return
+          default: 10
+          example: 10
+        yellowKeyFilter:
+          type: string
+          description: Filter by Bloomberg yellow key
+          enum:
+          - YK_FILTER_NONE
+          - YK_FILTER_CMDT
+          - YK_FILTER_EQUITY
+          - YK_FILTER_MUNI
+          - YK_FILTER_PRFD
+          - YK_FILTER_CLNT
+          - YK_FILTER_MMKT
+          - YK_FILTER_GOVT
+          - YK_FILTER_CORP
+          - YK_FILTER_INDX
+          - YK_FILTER_CURR
+          - YK_FILTER_MTGE
+          example: YK_FILTER_NONE
+        languageOverride:
+          type: string
+          description: Two-letter language code
+          example: example_value
+    CurveListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    curve:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+                    currency:
+                      type: string
+                    type:
+                      type: string
+                    subtype:
+                      type: string
+          example: []
+    CurveListRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Search string for curve lookup
+          example: example_value
+        maxResults:
+          type: integer
+          default: 10
+          example: 10
+        countryCode:
+          type: string
+          description: Two-letter country code filter
+          example: example_value
+        currencyCode:
+          type: string
+          description: Three-letter currency code filter
+          example: example_value
+        type:
+          type: string
+          enum:
+          - BOND
+          - CDS
+          - ISDA
+          description: Curve type filter
+          example: BOND
+        subtype:
+          type: string
+          enum:
+          - SOVEREIGN
+          - CORPORATE
+          example: SOVEREIGN
+    GovernmentLookupResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    GovernmentLookupRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Country or ticker search string
+          example: example_value
+        partialMatch:
+          type: boolean
+          default: false
+          example: true
+        maxResults:
+          type: integer
+          default: 10
+          example: 10
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

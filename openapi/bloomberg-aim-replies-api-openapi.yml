@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Replies API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Replies
+  description: Access request reply data
+paths:
+  /catalogs/{catalogId}/distributions/{distributionId}/replies:
+    get:
+      operationId: listReplies
+      summary: List Replies for a Distribution
+      description: Returns the individual reply files available for download within a distribution.
+      tags:
+      - Replies
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
+      responses:
+        '200':
+          description: A list of replies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyCollection'
+              examples:
+                Listreplies200Example:
+                  summary: Default listReplies 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      distributionId: '500123'
+                      contentType: example_value
+                      size: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/distributions/{distributionId}/replies/{replyId}:
+    get:
+      operationId: getReply
+      summary: Download a Reply
+      description: Downloads the data content of a specific reply within a distribution. The response format depends on the request configuration (JSON, CSV, etc.).
+      tags:
+      - Replies
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/distributionId'
+      - $ref: '#/components/parameters/replyId'
+      responses:
+        '200':
+          description: Reply data content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyData'
+              examples:
+                Getreply200Example:
+                  summary: Default getReply 200 response
+                  x-microcks-default: true
+                  value:
+                    fields:
+                    - example_value
+                    data:
+                    - {}
+            text/csv:
+              schema:
+                type: string
+              examples:
+                Getreply200Example:
+                  summary: Default getReply 200 response
+                  x-microcks-default: true
+                  value: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      description: Unique identifier for the reply
+      schema:
+        type: string
+  schemas:
+    Reply:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Reply
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        distributionId:
+          type: string
+          example: '500123'
+        contentType:
+          type: string
+          example: example_value
+        size:
+          type: integer
+          description: Size in bytes
+          example: 10
+    ReplyCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reply'
+          example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    ReplyData:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            type: string
+          example: []
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

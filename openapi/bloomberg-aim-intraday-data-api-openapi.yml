@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Intraday Data API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Intraday Data
+  description: Request intraday tick or bar data
+paths:
+  /request/blp/refdata/IntradayTickRequest:
+    post:
+      operationId: intradayTickRequest
+      summary: Request Intraday Tick Data
+      description: Retrieves intraday tick-level data for a single security over a specified time range.
+      tags:
+      - Intraday Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntradayTickRequest'
+            examples:
+              IntradaytickrequestRequestExample:
+                summary: Default intradayTickRequest request
+                x-microcks-default: true
+                value:
+                  security: example_value
+                  eventTypes:
+                  - TRADE
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  endDateTime: '2026-01-15T10:30:00Z'
+                  includeConditionCodes: true
+                  includeExchangeCodes: true
+                  includeBrokerCodes: true
+                  includeRPSCodes: true
+      responses:
+        '200':
+          description: Intraday tick data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntradayTickResponse'
+              examples:
+                Intradaytickrequest200Example:
+                  summary: Default intradayTickRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - tickData:
+                        tickData: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/refdata/IntradayBarRequest:
+    post:
+      operationId: intradayBarRequest
+      summary: Request Intraday Bar Data
+      description: Retrieves intraday OHLCV bar data for a single security over a specified time range and interval.
+      tags:
+      - Intraday Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntradayBarRequest'
+            examples:
+              IntradaybarrequestRequestExample:
+                summary: Default intradayBarRequest request
+                x-microcks-default: true
+                value:
+                  security: example_value
+                  eventType: TRADE
+                  startDateTime: '2026-01-15T10:30:00Z'
+                  endDateTime: '2026-01-15T10:30:00Z'
+                  interval: 10
+                  gapFillInitialBar: true
+      responses:
+        '200':
+          description: Intraday bar data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntradayBarResponse'
+              examples:
+                Intradaybarrequest200Example:
+                  summary: Default intradayBarRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - barData:
+                        barTickData: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    IntradayBarResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barData:
+                type: object
+                properties:
+                  barTickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        open:
+                          type: number
+                        high:
+                          type: number
+                        low:
+                          type: number
+                        close:
+                          type: number
+                        volume:
+                          type: integer
+                        numEvents:
+                          type: integer
+          example: []
+    IntradayBarRequest:
+      type: object
+      required:
+      - security
+      - eventType
+      - startDateTime
+      - endDateTime
+      - interval
+      properties:
+        security:
+          type: string
+          description: Single security identifier
+          example: example_value
+        eventType:
+          type: string
+          enum:
+          - TRADE
+          - BID
+          - ASK
+          - BEST_BID
+          - BEST_ASK
+          default: TRADE
+          example: TRADE
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        endDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        interval:
+          type: integer
+          description: Bar interval in minutes
+          minimum: 1
+          maximum: 1440
+          example: 10
+        gapFillInitialBar:
+          type: boolean
+          default: false
+          example: true
+    IntradayTickRequest:
+      type: object
+      required:
+      - security
+      - startDateTime
+      - endDateTime
+      properties:
+        security:
+          type: string
+          description: Single security identifier
+          example: example_value
+        eventTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - TRADE
+            - BID
+            - ASK
+            - BID_BEST
+            - ASK_BEST
+            - MID_PRICE
+            - AT_TRADE
+            - BEST_BID
+            - BEST_ASK
+          default:
+          - TRADE
+          example: []
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time range
+          example: '2026-01-15T10:30:00Z'
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time range
+          example: '2026-01-15T10:30:00Z'
+        includeConditionCodes:
+          type: boolean
+          default: false
+          example: true
+        includeExchangeCodes:
+          type: boolean
+          default: false
+          example: true
+        includeBrokerCodes:
+          type: boolean
+          default: false
+          example: true
+        includeRPSCodes:
+          type: boolean
+          default: false
+          example: true
+    IntradayTickResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              tickData:
+                type: object
+                properties:
+                  tickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        type:
+                          type: string
+                        value:
+                          type: number
+                        size:
+                          type: integer
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

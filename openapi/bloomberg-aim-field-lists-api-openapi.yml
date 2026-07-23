@@ -1,0 +1,333 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Field Lists API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Field Lists
+  description: Manage field lists for data requests
+paths:
+  /catalogs/{catalogId}/fields:
+    get:
+      operationId: listCatalogFields
+      summary: List Available Fields in a Catalog
+      description: Returns the fields available for data requests within a catalog. Fields can be filtered by asset class or data category.
+      tags:
+      - Field Lists
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - name: category
+        in: query
+        description: Filter fields by data category
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: A list of available fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldCollection'
+              examples:
+                Listcatalogfields200Example:
+                  summary: Default listCatalogFields 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/fieldLists:
+    get:
+      operationId: listFieldLists
+      summary: List Field Lists
+      description: Returns all field lists defined in the catalog.
+      tags:
+      - Field Lists
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of field lists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldListCollection'
+              examples:
+                Listfieldlists200Example:
+                  summary: Default listFieldLists 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      contains: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFieldList
+      summary: Create a Field List
+      description: Creates a new field list specifying which data fields to include in a data request.
+      tags:
+      - Field Lists
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FieldListCreate'
+            examples:
+              CreatefieldlistRequestExample:
+                summary: Default createFieldList request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  contains:
+                  - cleanName: example_value
+      responses:
+        '201':
+          description: Field list created
+          headers:
+            Location:
+              description: URI of the created field list
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldList'
+              examples:
+                Createfieldlist201Example:
+                  summary: Default createFieldList 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/fieldLists/{fieldListId}:
+    get:
+      operationId: getFieldList
+      summary: Get Field List Details
+      description: Returns details of a specific field list.
+      tags:
+      - Field Lists
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/fieldListId'
+      responses:
+        '200':
+          description: Field list details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldList'
+              examples:
+                Getfieldlist200Example:
+                  summary: Default getFieldList 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    contains:
+                    - identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      dataType: example_value
+                      category: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    FieldListCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - title
+      - contains
+      properties:
+        '@type':
+          type: string
+          const: FieldList
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        contains:
+          type: array
+          items:
+            type: object
+            properties:
+              cleanName:
+                type: string
+                description: Bloomberg field mnemonic
+          example: []
+    FieldListCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldList'
+          example: []
+    Field:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Bloomberg field mnemonic (e.g., PX_LAST)
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        dataType:
+          type: string
+          description: Data type of the field value
+          example: example_value
+        category:
+          type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    FieldList:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: FieldList
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+    FieldCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+  parameters:
+    fieldListId:
+      name: fieldListId
+      in: path
+      required: true
+      description: Unique identifier for the field list
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

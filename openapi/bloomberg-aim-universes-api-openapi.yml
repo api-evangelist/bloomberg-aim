@@ -1,0 +1,298 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Universes API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Universes
+  description: Manage security universes for data requests
+paths:
+  /catalogs/{catalogId}/universes:
+    get:
+      operationId: listUniverses
+      summary: List Universes
+      description: Returns the security universes defined in the catalog.
+      tags:
+      - Universes
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of universes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UniverseCollection'
+              examples:
+                Listuniverses200Example:
+                  summary: Default listUniverses 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      contains: {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createUniverse
+      summary: Create a Universe
+      description: Creates a new security universe containing a set of identifiers (tickers, FIGIs, ISINs, CUSIPs, SEDOLs, etc.) for data requests.
+      tags:
+      - Universes
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UniverseCreate'
+            examples:
+              CreateuniverseRequestExample:
+                summary: Default createUniverse request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  description: A sample description.
+                  contains:
+                  - '@type': example_value
+                    identifierType: TICKER
+                    identifierValue: example_value
+      responses:
+        '201':
+          description: Universe created
+          headers:
+            Location:
+              description: URI of the created universe
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Universe'
+              examples:
+                Createuniverse201Example:
+                  summary: Default createUniverse 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    contains:
+                    - '@type': example_value
+                      identifierType: TICKER
+                      identifierValue: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/universes/{universeId}:
+    get:
+      operationId: getUniverse
+      summary: Get Universe Details
+      description: Returns details of a specific security universe.
+      tags:
+      - Universes
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/universeId'
+      responses:
+        '200':
+          description: Universe details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Universe'
+              examples:
+                Getuniverse200Example:
+                  summary: Default getUniverse 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    contains:
+                    - '@type': example_value
+                      identifierType: TICKER
+                      identifierValue: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UniverseCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Universe'
+          example: []
+    Universe:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Universe
+          example: example_value
+        identifier:
+          type: string
+          description: Unique universe identifier
+          example: example_value
+        title:
+          type: string
+          description: Human-readable universe title
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityIdentifier'
+          example: []
+    SecurityIdentifier:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Identifier
+          example: example_value
+        identifierType:
+          type: string
+          description: Type of identifier
+          enum:
+          - TICKER
+          - BB_GLOBAL
+          - ISIN
+          - CUSIP
+          - SEDOL
+          - BB_UNIQUE
+          - FIGI
+          example: TICKER
+        identifierValue:
+          type: string
+          description: The identifier value
+          example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    UniverseCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - title
+      - contains
+      properties:
+        '@type':
+          type: string
+          const: Universe
+          example: example_value
+        identifier:
+          type: string
+          description: Unique universe identifier
+          example: example_value
+        title:
+          type: string
+          description: Human-readable universe title
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityIdentifier'
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    universeId:
+      name: universeId
+      in: path
+      required: true
+      description: Unique identifier for the universe
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

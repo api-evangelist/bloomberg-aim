@@ -1,0 +1,285 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Triggers API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Triggers
+  description: Configure scheduling triggers for data delivery
+paths:
+  /catalogs/{catalogId}/triggers:
+    get:
+      operationId: listTriggers
+      summary: List Triggers
+      description: Returns the scheduling triggers available in the catalog.
+      tags:
+      - Triggers
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      responses:
+        '200':
+          description: A list of triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerCollection'
+              examples:
+                Listtriggers200Example:
+                  summary: Default listTriggers 200 response
+                  x-microcks-default: true
+                  value:
+                    contains:
+                    - '@type': example_value
+                      identifier: example_value
+                      title: Example Title
+                      description: A sample description.
+                      frequency: daily
+                      snapshotTime: example_value
+                      timezone: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTrigger
+      summary: Create a Trigger
+      description: Creates a scheduling trigger to control when data requests are executed and delivered.
+      tags:
+      - Triggers
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerCreate'
+            examples:
+              CreatetriggerRequestExample:
+                summary: Default createTrigger request
+                x-microcks-default: true
+                value:
+                  '@type': example_value
+                  identifier: example_value
+                  title: Example Title
+                  frequency: daily
+                  snapshotTime: example_value
+                  timezone: example_value
+      responses:
+        '201':
+          description: Trigger created
+          headers:
+            Location:
+              description: URI of the created trigger
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+              examples:
+                Createtrigger201Example:
+                  summary: Default createTrigger 201 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    frequency: daily
+                    snapshotTime: example_value
+                    timezone: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /catalogs/{catalogId}/triggers/{triggerId}:
+    get:
+      operationId: getTrigger
+      summary: Get Trigger Details
+      description: Returns details of a specific trigger.
+      tags:
+      - Triggers
+      parameters:
+      - $ref: '#/components/parameters/catalogId'
+      - $ref: '#/components/parameters/triggerId'
+      responses:
+        '200':
+          description: Trigger details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+              examples:
+                Gettrigger200Example:
+                  summary: Default getTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    '@type': example_value
+                    identifier: example_value
+                    title: Example Title
+                    description: A sample description.
+                    frequency: daily
+                    snapshotTime: example_value
+                    timezone: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Trigger:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        frequency:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
+        snapshotTime:
+          type: string
+          description: Time of day for the snapshot (HH:MM)
+          example: example_value
+        timezone:
+          type: string
+          description: Timezone for the trigger schedule
+          example: example_value
+    TriggerCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    TriggerCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - frequency
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        frequency:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
+        snapshotTime:
+          type: string
+          example: example_value
+        timezone:
+          type: string
+          example: example_value
+  parameters:
+    triggerId:
+      name: triggerId
+      in: path
+      required: true
+      description: Unique identifier for the trigger
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

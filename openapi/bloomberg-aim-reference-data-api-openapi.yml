@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Reference Data API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Reference Data
+  description: Request reference (static) data for securities
+paths:
+  /request:
+    post:
+      operationId: sendRequest
+      summary: Send a Blpapi Request
+      description: Sends a generic BLPAPI request. The service and operation are specified in the request body. This is the primary endpoint for all request-response operations.
+      tags:
+      - Reference Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlpapiRequest'
+            examples:
+              SendrequestRequestExample:
+                summary: Default sendRequest request
+                x-microcks-default: true
+                value:
+                  serviceUri: example_value
+                  operationName: example_value
+                  requestObject: example_value
+      responses:
+        '200':
+          description: Successful response with requested data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlpapiResponse'
+              examples:
+                Sendrequest200Example:
+                  summary: Default sendRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    statusCode: 10
+                    message: example_value
+                    data:
+                    - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/refdata/ReferenceDataRequest:
+    post:
+      operationId: referenceDataRequest
+      summary: Request Reference Data
+      description: Retrieves current reference data for a set of securities and fields. Returns the latest available values for requested fields.
+      tags:
+      - Reference Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceDataRequest'
+            examples:
+              ReferencedatarequestRequestExample:
+                summary: Default referenceDataRequest request
+                x-microcks-default: true
+                value:
+                  securities:
+                  - example_value
+                  fields:
+                  - example_value
+                  overrides:
+                  - fieldId: '500123'
+                    value: example_value
+                  returnFormattedValue: true
+                  useUTCTime: true
+      responses:
+        '200':
+          description: Reference data response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceDataResponse'
+              examples:
+                Referencedatarequest200Example:
+                  summary: Default referenceDataRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - securityData:
+                      - {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    BlpapiRequest:
+      type: object
+      required:
+      - serviceUri
+      - operationName
+      - requestObject
+      properties:
+        serviceUri:
+          type: string
+          description: BLPAPI service URI (e.g., //blp/refdata)
+          examples:
+          - //blp/refdata
+          - //blp/instruments
+          - //blp/mktdata
+        operationName:
+          type: string
+          description: Name of the BLPAPI operation
+          examples:
+          - ReferenceDataRequest
+          - HistoricalDataRequest
+        requestObject:
+          type: object
+          description: The operation-specific request payload
+          additionalProperties: true
+          example: example_value
+    BlpapiResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: HTTP status code
+          example: 10
+        message:
+          type: string
+          example: example_value
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          example: []
+    ReferenceDataRequest:
+      type: object
+      required:
+      - securities
+      - fields
+      properties:
+        securities:
+          type: array
+          items:
+            type: string
+          description: List of security identifiers
+          examples:
+          - - IBM US Equity
+            - AAPL US Equity
+        fields:
+          type: array
+          items:
+            type: string
+          description: List of Bloomberg field mnemonics
+          examples:
+          - - PX_LAST
+            - NAME
+            - MARKET_CAP
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Override'
+          example: []
+        returnFormattedValue:
+          type: boolean
+          default: false
+          example: true
+        useUTCTime:
+          type: boolean
+          default: false
+          example: true
+    ReferenceDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    fieldData:
+                      type: object
+                      additionalProperties: true
+                    fieldExceptions:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldException'
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
+    FieldException:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          example: '500123'
+        errorInfo:
+          type: object
+          properties:
+            source:
+              type: string
+            code:
+              type: integer
+            category:
+              type: string
+            message:
+              type: string
+            subcategory:
+              type: string
+          example: example_value
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data

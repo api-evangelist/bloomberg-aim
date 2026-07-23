@@ -1,0 +1,624 @@
+openapi: 3.1.0
+info:
+  title: Bloomberg Data License API (HAPI) Broker Strategies Orders API
+  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  version: 1.0.0
+  contact:
+    name: Bloomberg Developer Support
+    url: https://developer.bloomberg.com/
+  license:
+    name: Proprietary
+    url: https://www.bloomberg.com/notices/tos/
+  termsOfService: https://www.bloomberg.com/notices/tos/
+servers:
+- url: https://api.bloomberg.com/eap
+  description: Bloomberg Enterprise Access Point (Production)
+security:
+- bearerAuth: []
+- oauth2: []
+tags:
+- name: Orders
+  description: Create, modify, and manage orders
+paths:
+  /request/blp/emapisvc/CreateOrder:
+    post:
+      operationId: createOrder
+      summary: Create a New Order
+      description: Creates a new order in the EMSX blotter. Orders can be created for equities, futures, and options with various order types and time-in-force parameters.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            examples:
+              CreateorderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_TICKER: example_value
+                  EMSX_AMOUNT: 10
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_SIDE: BUY
+                  EMSX_TIF: DAY
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_ACCOUNT: example_value
+                  EMSX_NOTES: example_value
+                  EMSX_HAND_INSTRUCTION: ANY
+                  EMSX_BASKET_NAME: example_value
+                  EMSX_CFD_FLAG: Y
+                  EMSX_CUSTOM_NOTE1: example_value
+                  EMSX_CUSTOM_NOTE2: example_value
+                  EMSX_CUSTOM_NOTE3: example_value
+                  EMSX_CUSTOM_NOTE4: example_value
+                  EMSX_CUSTOM_NOTE5: example_value
+                  EMSX_GTD_DATE: example_value
+                  EMSX_INVESTOR_ID: '500123'
+                  EMSX_LOCATE_BROKER: example_value
+                  EMSX_LOCATE_ID: '500123'
+                  EMSX_PORTFOLIO: example_value
+      responses:
+        '200':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderResponse'
+              examples:
+                Createorder200Example:
+                  summary: Default createOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    EMSX_SEQUENCE: 10
+                    MESSAGE: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/CreateOrderAndRouteEx:
+    post:
+      operationId: createOrderAndRoute
+      summary: Create an Order and Route Simultaneously
+      description: Creates a new order and immediately routes it to a specified broker in a single operation.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderAndRouteRequest'
+            examples:
+              CreateorderandrouteRequestExample:
+                summary: Default createOrderAndRoute request
+                x-microcks-default: true
+                value: {}
+      responses:
+        '200':
+          description: Order created and routed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderAndRouteResponse'
+              examples:
+                Createorderandroute200Example:
+                  summary: Default createOrderAndRoute 200 response
+                  x-microcks-default: true
+                  value:
+                    EMSX_SEQUENCE: 10
+                    EMSX_ROUTE_ID: '500123'
+                    MESSAGE: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/ModifyOrderEx:
+    post:
+      operationId: modifyOrder
+      summary: Modify an Existing Order
+      description: Modifies parameters of an existing order such as quantity, limit price, or time-in-force.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyOrderRequest'
+            examples:
+              ModifyorderRequestExample:
+                summary: Default modifyOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+                  EMSX_AMOUNT: 10
+                  EMSX_ORDER_TYPE: MKT
+                  EMSX_LIMIT_PRICE: 42.5
+                  EMSX_STOP_PRICE: 42.5
+                  EMSX_TIF: DAY
+                  EMSX_NOTES: example_value
+      responses:
+        '200':
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Modifyorder200Example:
+                  summary: Default modifyOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/DeleteOrder:
+    post:
+      operationId: deleteOrder
+      summary: Delete an Order
+      description: Deletes (cancels) an order from the EMSX blotter. Only orders that have not been fully filled can be deleted.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrderRequest'
+            examples:
+              DeleteorderRequestExample:
+                summary: Default deleteOrder request
+                x-microcks-default: true
+                value:
+                  EMSX_SEQUENCE: 10
+      responses:
+        '200':
+          description: Order deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+              examples:
+                Deleteorder200Example:
+                  summary: Default deleteOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    STATUS: 10
+                    MESSAGE: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /request/blp/emapisvc/GetOrders:
+    post:
+      operationId: getOrders
+      summary: Get Orders
+      description: Retrieves the current list of orders in the EMSX blotter, optionally filtered by status or other parameters.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOrdersRequest'
+            examples:
+              GetordersRequestExample:
+                summary: Default getOrders request
+                x-microcks-default: true
+                value:
+                  scope: PRIVATE
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersResponse'
+              examples:
+                Getorders200Example:
+                  summary: Default getOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    orders:
+                    - EMSX_SEQUENCE: 10
+                      EMSX_TICKER: example_value
+                      EMSX_SIDE: BUY
+                      EMSX_AMOUNT: 10
+                      EMSX_FILLED: 10
+                      EMSX_WORKING: 10
+                      EMSX_ORDER_TYPE: example_value
+                      EMSX_LIMIT_PRICE: 42.5
+                      EMSX_STOP_PRICE: 42.5
+                      EMSX_TIF: example_value
+                      EMSX_STATUS: ASSIGN
+                      EMSX_AVG_PRICE: 42.5
+                      EMSX_ACCOUNT: example_value
+                      EMSX_TRADER: example_value
+                      EMSX_NOTES: example_value
+                      EMSX_BASKET_NAME: example_value
+                      EMSX_DATE: example_value
+                      EMSX_TIME_STAMP: example_value
+                      EMSX_PORTFOLIO: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    GetOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+          example: []
+    CreateOrderAndRouteRequest:
+      allOf:
+      - $ref: '#/components/schemas/CreateOrderRequest'
+      - type: object
+        required:
+        - EMSX_BROKER
+        properties:
+          EMSX_BROKER:
+            type: string
+            description: Broker code for routing
+          EMSX_STRATEGY:
+            type: string
+            description: Broker execution strategy name
+          EMSX_STRATEGY_PARAMS:
+            type: object
+            description: Strategy-specific parameters
+            additionalProperties: true
+          EMSX_EXEC_INSTRUCTIONS:
+            type: string
+            description: Execution instructions for the broker
+    CreateOrderResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number assigned by EMSX
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    CreateOrderRequest:
+      type: object
+      required:
+      - EMSX_TICKER
+      - EMSX_AMOUNT
+      - EMSX_ORDER_TYPE
+      - EMSX_SIDE
+      - EMSX_TIF
+      properties:
+        EMSX_TICKER:
+          type: string
+          description: Bloomberg security identifier
+          examples:
+          - IBM US Equity
+        EMSX_AMOUNT:
+          type: integer
+          description: Order quantity (number of shares/contracts)
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          description: Order type
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_SIDE:
+          type: string
+          description: Buy or sell
+          enum:
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
+        EMSX_TIF:
+          type: string
+          description: Time in force
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_LIMIT_PRICE:
+          type: number
+          description: Limit price (required for LMT and STP LMT orders)
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          description: Stop price (required for STP and STP LMT orders)
+          example: 42.5
+        EMSX_ACCOUNT:
+          type: string
+          description: Trading account identifier
+          example: example_value
+        EMSX_NOTES:
+          type: string
+          description: Free-text notes attached to the order
+          example: example_value
+        EMSX_HAND_INSTRUCTION:
+          type: string
+          description: Handling instruction
+          enum:
+          - ANY
+          - DIR
+          - FCM
+          example: ANY
+        EMSX_BASKET_NAME:
+          type: string
+          description: Name of the basket this order belongs to
+          example: example_value
+        EMSX_CFD_FLAG:
+          type: string
+          description: Contract for difference flag
+          enum:
+          - Y
+          - N
+          example: Y
+        EMSX_CUSTOM_NOTE1:
+          type: string
+          example: example_value
+        EMSX_CUSTOM_NOTE2:
+          type: string
+          example: example_value
+        EMSX_CUSTOM_NOTE3:
+          type: string
+          example: example_value
+        EMSX_CUSTOM_NOTE4:
+          type: string
+          example: example_value
+        EMSX_CUSTOM_NOTE5:
+          type: string
+          example: example_value
+        EMSX_GTD_DATE:
+          type: string
+          description: Good-till-date in YYYYMMDD format
+          example: example_value
+        EMSX_INVESTOR_ID:
+          type: string
+          description: Investor identifier for allocation
+          example: '500123'
+        EMSX_LOCATE_BROKER:
+          type: string
+          description: Locate broker for short sells
+          example: example_value
+        EMSX_LOCATE_ID:
+          type: string
+          description: Locate ID for short sells
+          example: '500123'
+        EMSX_PORTFOLIO:
+          type: string
+          description: Portfolio name for the order
+          example: example_value
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        MESSAGE:
+          type: string
+          example: example_value
+    Order:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_TICKER:
+          type: string
+          description: Security identifier
+          example: example_value
+        EMSX_SIDE:
+          type: string
+          enum:
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
+        EMSX_AMOUNT:
+          type: integer
+          description: Total order quantity
+          example: 10
+        EMSX_FILLED:
+          type: integer
+          description: Quantity filled so far
+          example: 10
+        EMSX_WORKING:
+          type: integer
+          description: Quantity currently working (routed but not filled)
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          example: example_value
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          example: example_value
+        EMSX_STATUS:
+          type: string
+          description: Current order status
+          enum:
+          - ASSIGN
+          - CANCEL
+          - CONNECTED
+          - CXL_PND
+          - DONE
+          - EXPIRED
+          - FILL
+          - MOD_PND
+          - NEW
+          - PART_FILL
+          - RJCT
+          - SENT
+          - WORKING
+          example: ASSIGN
+        EMSX_AVG_PRICE:
+          type: number
+          description: Average fill price
+          example: 42.5
+        EMSX_ACCOUNT:
+          type: string
+          example: example_value
+        EMSX_TRADER:
+          type: string
+          example: example_value
+        EMSX_NOTES:
+          type: string
+          example: example_value
+        EMSX_BASKET_NAME:
+          type: string
+          example: example_value
+        EMSX_DATE:
+          type: string
+          description: Order creation date (YYYYMMDD)
+          example: example_value
+        EMSX_TIME_STAMP:
+          type: string
+          description: Last update timestamp
+          example: example_value
+        EMSX_PORTFOLIO:
+          type: string
+          example: example_value
+    DeleteOrderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to delete
+          example: 10
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    GetOrdersRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          description: Scope of orders to retrieve
+          enum:
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
+    ModifyOrderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to modify
+          example: 10
+        EMSX_AMOUNT:
+          type: integer
+          description: New order quantity
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_NOTES:
+          type: string
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
+          scopes:
+            eap: Access to Enterprise Access Point data
+            eap.catalogs.read: Read catalog data
+            eap.catalogs.write: Write catalog data
