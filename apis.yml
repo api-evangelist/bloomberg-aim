@@ -6,7 +6,20 @@ description: >-
   APIs including BLPAPI, Server API, and the Hypermedia API for programmatic access to market data, analytics, and
   enterprise services.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomberg-aim.png
 tags:
   - Financial Data
   - Market Data
@@ -18,77 +31,363 @@ created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: bloomberg-aim:bloomberg-data-license-api
-    name: Bloomberg Data License API
-    description: >-
-      Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and
-      alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI).
-    humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
-    baseURL: https://api.bloomberg.com/eap
-    tags:
-      - Financial Data
-      - Market Data
-      - Pricing Data
-      - Reference Data
-    properties:
-      - type: Documentation
-        url: https://www.bloomberg.com/professional/support/api-library/
-      - type: Authentication
-        url: https://console.bloomberg.com/about/82
-      - type: OpenAPI
-        url: openapi/bloomberg-data-license-api.yml
-  - aid: bloomberg-aim:bloomberg-server-api
-    name: Bloomberg Server API (SAPI)
-    description: >-
-      Server API delivers real-time market data, historical data, premium reference data, and calculation tools from the
-      Bloomberg Terminal into front-office applications.
-    humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
-    tags:
-      - Financial Analytics
-      - Market Data
-      - Real-Time Data
-      - Server API
-    properties:
-      - type: Documentation
-        url: https://bloomberg.github.io/blpapi-docs/
-  - aid: bloomberg-aim:bloomberg-emsx-api
-    name: Bloomberg EMSX API
-    description: >-
-      The Execution Management System API allows developers to manage and automate trading for equities, futures, and
-      options.
-    humanURL: https://www.bloomberg.com/professional/products/trading/execution-management-system/
-    baseURL: https://localhost:3000
-    tags:
-      - Equities
-      - Execution Management
-      - Order Management
-      - Trading
-    properties:
-      - type: Documentation
-        url: https://emsx-api-doc.readthedocs.io/
-      - type: OpenAPI
-        url: openapi/bloomberg-emsx-api.yml
-  - aid: bloomberg-aim:bloomberg-http-api
-    name: Bloomberg HTTP API
-    description: >-
-      Makes the Bloomberg Open API available via HTTP and WebSockets, allowing clients to access reference and
-      historical request-response data as well as subscribe to live streaming market data.
-    humanURL: https://github.com/bloomberg/blpapi-http
-    baseURL: https://localhost:3000
-    tags:
-      - Historical Data
-      - HTTP API
-      - Market Data
-      - Reference Data
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://github.com/bloomberg/blpapi-http
-      - type: OpenAPI
-        url: openapi/bloomberg-http-api.yml
-      - type: GitHubRepository
-        url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-server-api
+  name: Bloomberg Server API (SAPI)
+  description: >-
+    Server API delivers real-time market data, historical data, premium reference data, and calculation
+    tools from the Bloomberg Terminal into front-office applications.
+  humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
+  tags:
+  - Financial Analytics
+  - Market Data
+  - Real-Time Data
+  - Server API
+  properties:
+  - type: Documentation
+    url: https://bloomberg.github.io/blpapi-docs/
+- aid: bloomberg-aim:bloomberg-aim-broker-strategies-api
+  name: Bloomberg AIM Broker Strategies API
+  description: Query available broker strategies and parameters
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Broker Strategies
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-broker-strategies-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-catalogs-api
+  name: Bloomberg AIM Catalogs API
+  description: Browse available data catalogs and their contents
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-catalogs-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-distributions-api
+  name: Bloomberg AIM Distributions API
+  description: Access completed data distributions and downloads
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Distributions
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-distributions-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-field-lists-api
+  name: Bloomberg AIM Field Lists API
+  description: Manage field lists for data requests
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Field Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-field-lists-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-field-search-api
+  name: Bloomberg AIM Field Search API
+  description: Search and discover available data fields
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Field Search
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-field-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-fills-api
+  name: Bloomberg AIM Fills API
+  description: Track order and route fills
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Fills
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-fills-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-historical-data-api
+  name: Bloomberg AIM Historical Data API
+  description: Request historical end-of-day or intraday data
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Historical Data
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-historical-data-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-instruments-api
+  name: Bloomberg AIM Instruments API
+  description: Search for securities and instruments
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Instruments
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-instruments-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-intraday-data-api
+  name: Bloomberg AIM Intraday Data API
+  description: Request intraday tick or bar data
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Intraday Data
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-intraday-data-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-orders-api
+  name: Bloomberg AIM Orders API
+  description: Create, modify, and manage orders
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-orders-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-reference-data-api
+  name: Bloomberg AIM Reference Data API
+  description: Request reference (static) data for securities
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-replies-api
+  name: Bloomberg AIM Replies API
+  description: Access request reply data
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Replies
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-replies-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-requests-api
+  name: Bloomberg AIM Requests API
+  description: Create and manage data requests
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-requests-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-routes-api
+  name: Bloomberg AIM Routes API
+  description: Create, modify, and manage routes to brokers
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-routes-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-teams-api
+  name: Bloomberg AIM Teams API
+  description: Manage EMSX teams and assignments
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-teams-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-triggers-api
+  name: Bloomberg AIM Triggers API
+  description: Configure scheduling triggers for data delivery
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-triggers-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
+- aid: bloomberg-aim:bloomberg-aim-universes-api
+  name: Bloomberg AIM Universes API
+  description: Manage security universes for data requests
+  humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Universes
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomberg-aim-universes-api-openapi.yml
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Authentication
+    url: https://console.bloomberg.com/about/82
+  - type: Documentation
+    url: https://emsx-api-doc.readthedocs.io/
+  - type: Documentation
+    url: https://github.com/bloomberg/blpapi-http
+  - type: GitHubRepository
+    url: https://github.com/bloomberg/blpapi-http
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/bloomberg-aim/overview
   - type: AgenticAccess
     url: agentic-access/bloomberg-aim-agentic-access.yml
   - type: VulnerabilityDisclosure
