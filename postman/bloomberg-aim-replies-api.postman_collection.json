@@ -1,0 +1,471 @@
+{
+  "info": {
+    "_postman_id": "1b1078c0-efd2-429c-adbd-8fd680bbde87",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Replies API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:21.000Z",
+    "updatedAt": "2026-07-28T01:14:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1b1078c0-efd2-429c-adbd-8fd680bbde87"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalogId}",
+          "item": [
+            {
+              "name": "distributions",
+              "item": [
+                {
+                  "name": "{distributionId}",
+                  "item": [
+                    {
+                      "name": "replies",
+                      "item": [
+                        {
+                          "name": "{replyId}",
+                          "item": [
+                            {
+                              "name": "Download a Reply",
+                              "id": "b71972dd-e3f2-4820-a2b6-2a23f86a0499",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalogId",
+                                    "distributions",
+                                    ":distributionId",
+                                    "replies",
+                                    ":replyId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b2034441-fcc0-4ced-b6ac-dc0eb60ccc35",
+                                      "key": "catalogId",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier for the catalog"
+                                    },
+                                    {
+                                      "id": "ea0181cd-408a-4ef3-98a5-31a7a77ad7f3",
+                                      "key": "distributionId",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier for the distribution"
+                                    },
+                                    {
+                                      "id": "fa0a6042-ebd9-45ac-9bc1-899c0ec1c0b6",
+                                      "key": "replyId",
+                                      "value": "<string>",
+                                      "description": "(Required) Unique identifier for the reply"
+                                    }
+                                  ]
+                                },
+                                "description": "Downloads the data content of a specific reply within a distribution. The response format depends on the request configuration (JSON, CSV, etc.)."
+                              },
+                              "response": [
+                                {
+                                  "id": "e2b34120-99e1-484f-8fa4-7e91a64d32b4",
+                                  "name": "Reply data content",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalogId",
+                                        "distributions",
+                                        ":distributionId",
+                                        "replies",
+                                        ":replyId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalogId"
+                                        },
+                                        {
+                                          "key": "distributionId"
+                                        },
+                                        {
+                                          "key": "replyId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data\": [\n    {\n      \"ad1\": false,\n      \"aliquip3df\": \"deser\"\n    },\n    {\n      \"et20e\": \"laborum\",\n      \"veniam0ce\": true\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:14:22.000Z",
+                                  "updatedAt": "2026-07-28T01:14:22.000Z",
+                                  "uid": "35240-e2b34120-99e1-484f-8fa4-7e91a64d32b4"
+                                },
+                                {
+                                  "id": "04fe1fcc-d850-4d8b-bfe5-9d800e1ff013",
+                                  "name": "Authentication credentials missing or invalid",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalogId",
+                                        "distributions",
+                                        ":distributionId",
+                                        "replies",
+                                        ":replyId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalogId"
+                                        },
+                                        {
+                                          "key": "distributionId"
+                                        },
+                                        {
+                                          "key": "replyId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:14:22.000Z",
+                                  "updatedAt": "2026-07-28T01:14:22.000Z",
+                                  "uid": "35240-04fe1fcc-d850-4d8b-bfe5-9d800e1ff013"
+                                },
+                                {
+                                  "id": "217e2076-4e06-4d84-92a3-816f6ca6769f",
+                                  "name": "Resource not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "catalogs",
+                                        ":catalogId",
+                                        "distributions",
+                                        ":distributionId",
+                                        "replies",
+                                        ":replyId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "catalogId"
+                                        },
+                                        {
+                                          "key": "distributionId"
+                                        },
+                                        {
+                                          "key": "replyId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T01:14:22.000Z",
+                                  "updatedAt": "2026-07-28T01:14:22.000Z",
+                                  "uid": "35240-217e2076-4e06-4d84-92a3-816f6ca6769f"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:14:22.000Z",
+                              "updatedAt": "2026-07-28T01:14:22.000Z",
+                              "uid": "35240-b71972dd-e3f2-4820-a2b6-2a23f86a0499"
+                            }
+                          ],
+                          "id": "06ab0b88-16b6-47ee-9144-c979aca69be2",
+                          "createdAt": "2026-07-28T01:14:22.000Z",
+                          "updatedAt": "2026-07-28T01:14:22.000Z",
+                          "uid": "35240-06ab0b88-16b6-47ee-9144-c979aca69be2"
+                        },
+                        {
+                          "name": "List Replies for a Distribution",
+                          "id": "4c32c512-8c1c-4c56-86a1-40cd7dad19cc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "distributions",
+                                ":distributionId",
+                                "replies"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b7f5394b-c23a-4b33-8de8-e68d891ced30",
+                                  "key": "catalogId",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the catalog"
+                                },
+                                {
+                                  "id": "90c3f9f0-3dd4-4c52-bc6c-f06bd5c5a376",
+                                  "key": "distributionId",
+                                  "value": "<string>",
+                                  "description": "(Required) Unique identifier for the distribution"
+                                }
+                              ]
+                            },
+                            "description": "Returns the individual reply files available for download within a distribution."
+                          },
+                          "response": [
+                            {
+                              "id": "e9caaad5-f001-44ad-8609-f88743fa9ef1",
+                              "name": "A list of replies",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalogId",
+                                    "distributions",
+                                    ":distributionId",
+                                    "replies"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalogId"
+                                    },
+                                    {
+                                      "key": "distributionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"contains\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"distributionId\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"size\": \"<integer>\"\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"distributionId\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"size\": \"<integer>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:14:22.000Z",
+                              "updatedAt": "2026-07-28T01:14:22.000Z",
+                              "uid": "35240-e9caaad5-f001-44ad-8609-f88743fa9ef1"
+                            },
+                            {
+                              "id": "916d9683-6612-49ed-a862-91e87eb7e3ae",
+                              "name": "Authentication credentials missing or invalid",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId/replies",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "catalogs",
+                                    ":catalogId",
+                                    "distributions",
+                                    ":distributionId",
+                                    "replies"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "catalogId"
+                                    },
+                                    {
+                                      "key": "distributionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:14:22.000Z",
+                              "updatedAt": "2026-07-28T01:14:22.000Z",
+                              "uid": "35240-916d9683-6612-49ed-a862-91e87eb7e3ae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:14:22.000Z",
+                          "updatedAt": "2026-07-28T01:14:22.000Z",
+                          "uid": "35240-4c32c512-8c1c-4c56-86a1-40cd7dad19cc"
+                        }
+                      ],
+                      "id": "36bb919c-71b0-434e-aad7-bdb1796fbfcb",
+                      "createdAt": "2026-07-28T01:14:22.000Z",
+                      "updatedAt": "2026-07-28T01:14:22.000Z",
+                      "uid": "35240-36bb919c-71b0-434e-aad7-bdb1796fbfcb"
+                    }
+                  ],
+                  "id": "7621a1a1-f700-4b21-8262-1c4ca7182a07",
+                  "createdAt": "2026-07-28T01:14:22.000Z",
+                  "updatedAt": "2026-07-28T01:14:22.000Z",
+                  "uid": "35240-7621a1a1-f700-4b21-8262-1c4ca7182a07"
+                }
+              ],
+              "id": "bc6170d2-915e-417a-9b5f-57c04db1ca43",
+              "createdAt": "2026-07-28T01:14:22.000Z",
+              "updatedAt": "2026-07-28T01:14:22.000Z",
+              "uid": "35240-bc6170d2-915e-417a-9b5f-57c04db1ca43"
+            }
+          ],
+          "id": "906918ed-80cf-4cd6-b35e-dc5553d250e3",
+          "createdAt": "2026-07-28T01:14:22.000Z",
+          "updatedAt": "2026-07-28T01:14:22.000Z",
+          "uid": "35240-906918ed-80cf-4cd6-b35e-dc5553d250e3"
+        }
+      ],
+      "id": "5b568daa-c3d9-49ff-bbed-b799aeb692cc",
+      "createdAt": "2026-07-28T01:14:22.000Z",
+      "updatedAt": "2026-07-28T01:14:22.000Z",
+      "uid": "35240-5b568daa-c3d9-49ff-bbed-b799aeb692cc"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

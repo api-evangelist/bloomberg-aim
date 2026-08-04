@@ -1,0 +1,504 @@
+{
+  "info": {
+    "_postman_id": "5646c66f-0e82-42aa-8bba-e6e96b7a3119",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Reference Data API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:20.000Z",
+    "updatedAt": "2026-07-28T01:14:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5646c66f-0e82-42aa-8bba-e6e96b7a3119"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "refdata",
+              "item": [
+                {
+                  "name": "ReferenceDataRequest",
+                  "item": [
+                    {
+                      "name": "Request Reference Data",
+                      "id": "65face06-b441-424e-b8e1-5d1ee70b2395",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"returnFormattedValue\": false,\n  \"useUTCTime\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/ReferenceDataRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "ReferenceDataRequest"
+                          ]
+                        },
+                        "description": "Retrieves current reference data for a set of securities and fields. Returns the latest available values for requested fields."
+                      },
+                      "response": [
+                        {
+                          "id": "f2bc13c9-68c3-488d-a21e-7eff5daff6c3",
+                          "name": "Reference data response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"returnFormattedValue\": false,\n  \"useUTCTime\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/ReferenceDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "ReferenceDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"securityData\": [\n        {\n          \"security\": \"<string>\",\n          \"fieldData\": {\n            \"velit_d\": -99841420\n          },\n          \"fieldExceptions\": [\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            },\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            }\n          ]\n        },\n        {\n          \"security\": \"<string>\",\n          \"fieldData\": {\n            \"eiusmod948\": -25662800,\n            \"elitc\": \"ex occaecat ea\"\n          },\n          \"fieldExceptions\": [\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            },\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"securityData\": [\n        {\n          \"security\": \"<string>\",\n          \"fieldData\": {\n            \"anim_3\": false\n          },\n          \"fieldExceptions\": [\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            },\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            }\n          ]\n        },\n        {\n          \"security\": \"<string>\",\n          \"fieldData\": {\n            \"consectetur45a\": -36408956,\n            \"commodof17\": false,\n            \"mollitc2\": \"officia incididunt dolor\"\n          },\n          \"fieldExceptions\": [\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            },\n            {\n              \"fieldId\": \"<string>\",\n              \"errorInfo\": {\n                \"source\": \"<string>\",\n                \"code\": \"<integer>\",\n                \"category\": \"<string>\",\n                \"message\": \"<string>\",\n                \"subcategory\": \"<string>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:21.000Z",
+                          "updatedAt": "2026-07-28T01:14:21.000Z",
+                          "uid": "35240-f2bc13c9-68c3-488d-a21e-7eff5daff6c3"
+                        },
+                        {
+                          "id": "75f5c5bc-d3ce-4068-98fb-3bd01a988479",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"returnFormattedValue\": false,\n  \"useUTCTime\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/ReferenceDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "ReferenceDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:21.000Z",
+                          "updatedAt": "2026-07-28T01:14:21.000Z",
+                          "uid": "35240-75f5c5bc-d3ce-4068-98fb-3bd01a988479"
+                        },
+                        {
+                          "id": "c63d63ac-ec96-4d06-a7bf-510202eb3feb",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"returnFormattedValue\": false,\n  \"useUTCTime\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/ReferenceDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "ReferenceDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:21.000Z",
+                          "updatedAt": "2026-07-28T01:14:21.000Z",
+                          "uid": "35240-c63d63ac-ec96-4d06-a7bf-510202eb3feb"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:21.000Z",
+                      "updatedAt": "2026-07-28T01:14:21.000Z",
+                      "uid": "35240-65face06-b441-424e-b8e1-5d1ee70b2395"
+                    }
+                  ],
+                  "id": "b79720bc-b9a4-4482-bbd1-fde5315c1d1d",
+                  "createdAt": "2026-07-28T01:14:21.000Z",
+                  "updatedAt": "2026-07-28T01:14:21.000Z",
+                  "uid": "35240-b79720bc-b9a4-4482-bbd1-fde5315c1d1d"
+                }
+              ],
+              "id": "7bdf88ca-1f06-4b87-8d0b-90b8218650b2",
+              "createdAt": "2026-07-28T01:14:21.000Z",
+              "updatedAt": "2026-07-28T01:14:21.000Z",
+              "uid": "35240-7bdf88ca-1f06-4b87-8d0b-90b8218650b2"
+            }
+          ],
+          "id": "335e7c00-3825-47b5-8a37-50b46778d3f6",
+          "createdAt": "2026-07-28T01:14:21.000Z",
+          "updatedAt": "2026-07-28T01:14:21.000Z",
+          "uid": "35240-335e7c00-3825-47b5-8a37-50b46778d3f6"
+        },
+        {
+          "name": "Send a Blpapi Request",
+          "id": "345e68d2-86ad-4766-a72b-7f3d202efdde",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceUri\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"requestObject\": {\n    \"inf\": \"consequat ut\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "request"
+              ]
+            },
+            "description": "Sends a generic BLPAPI request. The service and operation are specified in the request body. This is the primary endpoint for all request-response operations."
+          },
+          "response": [
+            {
+              "id": "fa632c5e-2c04-4c01-bda6-24f903a92f66",
+              "name": "Successful response with requested data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"requestObject\": {\n    \"inf\": \"consequat ut\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "request"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"statusCode\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"data\": [\n    {\n      \"incididunt_be\": true,\n      \"ad_56a\": \"do aliquip incididunt\"\n    },\n    {\n      \"none6a\": \"laborum dolor\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:14:21.000Z",
+              "updatedAt": "2026-07-28T01:14:21.000Z",
+              "uid": "35240-fa632c5e-2c04-4c01-bda6-24f903a92f66"
+            },
+            {
+              "id": "559fd438-94cc-4780-afa3-c2f2e94154bd",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"requestObject\": {\n    \"inf\": \"consequat ut\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "request"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T01:14:21.000Z",
+              "updatedAt": "2026-07-28T01:14:21.000Z",
+              "uid": "35240-559fd438-94cc-4780-afa3-c2f2e94154bd"
+            },
+            {
+              "id": "fcb147eb-84b6-45fb-95a9-c133b468e033",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"serviceUri\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"requestObject\": {\n    \"inf\": \"consequat ut\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "request"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T01:14:21.000Z",
+              "updatedAt": "2026-07-28T01:14:21.000Z",
+              "uid": "35240-fcb147eb-84b6-45fb-95a9-c133b468e033"
+            }
+          ],
+          "createdAt": "2026-07-28T01:14:21.000Z",
+          "updatedAt": "2026-07-28T01:14:21.000Z",
+          "uid": "35240-345e68d2-86ad-4766-a72b-7f3d202efdde"
+        }
+      ],
+      "id": "39b7d02c-7591-4939-97e0-d5679b9b5519",
+      "createdAt": "2026-07-28T01:14:21.000Z",
+      "updatedAt": "2026-07-28T01:14:21.000Z",
+      "uid": "35240-39b7d02c-7591-4939-97e0-d5679b9b5519"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

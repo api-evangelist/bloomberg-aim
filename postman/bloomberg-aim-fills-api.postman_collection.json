@@ -1,0 +1,407 @@
+{
+  "info": {
+    "_postman_id": "8d537736-d9ce-442e-a54f-9c107d251f75",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Fills API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:13:59.000Z",
+    "updatedAt": "2026-07-28T01:13:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8d537736-d9ce-442e-a54f-9c107d251f75"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "emapisvc",
+              "item": [
+                {
+                  "name": "GetFills",
+                  "item": [
+                    {
+                      "name": "Get Fills",
+                      "id": "500ff30a-adc6-4f83-87d2-8579168e6c93",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"scope\": \"TEAM\",\n  \"fromDateTime\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/emapisvc/GetFills",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "emapisvc",
+                            "GetFills"
+                          ]
+                        },
+                        "description": "Retrieves fill information for orders and routes. Fills represent partial or complete executions of routes."
+                      },
+                      "response": [
+                        {
+                          "id": "ed58a4cc-f917-44ec-90f0-d03b9b311f66",
+                          "name": "List of fills",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"scope\": \"TEAM\",\n  \"fromDateTime\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/emapisvc/GetFills",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "emapisvc",
+                                "GetFills"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"fills\": [\n    {\n      \"EMSX_SEQUENCE\": \"<integer>\",\n      \"EMSX_ROUTE_ID\": \"<integer>\",\n      \"EMSX_FILL_ID\": \"<integer>\",\n      \"EMSX_TICKER\": \"<string>\",\n      \"EMSX_SIDE\": \"SHRT\",\n      \"EMSX_FILL_AMOUNT\": \"<integer>\",\n      \"EMSX_FILL_PRICE\": \"<number>\",\n      \"EMSX_FILL_DATE\": \"<string>\",\n      \"EMSX_FILL_TIME\": \"<string>\",\n      \"EMSX_BROKER\": \"<string>\",\n      \"EMSX_EXCHANGE\": \"<string>\"\n    },\n    {\n      \"EMSX_SEQUENCE\": \"<integer>\",\n      \"EMSX_ROUTE_ID\": \"<integer>\",\n      \"EMSX_FILL_ID\": \"<integer>\",\n      \"EMSX_TICKER\": \"<string>\",\n      \"EMSX_SIDE\": \"SELL\",\n      \"EMSX_FILL_AMOUNT\": \"<integer>\",\n      \"EMSX_FILL_PRICE\": \"<number>\",\n      \"EMSX_FILL_DATE\": \"<string>\",\n      \"EMSX_FILL_TIME\": \"<string>\",\n      \"EMSX_BROKER\": \"<string>\",\n      \"EMSX_EXCHANGE\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:13:59.000Z",
+                          "updatedAt": "2026-07-28T01:13:59.000Z",
+                          "uid": "35240-ed58a4cc-f917-44ec-90f0-d03b9b311f66"
+                        },
+                        {
+                          "id": "8acac2b7-9c57-4a1f-8de7-410725f7f22d",
+                          "name": "Invalid request parameters or business rule violation",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"scope\": \"TEAM\",\n  \"fromDateTime\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/emapisvc/GetFills",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "emapisvc",
+                                "GetFills"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"STATUS\": \"<integer>\",\n  \"MESSAGE\": \"<string>\",\n  \"REASON\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:13:59.000Z",
+                          "updatedAt": "2026-07-28T01:13:59.000Z",
+                          "uid": "35240-8acac2b7-9c57-4a1f-8de7-410725f7f22d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:59.000Z",
+                      "updatedAt": "2026-07-28T01:13:59.000Z",
+                      "uid": "35240-500ff30a-adc6-4f83-87d2-8579168e6c93"
+                    }
+                  ],
+                  "id": "43f05a55-5b53-45dd-9fee-72aec8a74d75",
+                  "createdAt": "2026-07-28T01:13:59.000Z",
+                  "updatedAt": "2026-07-28T01:13:59.000Z",
+                  "uid": "35240-43f05a55-5b53-45dd-9fee-72aec8a74d75"
+                },
+                {
+                  "name": "ManualFill",
+                  "item": [
+                    {
+                      "name": "Record a Manual Fill",
+                      "id": "19bdf50d-b346-45b7-9cd6-9f81c91ee868",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\",\n  \"EMSX_ROUTE_ID\": \"<integer>\",\n  \"EMSX_FILL_AMOUNT\": \"<integer>\",\n  \"EMSX_FILL_PRICE\": \"<number>\",\n  \"EMSX_FILL_DATE\": \"<string>\",\n  \"EMSX_FILL_TIME\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/emapisvc/ManualFill",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "emapisvc",
+                            "ManualFill"
+                          ]
+                        },
+                        "description": "Records a manual fill against a route for cases where fills are reported outside the electronic execution flow."
+                      },
+                      "response": [
+                        {
+                          "id": "f140dd74-2fa9-43ff-a454-2960d5155c8a",
+                          "name": "Manual fill recorded",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\",\n  \"EMSX_ROUTE_ID\": \"<integer>\",\n  \"EMSX_FILL_AMOUNT\": \"<integer>\",\n  \"EMSX_FILL_PRICE\": \"<number>\",\n  \"EMSX_FILL_DATE\": \"<string>\",\n  \"EMSX_FILL_TIME\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/emapisvc/ManualFill",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "emapisvc",
+                                "ManualFill"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"STATUS\": \"<integer>\",\n  \"MESSAGE\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:13:59.000Z",
+                          "updatedAt": "2026-07-28T01:13:59.000Z",
+                          "uid": "35240-f140dd74-2fa9-43ff-a454-2960d5155c8a"
+                        },
+                        {
+                          "id": "bdb9f24c-8f73-400f-9bac-c2b5b7d8012b",
+                          "name": "Invalid request parameters or business rule violation",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\",\n  \"EMSX_ROUTE_ID\": \"<integer>\",\n  \"EMSX_FILL_AMOUNT\": \"<integer>\",\n  \"EMSX_FILL_PRICE\": \"<number>\",\n  \"EMSX_FILL_DATE\": \"<string>\",\n  \"EMSX_FILL_TIME\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/emapisvc/ManualFill",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "emapisvc",
+                                "ManualFill"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"STATUS\": \"<integer>\",\n  \"MESSAGE\": \"<string>\",\n  \"REASON\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:13:59.000Z",
+                          "updatedAt": "2026-07-28T01:13:59.000Z",
+                          "uid": "35240-bdb9f24c-8f73-400f-9bac-c2b5b7d8012b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:59.000Z",
+                      "updatedAt": "2026-07-28T01:13:59.000Z",
+                      "uid": "35240-19bdf50d-b346-45b7-9cd6-9f81c91ee868"
+                    }
+                  ],
+                  "id": "cdb6e5b1-d078-4089-9ad6-aee8a0556443",
+                  "createdAt": "2026-07-28T01:13:59.000Z",
+                  "updatedAt": "2026-07-28T01:13:59.000Z",
+                  "uid": "35240-cdb6e5b1-d078-4089-9ad6-aee8a0556443"
+                }
+              ],
+              "id": "5b80fd2d-d4a4-4f92-a3ce-ebcaf49405f5",
+              "createdAt": "2026-07-28T01:13:59.000Z",
+              "updatedAt": "2026-07-28T01:13:59.000Z",
+              "uid": "35240-5b80fd2d-d4a4-4f92-a3ce-ebcaf49405f5"
+            }
+          ],
+          "id": "fe3e0fc1-03e4-4732-97fe-f083b9d29416",
+          "createdAt": "2026-07-28T01:13:59.000Z",
+          "updatedAt": "2026-07-28T01:13:59.000Z",
+          "uid": "35240-fe3e0fc1-03e4-4732-97fe-f083b9d29416"
+        }
+      ],
+      "id": "ac6e6e46-a7f7-4152-8a98-9aeded0b63fc",
+      "createdAt": "2026-07-28T01:13:59.000Z",
+      "updatedAt": "2026-07-28T01:13:59.000Z",
+      "uid": "35240-ac6e6e46-a7f7-4152-8a98-9aeded0b63fc"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

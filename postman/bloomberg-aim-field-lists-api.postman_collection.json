@@ -1,0 +1,834 @@
+{
+  "info": {
+    "_postman_id": "925a83dc-6fb8-4b0f-a48d-7f49a5e6a224",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Field Lists API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:13:57.000Z",
+    "updatedAt": "2026-07-28T01:13:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-925a83dc-6fb8-4b0f-a48d-7f49a5e6a224"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalogId}",
+          "item": [
+            {
+              "name": "fields",
+              "item": [
+                {
+                  "name": "List Available Fields in a Catalog",
+                  "id": "109e89a8-b603-40c2-abb8-e753bbcc011b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/fields?category=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter fields by data category",
+                          "key": "category",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "993ffc2c-23f7-4311-a1d9-b64095a63e22",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Returns the fields available for data requests within a catalog. Fields can be filtered by asset class or data category."
+                  },
+                  "response": [
+                    {
+                      "id": "37fb7fb0-d8d6-4351-985f-4f3b5259cd44",
+                      "name": "A list of available fields",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fields?category=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fields"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter fields by data category",
+                              "key": "category",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"contains\": [\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-37fb7fb0-d8d6-4351-985f-4f3b5259cd44"
+                    },
+                    {
+                      "id": "8c796410-2822-4682-84cf-b7273fc26174",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fields?category=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fields"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter fields by data category",
+                              "key": "category",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-8c796410-2822-4682-84cf-b7273fc26174"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-109e89a8-b603-40c2-abb8-e753bbcc011b"
+                }
+              ],
+              "id": "dbdedfed-3f7d-4745-8477-7909e71dc52f",
+              "createdAt": "2026-07-28T01:13:57.000Z",
+              "updatedAt": "2026-07-28T01:13:57.000Z",
+              "uid": "35240-dbdedfed-3f7d-4745-8477-7909e71dc52f"
+            },
+            {
+              "name": "fieldLists",
+              "item": [
+                {
+                  "name": "{fieldListId}",
+                  "item": [
+                    {
+                      "name": "Get Field List Details",
+                      "id": "eed60ea3-3ed6-4d79-9154-a923e3b6b8a9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists/:fieldListId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists",
+                            ":fieldListId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d01d9496-2fa0-4ef5-bd32-81a1aa0496e6",
+                              "key": "catalogId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the catalog"
+                            },
+                            {
+                              "id": "3536435d-3845-4723-b114-bc3ebf4c5cb4",
+                              "key": "fieldListId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the field list"
+                            }
+                          ]
+                        },
+                        "description": "Returns details of a specific field list."
+                      },
+                      "response": [
+                        {
+                          "id": "c5ce0d0d-0a24-4dbd-8043-52e757a575cd",
+                          "name": "Field list details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists/:fieldListId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "fieldLists",
+                                ":fieldListId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "fieldListId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-c5ce0d0d-0a24-4dbd-8043-52e757a575cd"
+                        },
+                        {
+                          "id": "9308088d-2afc-4987-819b-ff36c20c21d0",
+                          "name": "Authentication credentials missing or invalid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists/:fieldListId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "fieldLists",
+                                ":fieldListId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "fieldListId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-9308088d-2afc-4987-819b-ff36c20c21d0"
+                        },
+                        {
+                          "id": "ff687f38-dcff-4090-ad41-3eb671957e35",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists/:fieldListId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "fieldLists",
+                                ":fieldListId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "fieldListId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-ff687f38-dcff-4090-ad41-3eb671957e35"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-eed60ea3-3ed6-4d79-9154-a923e3b6b8a9"
+                    }
+                  ],
+                  "id": "ba941acc-b839-434d-b223-8009b036e82b",
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-ba941acc-b839-434d-b223-8009b036e82b"
+                },
+                {
+                  "name": "List Field Lists",
+                  "id": "0c5cb668-1aca-46f7-bb4b-c293c886de00",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "fieldLists"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9e853b64-7dee-4415-9746-d8177eae6cc1",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Returns all field lists defined in the catalog."
+                  },
+                  "response": [
+                    {
+                      "id": "2eb51cb4-f98f-438d-9e7c-d1a684355bc9",
+                      "name": "A list of field lists",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"contains\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"contains\": [\n        {\n          \"identifier\": \"<string>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"dataType\": \"<string>\",\n          \"category\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"dataType\": \"<string>\",\n          \"category\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"contains\": [\n        {\n          \"identifier\": \"<string>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"dataType\": \"<string>\",\n          \"category\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\",\n          \"title\": \"<string>\",\n          \"description\": \"<string>\",\n          \"dataType\": \"<string>\",\n          \"category\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-2eb51cb4-f98f-438d-9e7c-d1a684355bc9"
+                    },
+                    {
+                      "id": "b2b058b9-4132-4550-a61f-d342c2d35b25",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-b2b058b9-4132-4550-a61f-d342c2d35b25"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-0c5cb668-1aca-46f7-bb4b-c293c886de00"
+                },
+                {
+                  "name": "Create a Field List",
+                  "id": "5f5fc6f4-43d2-4cb7-b2e8-15efd31f5505",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"cleanName\": \"<string>\"\n    },\n    {\n      \"cleanName\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "fieldLists"
+                      ],
+                      "variable": [
+                        {
+                          "id": "628aae57-dedc-44f6-bba3-99e8897a8f4d",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new field list specifying which data fields to include in a data request."
+                  },
+                  "response": [
+                    {
+                      "id": "ee3d4cb8-20e4-4062-acf9-39faee31ee39",
+                      "name": "Field list created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"cleanName\": \"<string>\"\n    },\n    {\n      \"cleanName\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "URI of the created field list",
+                            "type": "text/plain"
+                          },
+                          "key": "Location",
+                          "value": "<uri>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataType\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-ee3d4cb8-20e4-4062-acf9-39faee31ee39"
+                    },
+                    {
+                      "id": "41168a97-c85c-4b0d-9696-2f7e721457c3",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"cleanName\": \"<string>\"\n    },\n    {\n      \"cleanName\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-41168a97-c85c-4b0d-9696-2f7e721457c3"
+                    },
+                    {
+                      "id": "1231633a-4034-41d9-a704-132378973592",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"contains\": [\n    {\n      \"cleanName\": \"<string>\"\n    },\n    {\n      \"cleanName\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/fieldLists",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "fieldLists"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-1231633a-4034-41d9-a704-132378973592"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-5f5fc6f4-43d2-4cb7-b2e8-15efd31f5505"
+                }
+              ],
+              "id": "bec451e2-4b9a-41f8-b0b4-7da890da0da4",
+              "createdAt": "2026-07-28T01:13:57.000Z",
+              "updatedAt": "2026-07-28T01:13:57.000Z",
+              "uid": "35240-bec451e2-4b9a-41f8-b0b4-7da890da0da4"
+            }
+          ],
+          "id": "9d250d84-91fb-4661-8df7-2f23285ffc6a",
+          "createdAt": "2026-07-28T01:13:57.000Z",
+          "updatedAt": "2026-07-28T01:13:57.000Z",
+          "uid": "35240-9d250d84-91fb-4661-8df7-2f23285ffc6a"
+        }
+      ],
+      "id": "59bb2de8-c9e5-4024-973b-1aff10d5c277",
+      "createdAt": "2026-07-28T01:13:57.000Z",
+      "updatedAt": "2026-07-28T01:13:57.000Z",
+      "uid": "35240-59bb2de8-c9e5-4024-973b-1aff10d5c277"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

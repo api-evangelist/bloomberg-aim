@@ -1,0 +1,291 @@
+{
+  "info": {
+    "_postman_id": "87ae4875-9b0e-42b5-a891-af9a4bbd4d37",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Historical Data API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:00.000Z",
+    "updatedAt": "2026-07-28T01:14:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-87ae4875-9b0e-42b5-a891-af9a4bbd4d37"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "refdata",
+              "item": [
+                {
+                  "name": "HistoricalDataRequest",
+                  "item": [
+                    {
+                      "name": "Request Historical Data",
+                      "id": "cf503a0e-97dd-48e8-a670-a4e11cf4c569",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/HistoricalDataRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "HistoricalDataRequest"
+                          ]
+                        },
+                        "description": "Retrieves historical end-of-day data for a set of securities and fields over a specified date range."
+                      },
+                      "response": [
+                        {
+                          "id": "934cec73-4e5c-4bc0-b8a5-b9e698ca5607",
+                          "name": "Historical data response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/HistoricalDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "HistoricalDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"securityData\": {\n        \"security\": \"<string>\",\n        \"fieldData\": [\n          {\n            \"date\": \"<date>\",\n            \"consequat136\": \"ex nostrud do\",\n            \"aliqua977\": true\n          },\n          {\n            \"date\": \"<date>\",\n            \"Duisb16\": true\n          }\n        ]\n      }\n    },\n    {\n      \"securityData\": {\n        \"security\": \"<string>\",\n        \"fieldData\": [\n          {\n            \"date\": \"<date>\",\n            \"dolorb4\": 17365732\n          },\n          {\n            \"date\": \"<date>\",\n            \"nisi1\": -88331847.43022823,\n            \"ullamco_7\": 26689312\n          }\n        ]\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:00.000Z",
+                          "updatedAt": "2026-07-28T01:14:00.000Z",
+                          "uid": "35240-934cec73-4e5c-4bc0-b8a5-b9e698ca5607"
+                        },
+                        {
+                          "id": "97fe1fe8-f5bb-4ef6-ab2a-59f76ca5d15b",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/HistoricalDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "HistoricalDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:00.000Z",
+                          "updatedAt": "2026-07-28T01:14:00.000Z",
+                          "uid": "35240-97fe1fe8-f5bb-4ef6-ab2a-59f76ca5d15b"
+                        },
+                        {
+                          "id": "17d03e09-7606-4e66-b147-aa6cc7142d9b",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/HistoricalDataRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "HistoricalDataRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:00.000Z",
+                          "updatedAt": "2026-07-28T01:14:00.000Z",
+                          "uid": "35240-17d03e09-7606-4e66-b147-aa6cc7142d9b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:00.000Z",
+                      "updatedAt": "2026-07-28T01:14:00.000Z",
+                      "uid": "35240-cf503a0e-97dd-48e8-a670-a4e11cf4c569"
+                    }
+                  ],
+                  "id": "adc722d2-d605-4e5c-81e7-e91dffe57ed0",
+                  "createdAt": "2026-07-28T01:14:00.000Z",
+                  "updatedAt": "2026-07-28T01:14:00.000Z",
+                  "uid": "35240-adc722d2-d605-4e5c-81e7-e91dffe57ed0"
+                }
+              ],
+              "id": "f6fc24dd-4211-4949-b41e-fb4cced3478f",
+              "createdAt": "2026-07-28T01:14:00.000Z",
+              "updatedAt": "2026-07-28T01:14:00.000Z",
+              "uid": "35240-f6fc24dd-4211-4949-b41e-fb4cced3478f"
+            }
+          ],
+          "id": "c363c673-c761-4d9e-927d-0770e7b452da",
+          "createdAt": "2026-07-28T01:14:00.000Z",
+          "updatedAt": "2026-07-28T01:14:00.000Z",
+          "uid": "35240-c363c673-c761-4d9e-927d-0770e7b452da"
+        }
+      ],
+      "id": "c7c427ee-da55-49fd-ae14-a1b5d5f3c459",
+      "createdAt": "2026-07-28T01:14:00.000Z",
+      "updatedAt": "2026-07-28T01:14:00.000Z",
+      "uid": "35240-c7c427ee-da55-49fd-ae14-a1b5d5f3c459"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

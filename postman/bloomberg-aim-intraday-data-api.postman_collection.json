@@ -1,0 +1,525 @@
+{
+  "info": {
+    "_postman_id": "cd638ee9-e95d-4fd4-a189-df1c855d5135",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Intraday Data API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:17.000Z",
+    "updatedAt": "2026-07-28T01:14:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cd638ee9-e95d-4fd4-a189-df1c855d5135"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "refdata",
+              "item": [
+                {
+                  "name": "IntradayTickRequest",
+                  "item": [
+                    {
+                      "name": "Request Intraday Tick Data",
+                      "id": "17d6d1df-286a-4f52-9670-52060340260f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"security\": \"<string>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"includeConditionCodes\": false,\n  \"includeExchangeCodes\": false,\n  \"includeBrokerCodes\": false,\n  \"includeRPSCodes\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/IntradayTickRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "IntradayTickRequest"
+                          ]
+                        },
+                        "description": "Retrieves intraday tick-level data for a single security over a specified time range."
+                      },
+                      "response": [
+                        {
+                          "id": "99632d33-3e87-44ca-b00a-218c00231b60",
+                          "name": "Intraday tick data response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"includeConditionCodes\": false,\n  \"includeExchangeCodes\": false,\n  \"includeBrokerCodes\": false,\n  \"includeRPSCodes\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayTickRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayTickRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"tickData\": {\n        \"tickData\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"type\": \"<string>\",\n            \"value\": \"<number>\",\n            \"size\": \"<integer>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"type\": \"<string>\",\n            \"value\": \"<number>\",\n            \"size\": \"<integer>\"\n          }\n        ]\n      }\n    },\n    {\n      \"tickData\": {\n        \"tickData\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"type\": \"<string>\",\n            \"value\": \"<number>\",\n            \"size\": \"<integer>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"type\": \"<string>\",\n            \"value\": \"<number>\",\n            \"size\": \"<integer>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-99632d33-3e87-44ca-b00a-218c00231b60"
+                        },
+                        {
+                          "id": "301117c3-e080-43f9-a0f0-f88f8974a720",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"includeConditionCodes\": false,\n  \"includeExchangeCodes\": false,\n  \"includeBrokerCodes\": false,\n  \"includeRPSCodes\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayTickRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayTickRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-301117c3-e080-43f9-a0f0-f88f8974a720"
+                        },
+                        {
+                          "id": "6ff854be-f59e-4c05-8954-b261e14b34bd",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"eventTypes\": [\n    \"TRADE\"\n  ],\n  \"includeConditionCodes\": false,\n  \"includeExchangeCodes\": false,\n  \"includeBrokerCodes\": false,\n  \"includeRPSCodes\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayTickRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayTickRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-6ff854be-f59e-4c05-8954-b261e14b34bd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:17.000Z",
+                      "updatedAt": "2026-07-28T01:14:17.000Z",
+                      "uid": "35240-17d6d1df-286a-4f52-9670-52060340260f"
+                    }
+                  ],
+                  "id": "27b11ddc-f4cc-44f2-a4b4-04690e02cc9e",
+                  "createdAt": "2026-07-28T01:14:17.000Z",
+                  "updatedAt": "2026-07-28T01:14:17.000Z",
+                  "uid": "35240-27b11ddc-f4cc-44f2-a4b4-04690e02cc9e"
+                },
+                {
+                  "name": "IntradayBarRequest",
+                  "item": [
+                    {
+                      "name": "Request Intraday Bar Data",
+                      "id": "f2af6b4c-26f9-4d34-83ad-62005b933b54",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"security\": \"<string>\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"interval\": \"<integer>\",\n  \"gapFillInitialBar\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/IntradayBarRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "IntradayBarRequest"
+                          ]
+                        },
+                        "description": "Retrieves intraday OHLCV bar data for a single security over a specified time range and interval."
+                      },
+                      "response": [
+                        {
+                          "id": "1aa37930-bb1c-439c-94e7-f8ff09beb00b",
+                          "name": "Intraday bar data response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"interval\": \"<integer>\",\n  \"gapFillInitialBar\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayBarRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayBarRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"barData\": {\n        \"barTickData\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"open\": \"<number>\",\n            \"high\": \"<number>\",\n            \"low\": \"<number>\",\n            \"close\": \"<number>\",\n            \"volume\": \"<integer>\",\n            \"numEvents\": \"<integer>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"open\": \"<number>\",\n            \"high\": \"<number>\",\n            \"low\": \"<number>\",\n            \"close\": \"<number>\",\n            \"volume\": \"<integer>\",\n            \"numEvents\": \"<integer>\"\n          }\n        ]\n      }\n    },\n    {\n      \"barData\": {\n        \"barTickData\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"open\": \"<number>\",\n            \"high\": \"<number>\",\n            \"low\": \"<number>\",\n            \"close\": \"<number>\",\n            \"volume\": \"<integer>\",\n            \"numEvents\": \"<integer>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"open\": \"<number>\",\n            \"high\": \"<number>\",\n            \"low\": \"<number>\",\n            \"close\": \"<number>\",\n            \"volume\": \"<integer>\",\n            \"numEvents\": \"<integer>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-1aa37930-bb1c-439c-94e7-f8ff09beb00b"
+                        },
+                        {
+                          "id": "470cb714-e1d8-4257-a161-8a1f1d4545fe",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"interval\": \"<integer>\",\n  \"gapFillInitialBar\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayBarRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayBarRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-470cb714-e1d8-4257-a161-8a1f1d4545fe"
+                        },
+                        {
+                          "id": "ea3fe554-1ff8-4513-bd06-3ae7cd54f19a",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"security\": \"<string>\",\n  \"eventType\": \"TRADE\",\n  \"startDateTime\": \"<dateTime>\",\n  \"endDateTime\": \"<dateTime>\",\n  \"interval\": \"<integer>\",\n  \"gapFillInitialBar\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/IntradayBarRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "IntradayBarRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:17.000Z",
+                          "updatedAt": "2026-07-28T01:14:17.000Z",
+                          "uid": "35240-ea3fe554-1ff8-4513-bd06-3ae7cd54f19a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:17.000Z",
+                      "updatedAt": "2026-07-28T01:14:17.000Z",
+                      "uid": "35240-f2af6b4c-26f9-4d34-83ad-62005b933b54"
+                    }
+                  ],
+                  "id": "ac3a63a9-30e2-4f82-a703-1ee472fb3cd9",
+                  "createdAt": "2026-07-28T01:14:17.000Z",
+                  "updatedAt": "2026-07-28T01:14:17.000Z",
+                  "uid": "35240-ac3a63a9-30e2-4f82-a703-1ee472fb3cd9"
+                }
+              ],
+              "id": "f057602f-2367-4af7-a339-473e573c0ef3",
+              "createdAt": "2026-07-28T01:14:17.000Z",
+              "updatedAt": "2026-07-28T01:14:17.000Z",
+              "uid": "35240-f057602f-2367-4af7-a339-473e573c0ef3"
+            }
+          ],
+          "id": "1654ddab-b136-40f6-880d-1d2aa6a35b85",
+          "createdAt": "2026-07-28T01:14:17.000Z",
+          "updatedAt": "2026-07-28T01:14:17.000Z",
+          "uid": "35240-1654ddab-b136-40f6-880d-1d2aa6a35b85"
+        }
+      ],
+      "id": "d8d9ec38-21e1-4e15-84a6-2d5a1f4927fa",
+      "createdAt": "2026-07-28T01:14:17.000Z",
+      "updatedAt": "2026-07-28T01:14:17.000Z",
+      "uid": "35240-d8d9ec38-21e1-4e15-84a6-2d5a1f4927fa"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

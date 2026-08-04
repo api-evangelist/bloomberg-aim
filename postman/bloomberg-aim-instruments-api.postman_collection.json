@@ -1,0 +1,759 @@
+{
+  "info": {
+    "_postman_id": "05ab362f-22af-441d-ad92-bbd1f1ff9d98",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Instruments API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:16.000Z",
+    "updatedAt": "2026-07-28T01:14:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-05ab362f-22af-441d-ad92-bbd1f1ff9d98"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "instruments",
+              "item": [
+                {
+                  "name": "InstrumentListRequest",
+                  "item": [
+                    {
+                      "name": "Search for Instruments",
+                      "id": "4b032117-e971-4afd-8f79-7f6e455802a2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_EQUITY\",\n  \"languageOverride\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/instruments/InstrumentListRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "instruments",
+                            "InstrumentListRequest"
+                          ]
+                        },
+                        "description": "Searches for securities and instruments by query string, supporting partial matches."
+                      },
+                      "response": [
+                        {
+                          "id": "70927239-00b6-4de6-a064-549996d8b528",
+                          "name": "Instrument list response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_EQUITY\",\n  \"languageOverride\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/InstrumentListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "InstrumentListRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"results\": [\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-70927239-00b6-4de6-a064-549996d8b528"
+                        },
+                        {
+                          "id": "9f101d83-b444-4ddb-99ca-66bdd27b2743",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_EQUITY\",\n  \"languageOverride\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/InstrumentListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "InstrumentListRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-9f101d83-b444-4ddb-99ca-66bdd27b2743"
+                        },
+                        {
+                          "id": "fd7ec4a7-07cd-4dea-8388-b1f19018e353",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"yellowKeyFilter\": \"YK_FILTER_EQUITY\",\n  \"languageOverride\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/InstrumentListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "InstrumentListRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-fd7ec4a7-07cd-4dea-8388-b1f19018e353"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:16.000Z",
+                      "updatedAt": "2026-07-28T01:14:16.000Z",
+                      "uid": "35240-4b032117-e971-4afd-8f79-7f6e455802a2"
+                    }
+                  ],
+                  "id": "d8f4556b-a925-4cd2-b8be-ad1b98c1d009",
+                  "createdAt": "2026-07-28T01:14:16.000Z",
+                  "updatedAt": "2026-07-28T01:14:16.000Z",
+                  "uid": "35240-d8f4556b-a925-4cd2-b8be-ad1b98c1d009"
+                },
+                {
+                  "name": "CurveListRequest",
+                  "item": [
+                    {
+                      "name": "Search for Curves",
+                      "id": "49f0aeec-5840-48d5-964f-4c61b1212543",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"countryCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/instruments/CurveListRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "instruments",
+                            "CurveListRequest"
+                          ]
+                        },
+                        "description": "Searches for yield curves and other curve instruments by query."
+                      },
+                      "response": [
+                        {
+                          "id": "07126e13-f064-4269-8a34-9158e28f1f17",
+                          "name": "Curve list response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"countryCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/CurveListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "CurveListRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {\n          \"curve\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"type\": \"<string>\",\n          \"subtype\": \"<string>\"\n        },\n        {\n          \"curve\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"type\": \"<string>\",\n          \"subtype\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"results\": [\n        {\n          \"curve\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"type\": \"<string>\",\n          \"subtype\": \"<string>\"\n        },\n        {\n          \"curve\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"type\": \"<string>\",\n          \"subtype\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-07126e13-f064-4269-8a34-9158e28f1f17"
+                        },
+                        {
+                          "id": "8f3939c4-bc1a-48bd-bc37-408cce98f015",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"countryCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/CurveListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "CurveListRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-8f3939c4-bc1a-48bd-bc37-408cce98f015"
+                        },
+                        {
+                          "id": "ac7c1566-2950-4388-9522-65f73f010bb4",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"maxResults\": 10,\n  \"countryCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"type\": \"BOND\",\n  \"subtype\": \"SOVEREIGN\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/CurveListRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "CurveListRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-ac7c1566-2950-4388-9522-65f73f010bb4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:16.000Z",
+                      "updatedAt": "2026-07-28T01:14:16.000Z",
+                      "uid": "35240-49f0aeec-5840-48d5-964f-4c61b1212543"
+                    }
+                  ],
+                  "id": "8cc27ce2-eaba-461a-865c-73f8a7b39bc2",
+                  "createdAt": "2026-07-28T01:14:16.000Z",
+                  "updatedAt": "2026-07-28T01:14:16.000Z",
+                  "uid": "35240-8cc27ce2-eaba-461a-865c-73f8a7b39bc2"
+                },
+                {
+                  "name": "GovernmentLookupRequest",
+                  "item": [
+                    {
+                      "name": "Look up Government Securities",
+                      "id": "5bc90f4c-aec0-4669-ab78-ecb4a7750da2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"query\": \"<string>\",\n  \"partialMatch\": false,\n  \"maxResults\": 10\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/instruments/GovernmentLookupRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "instruments",
+                            "GovernmentLookupRequest"
+                          ]
+                        },
+                        "description": "Searches for government bond securities by country, currency, and maturity parameters."
+                      },
+                      "response": [
+                        {
+                          "id": "fb9affc8-1a87-4ac8-a9ea-be4d21076ed3",
+                          "name": "Government security lookup response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"partialMatch\": false,\n  \"maxResults\": 10\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/GovernmentLookupRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "GovernmentLookupRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"results\": [\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"results\": [\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        {\n          \"security\": \"<string>\",\n          \"description\": \"<string>\",\n          \"country\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-fb9affc8-1a87-4ac8-a9ea-be4d21076ed3"
+                        },
+                        {
+                          "id": "bc38042c-8c17-40b0-800a-71c914f3c20c",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"partialMatch\": false,\n  \"maxResults\": 10\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/GovernmentLookupRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "GovernmentLookupRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-bc38042c-8c17-40b0-800a-71c914f3c20c"
+                        },
+                        {
+                          "id": "3ba604b2-3247-4cf4-95ae-0246372792f7",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"query\": \"<string>\",\n  \"partialMatch\": false,\n  \"maxResults\": 10\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/instruments/GovernmentLookupRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "instruments",
+                                "GovernmentLookupRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:14:16.000Z",
+                          "updatedAt": "2026-07-28T01:14:16.000Z",
+                          "uid": "35240-3ba604b2-3247-4cf4-95ae-0246372792f7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:16.000Z",
+                      "updatedAt": "2026-07-28T01:14:16.000Z",
+                      "uid": "35240-5bc90f4c-aec0-4669-ab78-ecb4a7750da2"
+                    }
+                  ],
+                  "id": "7db347c8-55ca-404f-83a7-cdc5e86aa8b3",
+                  "createdAt": "2026-07-28T01:14:16.000Z",
+                  "updatedAt": "2026-07-28T01:14:16.000Z",
+                  "uid": "35240-7db347c8-55ca-404f-83a7-cdc5e86aa8b3"
+                }
+              ],
+              "id": "4c2a5898-6796-4016-9fa5-bbf5228febbf",
+              "createdAt": "2026-07-28T01:14:16.000Z",
+              "updatedAt": "2026-07-28T01:14:16.000Z",
+              "uid": "35240-4c2a5898-6796-4016-9fa5-bbf5228febbf"
+            }
+          ],
+          "id": "49f71601-7200-442a-bf16-ceb2e9d0049b",
+          "createdAt": "2026-07-28T01:14:16.000Z",
+          "updatedAt": "2026-07-28T01:14:16.000Z",
+          "uid": "35240-49f71601-7200-442a-bf16-ceb2e9d0049b"
+        }
+      ],
+      "id": "f9b17aa0-96b6-404f-b109-81f2fe85a678",
+      "createdAt": "2026-07-28T01:14:16.000Z",
+      "updatedAt": "2026-07-28T01:14:16.000Z",
+      "uid": "35240-f9b17aa0-96b6-404f-b109-81f2fe85a678"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

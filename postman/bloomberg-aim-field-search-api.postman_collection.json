@@ -1,0 +1,525 @@
+{
+  "info": {
+    "_postman_id": "b7079cad-aca8-457c-8526-b5adf758aa3e",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Field Search API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:13:58.000Z",
+    "updatedAt": "2026-07-28T01:13:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b7079cad-aca8-457c-8526-b5adf758aa3e"
+  },
+  "item": [
+    {
+      "name": "request",
+      "item": [
+        {
+          "name": "blp",
+          "item": [
+            {
+              "name": "refdata",
+              "item": [
+                {
+                  "name": "FieldInfoRequest",
+                  "item": [
+                    {
+                      "name": "Get Field Information",
+                      "id": "281d7038-c6d5-40ab-a948-67b3a018fd5e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"fieldId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"returnFieldDocumentation\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/FieldInfoRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "FieldInfoRequest"
+                          ]
+                        },
+                        "description": "Returns metadata about specified Bloomberg fields, including descriptions, data types, and categories."
+                      },
+                      "response": [
+                        {
+                          "id": "8f296af7-f6dd-4843-b07e-f21e619faaad",
+                          "name": "Field information response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"fieldId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldInfoRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldInfoRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"fieldData\": [\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"documentation\": \"<string>\"\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"documentation\": \"<string>\"\n          }\n        }\n      ]\n    },\n    {\n      \"fieldData\": [\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"documentation\": \"<string>\"\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"documentation\": \"<string>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-8f296af7-f6dd-4843-b07e-f21e619faaad"
+                        },
+                        {
+                          "id": "3f2b8577-cd7f-44dc-a20c-8bd34a4728a0",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"fieldId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldInfoRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldInfoRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-3f2b8577-cd7f-44dc-a20c-8bd34a4728a0"
+                        },
+                        {
+                          "id": "866e0fa9-2982-4b2e-b27c-b800f930f05d",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"fieldId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldInfoRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldInfoRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-866e0fa9-2982-4b2e-b27c-b800f930f05d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:58.000Z",
+                      "updatedAt": "2026-07-28T01:13:58.000Z",
+                      "uid": "35240-281d7038-c6d5-40ab-a948-67b3a018fd5e"
+                    }
+                  ],
+                  "id": "691bcdc9-bc32-4ff0-85ab-60176bb09465",
+                  "createdAt": "2026-07-28T01:13:58.000Z",
+                  "updatedAt": "2026-07-28T01:13:58.000Z",
+                  "uid": "35240-691bcdc9-bc32-4ff0-85ab-60176bb09465"
+                },
+                {
+                  "name": "FieldSearchRequest",
+                  "item": [
+                    {
+                      "name": "Search for Fields",
+                      "id": "e168514a-a36f-4cb8-9cd1-466659c422bb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"searchSpec\": \"<string>\",\n  \"returnFieldDocumentation\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/request/blp/refdata/FieldSearchRequest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "request",
+                            "blp",
+                            "refdata",
+                            "FieldSearchRequest"
+                          ]
+                        },
+                        "description": "Searches for Bloomberg fields by keyword or category."
+                      },
+                      "response": [
+                        {
+                          "id": "df389138-7702-4f43-a00f-76a7006b97a7",
+                          "name": "Field search results",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"searchSpec\": \"<string>\",\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldSearchRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldSearchRequest"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"fieldData\": [\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        }\n      ]\n    },\n    {\n      \"fieldData\": [\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"fieldInfo\": {\n            \"mnemonic\": \"<string>\",\n            \"description\": \"<string>\",\n            \"datatype\": \"<string>\",\n            \"categoryName\": [\n              \"<string>\",\n              \"<string>\"\n            ]\n          }\n        }\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-df389138-7702-4f43-a00f-76a7006b97a7"
+                        },
+                        {
+                          "id": "f4b6c41a-065b-499f-a301-f20f99fb8b55",
+                          "name": "Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"searchSpec\": \"<string>\",\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldSearchRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldSearchRequest"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-f4b6c41a-065b-499f-a301-f20f99fb8b55"
+                        },
+                        {
+                          "id": "4193ea76-8fc3-4636-b19a-364af4524a48",
+                          "name": "Internal server error or BLPAPI service error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"searchSpec\": \"<string>\",\n  \"returnFieldDocumentation\": false\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/request/blp/refdata/FieldSearchRequest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "request",
+                                "blp",
+                                "refdata",
+                                "FieldSearchRequest"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T01:13:58.000Z",
+                          "updatedAt": "2026-07-28T01:13:58.000Z",
+                          "uid": "35240-4193ea76-8fc3-4636-b19a-364af4524a48"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:58.000Z",
+                      "updatedAt": "2026-07-28T01:13:58.000Z",
+                      "uid": "35240-e168514a-a36f-4cb8-9cd1-466659c422bb"
+                    }
+                  ],
+                  "id": "2accf70b-4a9d-4af6-b590-6deaa16ff5ac",
+                  "createdAt": "2026-07-28T01:13:58.000Z",
+                  "updatedAt": "2026-07-28T01:13:58.000Z",
+                  "uid": "35240-2accf70b-4a9d-4af6-b590-6deaa16ff5ac"
+                }
+              ],
+              "id": "d702e44b-ed9d-4742-a967-beb5207977be",
+              "createdAt": "2026-07-28T01:13:58.000Z",
+              "updatedAt": "2026-07-28T01:13:58.000Z",
+              "uid": "35240-d702e44b-ed9d-4742-a967-beb5207977be"
+            }
+          ],
+          "id": "949a1924-b92a-444b-936b-3b2d46c69229",
+          "createdAt": "2026-07-28T01:13:58.000Z",
+          "updatedAt": "2026-07-28T01:13:58.000Z",
+          "uid": "35240-949a1924-b92a-444b-936b-3b2d46c69229"
+        }
+      ],
+      "id": "fe290a26-a201-4453-9a6b-3ad36824a72d",
+      "createdAt": "2026-07-28T01:13:58.000Z",
+      "updatedAt": "2026-07-28T01:13:58.000Z",
+      "uid": "35240-fe290a26-a201-4453-9a6b-3ad36824a72d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "info": {
+    "_postman_id": "5fde3b94-dcb8-40bf-bdad-adbdb79aca06",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Distributions API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:13:56.000Z",
+    "updatedAt": "2026-07-28T01:13:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5fde3b94-dcb8-40bf-bdad-adbdb79aca06"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalogId}",
+          "item": [
+            {
+              "name": "distributions",
+              "item": [
+                {
+                  "name": "{distributionId}",
+                  "item": [
+                    {
+                      "name": "Get Distribution Details",
+                      "id": "737c375f-b318-4745-b831-9185e6e88bd7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "distributions",
+                            ":distributionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "59b5b2c3-9ccc-41d3-9f56-1436341d05ef",
+                              "key": "catalogId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the catalog"
+                            },
+                            {
+                              "id": "8a24a1f7-c923-457a-9b58-7da384049afa",
+                              "key": "distributionId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the distribution"
+                            }
+                          ]
+                        },
+                        "description": "Returns details and download links for a specific distribution."
+                      },
+                      "response": [
+                        {
+                          "id": "c8e234c9-0fea-4a0e-987d-95d7463164f3",
+                          "name": "Distribution details with download links",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "distributions",
+                                ":distributionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "distributionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"snapshotTime\": \"<dateTime>\",\n  \"status\": \"error\",\n  \"links\": {\n    \"replies\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-c8e234c9-0fea-4a0e-987d-95d7463164f3"
+                        },
+                        {
+                          "id": "1267c192-c6c4-4d27-9e58-337a0d33b8ec",
+                          "name": "Authentication credentials missing or invalid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "distributions",
+                                ":distributionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "distributionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-1267c192-c6c4-4d27-9e58-337a0d33b8ec"
+                        },
+                        {
+                          "id": "e7454d5f-b20b-4a35-a4a7-046bd66b0e31",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/distributions/:distributionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "distributions",
+                                ":distributionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "distributionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:13:57.000Z",
+                          "updatedAt": "2026-07-28T01:13:57.000Z",
+                          "uid": "35240-e7454d5f-b20b-4a35-a4a7-046bd66b0e31"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-737c375f-b318-4745-b831-9185e6e88bd7"
+                    }
+                  ],
+                  "id": "9c5950dd-ff70-4560-af51-8f950f484ca3",
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-9c5950dd-ff70-4560-af51-8f950f484ca3"
+                },
+                {
+                  "name": "List Distributions",
+                  "id": "e0d18b84-4b79-4a63-861d-eaff40540c09",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/distributions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "distributions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4d059e0b-b756-4ec3-8654-23241c710d1e",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Returns available data distributions (completed outputs) for the catalog."
+                  },
+                  "response": [
+                    {
+                      "id": "ac5e56eb-ae25-4087-b4d3-36ebc206e653",
+                      "name": "A list of distributions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/distributions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "distributions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"contains\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"snapshotTime\": \"<dateTime>\",\n      \"status\": \"error\",\n      \"links\": {\n        \"replies\": \"<uri>\"\n      }\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"snapshotTime\": \"<dateTime>\",\n      \"status\": \"completed\",\n      \"links\": {\n        \"replies\": \"<uri>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-ac5e56eb-ae25-4087-b4d3-36ebc206e653"
+                    },
+                    {
+                      "id": "a55c0f09-b10e-4232-8ab8-f30b9ca8e129",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/distributions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "distributions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:57.000Z",
+                      "updatedAt": "2026-07-28T01:13:57.000Z",
+                      "uid": "35240-a55c0f09-b10e-4232-8ab8-f30b9ca8e129"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:13:57.000Z",
+                  "updatedAt": "2026-07-28T01:13:57.000Z",
+                  "uid": "35240-e0d18b84-4b79-4a63-861d-eaff40540c09"
+                }
+              ],
+              "id": "24e2a22d-eb06-4fda-a1b3-4ef67dccc0b2",
+              "createdAt": "2026-07-28T01:13:57.000Z",
+              "updatedAt": "2026-07-28T01:13:57.000Z",
+              "uid": "35240-24e2a22d-eb06-4fda-a1b3-4ef67dccc0b2"
+            }
+          ],
+          "id": "da18235a-30c4-4672-8251-e9890f1b2e26",
+          "createdAt": "2026-07-28T01:13:57.000Z",
+          "updatedAt": "2026-07-28T01:13:57.000Z",
+          "uid": "35240-da18235a-30c4-4672-8251-e9890f1b2e26"
+        }
+      ],
+      "id": "b5642fb4-fcfd-4919-851a-23e05049498b",
+      "createdAt": "2026-07-28T01:13:57.000Z",
+      "updatedAt": "2026-07-28T01:13:57.000Z",
+      "uid": "35240-b5642fb4-fcfd-4919-851a-23e05049498b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

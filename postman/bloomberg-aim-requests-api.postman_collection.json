@@ -1,0 +1,863 @@
+{
+  "info": {
+    "_postman_id": "f8d29f0a-6622-43f9-9dbf-a14b106d7498",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Requests API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:14:22.000Z",
+    "updatedAt": "2026-07-28T01:14:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f8d29f0a-6622-43f9-9dbf-a14b106d7498"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalogId}",
+          "item": [
+            {
+              "name": "requests",
+              "item": [
+                {
+                  "name": "{requestId}",
+                  "item": [
+                    {
+                      "name": "Get Data Request Details",
+                      "id": "caca0a35-60de-4291-a63c-8189f6cb791a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests",
+                            ":requestId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "12063549-2a68-44cd-bd2e-18f1dda76dbd",
+                              "key": "catalogId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the catalog"
+                            },
+                            {
+                              "id": "08278450-079a-466b-b17c-730be1f48b67",
+                              "key": "requestId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the data request"
+                            }
+                          ]
+                        },
+                        "description": "Returns details of a specific data request."
+                      },
+                      "response": [
+                        {
+                          "id": "679211bc-92da-4c12-b9d3-3fadaf93731a",
+                          "name": "Data request details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"formatting\": {\n    \"type\": \"<string>\",\n    \"dateFormat\": \"<string>\"\n  },\n  \"status\": \"active\"\n}",
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-679211bc-92da-4c12-b9d3-3fadaf93731a"
+                        },
+                        {
+                          "id": "c05f5917-b89e-4ad9-878c-dd938d333dea",
+                          "name": "Authentication credentials missing or invalid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-c05f5917-b89e-4ad9-878c-dd938d333dea"
+                        },
+                        {
+                          "id": "be1c5685-8117-4727-8463-f41abcec6185",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-be1c5685-8117-4727-8463-f41abcec6185"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-caca0a35-60de-4291-a63c-8189f6cb791a"
+                    },
+                    {
+                      "name": "Delete a Data Request",
+                      "id": "71d3a333-4cb0-4282-86b8-4c76c2baccf0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests",
+                            ":requestId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "17992e95-0f4d-4d9b-9136-b8e6fb571806",
+                              "key": "catalogId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the catalog"
+                            },
+                            {
+                              "id": "16cd1e65-e92d-4cb3-a4e2-a8cf563c514c",
+                              "key": "requestId",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier for the data request"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a specific data request."
+                      },
+                      "response": [
+                        {
+                          "id": "46c07832-c62a-4e57-be54-eadb3e7210e7",
+                          "name": "Request deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-46c07832-c62a-4e57-be54-eadb3e7210e7"
+                        },
+                        {
+                          "id": "97b0c27f-50a1-4e1c-b75c-6771e2464dae",
+                          "name": "Authentication credentials missing or invalid",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-97b0c27f-50a1-4e1c-b75c-6771e2464dae"
+                        },
+                        {
+                          "id": "0549371e-0def-47bc-9191-9ba568a21104",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/catalogs/:catalogId/requests/:requestId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "catalogs",
+                                ":catalogId",
+                                "requests",
+                                ":requestId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "catalogId"
+                                },
+                                {
+                                  "key": "requestId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:14:23.000Z",
+                          "updatedAt": "2026-07-28T01:14:23.000Z",
+                          "uid": "35240-0549371e-0def-47bc-9191-9ba568a21104"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-71d3a333-4cb0-4282-86b8-4c76c2baccf0"
+                    }
+                  ],
+                  "id": "eb2a0f04-a641-4e72-9580-63a5be51648d",
+                  "createdAt": "2026-07-28T01:14:23.000Z",
+                  "updatedAt": "2026-07-28T01:14:23.000Z",
+                  "uid": "35240-eb2a0f04-a641-4e72-9580-63a5be51648d"
+                },
+                {
+                  "name": "List Data Requests",
+                  "id": "203baaf1-b609-4425-aa77-19a93614d79e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "requests"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b4b72bee-6be4-411e-920e-5a918727a088",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Returns all data requests in the catalog."
+                  },
+                  "response": [
+                    {
+                      "id": "049e77bd-70ce-4061-bc54-9cacf3d92308",
+                      "name": "A list of data requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"contains\": [\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"universe\": \"<uri>\",\n      \"fieldList\": \"<uri>\",\n      \"trigger\": \"<uri>\",\n      \"formatting\": {\n        \"type\": \"<string>\",\n        \"dateFormat\": \"<string>\"\n      },\n      \"status\": \"active\"\n    },\n    {\n      \"@type\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"universe\": \"<uri>\",\n      \"fieldList\": \"<uri>\",\n      \"trigger\": \"<uri>\",\n      \"formatting\": {\n        \"type\": \"<string>\",\n        \"dateFormat\": \"<string>\"\n      },\n      \"status\": \"error\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-049e77bd-70ce-4061-bc54-9cacf3d92308"
+                    },
+                    {
+                      "id": "b2281bf1-a791-4ed8-8672-8bf69c92a6da",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-b2281bf1-a791-4ed8-8672-8bf69c92a6da"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:14:23.000Z",
+                  "updatedAt": "2026-07-28T01:14:23.000Z",
+                  "uid": "35240-203baaf1-b609-4425-aa77-19a93614d79e"
+                },
+                {
+                  "name": "Create a Data Request",
+                  "id": "f8cab08c-82ac-4f39-b1bc-2e82e37bddfb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"formatting\": {\n    \"type\": \"DataOutputCsv\",\n    \"dateFormat\": \"<string>\",\n    \"columnHeader\": \"<boolean>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "requests"
+                      ],
+                      "variable": [
+                        {
+                          "id": "916a4f18-6d9c-47ac-acf7-ef85257e2a08",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new data request combining a universe, field list, and trigger to produce a scheduled data output."
+                  },
+                  "response": [
+                    {
+                      "id": "c6b47dd5-8a07-4c11-9846-a63ff0bf6a6f",
+                      "name": "Request created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"formatting\": {\n    \"type\": \"DataOutputCsv\",\n    \"dateFormat\": \"<string>\",\n    \"columnHeader\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "URI of the created request",
+                            "type": "text/plain"
+                          },
+                          "key": "Location",
+                          "value": "<uri>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"formatting\": {\n    \"type\": \"<string>\",\n    \"dateFormat\": \"<string>\"\n  },\n  \"status\": \"active\"\n}",
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-c6b47dd5-8a07-4c11-9846-a63ff0bf6a6f"
+                    },
+                    {
+                      "id": "4942de0f-a8c5-4892-87b1-106950c8c559",
+                      "name": "Invalid request parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"formatting\": {\n    \"type\": \"DataOutputCsv\",\n    \"dateFormat\": \"<string>\",\n    \"columnHeader\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-4942de0f-a8c5-4892-87b1-106950c8c559"
+                    },
+                    {
+                      "id": "00327183-32ca-4949-8288-6e9b4ed64a94",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@type\": \"<string>\",\n  \"identifier\": \"<string>\",\n  \"universe\": \"<uri>\",\n  \"fieldList\": \"<uri>\",\n  \"trigger\": \"<uri>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"formatting\": {\n    \"type\": \"DataOutputCsv\",\n    \"dateFormat\": \"<string>\",\n    \"columnHeader\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "requests"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:14:23.000Z",
+                      "updatedAt": "2026-07-28T01:14:23.000Z",
+                      "uid": "35240-00327183-32ca-4949-8288-6e9b4ed64a94"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:14:23.000Z",
+                  "updatedAt": "2026-07-28T01:14:23.000Z",
+                  "uid": "35240-f8cab08c-82ac-4f39-b1bc-2e82e37bddfb"
+                }
+              ],
+              "id": "5b9ad185-7b79-4cd5-8463-737e5edd7352",
+              "createdAt": "2026-07-28T01:14:23.000Z",
+              "updatedAt": "2026-07-28T01:14:23.000Z",
+              "uid": "35240-5b9ad185-7b79-4cd5-8463-737e5edd7352"
+            }
+          ],
+          "id": "5a5fd98c-ef81-4ca1-82b7-339e0ddfc914",
+          "createdAt": "2026-07-28T01:14:23.000Z",
+          "updatedAt": "2026-07-28T01:14:23.000Z",
+          "uid": "35240-5a5fd98c-ef81-4ca1-82b7-339e0ddfc914"
+        }
+      ],
+      "id": "079688f0-330a-4c88-9b92-543c2a981190",
+      "createdAt": "2026-07-28T01:14:23.000Z",
+      "updatedAt": "2026-07-28T01:14:23.000Z",
+      "uid": "35240-079688f0-330a-4c88-9b92-543c2a981190"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}

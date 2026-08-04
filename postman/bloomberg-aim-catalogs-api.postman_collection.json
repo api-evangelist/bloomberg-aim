@@ -1,0 +1,544 @@
+{
+  "info": {
+    "_postman_id": "3c201316-9d6d-4914-aa4e-8317300c5c10",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Catalogs API",
+    "description": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:13:55.000Z",
+    "updatedAt": "2026-07-28T01:13:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3c201316-9d6d-4914-aa4e-8317300c5c10"
+  },
+  "item": [
+    {
+      "name": "catalogs",
+      "item": [
+        {
+          "name": "{catalogId}",
+          "item": [
+            {
+              "name": "datasets",
+              "item": [
+                {
+                  "name": "List Datasets in a Catalog",
+                  "id": "55bd8d2e-1a99-4c51-b0e9-1ac700ea7b35",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId/datasets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId",
+                        "datasets"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c124d5b6-1255-4e68-bc43-52ebf1f1b4a3",
+                          "key": "catalogId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier for the catalog"
+                        }
+                      ]
+                    },
+                    "description": "Returns the datasets available within a specific catalog."
+                  },
+                  "response": [
+                    {
+                      "id": "9d8a1480-dd56-444b-988d-bb4511ef8124",
+                      "name": "A list of datasets",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/datasets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "datasets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"contains\": [\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"fieldCount\": \"<integer>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"fieldCount\": \"<integer>\",\n      \"category\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:13:55.000Z",
+                      "updatedAt": "2026-07-28T01:13:55.000Z",
+                      "uid": "35240-9d8a1480-dd56-444b-988d-bb4511ef8124"
+                    },
+                    {
+                      "id": "c6f75c26-153f-428c-9967-021d28f8ec68",
+                      "name": "Authentication credentials missing or invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/datasets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "datasets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:55.000Z",
+                      "updatedAt": "2026-07-28T01:13:55.000Z",
+                      "uid": "35240-c6f75c26-153f-428c-9967-021d28f8ec68"
+                    },
+                    {
+                      "id": "ffd11ead-02c3-47f9-a541-787d85e22b35",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/catalogs/:catalogId/datasets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "catalogs",
+                            ":catalogId",
+                            "datasets"
+                          ],
+                          "variable": [
+                            {
+                              "key": "catalogId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:13:55.000Z",
+                      "updatedAt": "2026-07-28T01:13:55.000Z",
+                      "uid": "35240-ffd11ead-02c3-47f9-a541-787d85e22b35"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:13:55.000Z",
+                  "updatedAt": "2026-07-28T01:13:55.000Z",
+                  "uid": "35240-55bd8d2e-1a99-4c51-b0e9-1ac700ea7b35"
+                }
+              ],
+              "id": "ab1e8917-51b7-4719-8a88-a9cf829c7b07",
+              "createdAt": "2026-07-28T01:13:55.000Z",
+              "updatedAt": "2026-07-28T01:13:55.000Z",
+              "uid": "35240-ab1e8917-51b7-4719-8a88-a9cf829c7b07"
+            },
+            {
+              "name": "Get Catalog Details",
+              "id": "384414dc-ac33-4c01-9120-facf1a646e2b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalogs/:catalogId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalogs",
+                    ":catalogId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5974da6a-6dce-4d0c-a55a-f4060e11fa32",
+                      "key": "catalogId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier for the catalog"
+                    }
+                  ]
+                },
+                "description": "Returns details and links for a specific catalog."
+              },
+              "response": [
+                {
+                  "id": "f7adf123-8130-424f-9c82-d54c218b95cb",
+                  "name": "Catalog details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "catalogId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"identifier\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"links\": {\n    \"universes\": \"<uri>\",\n    \"fieldLists\": \"<uri>\",\n    \"triggers\": \"<uri>\",\n    \"requests\": \"<uri>\",\n    \"distributions\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:13:55.000Z",
+                  "updatedAt": "2026-07-28T01:13:55.000Z",
+                  "uid": "35240-f7adf123-8130-424f-9c82-d54c218b95cb"
+                },
+                {
+                  "id": "1e1751f4-ee02-482f-aef4-e1953a0f1e81",
+                  "name": "Authentication credentials missing or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "catalogId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:13:55.000Z",
+                  "updatedAt": "2026-07-28T01:13:55.000Z",
+                  "uid": "35240-1e1751f4-ee02-482f-aef4-e1953a0f1e81"
+                },
+                {
+                  "id": "b982c818-dbf9-4f75-963d-0bff40b2bcfb",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/catalogs/:catalogId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "catalogs",
+                        ":catalogId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "catalogId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:13:55.000Z",
+                  "updatedAt": "2026-07-28T01:13:55.000Z",
+                  "uid": "35240-b982c818-dbf9-4f75-963d-0bff40b2bcfb"
+                }
+              ],
+              "createdAt": "2026-07-28T01:13:55.000Z",
+              "updatedAt": "2026-07-28T01:13:55.000Z",
+              "uid": "35240-384414dc-ac33-4c01-9120-facf1a646e2b"
+            }
+          ],
+          "id": "453b0b7c-83dc-4a95-b301-6373ed21e0d7",
+          "createdAt": "2026-07-28T01:13:55.000Z",
+          "updatedAt": "2026-07-28T01:13:55.000Z",
+          "uid": "35240-453b0b7c-83dc-4a95-b301-6373ed21e0d7"
+        },
+        {
+          "name": "List Available Catalogs",
+          "id": "4d177fdc-6c14-4b66-8e35-9ff0e1a81ca0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/catalogs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "catalogs"
+              ]
+            },
+            "description": "Returns a collection of catalogs available to the authenticated user. Each catalog represents a logical grouping of data services."
+          },
+          "response": [
+            {
+              "id": "82ebaf18-e0a2-4bad-beb8-34f72ee2c211",
+              "name": "A list of available catalogs",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalogs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalogs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"contains\": [\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"links\": {\n        \"universes\": \"<uri>\",\n        \"fieldLists\": \"<uri>\",\n        \"triggers\": \"<uri>\",\n        \"requests\": \"<uri>\",\n        \"distributions\": \"<uri>\"\n      }\n    },\n    {\n      \"identifier\": \"<string>\",\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"links\": {\n        \"universes\": \"<uri>\",\n        \"fieldLists\": \"<uri>\",\n        \"triggers\": \"<uri>\",\n        \"requests\": \"<uri>\",\n        \"distributions\": \"<uri>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:13:55.000Z",
+              "updatedAt": "2026-07-28T01:13:55.000Z",
+              "uid": "35240-82ebaf18-e0a2-4bad-beb8-34f72ee2c211"
+            },
+            {
+              "id": "66e8a981-6c27-44e1-8511-0edac21001d3",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/catalogs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "catalogs"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:13:55.000Z",
+              "updatedAt": "2026-07-28T01:13:55.000Z",
+              "uid": "35240-66e8a981-6c27-44e1-8511-0edac21001d3"
+            }
+          ],
+          "createdAt": "2026-07-28T01:13:55.000Z",
+          "updatedAt": "2026-07-28T01:13:55.000Z",
+          "uid": "35240-4d177fdc-6c14-4b66-8e35-9ff0e1a81ca0"
+        }
+      ],
+      "id": "00dee647-c66e-4197-a5b3-0ea3692036fc",
+      "createdAt": "2026-07-28T01:13:55.000Z",
+      "updatedAt": "2026-07-28T01:13:55.000Z",
+      "uid": "35240-00dee647-c66e-4197-a5b3-0ea3692036fc"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bloomberg.com/eap"
+    }
+  ]
+}
