@@ -10,9 +10,12 @@
     },
     {
       "source": "https://www.bloomberg.com/notices/",
-      "error": "HTTPError"
+      "feed_url": "https://www.bloomberg.com/notices/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "fetched": "2026-08-01T15:49:00Z",
+  "fetched": "2026-08-06T14:08:46Z",
   "post_count": 20
 }
