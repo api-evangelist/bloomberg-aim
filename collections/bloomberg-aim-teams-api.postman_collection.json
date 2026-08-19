@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "63b1a55e-cb3e-4555-a195-5b14582ba976",
+      "name": "Teams",
+      "description": {
+        "content": "Manage EMSX teams and assignments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6d12dd2f-3560-4f6c-9f4c-ac3f4b2de933",
+          "name": "Get Emsx Teams",
+          "request": {
+            "name": "Get Emsx Teams",
+            "description": {
+              "content": "Retrieves the list of EMSX teams available to the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "GetTeams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0c47280-5da9-4b82-a362-f35e93e8221d",
+              "name": "List of teams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetTeams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"teams\": [\n    {\n      \"name\": \"Example Title\",\n      \"members\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc1f795d-c4ed-48e6-912a-b320fd97e208",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetTeams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca284f27-75ea-45b9-9430-292d25923b52",
+          "name": "Assign a Trader to an Order",
+          "request": {
+            "name": "Assign a Trader to an Order",
+            "description": {
+              "content": "Assigns or reassigns a trader to handle a specific order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "AssignTrader"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\",\n  \"EMSX_TRADER_UUID\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b0707638-8d54-4f95-b7d9-580224992d7d",
+              "name": "Trader assigned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "AssignTrader"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"EMSX_TRADER_UUID\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "914a3673-99c2-4977-8222-e9ca4a388da9",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "AssignTrader"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"EMSX_TRADER_UUID\": \"500123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bloomberg.com/eap",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "51123a84-25cb-402f-bea4-38364bf3e3f1",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

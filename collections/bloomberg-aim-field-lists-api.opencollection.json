@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Field Lists API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Field Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Fields in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fields",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "category",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter fields by data category"
+              }
+            ]
+          },
+          "docs": "Returns the fields available for data requests within a catalog. Fields can be filtered by asset class or data category."
+        },
+        {
+          "info": {
+            "name": "List Field Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns all field lists defined in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Field List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new field list specifying which data fields to include in a data request."
+        },
+        {
+          "info": {
+            "name": "Get Field List Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/fieldLists/:fieldListId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "fieldListId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the field list"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific field list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

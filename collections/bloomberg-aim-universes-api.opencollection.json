@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Universes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Universes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Universes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the security universes defined in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Universe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new security universe containing a set of identifiers (tickers, FIGIs, ISINs, CUSIPs, SEDOLs, etc.) for data requests."
+        },
+        {
+          "info": {
+            "name": "Get Universe Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/universes/:universeId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "universeId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the universe"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific security universe."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

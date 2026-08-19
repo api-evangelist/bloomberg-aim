@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Routes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Order and Route Simultaneously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/CreateOrderAndRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order and immediately routes it to a specified broker in a single operation."
+        },
+        {
+          "info": {
+            "name": "Route Multiple Orders as a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/GroupRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Routes a group of orders to a single broker in a single operation, useful for basket or program trading."
+        },
+        {
+          "info": {
+            "name": "Route an Order to a Broker",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/RouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Routes an existing order to a specific broker with optional strategy parameters."
+        },
+        {
+          "info": {
+            "name": "Modify a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/ModifyRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies parameters of an existing route, such as quantity or strategy parameters."
+        },
+        {
+          "info": {
+            "name": "Delete (cancel) a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/DeleteRoute",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active route. Only routes that have not been fully filled can be cancelled."
+        },
+        {
+          "info": {
+            "name": "Get Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/GetRoutes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current list of routes associated with orders in the EMSX blotter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

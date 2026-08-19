@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "be7f59b1-0dee-4689-8413-8aa922dc2f90",
+      "name": "Broker Strategies",
+      "description": {
+        "content": "Query available broker strategies and parameters",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8014f7b5-4237-47cd-8c9b-0d6b15bbdd7e",
+          "name": "Get Broker Strategies",
+          "request": {
+            "name": "Get Broker Strategies",
+            "description": {
+              "content": "Retrieves available trading strategies for a specific broker and asset class combination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "GetBrokerStrategiesWithAssetClass"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_BROKER\": \"<string>\",\n  \"EMSX_ASSET_CLASS\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b6aa6f2b-9200-4eec-80a5-8e2cd7389ed2",
+              "name": "Available broker strategies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetBrokerStrategiesWithAssetClass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_BROKER\": \"example_value\",\n  \"EMSX_ASSET_CLASS\": \"EQTY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"strategies\": [\n    \"example_value\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f32cc87b-177d-4f49-bf37-95820756f7a2",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetBrokerStrategiesWithAssetClass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_BROKER\": \"example_value\",\n  \"EMSX_ASSET_CLASS\": \"EQTY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a826913-3b98-411a-87e4-cee6d82ede0b",
+          "name": "Get Broker Strategy Details",
+          "request": {
+            "name": "Get Broker Strategy Details",
+            "description": {
+              "content": "Retrieves detailed information about a specific broker strategy including its parameters and constraints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "GetBrokerStrategyInfoWithAssetClass"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_BROKER\": \"<string>\",\n  \"EMSX_STRATEGY\": \"<string>\",\n  \"EMSX_ASSET_CLASS\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "606edf00-e92e-4a35-9ab5-13d5b0241ced",
+              "name": "Strategy details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetBrokerStrategyInfoWithAssetClass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_BROKER\": \"example_value\",\n  \"EMSX_STRATEGY\": \"example_value\",\n  \"EMSX_ASSET_CLASS\": \"EQTY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"strategyInfo\": {\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"parameters\": [\n      {\n        \"name\": \"Example Title\",\n        \"description\": \"A sample description.\",\n        \"type\": \"example_value\",\n        \"required\": true,\n        \"allowedValues\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7133a5a0-4d1c-4ee2-8565-469c0dd153f4",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetBrokerStrategyInfoWithAssetClass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_BROKER\": \"example_value\",\n  \"EMSX_STRATEGY\": \"example_value\",\n  \"EMSX_ASSET_CLASS\": \"EQTY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bloomberg.com/eap",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ff66c89-e7a2-4045-baca-d397894c41e6",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

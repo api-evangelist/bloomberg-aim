@@ -1,0 +1,836 @@
+{
+  "item": [
+    {
+      "id": "f20ca222-2378-4c49-ad56-8a75af7bd47e",
+      "name": "Orders",
+      "description": {
+        "content": "Create, modify, and manage orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc4d5e32-0ac7-4917-bd79-2fc56d48631f",
+          "name": "Create a New Order",
+          "request": {
+            "name": "Create a New Order",
+            "description": {
+              "content": "Creates a new order in the EMSX blotter. Orders can be created for equities, futures, and options with various order types and time-in-force parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "CreateOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_TICKER\": \"<string>\",\n  \"EMSX_AMOUNT\": \"<integer>\",\n  \"EMSX_ORDER_TYPE\": \"<string>\",\n  \"EMSX_SIDE\": \"<string>\",\n  \"EMSX_TIF\": \"<string>\",\n  \"EMSX_LIMIT_PRICE\": \"<number>\",\n  \"EMSX_STOP_PRICE\": \"<number>\",\n  \"EMSX_ACCOUNT\": \"<string>\",\n  \"EMSX_NOTES\": \"<string>\",\n  \"EMSX_HAND_INSTRUCTION\": \"<string>\",\n  \"EMSX_BASKET_NAME\": \"<string>\",\n  \"EMSX_CFD_FLAG\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE1\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE2\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE3\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE4\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE5\": \"<string>\",\n  \"EMSX_GTD_DATE\": \"<string>\",\n  \"EMSX_INVESTOR_ID\": \"<string>\",\n  \"EMSX_LOCATE_BROKER\": \"<string>\",\n  \"EMSX_LOCATE_ID\": \"<string>\",\n  \"EMSX_PORTFOLIO\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf28bc3a-cc34-4a7e-b2cb-e8e7030aea62",
+              "name": "Order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "CreateOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_TICKER\": \"example_value\",\n  \"EMSX_AMOUNT\": 10,\n  \"EMSX_ORDER_TYPE\": \"MKT\",\n  \"EMSX_SIDE\": \"BUY\",\n  \"EMSX_TIF\": \"DAY\",\n  \"EMSX_LIMIT_PRICE\": 42.5,\n  \"EMSX_STOP_PRICE\": 42.5,\n  \"EMSX_ACCOUNT\": \"example_value\",\n  \"EMSX_NOTES\": \"example_value\",\n  \"EMSX_HAND_INSTRUCTION\": \"ANY\",\n  \"EMSX_BASKET_NAME\": \"example_value\",\n  \"EMSX_CFD_FLAG\": \"Y\",\n  \"EMSX_CUSTOM_NOTE1\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE2\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE3\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE4\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE5\": \"example_value\",\n  \"EMSX_GTD_DATE\": \"example_value\",\n  \"EMSX_INVESTOR_ID\": \"500123\",\n  \"EMSX_LOCATE_BROKER\": \"example_value\",\n  \"EMSX_LOCATE_ID\": \"500123\",\n  \"EMSX_PORTFOLIO\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"MESSAGE\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c455e34-af24-4cd4-bf77-d1f9d5a61f87",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "CreateOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_TICKER\": \"example_value\",\n  \"EMSX_AMOUNT\": 10,\n  \"EMSX_ORDER_TYPE\": \"MKT\",\n  \"EMSX_SIDE\": \"BUY\",\n  \"EMSX_TIF\": \"DAY\",\n  \"EMSX_LIMIT_PRICE\": 42.5,\n  \"EMSX_STOP_PRICE\": 42.5,\n  \"EMSX_ACCOUNT\": \"example_value\",\n  \"EMSX_NOTES\": \"example_value\",\n  \"EMSX_HAND_INSTRUCTION\": \"ANY\",\n  \"EMSX_BASKET_NAME\": \"example_value\",\n  \"EMSX_CFD_FLAG\": \"Y\",\n  \"EMSX_CUSTOM_NOTE1\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE2\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE3\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE4\": \"example_value\",\n  \"EMSX_CUSTOM_NOTE5\": \"example_value\",\n  \"EMSX_GTD_DATE\": \"example_value\",\n  \"EMSX_INVESTOR_ID\": \"500123\",\n  \"EMSX_LOCATE_BROKER\": \"example_value\",\n  \"EMSX_LOCATE_ID\": \"500123\",\n  \"EMSX_PORTFOLIO\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5844cb60-23d6-4d94-b21b-742a6ff72624",
+          "name": "Create an Order and Route Simultaneously",
+          "request": {
+            "name": "Create an Order and Route Simultaneously",
+            "description": {
+              "content": "Creates a new order and immediately routes it to a specified broker in a single operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "CreateOrderAndRouteEx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_AMOUNT\": \"<integer>\",\n  \"EMSX_BROKER\": \"<string>\",\n  \"EMSX_ORDER_TYPE\": \"<string>\",\n  \"EMSX_SIDE\": \"<string>\",\n  \"EMSX_TICKER\": \"<string>\",\n  \"EMSX_TIF\": \"<string>\",\n  \"EMSX_LIMIT_PRICE\": \"<number>\",\n  \"EMSX_STOP_PRICE\": \"<number>\",\n  \"EMSX_ACCOUNT\": \"<string>\",\n  \"EMSX_NOTES\": \"<string>\",\n  \"EMSX_HAND_INSTRUCTION\": \"<string>\",\n  \"EMSX_BASKET_NAME\": \"<string>\",\n  \"EMSX_CFD_FLAG\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE1\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE2\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE3\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE4\": \"<string>\",\n  \"EMSX_CUSTOM_NOTE5\": \"<string>\",\n  \"EMSX_GTD_DATE\": \"<string>\",\n  \"EMSX_INVESTOR_ID\": \"<string>\",\n  \"EMSX_LOCATE_BROKER\": \"<string>\",\n  \"EMSX_LOCATE_ID\": \"<string>\",\n  \"EMSX_PORTFOLIO\": \"<string>\",\n  \"EMSX_STRATEGY\": \"<string>\",\n  \"EMSX_STRATEGY_PARAMS\": {\n    \"key_0\": 6232\n  },\n  \"EMSX_EXEC_INSTRUCTIONS\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6234496-3944-4594-b012-bdb5f2f90fc3",
+              "name": "Order created and routed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "CreateOrderAndRouteEx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"EMSX_ROUTE_ID\": \"500123\",\n  \"MESSAGE\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33a6aace-8509-4f03-85d1-b787245bd766",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "CreateOrderAndRouteEx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6fae74f-a383-4749-b4a5-11c253c032dc",
+          "name": "Modify an Existing Order",
+          "request": {
+            "name": "Modify an Existing Order",
+            "description": {
+              "content": "Modifies parameters of an existing order such as quantity, limit price, or time-in-force.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "ModifyOrderEx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\",\n  \"EMSX_AMOUNT\": \"<integer>\",\n  \"EMSX_ORDER_TYPE\": \"<string>\",\n  \"EMSX_LIMIT_PRICE\": \"<number>\",\n  \"EMSX_STOP_PRICE\": \"<number>\",\n  \"EMSX_TIF\": \"<string>\",\n  \"EMSX_NOTES\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d4fa92f-a6fa-4f68-a730-6ceb897a2b68",
+              "name": "Order modified successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "ModifyOrderEx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"EMSX_AMOUNT\": 10,\n  \"EMSX_ORDER_TYPE\": \"MKT\",\n  \"EMSX_LIMIT_PRICE\": 42.5,\n  \"EMSX_STOP_PRICE\": 42.5,\n  \"EMSX_TIF\": \"DAY\",\n  \"EMSX_NOTES\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b153c4a-c063-42c7-ac56-4e1e34910365",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "ModifyOrderEx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10,\n  \"EMSX_AMOUNT\": 10,\n  \"EMSX_ORDER_TYPE\": \"MKT\",\n  \"EMSX_LIMIT_PRICE\": 42.5,\n  \"EMSX_STOP_PRICE\": 42.5,\n  \"EMSX_TIF\": \"DAY\",\n  \"EMSX_NOTES\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6334a50-96a3-4f1a-9fee-d38231a4b85d",
+          "name": "Delete an Order",
+          "request": {
+            "name": "Delete an Order",
+            "description": {
+              "content": "Deletes (cancels) an order from the EMSX blotter. Only orders that have not been fully filled can be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "DeleteOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EMSX_SEQUENCE\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d6429e0f-a6cb-4c3f-82c0-03f1be3ad563",
+              "name": "Order deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "DeleteOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dda0459a-8195-4116-86e0-5c9d4372dcd8",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "DeleteOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EMSX_SEQUENCE\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dec1e30b-42f0-4498-9ca7-90f55c71dc37",
+          "name": "Get Orders",
+          "request": {
+            "name": "Get Orders",
+            "description": {
+              "content": "Retrieves the current list of orders in the EMSX blotter, optionally filtered by status or other parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "emapisvc",
+                "GetOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scope\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93bba939-7c61-4534-a184-40fc72e4079c",
+              "name": "List of orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"EMSX_SEQUENCE\": 10,\n      \"EMSX_TICKER\": \"example_value\",\n      \"EMSX_SIDE\": \"BUY\",\n      \"EMSX_AMOUNT\": 10,\n      \"EMSX_FILLED\": 10,\n      \"EMSX_WORKING\": 10,\n      \"EMSX_ORDER_TYPE\": \"example_value\",\n      \"EMSX_LIMIT_PRICE\": 42.5,\n      \"EMSX_STOP_PRICE\": 42.5,\n      \"EMSX_TIF\": \"example_value\",\n      \"EMSX_STATUS\": \"ASSIGN\",\n      \"EMSX_AVG_PRICE\": 42.5,\n      \"EMSX_ACCOUNT\": \"example_value\",\n      \"EMSX_TRADER\": \"example_value\",\n      \"EMSX_NOTES\": \"example_value\",\n      \"EMSX_BASKET_NAME\": \"example_value\",\n      \"EMSX_DATE\": \"example_value\",\n      \"EMSX_TIME_STAMP\": \"example_value\",\n      \"EMSX_PORTFOLIO\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4d9c6d9-aaa9-444d-af42-2028a102e823",
+              "name": "Invalid request parameters or business rule violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "emapisvc",
+                    "GetOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"STATUS\": 10,\n  \"MESSAGE\": \"example_value\",\n  \"REASON\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bloomberg.com/eap",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b69c5155-05e3-48d9-9cf5-1e849ddc28fe",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

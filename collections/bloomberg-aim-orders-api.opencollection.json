@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Orders API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a New Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/CreateOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order in the EMSX blotter. Orders can be created for equities, futures, and options with various order types and time-in-force parameters."
+        },
+        {
+          "info": {
+            "name": "Create an Order and Route Simultaneously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/CreateOrderAndRouteEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order and immediately routes it to a specified broker in a single operation."
+        },
+        {
+          "info": {
+            "name": "Modify an Existing Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/ModifyOrderEx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies parameters of an existing order such as quantity, limit price, or time-in-force."
+        },
+        {
+          "info": {
+            "name": "Delete an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/DeleteOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes (cancels) an order from the EMSX blotter. Only orders that have not been fully filled can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/request/blp/emapisvc/GetOrders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the current list of orders in the EMSX blotter, optionally filtered by status or other parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Triggers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the scheduling triggers available in the catalog."
+        },
+        {
+          "info": {
+            "name": "Create a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a scheduling trigger to control when data requests are executed and delivered."
+        },
+        {
+          "info": {
+            "name": "Get Trigger Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/triggers/:triggerId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "triggerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the trigger"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific trigger."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

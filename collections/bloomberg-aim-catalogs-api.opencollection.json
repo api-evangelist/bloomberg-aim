@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Catalogs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs"
+          },
+          "docs": "Returns a collection of catalogs available to the authenticated user. Each catalog represents a logical grouping of data services."
+        },
+        {
+          "info": {
+            "name": "Get Catalog Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns details and links for a specific catalog."
+        },
+        {
+          "info": {
+            "name": "List Datasets in a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/datasets",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              }
+            ]
+          },
+          "docs": "Returns the datasets available within a specific catalog."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

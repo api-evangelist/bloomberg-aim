@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "86c07805-b9cb-467e-b2e9-aafa1fe01371",
+      "name": "Historical Data",
+      "description": {
+        "content": "Request historical end-of-day or intraday data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86239c74-3793-4c0e-b53f-f98b35546d97",
+          "name": "Request Historical Data",
+          "request": {
+            "name": "Request Historical Data",
+            "description": {
+              "content": "Retrieves historical end-of-day data for a set of securities and fields over a specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request",
+                "blp",
+                "refdata",
+                "HistoricalDataRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"securities\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<string>\",\n  \"endDate\": \"<string>\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"<string>\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"fieldId\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"ACTIVE_DAYS_ONLY\",\n  \"nonTradingDayFillMethod\": \"NIL_VALUE\",\n  \"adjustmentNormal\": false,\n  \"adjustmentAbnormal\": false,\n  \"adjustmentSplit\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9096109a-e319-4f42-bbc1-4ee9f17b3c2f",
+              "name": "Historical data response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"securityData\": {\n        \"security\": \"example_value\",\n        \"fieldData\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3327c7c5-79dc-4ce4-9e94-459a456ff7d9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0490013-63b8-44c6-ae4b-371258d99a0b",
+              "name": "Internal server error or BLPAPI service error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "blp",
+                    "refdata",
+                    "HistoricalDataRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"securities\": [\n    \"example_value\"\n  ],\n  \"fields\": [\n    \"example_value\"\n  ],\n  \"startDate\": \"example_value\",\n  \"endDate\": \"example_value\",\n  \"periodicitySelection\": \"DAILY\",\n  \"periodicityAdjustment\": \"ACTUAL\",\n  \"currency\": \"example_value\",\n  \"overrides\": [\n    {\n      \"fieldId\": \"500123\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"nonTradingDayFillOption\": \"NON_TRADING_WEEKDAYS\",\n  \"nonTradingDayFillMethod\": \"PREVIOUS_VALUE\",\n  \"adjustmentNormal\": true,\n  \"adjustmentAbnormal\": true,\n  \"adjustmentSplit\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bloomberg.com/eap",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a1d52f0-2932-4a49-b66e-368a2bc23f50",
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Historical Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.\n\nContact Support:\n Name: Bloomberg Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bloomberg Data License API (HAPI) Broker Strategies Replies API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Replies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Replies for a Distribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions/:distributionId/replies",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the distribution"
+              }
+            ]
+          },
+          "docs": "Returns the individual reply files available for download within a distribution."
+        },
+        {
+          "info": {
+            "name": "Download a Reply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bloomberg.com/eap/catalogs/:catalogId/distributions/:distributionId/replies/:replyId",
+            "params": [
+              {
+                "name": "catalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog"
+              },
+              {
+                "name": "distributionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the distribution"
+              },
+              {
+                "name": "replyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the reply"
+              }
+            ]
+          },
+          "docs": "Downloads the data content of a specific reply within a distribution. The response format depends on the request configuration (JSON, CSV, etc.)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
