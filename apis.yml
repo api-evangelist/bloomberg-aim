@@ -24,6 +24,12 @@ tags:
   - Financial Data
   - Market Data
   - Order Management
+  - Portfolio-Management
+  - Trading
+tags_raw:
+  - Financial Data
+  - Market Data
+  - Order Management
   - Portfolio Management
   - Trading
 url: https://raw.githubusercontent.com/api-evangelist/bloomberg-aim/refs/heads/main/apis.yml
@@ -231,6 +237,8 @@ apis:
   humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
   baseURL: https://api.bloomberg.com/eap
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -331,6 +339,8 @@ apis:
   humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
   baseURL: https://api.bloomberg.com/eap
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
