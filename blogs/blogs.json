@@ -9,14 +9,13 @@
       "method": "feed"
     },
     {
-      "source": "https://www.bloomberg.com/notices/feed/",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://www.bloomberg.com/notices/",
-      "error": "HTTPError"
+      "feed_url": "https://www.bloomberg.com/notices/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-08-15T12:22:01Z",
+  "fetched": "2026-08-22T20:20:02Z",
   "post_count": 20
 }
