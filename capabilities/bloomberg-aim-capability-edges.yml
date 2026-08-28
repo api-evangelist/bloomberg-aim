@@ -1,0 +1,49 @@
+slug: bloomberg-aim
+provider: Bloomberg AIM
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Orders
+  spec_file: bloomberg-aim-orders-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.95
+  evidence: POST /request/blp/emapisvc/CreateOrderAndRouteEx  Create an Order and Route Simultaneously;
+    ModifyOrderEx  Modify an Existing Order
+  reason: Full lifecycle of trading orders — create, modify, delete, retrieve, and route to execution
+    — which is exactly Trading Order Management (order capture, execution, routing) in a buy-side EMS/OMS
+    context.
+- tag: Routes
+  spec_file: bloomberg-aim-routes-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.9
+  evidence: POST /request/blp/emapisvc/RouteEx  Route an Order to a Broker; GroupRouteEx  Route Multiple
+    Orders as a Group
+  reason: Routing of orders to brokers/venues, including group routing, modification and cancellation
+    — this is order execution and routing, squarely Trading Order Management.
+- tag: Fills
+  spec_file: bloomberg-aim-fills-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.75
+  evidence: POST /request/blp/emapisvc/GetFills  Get Fills; POST /request/blp/emapisvc/ManualFill  Record
+    a Manual Fill
+  reason: Fills are execution reports against trading orders in Bloomberg's EMSX order/execution service;
+    retrieving and recording fills is part of order capture and execution management. Some ambiguity with
+    trade capture/confirmation (BC-1380.10), but the operations sit inside the order-management service
+    alongside Orders and Routes.

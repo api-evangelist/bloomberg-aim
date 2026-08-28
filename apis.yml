@@ -5,6 +5,20 @@ description: Bloomberg's Asset and Investment Manager (AIM) is a comprehensive b
   of developer APIs including BLPAPI, Server API, and the Hypermedia API for programmatic access to market data,
   analytics, and enterprise services.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -394,6 +408,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/bloomberg/blpapi-http
 common:
+- type: CapabilityMap
+  url: capabilities/bloomberg-aim-capability-edges.yml
+  name: Bloomberg AIM Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/bloomberg/
   name: Bloomberg
