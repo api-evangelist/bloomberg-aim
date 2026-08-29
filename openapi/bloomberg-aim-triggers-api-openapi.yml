@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Triggers API
+  title: Bloomberg Data License API (HAPI) Triggers API
   description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
   version: 1.0.0
   contact:
@@ -149,6 +149,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    TriggerCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
     Trigger:
       type: object
       properties:
@@ -180,27 +201,6 @@ components:
         timezone:
           type: string
           description: Timezone for the trigger schedule
-          example: example_value
-    TriggerCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trigger'
-          example: []
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
           example: example_value
     TriggerCreate:
       type: object
@@ -234,13 +234,6 @@ components:
           type: string
           example: example_value
   parameters:
-    triggerId:
-      name: triggerId
-      in: path
-      required: true
-      description: Unique identifier for the trigger
-      schema:
-        type: string
     catalogId:
       name: catalogId
       in: path
@@ -248,15 +241,22 @@ components:
       description: Unique identifier for the catalog
       schema:
         type: string
+    triggerId:
+      name: triggerId
+      in: path
+      required: true
+      description: Unique identifier for the trigger
+      schema:
+        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

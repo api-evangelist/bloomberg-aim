@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Requests API
+  title: Bloomberg Data License API (HAPI) Requests API
   description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
   version: 1.0.0
   contact:
@@ -182,15 +182,35 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier for the data request
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   schemas:
-    RequestCollection:
+    Error:
       type: object
       properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataRequest'
-          example: []
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
     DataRequest:
       type: object
       properties:
@@ -234,6 +254,14 @@ components:
           - inactive
           - error
           example: active
+    RequestCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRequest'
+          example: []
     RequestCreate:
       type: object
       required:
@@ -284,43 +312,15 @@ components:
             columnHeader:
               type: boolean
           example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
-  parameters:
-    requestId:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier for the data request
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

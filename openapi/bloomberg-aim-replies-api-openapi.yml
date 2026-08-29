@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Replies API
+  title: Bloomberg Data License API (HAPI) Replies API
   description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
   version: 1.0.0
   contact:
@@ -96,49 +96,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    distributionId:
-      name: distributionId
-      in: path
-      required: true
-      description: Unique identifier for the distribution
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
-    replyId:
-      name: replyId
-      in: path
-      required: true
-      description: Unique identifier for the reply
-      schema:
-        type: string
   schemas:
-    Reply:
-      type: object
-      properties:
-        '@type':
-          type: string
-          const: Reply
-          example: example_value
-        identifier:
-          type: string
-          example: example_value
-        distributionId:
-          type: string
-          example: '500123'
-        contentType:
-          type: string
-          example: example_value
-        size:
-          type: integer
-          description: Size in bytes
-          example: 10
     ReplyCollection:
       type: object
       properties:
@@ -174,15 +132,57 @@ components:
             type: object
             additionalProperties: true
           example: []
+    Reply:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Reply
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        distributionId:
+          type: string
+          example: '500123'
+        contentType:
+          type: string
+          example: example_value
+        size:
+          type: integer
+          description: Size in bytes
+          example: 10
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      description: Unique identifier for the reply
+      schema:
+        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

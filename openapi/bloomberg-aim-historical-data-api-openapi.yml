@@ -1,21 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Historical Data API
-  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  title: Bloomberg HTTP Historical Data API
+  description: Makes the Bloomberg Open API available via HTTP and WebSockets, allowing clients to access reference and historical request-response data as well as subscribe to live streaming market data. This API wraps the BLPAPI protocol into RESTful HTTP endpoints and WebSocket connections.
   version: 1.0.0
   contact:
     name: Bloomberg Developer Support
-    url: https://developer.bloomberg.com/
+    url: https://github.com/bloomberg/blpapi-http
   license:
-    name: Proprietary
-    url: https://www.bloomberg.com/notices/tos/
-  termsOfService: https://www.bloomberg.com/notices/tos/
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: https://api.bloomberg.com/eap
-  description: Bloomberg Enterprise Access Point (Production)
+- url: https://localhost:3000
+  description: Local Bloomberg HTTP API server (default)
 security:
-- bearerAuth: []
-- oauth2: []
+- basicAuth: []
 tags:
 - name: Historical Data
   description: Request historical end-of-day or intraday data
@@ -80,6 +78,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
     HistoricalDataResponse:
       type: object
       properties:
@@ -103,26 +110,6 @@ components:
                           format: date
                       additionalProperties: true
           example: []
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
-    Override:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          description: Bloomberg field mnemonic to override
-          example: '500123'
-        value:
-          type: string
-          description: Override value
-          example: example_value
     HistoricalDataRequest:
       type: object
       required:
@@ -208,6 +195,17 @@ components:
           type: boolean
           default: true
           example: true
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error
@@ -222,18 +220,7 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   securitySchemes:
-    bearerAuth:
+    basicAuth:
       type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 client credentials flow
-      flows:
-        clientCredentials:
-          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
-          scopes:
-            eap: Access to Enterprise Access Point data
-            eap.catalogs.read: Read catalog data
-            eap.catalogs.write: Write catalog data
+      scheme: basic
+      description: HTTP Basic authentication for the local API server

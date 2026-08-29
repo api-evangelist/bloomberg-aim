@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Catalogs API
+  title: Bloomberg Data License API (HAPI) Catalogs API
   description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
   version: 1.0.0
   contact:
@@ -156,14 +156,6 @@ components:
               type: string
               format: uri
           example: example_value
-    CatalogCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Catalog'
-          example: []
     Error:
       type: object
       properties:
@@ -185,6 +177,14 @@ components:
           items:
             $ref: '#/components/schemas/Dataset'
           example: []
+    CatalogCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Catalog'
+          example: []
     Dataset:
       type: object
       properties:
@@ -203,19 +203,6 @@ components:
         category:
           type: string
           example: example_value
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     catalogId:
       name: catalogId
@@ -224,6 +211,19 @@ components:
       description: Unique identifier for the catalog
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

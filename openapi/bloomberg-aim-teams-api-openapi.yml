@@ -1,21 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bloomberg Data License API (HAPI) Broker Strategies Teams API
-  description: Provides programmatic access to Bloomberg's comprehensive financial, pricing, reference, regulatory, and alternative data covering over 50 million securities and 56,000 fields via the Hypermedia API (HAPI). The BEAP/HAPI follows a hypermedia-driven REST architecture where clients discover resources through link relations in responses.
+  title: Bloomberg EMSX Teams API
+  description: The Execution Management System API allows developers to manage and automate trading for equities, futures, and options using an event-driven model with both subscription and request-response paradigms. EMSX provides order and route management, broker integration, and fill tracking via the BLPAPI protocol. This spec models the request-response operations as REST-like endpoints.
   version: 1.0.0
   contact:
     name: Bloomberg Developer Support
-    url: https://developer.bloomberg.com/
+    url: https://emsx-api-doc.readthedocs.io/
   license:
     name: Proprietary
     url: https://www.bloomberg.com/notices/tos/
   termsOfService: https://www.bloomberg.com/notices/tos/
 servers:
-- url: https://api.bloomberg.com/eap
-  description: Bloomberg Enterprise Access Point (Production)
+- url: https://localhost:3000
+  description: Bloomberg EMSX service via BLPAPI HTTP bridge
 security:
 - bearerAuth: []
-- oauth2: []
 tags:
 - name: Teams
   description: Manage EMSX teams and assignments
@@ -100,6 +99,33 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    GetTeamsResponse:
+      type: object
+      properties:
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              members:
+                type: array
+                items:
+                  type: string
+          example: []
     OperationResponse:
       type: object
       properties:
@@ -125,33 +151,6 @@ components:
           type: string
           description: UUID of the trader to assign
           example: '500123'
-    GetTeamsResponse:
-      type: object
-      properties:
-        teams:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              members:
-                type: array
-                items:
-                  type: string
-          example: []
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation
@@ -164,14 +163,4 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Bloomberg-issued JWT credential obtained from the Bloomberg Console.
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 client credentials flow
-      flows:
-        clientCredentials:
-          tokenUrl: https://bsso.blpprofessional.com/ext/api/as/token.oauth2
-          scopes:
-            eap: Access to Enterprise Access Point data
-            eap.catalogs.read: Read catalog data
-            eap.catalogs.write: Write catalog data
+      description: Bloomberg-issued JWT credential for EMSX access
