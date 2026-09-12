@@ -2,20 +2,15 @@
   "repo": "bloomberg-aim",
   "feeds": [
     {
-      "source": "https://www.techatbloomberg.com/feed/",
-      "feed_url": "https://www.techatbloomberg.com/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
+      "source": "https://www.bloomberg.com/notices/",
+      "error": "HTTPError"
     },
     {
-      "source": "https://www.bloomberg.com/notices/",
+      "source": "https://www.techatbloomberg.com/feed/",
       "error": "HTTPError"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 20,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
