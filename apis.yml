@@ -89,6 +89,8 @@ apis:
   humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
   baseURL: https://api.bloomberg.com/eap
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
