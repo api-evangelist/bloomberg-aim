@@ -96,15 +96,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      description: Unique identifier for the reply
+      schema:
+        type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
   schemas:
-    ReplyCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reply'
-          example: []
     Error:
       type: object
       properties:
@@ -132,6 +146,14 @@ components:
             type: object
             additionalProperties: true
           example: []
+    ReplyCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reply'
+          example: []
     Reply:
       type: object
       properties:
@@ -152,28 +174,6 @@ components:
           type: integer
           description: Size in bytes
           example: 10
-  parameters:
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
-    distributionId:
-      name: distributionId
-      in: path
-      required: true
-      description: Unique identifier for the distribution
-      schema:
-        type: string
-    replyId:
-      name: replyId
-      in: path
-      required: true
-      description: Unique identifier for the reply
-      schema:
-        type: string
   responses:
     NotFound:
       description: Resource not found

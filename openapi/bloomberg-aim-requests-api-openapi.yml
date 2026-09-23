@@ -182,22 +182,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    requestId:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier for the data request
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
   schemas:
+    RequestCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRequest'
+          example: []
     Error:
       type: object
       properties:
@@ -211,57 +204,6 @@ components:
             details:
               type: string
           example: example_value
-    DataRequest:
-      type: object
-      properties:
-        '@type':
-          type: string
-          const: DataRequest
-          example: example_value
-        identifier:
-          type: string
-          example: example_value
-        title:
-          type: string
-          example: Example Title
-        description:
-          type: string
-          example: A sample description.
-        universe:
-          type: string
-          format: uri
-          example: https://www.example.com
-        fieldList:
-          type: string
-          format: uri
-          example: https://www.example.com
-        trigger:
-          type: string
-          format: uri
-          example: https://www.example.com
-        formatting:
-          type: object
-          properties:
-            type:
-              type: string
-            dateFormat:
-              type: string
-          example: example_value
-        status:
-          type: string
-          enum:
-          - active
-          - inactive
-          - error
-          example: active
-    RequestCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataRequest'
-          example: []
     RequestCreate:
       type: object
       required:
@@ -312,6 +254,64 @@ components:
             columnHeader:
               type: boolean
           example: example_value
+    DataRequest:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: DataRequest
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        universe:
+          type: string
+          format: uri
+          example: https://www.example.com
+        fieldList:
+          type: string
+          format: uri
+          example: https://www.example.com
+        trigger:
+          type: string
+          format: uri
+          example: https://www.example.com
+        formatting:
+          type: object
+          properties:
+            type:
+              type: string
+            dateFormat:
+              type: string
+          example: example_value
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          - error
+          example: active
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier for the data request
+      schema:
+        type: string
   responses:
     NotFound:
       description: Resource not found
@@ -319,14 +319,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

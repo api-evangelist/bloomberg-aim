@@ -104,7 +104,57 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    FieldInfoRequest:
+      type: object
+      required:
+      - fieldId
+      properties:
+        fieldId:
+          type: array
+          items:
+            type: string
+          description: List of field mnemonics or IDs to look up
+          example: '500123'
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+          example: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    FieldSearchRequest:
+      type: object
+      required:
+      - searchSpec
+      properties:
+        searchSpec:
+          type: string
+          description: Search keyword or pattern
+          example: example_value
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+          example: true
     FieldSearchResponse:
       type: object
       properties:
@@ -134,30 +184,6 @@ components:
                           items:
                             type: string
           example: []
-    FieldInfoRequest:
-      type: object
-      required:
-      - fieldId
-      properties:
-        fieldId:
-          type: array
-          items:
-            type: string
-          description: List of field mnemonics or IDs to look up
-          example: '500123'
-        returnFieldDocumentation:
-          type: boolean
-          default: false
-          example: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     FieldInfoResponse:
       type: object
       properties:
@@ -189,32 +215,6 @@ components:
                         documentation:
                           type: string
           example: []
-    FieldSearchRequest:
-      type: object
-      required:
-      - searchSpec
-      properties:
-        searchSpec:
-          type: string
-          description: Search keyword or pattern
-          example: example_value
-        returnFieldDocumentation:
-          type: boolean
-          default: false
-          example: true
-  responses:
-    InternalError:
-      description: Internal server error or BLPAPI service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

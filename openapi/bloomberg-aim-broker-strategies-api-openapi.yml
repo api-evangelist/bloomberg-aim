@@ -107,6 +107,65 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    GetBrokerStrategiesResponse:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            type: string
+          description: List of available strategy names
+          example: []
+    GetBrokerStrategiesRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          description: Asset class
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
+    GetBrokerStrategyInfoRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_STRATEGY
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          example: example_value
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
     GetBrokerStrategyInfoResponse:
       type: object
       properties:
@@ -135,65 +194,6 @@ components:
                     items:
                       type: string
           example: example_value
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
-    GetBrokerStrategyInfoRequest:
-      type: object
-      required:
-      - EMSX_BROKER
-      - EMSX_STRATEGY
-      - EMSX_ASSET_CLASS
-      properties:
-        EMSX_BROKER:
-          type: string
-          example: example_value
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_ASSET_CLASS:
-          type: string
-          enum:
-          - EQTY
-          - OPT
-          - FUT
-          example: EQTY
-    GetBrokerStrategiesResponse:
-      type: object
-      properties:
-        strategies:
-          type: array
-          items:
-            type: string
-          description: List of available strategy names
-          example: []
-    GetBrokerStrategiesRequest:
-      type: object
-      required:
-      - EMSX_BROKER
-      - EMSX_ASSET_CLASS
-      properties:
-        EMSX_BROKER:
-          type: string
-          description: Broker code
-          example: example_value
-        EMSX_ASSET_CLASS:
-          type: string
-          description: Asset class
-          enum:
-          - EQTY
-          - OPT
-          - FUT
-          example: EQTY
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

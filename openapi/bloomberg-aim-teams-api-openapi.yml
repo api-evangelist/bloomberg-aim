@@ -111,6 +111,20 @@ components:
         REASON:
           type: string
           example: example_value
+    AssignTraderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_TRADER_UUID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_TRADER_UUID:
+          type: string
+          description: UUID of the trader to assign
+          example: '500123'
     GetTeamsResponse:
       type: object
       properties:
@@ -137,20 +151,6 @@ components:
           type: string
           description: Status message
           example: example_value
-    AssignTraderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_TRADER_UUID
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number
-          example: 10
-        EMSX_TRADER_UUID:
-          type: string
-          description: UUID of the trader to assign
-          example: '500123'
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

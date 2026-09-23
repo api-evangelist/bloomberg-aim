@@ -121,7 +121,62 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   schemas:
+    CatalogCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Catalog'
+          example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+    Dataset:
+      type: object
+      properties:
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        fieldCount:
+          type: integer
+          example: 10
+        category:
+          type: string
+          example: example_value
+    DatasetCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+          example: []
     Catalog:
       type: object
       properties:
@@ -156,61 +211,6 @@ components:
               type: string
               format: uri
           example: example_value
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
-    DatasetCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dataset'
-          example: []
-    CatalogCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Catalog'
-          example: []
-    Dataset:
-      type: object
-      properties:
-        identifier:
-          type: string
-          example: example_value
-        title:
-          type: string
-          example: Example Title
-        description:
-          type: string
-          example: A sample description.
-        fieldCount:
-          type: integer
-          example: 10
-        category:
-          type: string
-          example: example_value
-  parameters:
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
   responses:
     NotFound:
       description: Resource not found

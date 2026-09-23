@@ -153,15 +153,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     InstrumentListResponse:
       type: object
       properties:
@@ -178,69 +169,6 @@ components:
                     security:
                       type: string
                     description:
-                      type: string
-          example: []
-    CurveListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    curve:
-                      type: string
-                    description:
-                      type: string
-                    country:
-                      type: string
-                    currency:
-                      type: string
-                    type:
-                      type: string
-                    subtype:
-                      type: string
-          example: []
-    GovernmentLookupRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: Country or ticker search string
-          example: example_value
-        partialMatch:
-          type: boolean
-          default: false
-          example: true
-        maxResults:
-          type: integer
-          default: 10
-          example: 10
-    GovernmentLookupResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    description:
-                      type: string
-                    country:
                       type: string
           example: []
     CurveListRequest:
@@ -278,6 +206,32 @@ components:
           - SOVEREIGN
           - CORPORATE
           example: SOVEREIGN
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    GovernmentLookupRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Country or ticker search string
+          example: example_value
+        partialMatch:
+          type: boolean
+          default: false
+          example: true
+        maxResults:
+          type: integer
+          default: 10
+          example: 10
     InstrumentListRequest:
       type: object
       required:
@@ -313,6 +267,52 @@ components:
           type: string
           description: Two-letter language code
           example: example_value
+    CurveListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    curve:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+                    currency:
+                      type: string
+                    type:
+                      type: string
+                    subtype:
+                      type: string
+          example: []
+    GovernmentLookupResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+          example: []
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

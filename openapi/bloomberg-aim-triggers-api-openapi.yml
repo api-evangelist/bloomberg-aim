@@ -149,6 +149,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    TriggerCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - frequency
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        frequency:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
+        snapshotTime:
+          type: string
+          example: example_value
+        timezone:
+          type: string
+          example: example_value
     Error:
       type: object
       properties:
@@ -202,37 +233,6 @@ components:
           type: string
           description: Timezone for the trigger schedule
           example: example_value
-    TriggerCreate:
-      type: object
-      required:
-      - '@type'
-      - identifier
-      - frequency
-      properties:
-        '@type':
-          type: string
-          const: Trigger
-          example: example_value
-        identifier:
-          type: string
-          example: example_value
-        title:
-          type: string
-          example: Example Title
-        frequency:
-          type: string
-          enum:
-          - daily
-          - weekly
-          - monthly
-          - once
-          example: daily
-        snapshotTime:
-          type: string
-          example: example_value
-        timezone:
-          type: string
-          example: example_value
   parameters:
     catalogId:
       name: catalogId
@@ -255,14 +255,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

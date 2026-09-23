@@ -256,230 +256,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateOrderResponse:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Unique order sequence number assigned by EMSX
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
-    CreateOrderAndRouteResponse:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Unique order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Unique route identifier
-          example: '500123'
-        MESSAGE:
-          type: string
-          example: example_value
-    GetOrdersResponse:
-      type: object
-      properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-          example: []
-    Order:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Unique order sequence number
-          example: 10
-        EMSX_TICKER:
-          type: string
-          description: Security identifier
-          example: example_value
-        EMSX_SIDE:
-          type: string
-          enum:
-          - BUY
-          - SELL
-          - SHRT
-          example: BUY
-        EMSX_AMOUNT:
-          type: integer
-          description: Total order quantity
-          example: 10
-        EMSX_FILLED:
-          type: integer
-          description: Quantity filled so far
-          example: 10
-        EMSX_WORKING:
-          type: integer
-          description: Quantity currently working (routed but not filled)
-          example: 10
-        EMSX_ORDER_TYPE:
-          type: string
-          example: example_value
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          example: example_value
-        EMSX_STATUS:
-          type: string
-          description: Current order status
-          enum:
-          - ASSIGN
-          - CANCEL
-          - CONNECTED
-          - CXL_PND
-          - DONE
-          - EXPIRED
-          - FILL
-          - MOD_PND
-          - NEW
-          - PART_FILL
-          - RJCT
-          - SENT
-          - WORKING
-          example: ASSIGN
-        EMSX_AVG_PRICE:
-          type: number
-          description: Average fill price
-          example: 42.5
-        EMSX_ACCOUNT:
-          type: string
-          example: example_value
-        EMSX_TRADER:
-          type: string
-          example: example_value
-        EMSX_NOTES:
-          type: string
-          example: example_value
-        EMSX_BASKET_NAME:
-          type: string
-          example: example_value
-        EMSX_DATE:
-          type: string
-          description: Order creation date (YYYYMMDD)
-          example: example_value
-        EMSX_TIME_STAMP:
-          type: string
-          description: Last update timestamp
-          example: example_value
-        EMSX_PORTFOLIO:
-          type: string
-          example: example_value
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
-    ModifyOrderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number to modify
-          example: 10
-        EMSX_AMOUNT:
-          type: integer
-          description: New order quantity
-          example: 10
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_NOTES:
-          type: string
-          example: example_value
-    CreateOrderAndRouteRequest:
-      allOf:
-      - $ref: '#/components/schemas/CreateOrderRequest'
-      - type: object
-        required:
-        - EMSX_BROKER
-        properties:
-          EMSX_BROKER:
-            type: string
-            description: Broker code for routing
-          EMSX_STRATEGY:
-            type: string
-            description: Broker execution strategy name
-          EMSX_STRATEGY_PARAMS:
-            type: object
-            description: Strategy-specific parameters
-            additionalProperties: true
-          EMSX_EXEC_INSTRUCTIONS:
-            type: string
-            description: Execution instructions for the broker
-    DeleteOrderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number to delete
-          example: 10
-    GetOrdersRequest:
-      type: object
-      properties:
-        scope:
-          type: string
-          description: Scope of orders to retrieve
-          enum:
-          - PRIVATE
-          - TEAM
-          example: PRIVATE
     CreateOrderRequest:
       type: object
       required:
@@ -597,6 +373,230 @@ components:
         EMSX_PORTFOLIO:
           type: string
           description: Portfolio name for the order
+          example: example_value
+    Order:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_TICKER:
+          type: string
+          description: Security identifier
+          example: example_value
+        EMSX_SIDE:
+          type: string
+          enum:
+          - BUY
+          - SELL
+          - SHRT
+          example: BUY
+        EMSX_AMOUNT:
+          type: integer
+          description: Total order quantity
+          example: 10
+        EMSX_FILLED:
+          type: integer
+          description: Quantity filled so far
+          example: 10
+        EMSX_WORKING:
+          type: integer
+          description: Quantity currently working (routed but not filled)
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          example: example_value
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          example: example_value
+        EMSX_STATUS:
+          type: string
+          description: Current order status
+          enum:
+          - ASSIGN
+          - CANCEL
+          - CONNECTED
+          - CXL_PND
+          - DONE
+          - EXPIRED
+          - FILL
+          - MOD_PND
+          - NEW
+          - PART_FILL
+          - RJCT
+          - SENT
+          - WORKING
+          example: ASSIGN
+        EMSX_AVG_PRICE:
+          type: number
+          description: Average fill price
+          example: 42.5
+        EMSX_ACCOUNT:
+          type: string
+          example: example_value
+        EMSX_TRADER:
+          type: string
+          example: example_value
+        EMSX_NOTES:
+          type: string
+          example: example_value
+        EMSX_BASKET_NAME:
+          type: string
+          example: example_value
+        EMSX_DATE:
+          type: string
+          description: Order creation date (YYYYMMDD)
+          example: example_value
+        EMSX_TIME_STAMP:
+          type: string
+          description: Last update timestamp
+          example: example_value
+        EMSX_PORTFOLIO:
+          type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    DeleteOrderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to delete
+          example: 10
+    GetOrdersRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          description: Scope of orders to retrieve
+          enum:
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
+    ModifyOrderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to modify
+          example: 10
+        EMSX_AMOUNT:
+          type: integer
+          description: New order quantity
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_NOTES:
+          type: string
+          example: example_value
+    CreateOrderAndRouteRequest:
+      allOf:
+      - $ref: '#/components/schemas/CreateOrderRequest'
+      - type: object
+        required:
+        - EMSX_BROKER
+        properties:
+          EMSX_BROKER:
+            type: string
+            description: Broker code for routing
+          EMSX_STRATEGY:
+            type: string
+            description: Broker execution strategy name
+          EMSX_STRATEGY_PARAMS:
+            type: object
+            description: Strategy-specific parameters
+            additionalProperties: true
+          EMSX_EXEC_INSTRUCTIONS:
+            type: string
+            description: Execution instructions for the broker
+    GetOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+          example: []
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        MESSAGE:
+          type: string
+          example: example_value
+    CreateOrderResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number assigned by EMSX
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
           example: example_value
   responses:
     BadRequest:

@@ -115,6 +115,47 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    IntradayBarRequest:
+      type: object
+      required:
+      - security
+      - eventType
+      - startDateTime
+      - endDateTime
+      - interval
+      properties:
+        security:
+          type: string
+          description: Single security identifier
+          example: example_value
+        eventType:
+          type: string
+          enum:
+          - TRADE
+          - BID
+          - ASK
+          - BEST_BID
+          - BEST_ASK
+          default: TRADE
+          example: TRADE
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        endDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        interval:
+          type: integer
+          description: Bar interval in minutes
+          minimum: 1
+          maximum: 1440
+          example: 10
+        gapFillInitialBar:
+          type: boolean
+          default: false
+          example: true
     Error:
       type: object
       properties:
@@ -124,32 +165,6 @@ components:
         status:
           type: integer
           example: 10
-    IntradayTickResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              tickData:
-                type: object
-                properties:
-                  tickData:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        time:
-                          type: string
-                          format: date-time
-                        type:
-                          type: string
-                        value:
-                          type: number
-                        size:
-                          type: integer
-          example: []
     IntradayTickRequest:
       type: object
       required:
@@ -204,6 +219,32 @@ components:
           type: boolean
           default: false
           example: true
+    IntradayTickResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              tickData:
+                type: object
+                properties:
+                  tickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        type:
+                          type: string
+                        value:
+                          type: number
+                        size:
+                          type: integer
+          example: []
     IntradayBarResponse:
       type: object
       properties:
@@ -236,47 +277,6 @@ components:
                         numEvents:
                           type: integer
           example: []
-    IntradayBarRequest:
-      type: object
-      required:
-      - security
-      - eventType
-      - startDateTime
-      - endDateTime
-      - interval
-      properties:
-        security:
-          type: string
-          description: Single security identifier
-          example: example_value
-        eventType:
-          type: string
-          enum:
-          - TRADE
-          - BID
-          - ASK
-          - BEST_BID
-          - BEST_ASK
-          default: TRADE
-          example: TRADE
-        startDateTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        endDateTime:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        interval:
-          type: integer
-          description: Bar interval in minutes
-          minimum: 1
-          maximum: 1440
-          example: 10
-        gapFillInitialBar:
-          type: boolean
-          default: false
-          example: true
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

@@ -31,7 +31,8 @@
     "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "bloomberg-data-license-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "bloomberg-emsx-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "bloomberg-http-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "bloomberg-http-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "bloomberg-aim-broker-strategies-api-openapi.yml: previously refined output, superseded by openapi/_original/",

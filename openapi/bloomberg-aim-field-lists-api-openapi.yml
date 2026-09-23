@@ -186,28 +186,22 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    fieldListId:
+      name: fieldListId
+      in: path
+      required: true
+      description: Unique identifier for the field list
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
-    FieldCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          example: []
     FieldListCreate:
       type: object
       required:
@@ -235,14 +229,19 @@ components:
                 type: string
                 description: Bloomberg field mnemonic
           example: []
-    FieldListCollection:
+    Error:
       type: object
       properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldList'
-          example: []
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
     FieldList:
       type: object
       properties:
@@ -256,6 +255,14 @@ components:
         title:
           type: string
           example: Example Title
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+    FieldCollection:
+      type: object
+      properties:
         contains:
           type: array
           items:
@@ -281,21 +288,14 @@ components:
         category:
           type: string
           example: example_value
-  parameters:
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
-    fieldListId:
-      name: fieldListId
-      in: path
-      required: true
-      description: Unique identifier for the field list
-      schema:
-        type: string
+    FieldListCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldList'
+          example: []
   responses:
     NotFound:
       description: Resource not found
@@ -303,14 +303,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:
