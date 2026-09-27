@@ -99,18 +99,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
     AssignTraderRequest:
       type: object
       required:
@@ -125,6 +113,17 @@ components:
           type: string
           description: UUID of the trader to assign
           example: '500123'
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
     GetTeamsResponse:
       type: object
       properties:
@@ -140,16 +139,17 @@ components:
                 items:
                   type: string
           example: []
-    OperationResponse:
+    Error:
       type: object
       properties:
         STATUS:
           type: integer
-          description: Operation status code (0 = success)
           example: 10
         MESSAGE:
           type: string
-          description: Status message
+          example: example_value
+        REASON:
+          type: string
           example: example_value
   responses:
     BadRequest:

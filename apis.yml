@@ -40,7 +40,7 @@ tags:
 - Financial Data
 - Market Data
 - Order Management
-- Portfolio-Management
+- Portfolio Management
 - Trading
 tags_raw:
 - Financial Data
@@ -48,6 +48,7 @@ tags_raw:
 - Order Management
 - Portfolio Management
 - Trading
+- Portfolio-Management
 url: https://raw.githubusercontent.com/api-evangelist/bloomberg-aim/refs/heads/main/apis.yml
 created: '2024-01-15'
 modified: '2026-09-16'

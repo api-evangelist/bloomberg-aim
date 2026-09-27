@@ -78,49 +78,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    HistoricalDataResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              securityData:
-                type: object
-                properties:
-                  security:
-                    type: string
-                  fieldData:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        date:
-                          type: string
-                          format: date
-                      additionalProperties: true
-          example: []
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
-    Override:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          description: Bloomberg field mnemonic to override
-          example: '500123'
-        value:
-          type: string
-          description: Override value
-          example: example_value
     HistoricalDataRequest:
       type: object
       required:
@@ -206,6 +163,49 @@ components:
           type: boolean
           default: true
           example: true
+    HistoricalDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: object
+                properties:
+                  security:
+                    type: string
+                  fieldData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                      additionalProperties: true
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

@@ -107,6 +107,54 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    GetBrokerStrategyInfoResponse:
+      type: object
+      properties:
+        strategyInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  required:
+                    type: boolean
+                  allowedValues:
+                    type: array
+                    items:
+                      type: string
+          example: example_value
+    GetBrokerStrategyInfoRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_STRATEGY
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          example: example_value
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
     Error:
       type: object
       properties:
@@ -146,54 +194,6 @@ components:
           - OPT
           - FUT
           example: EQTY
-    GetBrokerStrategyInfoRequest:
-      type: object
-      required:
-      - EMSX_BROKER
-      - EMSX_STRATEGY
-      - EMSX_ASSET_CLASS
-      properties:
-        EMSX_BROKER:
-          type: string
-          example: example_value
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_ASSET_CLASS:
-          type: string
-          enum:
-          - EQTY
-          - OPT
-          - FUT
-          example: EQTY
-    GetBrokerStrategyInfoResponse:
-      type: object
-      properties:
-        strategyInfo:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  type:
-                    type: string
-                  required:
-                    type: boolean
-                  allowedValues:
-                    type: array
-                    items:
-                      type: string
-          example: example_value
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

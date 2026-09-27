@@ -156,15 +156,6 @@ components:
           type: boolean
           default: false
           example: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     IntradayTickRequest:
       type: object
       required:
@@ -245,6 +236,15 @@ components:
                         size:
                           type: integer
           example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
     IntradayBarResponse:
       type: object
       properties:

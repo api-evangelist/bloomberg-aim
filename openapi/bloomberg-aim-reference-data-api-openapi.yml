@@ -112,56 +112,55 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    InternalError:
-      description: Internal server error or BLPAPI service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    ReferenceDataResponse:
       type: object
       properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
-    Override:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          description: Bloomberg field mnemonic to override
-          example: '500123'
-        value:
-          type: string
-          description: Override value
-          example: example_value
-    BlpapiResponse:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          description: HTTP status code
-          example: 10
-        message:
-          type: string
-          example: example_value
         data:
           type: array
           items:
             type: object
-            additionalProperties: true
+            properties:
+              securityData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    fieldData:
+                      type: object
+                      additionalProperties: true
+                    fieldExceptions:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldException'
           example: []
+    BlpapiRequest:
+      type: object
+      required:
+      - serviceUri
+      - operationName
+      - requestObject
+      properties:
+        serviceUri:
+          type: string
+          description: BLPAPI service URI (e.g., //blp/refdata)
+          examples:
+          - //blp/refdata
+          - //blp/instruments
+          - //blp/mktdata
+        operationName:
+          type: string
+          description: Name of the BLPAPI operation
+          examples:
+          - ReferenceDataRequest
+          - HistoricalDataRequest
+        requestObject:
+          type: object
+          description: The operation-specific request payload
+          additionalProperties: true
+          example: example_value
     ReferenceDataRequest:
       type: object
       required:
@@ -198,54 +197,6 @@ components:
           type: boolean
           default: false
           example: true
-    BlpapiRequest:
-      type: object
-      required:
-      - serviceUri
-      - operationName
-      - requestObject
-      properties:
-        serviceUri:
-          type: string
-          description: BLPAPI service URI (e.g., //blp/refdata)
-          examples:
-          - //blp/refdata
-          - //blp/instruments
-          - //blp/mktdata
-        operationName:
-          type: string
-          description: Name of the BLPAPI operation
-          examples:
-          - ReferenceDataRequest
-          - HistoricalDataRequest
-        requestObject:
-          type: object
-          description: The operation-specific request payload
-          additionalProperties: true
-          example: example_value
-    ReferenceDataResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              securityData:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    fieldData:
-                      type: object
-                      additionalProperties: true
-                    fieldExceptions:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/FieldException'
-          example: []
     FieldException:
       type: object
       properties:
@@ -266,6 +217,55 @@ components:
             subcategory:
               type: string
           example: example_value
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    BlpapiResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: HTTP status code
+          example: 10
+        message:
+          type: string
+          example: example_value
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          example: []
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
+  responses:
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
