@@ -113,29 +113,51 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ReferenceDataResponse:
+    BlpapiResponse:
       type: object
       properties:
+        statusCode:
+          type: integer
+          description: HTTP status code
+          example: 10
+        message:
+          type: string
+          example: example_value
         data:
           type: array
           items:
             type: object
-            properties:
-              securityData:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    fieldData:
-                      type: object
-                      additionalProperties: true
-                    fieldExceptions:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/FieldException'
+            additionalProperties: true
           example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    FieldException:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          example: '500123'
+        errorInfo:
+          type: object
+          properties:
+            source:
+              type: string
+            code:
+              type: integer
+            category:
+              type: string
+            message:
+              type: string
+            subcategory:
+              type: string
+          example: example_value
     BlpapiRequest:
       type: object
       required:
@@ -197,51 +219,6 @@ components:
           type: boolean
           default: false
           example: true
-    FieldException:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          example: '500123'
-        errorInfo:
-          type: object
-          properties:
-            source:
-              type: string
-            code:
-              type: integer
-            category:
-              type: string
-            message:
-              type: string
-            subcategory:
-              type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
-    BlpapiResponse:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          description: HTTP status code
-          example: 10
-        message:
-          type: string
-          example: example_value
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          example: []
     Override:
       type: object
       properties:
@@ -253,15 +230,38 @@ components:
           type: string
           description: Override value
           example: example_value
+    ReferenceDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    fieldData:
+                      type: object
+                      additionalProperties: true
+                    fieldExceptions:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/FieldException'
+          example: []
   responses:
-    InternalError:
-      description: Internal server error or BLPAPI service error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    InternalError:
+      description: Internal server error or BLPAPI service error
       content:
         application/json:
           schema:

@@ -113,25 +113,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetFillsResponse:
-      type: object
-      properties:
-        fills:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fill'
-          example: []
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
     ManualFillRequest:
       type: object
       required:
@@ -178,18 +159,6 @@ components:
           format: date-time
           description: Start of time range for fills
           example: '2026-01-15T10:30:00Z'
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
     Fill:
       type: object
       properties:
@@ -238,6 +207,37 @@ components:
           type: string
           description: Exchange where the fill occurred
           example: example_value
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
+    GetFillsResponse:
+      type: object
+      properties:
+        fills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fill'
+          example: []
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

@@ -148,28 +148,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
-    triggerId:
-      name: triggerId
-      in: path
-      required: true
-      description: Unique identifier for the trigger
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -182,46 +161,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    TriggerCreate:
-      type: object
-      required:
-      - '@type'
-      - identifier
-      - frequency
-      properties:
-        '@type':
-          type: string
-          const: Trigger
-          example: example_value
-        identifier:
-          type: string
-          example: example_value
-        title:
-          type: string
-          example: Example Title
-        frequency:
-          type: string
-          enum:
-          - daily
-          - weekly
-          - monthly
-          - once
-          example: daily
-        snapshotTime:
-          type: string
-          example: example_value
-        timezone:
-          type: string
-          example: example_value
-    TriggerCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trigger'
-          example: []
     Error:
       type: object
       properties:
@@ -235,6 +181,14 @@ components:
             details:
               type: string
           example: example_value
+    TriggerCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
     Trigger:
       type: object
       properties:
@@ -267,6 +221,52 @@ components:
           type: string
           description: Timezone for the trigger schedule
           example: example_value
+    TriggerCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - frequency
+      properties:
+        '@type':
+          type: string
+          const: Trigger
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        frequency:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - monthly
+          - once
+          example: daily
+        snapshotTime:
+          type: string
+          example: example_value
+        timezone:
+          type: string
+          example: example_value
+  parameters:
+    triggerId:
+      name: triggerId
+      in: path
+      required: true
+      description: Unique identifier for the trigger
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

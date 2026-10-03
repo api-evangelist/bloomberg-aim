@@ -115,6 +115,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    IntradayTickResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              tickData:
+                type: object
+                properties:
+                  tickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        type:
+                          type: string
+                        value:
+                          type: number
+                        size:
+                          type: integer
+          example: []
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
     IntradayBarRequest:
       type: object
       required:
@@ -156,6 +191,38 @@ components:
           type: boolean
           default: false
           example: true
+    IntradayBarResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              barData:
+                type: object
+                properties:
+                  barTickData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          format: date-time
+                        open:
+                          type: number
+                        high:
+                          type: number
+                        low:
+                          type: number
+                        close:
+                          type: number
+                        volume:
+                          type: integer
+                        numEvents:
+                          type: integer
+          example: []
     IntradayTickRequest:
       type: object
       required:
@@ -210,73 +277,6 @@ components:
           type: boolean
           default: false
           example: true
-    IntradayTickResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              tickData:
-                type: object
-                properties:
-                  tickData:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        time:
-                          type: string
-                          format: date-time
-                        type:
-                          type: string
-                        value:
-                          type: number
-                        size:
-                          type: integer
-          example: []
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
-    IntradayBarResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              barData:
-                type: object
-                properties:
-                  barTickData:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        time:
-                          type: string
-                          format: date-time
-                        open:
-                          type: number
-                        high:
-                          type: number
-                        low:
-                          type: number
-                        close:
-                          type: number
-                        volume:
-                          type: integer
-                        numEvents:
-                          type: integer
-          example: []
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

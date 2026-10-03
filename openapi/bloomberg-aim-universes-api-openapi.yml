@@ -151,29 +151,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SecurityIdentifier:
+    UniverseCollection:
       type: object
       properties:
-        '@type':
-          type: string
-          const: Identifier
-          example: example_value
-        identifierType:
-          type: string
-          description: Type of identifier
-          enum:
-          - TICKER
-          - BB_GLOBAL
-          - ISIN
-          - CUSIP
-          - SEDOL
-          - BB_UNIQUE
-          - FIGI
-          example: TICKER
-        identifierValue:
-          type: string
-          description: The identifier value
-          example: example_value
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Universe'
+          example: []
     UniverseCreate:
       type: object
       required:
@@ -201,14 +186,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SecurityIdentifier'
-          example: []
-    UniverseCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Universe'
           example: []
     Universe:
       type: object
@@ -246,14 +223,30 @@ components:
             details:
               type: string
           example: example_value
+    SecurityIdentifier:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: Identifier
+          example: example_value
+        identifierType:
+          type: string
+          description: Type of identifier
+          enum:
+          - TICKER
+          - BB_GLOBAL
+          - ISIN
+          - CUSIP
+          - SEDOL
+          - BB_UNIQUE
+          - FIGI
+          example: TICKER
+        identifierValue:
+          type: string
+          description: The identifier value
+          example: example_value
   parameters:
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
     universeId:
       name: universeId
       in: path
@@ -261,13 +254,14 @@ components:
       description: Unique identifier for the universe
       schema:
         type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -276,6 +270,12 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:

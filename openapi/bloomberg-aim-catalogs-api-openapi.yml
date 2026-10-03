@@ -122,40 +122,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Catalog:
-      type: object
-      properties:
-        identifier:
-          type: string
-          description: Unique catalog identifier
-          example: example_value
-        title:
-          type: string
-          description: Human-readable catalog title
-          example: Example Title
-        description:
-          type: string
-          description: Description of the catalog contents
-          example: A sample description.
-        links:
-          type: object
-          properties:
-            universes:
-              type: string
-              format: uri
-            fieldLists:
-              type: string
-              format: uri
-            triggers:
-              type: string
-              format: uri
-            requests:
-              type: string
-              format: uri
-            distributions:
-              type: string
-              format: uri
-          example: example_value
     CatalogCollection:
       type: object
       properties:
@@ -203,6 +169,53 @@ components:
         category:
           type: string
           example: example_value
+    Catalog:
+      type: object
+      properties:
+        identifier:
+          type: string
+          description: Unique catalog identifier
+          example: example_value
+        title:
+          type: string
+          description: Human-readable catalog title
+          example: Example Title
+        description:
+          type: string
+          description: Description of the catalog contents
+          example: A sample description.
+        links:
+          type: object
+          properties:
+            universes:
+              type: string
+              format: uri
+            fieldLists:
+              type: string
+              format: uri
+            triggers:
+              type: string
+              format: uri
+            requests:
+              type: string
+              format: uri
+            distributions:
+              type: string
+              format: uri
+          example: example_value
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     catalogId:
       name: catalogId
@@ -211,19 +224,6 @@ components:
       description: Unique identifier for the catalog
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

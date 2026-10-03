@@ -256,92 +256,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateOrderAndRouteResponse:
+    GetOrdersResponse:
       type: object
       properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Unique order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Unique route identifier
-          example: '500123'
-        MESSAGE:
-          type: string
-          example: example_value
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
-    DeleteOrderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number to delete
-          example: 10
-    GetOrdersRequest:
-      type: object
-      properties:
-        scope:
-          type: string
-          description: Scope of orders to retrieve
-          enum:
-          - PRIVATE
-          - TEAM
-          example: PRIVATE
-    ModifyOrderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number to modify
-          example: 10
-        EMSX_AMOUNT:
-          type: integer
-          description: New order quantity
-          example: 10
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_NOTES:
-          type: string
-          example: example_value
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+          example: []
     CreateOrderRequest:
       type: object
       required:
@@ -460,6 +382,28 @@ components:
           type: string
           description: Portfolio name for the order
           example: example_value
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    CreateOrderResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number assigned by EMSX
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
     Error:
       type: object
       properties:
@@ -470,6 +414,20 @@ components:
           type: string
           example: example_value
         REASON:
+          type: string
+          example: example_value
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        MESSAGE:
           type: string
           example: example_value
     Order:
@@ -559,14 +517,15 @@ components:
         EMSX_PORTFOLIO:
           type: string
           example: example_value
-    GetOrdersResponse:
+    DeleteOrderRequest:
       type: object
+      required:
+      - EMSX_SEQUENCE
       properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-          example: []
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to delete
+          example: 10
     CreateOrderAndRouteRequest:
       allOf:
       - $ref: '#/components/schemas/CreateOrderRequest'
@@ -587,17 +546,58 @@ components:
           EMSX_EXEC_INSTRUCTIONS:
             type: string
             description: Execution instructions for the broker
-    CreateOrderResponse:
+    ModifyOrderRequest:
       type: object
+      required:
+      - EMSX_SEQUENCE
       properties:
         EMSX_SEQUENCE:
           type: integer
-          description: Unique order sequence number assigned by EMSX
+          description: Order sequence number to modify
           example: 10
-        MESSAGE:
+        EMSX_AMOUNT:
+          type: integer
+          description: New order quantity
+          example: 10
+        EMSX_ORDER_TYPE:
           type: string
-          description: Status message
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_NOTES:
+          type: string
           example: example_value
+    GetOrdersRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          description: Scope of orders to retrieve
+          enum:
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

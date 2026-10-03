@@ -77,7 +77,52 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Internal server error or BLPAPI service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
+    HistoricalDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              securityData:
+                type: object
+                properties:
+                  security:
+                    type: string
+                  fieldData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                      additionalProperties: true
+          example: []
     HistoricalDataRequest:
       type: object
       required:
@@ -163,38 +208,6 @@ components:
           type: boolean
           default: true
           example: true
-    HistoricalDataResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              securityData:
-                type: object
-                properties:
-                  security:
-                    type: string
-                  fieldData:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        date:
-                          type: string
-                          format: date
-                      additionalProperties: true
-          example: []
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     Override:
       type: object
       properties:
@@ -206,19 +219,6 @@ components:
           type: string
           description: Override value
           example: example_value
-  responses:
-    InternalError:
-      description: Internal server error or BLPAPI service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

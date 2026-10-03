@@ -96,49 +96,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    distributionId:
-      name: distributionId
-      in: path
-      required: true
-      description: Unique identifier for the distribution
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
-    replyId:
-      name: replyId
-      in: path
-      required: true
-      description: Unique identifier for the reply
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ReplyCollection:
+    ReplyData:
       type: object
       properties:
-        contains:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Reply'
+            type: string
+          example: []
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
           example: []
     Error:
       type: object
@@ -173,20 +144,49 @@ components:
           type: integer
           description: Size in bytes
           example: 10
-    ReplyData:
+    ReplyCollection:
       type: object
       properties:
-        fields:
+        contains:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Reply'
           example: []
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          example: []
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      description: Unique identifier for the reply
+      schema:
+        type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

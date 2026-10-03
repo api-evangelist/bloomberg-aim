@@ -153,70 +153,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CurveListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    curve:
-                      type: string
-                    description:
-                      type: string
-                    country:
-                      type: string
-                    currency:
-                      type: string
-                    type:
-                      type: string
-                    subtype:
-                      type: string
-          example: []
-    InstrumentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    description:
-                      type: string
-          example: []
-    GovernmentLookupResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    description:
-                      type: string
-                    country:
-                      type: string
-          example: []
     CurveListRequest:
       type: object
       required:
@@ -261,6 +197,32 @@ components:
         status:
           type: integer
           example: 10
+    CurveListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    curve:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+                    currency:
+                      type: string
+                    type:
+                      type: string
+                    subtype:
+                      type: string
+          example: []
     InstrumentListRequest:
       type: object
       required:
@@ -313,15 +275,53 @@ components:
           type: integer
           default: 10
           example: 10
+    InstrumentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+          example: []
+    GovernmentLookupResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+          example: []
   responses:
-    InternalError:
-      description: Internal server error or BLPAPI service error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    InternalError:
+      description: Internal server error or BLPAPI service error
       content:
         application/json:
           schema:

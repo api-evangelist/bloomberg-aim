@@ -294,12 +294,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateOrderAndRouteResponse:
+    GetRoutesRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
+    RouteOrderResponse:
       type: object
       properties:
         EMSX_SEQUENCE:
           type: integer
-          description: Unique order sequence number
           example: 10
         EMSX_ROUTE_ID:
           type: integer
@@ -373,195 +381,6 @@ components:
         EMSX_ROUTE_CREATE_TIME:
           type: string
           example: example_value
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
-    ModifyRouteRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_ROUTE_ID
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Route ID to modify
-          example: '500123'
-        EMSX_AMOUNT:
-          type: integer
-          example: 10
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_STRATEGY_PARAMS:
-          type: object
-          additionalProperties: true
-          example: example_value
-    RouteOrderRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_AMOUNT
-      - EMSX_BROKER
-      - EMSX_ORDER_TYPE
-      - EMSX_TIF
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number to route
-          example: 10
-        EMSX_AMOUNT:
-          type: integer
-          description: Quantity to route
-          example: 10
-        EMSX_BROKER:
-          type: string
-          description: Broker code
-          example: example_value
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STRATEGY:
-          type: string
-          description: Broker strategy name
-          example: example_value
-        EMSX_STRATEGY_PARAMS:
-          type: object
-          additionalProperties: true
-          example: example_value
-        EMSX_EXEC_INSTRUCTIONS:
-          type: string
-          example: example_value
-        EMSX_ACCOUNT:
-          type: string
-          example: example_value
-    DeleteRouteRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_ROUTE_ID
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Route ID to cancel
-          example: '500123'
-    GroupRouteRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_BROKER
-      - EMSX_ORDER_TYPE
-      - EMSX_TIF
-      properties:
-        EMSX_SEQUENCE:
-          type: array
-          items:
-            type: integer
-          description: List of order sequence numbers to route as a group
-          example: []
-        EMSX_AMOUNT_PERCENT:
-          type: number
-          description: Percentage of each order to route (0-100)
-          minimum: 0
-          maximum: 100
-          example: 42.5
-        EMSX_BROKER:
-          type: string
-          example: example_value
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_STRATEGY_PARAMS:
-          type: object
-          additionalProperties: true
-          example: example_value
     GetRoutesResponse:
       type: object
       properties:
@@ -570,19 +389,6 @@ components:
           items:
             $ref: '#/components/schemas/Route'
           example: []
-    RouteOrderResponse:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Unique route identifier
-          example: '500123'
-        MESSAGE:
-          type: string
-          example: example_value
     CreateOrderRequest:
       type: object
       required:
@@ -701,26 +507,17 @@ components:
           type: string
           description: Portfolio name for the order
           example: example_value
-    GroupRouteResponse:
+    OperationResponse:
       type: object
       properties:
-        numRouted:
+        STATUS:
           type: integer
-          description: Number of orders successfully routed
+          description: Operation status code (0 = success)
           example: 10
         MESSAGE:
           type: string
+          description: Status message
           example: example_value
-        routeIds:
-          type: array
-          items:
-            type: object
-            properties:
-              EMSX_SEQUENCE:
-                type: integer
-              EMSX_ROUTE_ID:
-                type: integer
-          example: []
     Error:
       type: object
       properties:
@@ -733,15 +530,123 @@ components:
         REASON:
           type: string
           example: example_value
-    GetRoutesRequest:
+    ModifyRouteRequest:
       type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
       properties:
-        scope:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to modify
+          example: '500123'
+        EMSX_AMOUNT:
+          type: integer
+          example: 10
+        EMSX_ORDER_TYPE:
           type: string
           enum:
-          - PRIVATE
-          - TEAM
-          example: PRIVATE
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+          example: example_value
+    GroupRouteRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_BROKER
+      - EMSX_ORDER_TYPE
+      - EMSX_TIF
+      properties:
+        EMSX_SEQUENCE:
+          type: array
+          items:
+            type: integer
+          description: List of order sequence numbers to route as a group
+          example: []
+        EMSX_AMOUNT_PERCENT:
+          type: number
+          description: Percentage of each order to route (0-100)
+          minimum: 0
+          maximum: 100
+          example: 42.5
+        EMSX_BROKER:
+          type: string
+          example: example_value
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+          example: example_value
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        MESSAGE:
+          type: string
+          example: example_value
     CreateOrderAndRouteRequest:
       allOf:
       - $ref: '#/components/schemas/CreateOrderRequest'
@@ -762,6 +667,101 @@ components:
           EMSX_EXEC_INSTRUCTIONS:
             type: string
             description: Execution instructions for the broker
+    DeleteRouteRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to cancel
+          example: '500123'
+    RouteOrderRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_AMOUNT
+      - EMSX_BROKER
+      - EMSX_ORDER_TYPE
+      - EMSX_TIF
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number to route
+          example: 10
+        EMSX_AMOUNT:
+          type: integer
+          description: Quantity to route
+          example: 10
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+          example: example_value
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STRATEGY:
+          type: string
+          description: Broker strategy name
+          example: example_value
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+          example: example_value
+        EMSX_EXEC_INSTRUCTIONS:
+          type: string
+          example: example_value
+        EMSX_ACCOUNT:
+          type: string
+          example: example_value
+    GroupRouteResponse:
+      type: object
+      properties:
+        numRouted:
+          type: integer
+          description: Number of orders successfully routed
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        routeIds:
+          type: array
+          items:
+            type: object
+            properties:
+              EMSX_SEQUENCE:
+                type: integer
+              EMSX_ROUTE_ID:
+                type: integer
+          example: []
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation
