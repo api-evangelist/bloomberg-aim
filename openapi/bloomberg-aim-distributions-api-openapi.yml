@@ -88,19 +88,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -115,14 +102,6 @@ components:
             details:
               type: string
           example: example_value
-    DistributionCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Distribution'
-          example: []
     Distribution:
       type: object
       properties:
@@ -151,19 +130,40 @@ components:
               type: string
               format: uri
           example: example_value
+    DistributionCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Distribution'
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    distributionId:
-      name: distributionId
-      in: path
-      required: true
-      description: Unique identifier for the distribution
-      schema:
-        type: string
     catalogId:
       name: catalogId
       in: path
       required: true
       description: Unique identifier for the catalog
+      schema:
+        type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
       schema:
         type: string
   securitySchemes:

@@ -106,14 +106,55 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters or business rule violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    GetBrokerStrategyInfoRequest:
+      type: object
+      required:
+      - EMSX_BROKER
+      - EMSX_STRATEGY
+      - EMSX_ASSET_CLASS
+      properties:
+        EMSX_BROKER:
+          type: string
+          example: example_value
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_ASSET_CLASS:
+          type: string
+          enum:
+          - EQTY
+          - OPT
+          - FUT
+          example: EQTY
+    GetBrokerStrategyInfoResponse:
+      type: object
+      properties:
+        strategyInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  type:
+                    type: string
+                  required:
+                    type: boolean
+                  allowedValues:
+                    type: array
+                    items:
+                      type: string
+          example: example_value
     Error:
       type: object
       properties:
@@ -144,26 +185,6 @@ components:
           - OPT
           - FUT
           example: EQTY
-    GetBrokerStrategyInfoRequest:
-      type: object
-      required:
-      - EMSX_BROKER
-      - EMSX_STRATEGY
-      - EMSX_ASSET_CLASS
-      properties:
-        EMSX_BROKER:
-          type: string
-          example: example_value
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_ASSET_CLASS:
-          type: string
-          enum:
-          - EQTY
-          - OPT
-          - FUT
-          example: EQTY
     GetBrokerStrategiesResponse:
       type: object
       properties:
@@ -173,34 +194,13 @@ components:
             type: string
           description: List of available strategy names
           example: []
-    GetBrokerStrategyInfoResponse:
-      type: object
-      properties:
-        strategyInfo:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  type:
-                    type: string
-                  required:
-                    type: boolean
-                  allowedValues:
-                    type: array
-                    items:
-                      type: string
-          example: example_value
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

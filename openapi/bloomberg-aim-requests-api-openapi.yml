@@ -182,25 +182,21 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier for the data request
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   schemas:
     Error:
       type: object
@@ -265,14 +261,6 @@ components:
             columnHeader:
               type: boolean
           example: example_value
-    RequestCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataRequest'
-          example: []
     DataRequest:
       type: object
       properties:
@@ -316,21 +304,33 @@ components:
           - inactive
           - error
           example: active
-  parameters:
-    requestId:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier for the data request
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
+    RequestCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRequest'
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

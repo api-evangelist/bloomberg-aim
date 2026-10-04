@@ -105,35 +105,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    FieldSearchResponse:
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              fieldData:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    fieldInfo:
-                      type: object
-                      properties:
-                        mnemonic:
-                          type: string
-                        description:
-                          type: string
-                        datatype:
-                          type: string
-                        categoryName:
-                          type: array
-                          items:
-                            type: string
-          example: []
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
     FieldSearchRequest:
       type: object
       required:
@@ -147,15 +127,6 @@ components:
           type: boolean
           default: false
           example: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     FieldInfoResponse:
       type: object
       properties:
@@ -187,6 +158,35 @@ components:
                         documentation:
                           type: string
           example: []
+    FieldSearchResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              fieldData:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    fieldInfo:
+                      type: object
+                      properties:
+                        mnemonic:
+                          type: string
+                        description:
+                          type: string
+                        datatype:
+                          type: string
+                        categoryName:
+                          type: array
+                          items:
+                            type: string
+          example: []
     FieldInfoRequest:
       type: object
       required:
@@ -203,14 +203,14 @@ components:
           default: false
           example: true
   responses:
-    BadRequest:
-      description: Invalid request parameters
+    InternalError:
+      description: Internal server error or BLPAPI service error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    InternalError:
-      description: Internal server error or BLPAPI service error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:

@@ -151,42 +151,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UniverseCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Universe'
-          example: []
-    UniverseCreate:
-      type: object
-      required:
-      - '@type'
-      - identifier
-      - title
-      - contains
-      properties:
-        '@type':
-          type: string
-          const: Universe
-          example: example_value
-        identifier:
-          type: string
-          description: Unique universe identifier
-          example: example_value
-        title:
-          type: string
-          description: Human-readable universe title
-          example: Example Title
-        description:
-          type: string
-          example: A sample description.
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/SecurityIdentifier'
-          example: []
     Universe:
       type: object
       properties:
@@ -223,6 +187,14 @@ components:
             details:
               type: string
           example: example_value
+    UniverseCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Universe'
+          example: []
     SecurityIdentifier:
       type: object
       properties:
@@ -246,6 +218,34 @@ components:
           type: string
           description: The identifier value
           example: example_value
+    UniverseCreate:
+      type: object
+      required:
+      - '@type'
+      - identifier
+      - title
+      - contains
+      properties:
+        '@type':
+          type: string
+          const: Universe
+          example: example_value
+        identifier:
+          type: string
+          description: Unique universe identifier
+          example: example_value
+        title:
+          type: string
+          description: Human-readable universe title
+          example: Example Title
+        description:
+          type: string
+          example: A sample description.
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityIdentifier'
+          example: []
   parameters:
     universeId:
       name: universeId
@@ -262,8 +262,8 @@ components:
       schema:
         type: string
   responses:
-    BadRequest:
-      description: Invalid request parameters
+    Unauthorized:
+      description: Authentication credentials missing or invalid
       content:
         application/json:
           schema:
@@ -274,8 +274,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:

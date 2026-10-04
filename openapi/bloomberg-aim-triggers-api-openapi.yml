@@ -148,47 +148,22 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    triggerId:
+      name: triggerId
+      in: path
+      required: true
+      description: Unique identifier for the trigger
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
-    TriggerCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Trigger'
-          example: []
     Trigger:
       type: object
       properties:
@@ -221,6 +196,19 @@ components:
           type: string
           description: Timezone for the trigger schedule
           example: example_value
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
     TriggerCreate:
       type: object
       required:
@@ -252,21 +240,33 @@ components:
         timezone:
           type: string
           example: example_value
-  parameters:
-    triggerId:
-      name: triggerId
-      in: path
-      required: true
-      description: Unique identifier for the trigger
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
+    TriggerCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

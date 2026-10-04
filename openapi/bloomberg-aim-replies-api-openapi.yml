@@ -97,19 +97,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ReplyData:
+    ReplyCollection:
       type: object
       properties:
-        fields:
+        contains:
           type: array
           items:
-            type: string
-          example: []
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
+            $ref: '#/components/schemas/Reply'
           example: []
     Error:
       type: object
@@ -144,40 +138,26 @@ components:
           type: integer
           description: Size in bytes
           example: 10
-    ReplyCollection:
+    ReplyData:
       type: object
       properties:
-        contains:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Reply'
+            type: string
           example: []
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          example: []
   parameters:
     replyId:
       name: replyId
       in: path
       required: true
       description: Unique identifier for the reply
-      schema:
-        type: string
-    distributionId:
-      name: distributionId
-      in: path
-      required: true
-      description: Unique identifier for the distribution
       schema:
         type: string
     catalogId:
@@ -187,6 +167,26 @@ components:
       description: Unique identifier for the catalog
       schema:
         type: string
+    distributionId:
+      name: distributionId
+      in: path
+      required: true
+      description: Unique identifier for the distribution
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
