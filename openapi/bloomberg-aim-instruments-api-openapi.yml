@@ -153,23 +153,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GovernmentLookupRequest:
+    CurveListRequest:
       type: object
       required:
       - query
       properties:
         query:
           type: string
-          description: Country or ticker search string
+          description: Search string for curve lookup
           example: example_value
-        partialMatch:
-          type: boolean
-          default: false
-          example: true
         maxResults:
           type: integer
           default: 10
           example: 10
+        countryCode:
+          type: string
+          description: Two-letter country code filter
+          example: example_value
+        currencyCode:
+          type: string
+          description: Three-letter currency code filter
+          example: example_value
+        type:
+          type: string
+          enum:
+          - BOND
+          - CDS
+          - ISDA
+          description: Curve type filter
+          example: BOND
+        subtype:
+          type: string
+          enum:
+          - SOVEREIGN
+          - CORPORATE
+          example: SOVEREIGN
     GovernmentLookupResponse:
       type: object
       properties:
@@ -188,6 +206,67 @@ components:
                     description:
                       type: string
                     country:
+                      type: string
+          example: []
+    GovernmentLookupRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: Country or ticker search string
+          example: example_value
+        partialMatch:
+          type: boolean
+          default: false
+          example: true
+        maxResults:
+          type: integer
+          default: 10
+          example: 10
+    InstrumentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    security:
+                      type: string
+                    description:
+                      type: string
+          example: []
+    CurveListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    curve:
+                      type: string
+                    description:
+                      type: string
+                    country:
+                      type: string
+                    currency:
+                      type: string
+                    type:
+                      type: string
+                    subtype:
                       type: string
           example: []
     InstrumentListRequest:
@@ -234,85 +313,6 @@ components:
         status:
           type: integer
           example: 10
-    CurveListRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: Search string for curve lookup
-          example: example_value
-        maxResults:
-          type: integer
-          default: 10
-          example: 10
-        countryCode:
-          type: string
-          description: Two-letter country code filter
-          example: example_value
-        currencyCode:
-          type: string
-          description: Three-letter currency code filter
-          example: example_value
-        type:
-          type: string
-          enum:
-          - BOND
-          - CDS
-          - ISDA
-          description: Curve type filter
-          example: BOND
-        subtype:
-          type: string
-          enum:
-          - SOVEREIGN
-          - CORPORATE
-          example: SOVEREIGN
-    CurveListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    curve:
-                      type: string
-                    description:
-                      type: string
-                    country:
-                      type: string
-                    currency:
-                      type: string
-                    type:
-                      type: string
-                    subtype:
-                      type: string
-          example: []
-    InstrumentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              results:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    security:
-                      type: string
-                    description:
-                      type: string
-          example: []
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

@@ -98,19 +98,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters or business rule violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
     AssignTraderRequest:
       type: object
       required:
@@ -125,17 +120,6 @@ components:
           type: string
           description: UUID of the trader to assign
           example: '500123'
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
     GetTeamsResponse:
       type: object
       properties:
@@ -151,13 +135,29 @@ components:
                 items:
                   type: string
           example: []
-  responses:
-    BadRequest:
-      description: Invalid request parameters or business rule violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    OperationResponse:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        REASON:
+          type: string
+          example: example_value
   securitySchemes:
     bearerAuth:
       type: http

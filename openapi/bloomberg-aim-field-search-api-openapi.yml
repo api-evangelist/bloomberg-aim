@@ -105,15 +105,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     FieldSearchRequest:
       type: object
       required:
@@ -123,6 +114,21 @@ components:
           type: string
           description: Search keyword or pattern
           example: example_value
+        returnFieldDocumentation:
+          type: boolean
+          default: false
+          example: true
+    FieldInfoRequest:
+      type: object
+      required:
+      - fieldId
+      properties:
+        fieldId:
+          type: array
+          items:
+            type: string
+          description: List of field mnemonics or IDs to look up
+          example: '500123'
         returnFieldDocumentation:
           type: boolean
           default: false
@@ -187,21 +193,15 @@ components:
                           items:
                             type: string
           example: []
-    FieldInfoRequest:
+    Error:
       type: object
-      required:
-      - fieldId
       properties:
-        fieldId:
-          type: array
-          items:
-            type: string
-          description: List of field mnemonics or IDs to look up
-          example: '500123'
-        returnFieldDocumentation:
-          type: boolean
-          default: false
-          example: true
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

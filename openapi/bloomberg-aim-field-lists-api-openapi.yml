@@ -214,19 +214,6 @@ components:
                 type: string
                 description: Bloomberg field mnemonic
           example: []
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
     FieldListCollection:
       type: object
       properties:
@@ -234,32 +221,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldList'
-          example: []
-    FieldList:
-      type: object
-      properties:
-        '@type':
-          type: string
-          const: FieldList
-          example: example_value
-        identifier:
-          type: string
-          example: example_value
-        title:
-          type: string
-          example: Example Title
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          example: []
-    FieldCollection:
-      type: object
-      properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
           example: []
     Field:
       type: object
@@ -281,6 +242,64 @@ components:
         category:
           type: string
           example: example_value
+    FieldCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+    FieldList:
+      type: object
+      properties:
+        '@type':
+          type: string
+          const: FieldList
+          example: example_value
+        identifier:
+          type: string
+          example: example_value
+        title:
+          type: string
+          example: Example Title
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          example: []
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     fieldListId:
       name: fieldListId
@@ -296,25 +315,6 @@ components:
       description: Unique identifier for the catalog
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

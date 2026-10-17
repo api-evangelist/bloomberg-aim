@@ -182,35 +182,26 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    requestId:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier for the data request
-      schema:
-        type: string
-    catalogId:
-      name: catalogId
-      in: path
-      required: true
-      description: Unique identifier for the catalog
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: string
-          example: example_value
     RequestCreate:
       type: object
       required:
@@ -261,6 +252,14 @@ components:
             columnHeader:
               type: boolean
           example: example_value
+    RequestCollection:
+      type: object
+      properties:
+        contains:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataRequest'
+          example: []
     DataRequest:
       type: object
       properties:
@@ -304,33 +303,34 @@ components:
           - inactive
           - error
           example: active
-    RequestCollection:
+    Error:
       type: object
       properties:
-        contains:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataRequest'
-          example: []
-  responses:
-    Unauthorized:
-      description: Authentication credentials missing or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: string
+          example: example_value
+  parameters:
+    requestId:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier for the data request
+      schema:
+        type: string
+    catalogId:
+      name: catalogId
+      in: path
+      required: true
+      description: Unique identifier for the catalog
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

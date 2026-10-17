@@ -163,26 +163,6 @@ components:
           type: boolean
           default: true
           example: true
-    Override:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          description: Bloomberg field mnemonic to override
-          example: '500123'
-        value:
-          type: string
-          description: Override value
-          example: example_value
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     HistoricalDataResponse:
       type: object
       properties:
@@ -206,6 +186,26 @@ components:
                           format: date
                       additionalProperties: true
           example: []
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error

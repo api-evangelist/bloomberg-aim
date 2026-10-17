@@ -294,189 +294,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Route:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Parent order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Unique route identifier
-          example: '500123'
-        EMSX_BROKER:
-          type: string
-          description: Broker code
-          example: example_value
-        EMSX_AMOUNT:
-          type: integer
-          description: Routed quantity
-          example: 10
-        EMSX_FILLED:
-          type: integer
-          description: Filled quantity on this route
-          example: 10
-        EMSX_STATUS:
-          type: string
-          enum:
-          - CANCEL
-          - CXL_PND
-          - DONE
-          - FILL
-          - MOD_PND
-          - NEW
-          - PART_FILL
-          - RJCT
-          - SENT
-          - WORKING
-          example: CANCEL
-        EMSX_ORDER_TYPE:
-          type: string
-          example: example_value
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_AVG_PRICE:
-          type: number
-          description: Average fill price for this route
-          example: 42.5
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_EXEC_INSTRUCTIONS:
-          type: string
-          example: example_value
-        EMSX_LAST_FILL_DATE:
-          type: string
-          example: example_value
-        EMSX_LAST_FILL_TIME:
-          type: string
-          example: example_value
-        EMSX_ROUTE_CREATE_DATE:
-          type: string
-          example: example_value
-        EMSX_ROUTE_CREATE_TIME:
-          type: string
-          example: example_value
-    CreateOrderAndRouteResponse:
-      type: object
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Unique order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Unique route identifier
-          example: '500123'
-        MESSAGE:
-          type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          example: 10
-        MESSAGE:
-          type: string
-          example: example_value
-        REASON:
-          type: string
-          example: example_value
-    ModifyRouteRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_ROUTE_ID
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Route ID to modify
-          example: '500123'
-        EMSX_AMOUNT:
-          type: integer
-          example: 10
-        EMSX_ORDER_TYPE:
-          type: string
-          enum:
-          - MKT
-          - LMT
-          - STP
-          - STP LMT
-          example: MKT
-        EMSX_LIMIT_PRICE:
-          type: number
-          example: 42.5
-        EMSX_STOP_PRICE:
-          type: number
-          example: 42.5
-        EMSX_TIF:
-          type: string
-          enum:
-          - DAY
-          - GTC
-          - OPG
-          - IOC
-          - FOK
-          - GTD
-          - MOC
-          - LOC
-          example: DAY
-        EMSX_STRATEGY:
-          type: string
-          example: example_value
-        EMSX_STRATEGY_PARAMS:
-          type: object
-          additionalProperties: true
-          example: example_value
-    OperationResponse:
-      type: object
-      properties:
-        STATUS:
-          type: integer
-          description: Operation status code (0 = success)
-          example: 10
-        MESSAGE:
-          type: string
-          description: Status message
-          example: example_value
-    GetRoutesResponse:
-      type: object
-      properties:
-        routes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Route'
-          example: []
-    GetRoutesRequest:
-      type: object
-      properties:
-        scope:
-          type: string
-          enum:
-          - PRIVATE
-          - TEAM
-          example: PRIVATE
-    DeleteRouteRequest:
-      type: object
-      required:
-      - EMSX_SEQUENCE
-      - EMSX_ROUTE_ID
-      properties:
-        EMSX_SEQUENCE:
-          type: integer
-          description: Order sequence number
-          example: 10
-        EMSX_ROUTE_ID:
-          type: integer
-          description: Route ID to cancel
-          example: '500123'
     CreateOrderAndRouteRequest:
       allOf:
       - $ref: '#/components/schemas/CreateOrderRequest'
@@ -615,6 +432,35 @@ components:
           type: string
           description: Portfolio name for the order
           example: example_value
+    GetRoutesRequest:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum:
+          - PRIVATE
+          - TEAM
+          example: PRIVATE
+    GroupRouteResponse:
+      type: object
+      properties:
+        numRouted:
+          type: integer
+          description: Number of orders successfully routed
+          example: 10
+        MESSAGE:
+          type: string
+          example: example_value
+        routeIds:
+          type: array
+          items:
+            type: object
+            properties:
+              EMSX_SEQUENCE:
+                type: integer
+              EMSX_ROUTE_ID:
+                type: integer
+          example: []
     RouteOrderRequest:
       type: object
       required:
@@ -676,6 +522,20 @@ components:
         EMSX_ACCOUNT:
           type: string
           example: example_value
+    CreateOrderAndRouteResponse:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Unique order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        MESSAGE:
+          type: string
+          example: example_value
     RouteOrderResponse:
       type: object
       properties:
@@ -687,6 +547,143 @@ components:
           description: Unique route identifier
           example: '500123'
         MESSAGE:
+          type: string
+          example: example_value
+    GetRoutesResponse:
+      type: object
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+          example: []
+    ModifyRouteRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to modify
+          example: '500123'
+        EMSX_AMOUNT:
+          type: integer
+          example: 10
+        EMSX_ORDER_TYPE:
+          type: string
+          enum:
+          - MKT
+          - LMT
+          - STP
+          - STP LMT
+          example: MKT
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_STOP_PRICE:
+          type: number
+          example: 42.5
+        EMSX_TIF:
+          type: string
+          enum:
+          - DAY
+          - GTC
+          - OPG
+          - IOC
+          - FOK
+          - GTD
+          - MOC
+          - LOC
+          example: DAY
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_STRATEGY_PARAMS:
+          type: object
+          additionalProperties: true
+          example: example_value
+    DeleteRouteRequest:
+      type: object
+      required:
+      - EMSX_SEQUENCE
+      - EMSX_ROUTE_ID
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Route ID to cancel
+          example: '500123'
+    Route:
+      type: object
+      properties:
+        EMSX_SEQUENCE:
+          type: integer
+          description: Parent order sequence number
+          example: 10
+        EMSX_ROUTE_ID:
+          type: integer
+          description: Unique route identifier
+          example: '500123'
+        EMSX_BROKER:
+          type: string
+          description: Broker code
+          example: example_value
+        EMSX_AMOUNT:
+          type: integer
+          description: Routed quantity
+          example: 10
+        EMSX_FILLED:
+          type: integer
+          description: Filled quantity on this route
+          example: 10
+        EMSX_STATUS:
+          type: string
+          enum:
+          - CANCEL
+          - CXL_PND
+          - DONE
+          - FILL
+          - MOD_PND
+          - NEW
+          - PART_FILL
+          - RJCT
+          - SENT
+          - WORKING
+          example: CANCEL
+        EMSX_ORDER_TYPE:
+          type: string
+          example: example_value
+        EMSX_LIMIT_PRICE:
+          type: number
+          example: 42.5
+        EMSX_AVG_PRICE:
+          type: number
+          description: Average fill price for this route
+          example: 42.5
+        EMSX_STRATEGY:
+          type: string
+          example: example_value
+        EMSX_EXEC_INSTRUCTIONS:
+          type: string
+          example: example_value
+        EMSX_LAST_FILL_DATE:
+          type: string
+          example: example_value
+        EMSX_LAST_FILL_TIME:
+          type: string
+          example: example_value
+        EMSX_ROUTE_CREATE_DATE:
+          type: string
+          example: example_value
+        EMSX_ROUTE_CREATE_TIME:
           type: string
           example: example_value
     GroupRouteRequest:
@@ -742,26 +739,29 @@ components:
           type: object
           additionalProperties: true
           example: example_value
-    GroupRouteResponse:
+    OperationResponse:
       type: object
       properties:
-        numRouted:
+        STATUS:
           type: integer
-          description: Number of orders successfully routed
+          description: Operation status code (0 = success)
+          example: 10
+        MESSAGE:
+          type: string
+          description: Status message
+          example: example_value
+    Error:
+      type: object
+      properties:
+        STATUS:
+          type: integer
           example: 10
         MESSAGE:
           type: string
           example: example_value
-        routeIds:
-          type: array
-          items:
-            type: object
-            properties:
-              EMSX_SEQUENCE:
-                type: integer
-              EMSX_ROUTE_ID:
-                type: integer
-          example: []
+        REASON:
+          type: string
+          example: example_value
   responses:
     BadRequest:
       description: Invalid request parameters or business rule violation

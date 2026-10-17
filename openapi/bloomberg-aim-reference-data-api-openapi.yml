@@ -113,6 +113,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    BlpapiRequest:
+      type: object
+      required:
+      - serviceUri
+      - operationName
+      - requestObject
+      properties:
+        serviceUri:
+          type: string
+          description: BLPAPI service URI (e.g., //blp/refdata)
+          examples:
+          - //blp/refdata
+          - //blp/instruments
+          - //blp/mktdata
+        operationName:
+          type: string
+          description: Name of the BLPAPI operation
+          examples:
+          - ReferenceDataRequest
+          - HistoricalDataRequest
+        requestObject:
+          type: object
+          description: The operation-specific request payload
+          additionalProperties: true
+          example: example_value
     ReferenceDataResponse:
       type: object
       properties:
@@ -152,71 +177,6 @@ components:
             type: object
             additionalProperties: true
           example: []
-    Override:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          description: Bloomberg field mnemonic to override
-          example: '500123'
-        value:
-          type: string
-          description: Override value
-          example: example_value
-    BlpapiRequest:
-      type: object
-      required:
-      - serviceUri
-      - operationName
-      - requestObject
-      properties:
-        serviceUri:
-          type: string
-          description: BLPAPI service URI (e.g., //blp/refdata)
-          examples:
-          - //blp/refdata
-          - //blp/instruments
-          - //blp/mktdata
-        operationName:
-          type: string
-          description: Name of the BLPAPI operation
-          examples:
-          - ReferenceDataRequest
-          - HistoricalDataRequest
-        requestObject:
-          type: object
-          description: The operation-specific request payload
-          additionalProperties: true
-          example: example_value
-    FieldException:
-      type: object
-      properties:
-        fieldId:
-          type: string
-          example: '500123'
-        errorInfo:
-          type: object
-          properties:
-            source:
-              type: string
-            code:
-              type: integer
-            category:
-              type: string
-            message:
-              type: string
-            subcategory:
-              type: string
-          example: example_value
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          example: example_value
-        status:
-          type: integer
-          example: 10
     ReferenceDataRequest:
       type: object
       required:
@@ -253,6 +213,46 @@ components:
           type: boolean
           default: false
           example: true
+    Override:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          description: Bloomberg field mnemonic to override
+          example: '500123'
+        value:
+          type: string
+          description: Override value
+          example: example_value
+    FieldException:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          example: '500123'
+        errorInfo:
+          type: object
+          properties:
+            source:
+              type: string
+            code:
+              type: integer
+            category:
+              type: string
+            message:
+              type: string
+            subcategory:
+              type: string
+          example: example_value
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: example_value
+        status:
+          type: integer
+          example: 10
   responses:
     InternalError:
       description: Internal server error or BLPAPI service error
